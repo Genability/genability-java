@@ -1,4 +1,14 @@
 genability-java is a Java client library for the Genability APIs.
 
-AppId's and API documentation available at:
+How to get going:
+
+1) Get an AppId's at:
+http://developer.genability.com
+
+2) Put the AppId and AppKey in:
+com.genability.test.client.api.service.BaseServiceTests
+
+3) Check it works by running a JUnit test
+
+4) Hack your own app, read the API documentation at:
 http://developer.genability.com
