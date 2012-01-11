@@ -5,10 +5,9 @@ How to get going:
 1) Get an AppId's at:
 http://developer.genability.com
 
-2) Put the AppId and AppKey in:
-com.genability.test.client.api.service.BaseServiceTests
+2) Put the AppId and AppKey in the genability.properties file
 
-3) Check it works by running a JUnit test
+3) Compile and check it works by running a JUnit test
 
 4) Hack your own app, read the API documentation at:
 http://developer.genability.com
