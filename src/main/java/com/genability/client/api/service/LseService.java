@@ -22,7 +22,7 @@ public class LseService extends BaseService {
 		@SuppressWarnings("unchecked")
 		Response<Territory> response = (Response<Territory>) this.callGet(
 				"public/territories", 
-				null,
+				request.getQueryParams(),
 				new TypeReference<Response<Territory>>() { });
 		
 		if(log.isDebugEnabled()) log.debug("getTerritories completed");

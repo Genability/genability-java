@@ -127,8 +127,8 @@ public class GetTerritoriesRequest extends AbstractGetNRequest implements Serial
 	}
 
 	@Override
-	protected List<NameValuePair> getQueryParams() {
-		// TODO Auto-generated method stub
+	public List<NameValuePair> getQueryParams() {
+		// TODO implement these
 		return null;
 	}
 	
