@@ -4,23 +4,48 @@ import org.codehaus.jackson.type.TypeReference;
 
 import com.genability.client.types.Account;
 import com.genability.client.types.Response;
+import com.genability.client.api.request.GetAccountsRequest;
+import com.genability.client.api.request.GetAccountRequest;
 
 public class AccountService extends BaseService {
 
 	
-	public Response<Account> getAccounts()
+	public Response<Account> getAccounts(GetAccountsRequest request)
 	{
+		if(log.isDebugEnabled()) log.debug("getAccounts called");
 		
-		//TODO - we are adding really soon!
-		return null;
+		@SuppressWarnings("unchecked")
+		Response<Account> response = (Response<Account>) this.callGet(
+				"beta/accounts", 
+				request.getQueryParams(),
+				new TypeReference<Response<Account>>() { });
+		
+		if(log.isDebugEnabled()) log.debug("getAccounts completed");
+		
+		return response;
 	}
 
 	
-	public Response<Account> getAccount()
+	public Response<Account> getAccount(GetAccountRequest request)
 	{
+
+		if(log.isDebugEnabled()) log.debug("getAccount called");
+
+		String uri = "beta/accounts";
+		if (request.getAccountId() != null && request.getAccountId().length() !=0) {
+			uri += "/" + request.getAccountId();
+		}
+
+		@SuppressWarnings("unchecked")
+		Response<Account> response = (Response<Account>) this.callGet(
+				uri,
+				request.getQueryParams(),
+				new TypeReference<Response<Account>>() { });
 		
-		//TODO - we are adding really soon!
-		return null;
+		if(log.isDebugEnabled()) log.debug("getAccount completed");
+		
+		return response;
+		
 	}
 	
 	
@@ -28,9 +53,7 @@ public class AccountService extends BaseService {
 		
 
 		if(log.isDebugEnabled()) log.debug("addAccount called");
-		
-		//betaStandardCurrency into Query parameters
-		
+	
 		@SuppressWarnings("unchecked")
 		Response<Account> response = (Response<Account>) this.callPost(
 				"beta/accounts", 

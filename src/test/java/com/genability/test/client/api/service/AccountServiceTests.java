@@ -10,7 +10,8 @@ import org.junit.Test;
 import com.genability.client.api.service.AccountService;
 import com.genability.client.types.Account;
 import com.genability.client.types.Response;
-import com.genability.client.types.Tariff;
+import com.genability.client.api.request.GetAccountsRequest;
+import com.genability.client.api.request.GetAccountRequest;
 
 public class AccountServiceTests  extends BaseServiceTests {
 	
@@ -49,4 +50,32 @@ public class AccountServiceTests  extends BaseServiceTests {
 		
 	}
 	
+	@Test
+	public void testGetAccounts() {
+		
+		GetAccountsRequest request = new GetAccountsRequest();
+		Response<Account> restResponse = accountService.getAccounts(request);
+		
+		assertNotNull("restResponse null", restResponse);
+		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
+		assertEquals("bad type",restResponse.getType(),Account.REST_TYPE);
+
+	}
+
+	@Test
+	public void testGetAccount() {
+
+		GetAccountRequest request = new GetAccountRequest();
+		
+		// Uncomment one of the below to retrieve a particular Account	
+
+		// request.setAccountId("account_id_here");
+		// request.setProviderAccountId("your_own_account_id_here");
+		Response<Account> restResponse = accountService.getAccount(request);
+		
+		assertNotNull("restResponse null", restResponse);
+		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
+		assertEquals("bad type",restResponse.getType(),Account.REST_TYPE);
+
+	}
 }
