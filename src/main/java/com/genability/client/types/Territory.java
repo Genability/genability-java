@@ -2,8 +2,6 @@ package com.genability.client.types;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class Territory {
 	

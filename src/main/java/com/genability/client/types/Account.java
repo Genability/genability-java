@@ -1,7 +1,5 @@
 package com.genability.client.types;
 
-import java.util.Map;
-
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 

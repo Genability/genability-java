@@ -2,8 +2,6 @@ package com.genability.client.api.service;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.List;
 
 import org.apache.commons.logging.Log;

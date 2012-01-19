@@ -2,7 +2,6 @@ package com.genability.test.client.api.service;
 
 import static org.junit.Assert.*;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
