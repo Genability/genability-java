@@ -7,6 +7,7 @@ import com.genability.client.types.PropertyData;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import com.genability.client.util.DateTimeJsonSerializer;
 
@@ -122,7 +123,8 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * 
 	 * @return inputs
 	 */
-	public List<PropertyData> getTariffInputs() {
+	@JsonProperty("tariffInputs")
+	public List<PropertyData> getInputs() {
 		return inputs;
 	}
 
@@ -131,7 +133,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * 
 	 * @param propertyDatas
 	 */
-	public void setTariffInputs(List<PropertyData> propertyDatas) {
+	public void setInputs(List<PropertyData> propertyDatas) {
 		inputs = propertyDatas;
 	}
 

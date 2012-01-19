@@ -120,6 +120,9 @@ public class CalculateServiceTests extends BaseServiceTests {
 		
 		CalculatedCost calculatedCost = restResponse.getResults().get(0);
 		
+		assertNotNull("calculatedCost total",calculatedCost.getTotalCost());
+		log.debug("totalCost:" + calculatedCost.getTotalCost().toPlainString());
+		
 		for(CalculatedCostItem costItem : calculatedCost.getItems()) {
 			
 			assertNotNull("cost null",costItem.getCost());
