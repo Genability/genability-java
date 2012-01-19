@@ -128,8 +128,18 @@ public class GetTerritoriesRequest extends AbstractGetNRequest implements Serial
 
 	@Override
 	public List<NameValuePair> getQueryParams() {
-		// TODO implement these
-		return null;
+
+		List<NameValuePair> qparams = super.getQueryParams();
+
+		addParam(qparams,"populateItems",populateItems);
+		addParam(qparams,"lseId",lseId);
+		addParam(qparams,"masterTariffId",masterTariffId);
+		addParam(qparams,"containsItemType",containsItemType);
+		addParam(qparams,"containsItemValue",containsItemValue);
+		addParam(qparams,"usageType",usageTypes);
+
+		return qparams;
+
 	}
 	
 }

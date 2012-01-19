@@ -54,6 +54,12 @@ public class AccountServiceTests  extends BaseServiceTests {
 	public void testGetAccounts() {
 		
 		GetAccountsRequest request = new GetAccountsRequest();
+		
+		// A few examples of how to search and sort
+		// request.setSortOn("customerOrgName");
+		// request.setSearch("acme");
+		// request.setSearchOn("customerOrgName");
+
 		Response<Account> restResponse = accountService.getAccounts(request);
 		
 		assertNotNull("restResponse null", restResponse);

@@ -1,0 +1,109 @@
+package com.genability.client.types;
+
+import java.math.BigDecimal;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.joda.time.DateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PropertyData {
+	
+	protected String keyName;
+	protected DateTime fromDateTime;
+	protected DateTime toDateTime;
+	protected String unit;
+	protected String dataValue;
+	protected BigDecimal accuracy;
+	
+	public PropertyData() {
+		//constructor
+	}
+	
+	/**
+	 * @return the fromDate
+	 */
+	public DateTime getFromDateTime() {
+		return fromDateTime;
+	}
+
+	/**
+	 * @param fromDate
+	 *            the fromDate to set
+	 */
+
+	public void setFromDateTime(DateTime fromDate) {
+		this.fromDateTime = fromDate;
+	}
+
+	/**
+	 * @return the toDate
+	 */
+	public DateTime getToDateTime() {
+		return toDateTime;
+	}
+
+	/**
+	 * @param toDate
+	 *            the toDate to set
+	 */
+	public void setToDateTime(DateTime toDate) {
+		this.toDateTime = toDate;
+	}
+
+	/**
+	 * @param unit
+	 *            the unit_ to set
+	 */
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	/**
+	 * @return the unit_
+	 */
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public String getUnit() {
+		return unit;
+	}
+
+	/**
+	 * 
+	 */
+	public void setDataValue(String dataValue) {
+		this.dataValue = dataValue;
+	}
+
+	/**
+	 * @return the unit_
+	 */
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public String getDataValue() {
+		return dataValue;
+	}
+
+	/**
+	 * @param accuracy
+	 *            the accuracy_ to set
+	 */
+	public void setAccuracy(BigDecimal accuracy) {
+		this.accuracy = accuracy;
+	}
+
+	public void setKeyName(String keyName_) {
+		keyName = keyName_;
+	}
+	
+	public String getKeyName() {
+		return keyName;
+	}
+	
+	/**
+	 * @return the accuracy_
+	 */
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public BigDecimal getAccuracy() {
+		return accuracy;
+	}
+
+}

@@ -249,8 +249,8 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		
+		List<NameValuePair> qparams = super.getQueryParams();
+
 		addParam(qparams,"lseId",lseId);
 		addParam(qparams,"distributionLseId",distributionLseId);
 		addParam(qparams,"masterTariffId",masterTariffId);

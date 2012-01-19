@@ -18,6 +18,12 @@ public abstract class AbstractRequest {
 
 	} // end of addParam for Long
 
+	protected void addParam(List<NameValuePair> qparams, String paramName, Integer paramValue) {
+		
+		if(paramValue != null) 
+			qparams.add(new BasicNameValuePair(paramName, paramValue.toString()));
+
+	} // end of addParam for Integer
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, String paramValue) {
 		
