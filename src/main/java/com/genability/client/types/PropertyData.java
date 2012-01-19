@@ -10,14 +10,28 @@ import org.joda.time.DateTime;
 public class PropertyData {
 	
 	protected String keyName;
+	
 	protected DateTime fromDateTime;
+	
 	protected DateTime toDateTime;
+	
 	protected String unit;
+	
 	protected String dataValue;
+	
 	protected BigDecimal accuracy;
 	
 	public PropertyData() {
 		//constructor
+	}
+
+
+	public void setKeyName(String keyName_) {
+		keyName = keyName_;
+	}
+	
+	public String getKeyName() {
+		return keyName;
 	}
 	
 	/**
@@ -90,13 +104,6 @@ public class PropertyData {
 		this.accuracy = accuracy;
 	}
 
-	public void setKeyName(String keyName_) {
-		keyName = keyName_;
-	}
-	
-	public String getKeyName() {
-		return keyName;
-	}
 	
 	/**
 	 * @return the accuracy_

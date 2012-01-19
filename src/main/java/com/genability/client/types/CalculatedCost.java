@@ -7,39 +7,41 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
+import com.genability.client.util.DateTimeJsonSerializer;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CalculatedCost {
 
 	public static final String REST_TYPE = "CalculatedCost";
 	
-	private Long masterTariffId_;
+	private Long masterTariffId;
 
-	private String tariffName_;
+	private String tariffName;
 
-	private DateTime fromDateTime_;
+	private DateTime fromDateTime;
 
-	private DateTime toDateTime_;
+	private DateTime toDateTime;
 
-	private BigDecimal totalCost_;
+	private BigDecimal totalCost;
 
 	private BigDecimal accuracy;
 
-	private List<Object> items_;
+	private List<CalculatedCostItem> items;
 	
-	private List<Object> assumptions;
+	private List<PropertyData> assumptions;
 	
 	/**
 	 * Access method for MasterTariffId.
 	 */
 	public Long getMasterTariffId() {
-		return masterTariffId_;
+		return masterTariffId;
 	}
 
 	/**
 	 * Mutator for MasterTariffId.
 	 */
 	public void setMasterTariffId(Long masterTariffId) {
-		this.masterTariffId_ = masterTariffId;
+		this.masterTariffId = masterTariffId;
 	}
 
 	/**
@@ -47,14 +49,14 @@ public class CalculatedCost {
 	 *            the tariffName_ to set
 	 */
 	public void setTariffName(String tariffName) {
-		this.tariffName_ = tariffName;
+		this.tariffName = tariffName;
 	}
 
 	/**
 	 * @return the tariffName_
 	 */
 	public String getTariffName() {
-		return tariffName_;
+		return tariffName;
 	}
 
 	/**
@@ -62,14 +64,15 @@ public class CalculatedCost {
 	 *            the fromDateTime_ to set
 	 */
 	public void setFromDateTime(DateTime fromDateTime) {
-		this.fromDateTime_ = fromDateTime;
+		this.fromDateTime = fromDateTime;
 	}
 	
 	/**
 	 * @return the fromDateTime_
 	 */
+	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getFromDateTime() {
-		return fromDateTime_;
+		return fromDateTime;
 	}
 
 	/**
@@ -77,14 +80,15 @@ public class CalculatedCost {
 	 *            the toDateTime_ to set
 	 */
 	public void setToDateTime(DateTime toDateTime) {
-		this.toDateTime_ = toDateTime;
+		this.toDateTime = toDateTime;
 	}
 
 	/**
 	 * @return the toDateTime_
 	 */
+	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getToDateTime() {
-		return toDateTime_;
+		return toDateTime;
 	}
 
 	/**
@@ -92,14 +96,14 @@ public class CalculatedCost {
 	 * @return
 	 */
 	public BigDecimal getTotalCost() {
-		return totalCost_;
+		return totalCost;
 	}
 	
 	/**
 	 * Sets the total cost of the whole calculation.
 	 */
 	public void setTotalCost(BigDecimal totalCost) {
-		this.totalCost_ = totalCost;
+		this.totalCost = totalCost;
 	}
 
 	/**
@@ -118,12 +122,12 @@ public class CalculatedCost {
 	}
 
 
-	public List<Object> getItems() {
-		return items_;
+	public List<CalculatedCostItem> getItems() {
+		return items;
 	}
 
-	public void setItems(List<Object> items) {
-		this.items_ = items;
+	public void setItems(List<CalculatedCostItem> items) {
+		this.items = items;
 	}
 	
 	/**
@@ -132,11 +136,11 @@ public class CalculatedCost {
 	 * @return
 	 */
 	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	public List<Object> getAssumptions() {
+	public List<PropertyData> getAssumptions() {
 		return assumptions;
 	}
 
-	public void setAssumptions(List<Object> assumptions) {
+	public void setAssumptions(List<PropertyData> assumptions) {
 		this.assumptions = assumptions;
 	}	
 	

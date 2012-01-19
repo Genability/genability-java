@@ -30,7 +30,6 @@ public class CalculateService extends BaseService {
 		@SuppressWarnings("unchecked")
 		Response<CalculatedCost> response = (Response<CalculatedCost>) this.callPost(
 				uri,
-				//request.getQueryParams(),
 				request,
 				new TypeReference<Response<CalculatedCost>>() { });
 		

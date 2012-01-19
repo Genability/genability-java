@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
+import com.genability.client.types.CalculatedCostItem;
 import com.genability.client.types.Response;
 import com.genability.client.types.CalculatedCost;
 import com.genability.client.types.PropertyData;
@@ -29,39 +32,77 @@ public class CalculateServiceTests extends BaseServiceTests {
 	@Test
 	public void testCalculateTariff512() {
 		
+		DateTime fromDateTime = new DateTime("2011-12-01T00:00:00.000-05:00");
+		DateTime toDateTime = new DateTime("2012-01-01T00:00:00.000-05:00");
+		
 		GetCalculatedCostRequest request = new GetCalculatedCostRequest();
 
-		request.setFromDateTime(new DateTime("2011-12-01T00:00:00.000-05:00"));
-		request.setToDateTime(new DateTime("2012-01-01T00:00:00.000-05:00"));
+		request.setFromDateTime(fromDateTime);
+		request.setToDateTime(toDateTime);
 		request.setMasterTariffId(512l);
+
+		// Set the consumption property
+		PropertyData newProp3 = new PropertyData();
+		newProp3.setFromDateTime(fromDateTime);
+		newProp3.setToDateTime(toDateTime);
+		newProp3.setDataValue("220");
+		newProp3.setKeyName("consumption");
 		
 		// Set the cityLimits property
 		PropertyData newProp = new PropertyData();
-		newProp.setFromDateTime(new DateTime("2011-12-01T00:00:00.000-05:00"));
-		newProp.setToDateTime(new DateTime("2011-12-01T00:00:00.000-05:00"));
+		newProp.setFromDateTime(fromDateTime);
+		newProp.setToDateTime(toDateTime);
 		newProp.setDataValue("Inside");
 		newProp.setKeyName("cityLimits");
 		
 		// Set the connectionType property
 		PropertyData newProp2 = new PropertyData();
-		newProp2.setFromDateTime(new DateTime("2011-12-01T00:00:00.000-05:00"));
-		newProp2.setToDateTime(new DateTime("2011-12-01T00:00:00.000-05:00"));
+		newProp2.setFromDateTime(fromDateTime);
+		newProp2.setToDateTime(toDateTime);
 		newProp2.setDataValue("Primary");
 		newProp2.setKeyName("connectionType");
-
-		// Set the consumption property
-		PropertyData newProp3 = new PropertyData();
-		newProp3.setFromDateTime(new DateTime("2011-12-01T00:00:00.000-05:00"));
-		newProp3.setToDateTime(new DateTime("2011-12-01T00:00:00.000-05:00"));
-		newProp3.setDataValue("220");
-		newProp3.setKeyName("consumption");
-
 		
-		request.addTariffInput(newProp);
-		request.addTariffInput(newProp2);
-		request.addTariffInput(newProp3);
+		request.addInput(newProp);
+		request.addInput(newProp2);
+		request.addInput(newProp3);
 		
 		callRunCalc("Test for master tariff 512",request);
+		
+	}
+	
+	
+	@Test
+	public void testCalculateTariff522() {
+		
+		// Where the tariff has a time zone (most do) you can use it to make sure your dates are the same
+		DateTime fromDateTime = new DateTime(2012, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime = new DateTime(2013, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
+		
+		GetCalculatedCostRequest request = new GetCalculatedCostRequest();
+
+		request.setFromDateTime(fromDateTime);
+		request.setToDateTime(toDateTime);
+		request.setMasterTariffId(522l); // PGE E1 - residential tariff
+
+		// Set the consumption property
+		PropertyData newProp = new PropertyData();
+		newProp.setFromDateTime(fromDateTime);
+		newProp.setToDateTime(toDateTime);
+		newProp.setDataValue("36500");
+		newProp.setKeyName("consumption");
+		
+		// Set the territoryId property
+		PropertyData newProp2 = new PropertyData();
+		newProp2.setFromDateTime(fromDateTime);
+		newProp2.setToDateTime(toDateTime);
+		newProp2.setDataValue("3534"); //Baseline Region P - 3534
+		newProp2.setKeyName("territoryId");
+
+		
+		request.addInput(newProp);
+		request.addInput(newProp2);
+		
+		callRunCalc("Test for master tariff 522",request);
 		
 	}
 	
@@ -74,14 +115,16 @@ public class CalculateServiceTests extends BaseServiceTests {
 		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
 		assertEquals("bad type",restResponse.getType(),CalculatedCost.REST_TYPE);
 		assertTrue("bad count",restResponse.getCount() > 0);
-		/*
-		for(Territory territory : restResponse.getResults()) {
+		assertNotNull("results null",restResponse.getResults());
+		assertEquals("results count",restResponse.getResults().size(),1);
+		
+		CalculatedCost calculatedCost = restResponse.getResults().get(0);
+		
+		for(CalculatedCostItem costItem : calculatedCost.getItems()) {
 			
-			assertNotNull("territoryId null",territory.getTerritoryId());
-			assertNotNull("lseId null",territory.getLseId());
-			assertNotNull("lseName null",territory.getLseName());
+			assertNotNull("cost null",costItem.getCost());
 			
 		}
-		*/
+		
 	}
 }

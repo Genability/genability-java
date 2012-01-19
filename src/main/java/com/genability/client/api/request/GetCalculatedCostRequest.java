@@ -1,14 +1,14 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import com.genability.client.types.PropertyData;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 import org.codehaus.jackson.annotate.JsonIgnore;
-
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.genability.client.util.DateTimeJsonSerializer;
 
 public class GetCalculatedCostRequest extends AbstractRequest implements Serializable {
 
@@ -16,55 +16,43 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * Private member variable serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private Long masterTariffId_;
-
-	/**
-	 * Private member variable territoryId
-	 */
-	private Long territoryId_;
-
-	/**
-	 * Private member variable profileId
-	 */
-	private String profileId_;
 
 	/**
 	 * Private member variable fromDate
 	 */
-	private DateTime fromDateTime_;
+	private DateTime fromDateTime;
 
 	/**
 	 * Private member variable toDate
 	 */
-	private DateTime toDateTime_;
+	private DateTime toDateTime;
 
 	/**
-	 * Private member variable TariffInputs_
+	 * Private member variable masterTariffId
 	 */
-	private List<PropertyData> tariffInputs_;
+	private Long masterTariffId;
+
+	/**
+	 * Private member variable profileId
+	 */
+	private String profileId;
+
+	/**
+	 * Private member variable Inputs
+	 */
+	private List<PropertyData> inputs;
 
 	/**
 	 * Private member variable detailLevel_
 	 * Possible values are: ALL, TOTAL, CHARGE_TYPE, RATE
 	 * Default is ALL if not specified.
 	 */
-	private String detailLevel_;
+	private String detailLevel;
 
 	/**
 	 * Private member variable estimate_
 	 */
 	private String accuracy;
-	
-	/**
-	 * Beta property to hide assumptions until we are ready to roll out.
-	 */
-	private Boolean betaPopulateAssumptions;
-
-	/**
-	 * Private member variable dataFactor_
-	 */
-	private BigDecimal dataFactor_;
 
 	/**
 	 * Constructor to initialize instance
@@ -79,7 +67,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * @return profileId
 	 */
 	public String getProfileId() {
-		return profileId_;
+		return profileId;
 	}
 
 	/**
@@ -88,79 +76,63 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * @param profileId
 	 */
 	public void setProfileId(String profileId) {
-		profileId_ = profileId;
+		this.profileId = profileId;
 	}
 
 	/**
-	 * Access method that retrieve territoryId_
+	 * Access method that retrieve fromDateTime
 	 * 
-	 * @return territoryId_
+	 * @return fromDateTime
 	 */
-	public Long getTerritoryId() {
-		return territoryId_;
-	}
-
-	/**
-	 * Mutator used to set the value of territoryId_
-	 * 
-	 * @param territoryId
-	 */
-	public void setTerritoryId(Long territoryId) {
-		territoryId_ = territoryId;
-	}
-
-	/**
-	 * Access method that retrieve fromDateTime_
-	 * 
-	 * @return fromDateTime_
-	 */
+	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getFromDateTime() {
-		return fromDateTime_;
+		return fromDateTime;
 	}
 
 	/**
-	 * Mutator used to set the value of fromDateTime_
+	 * Mutator used to set the value of fromDateTime
 	 * 
 	 * @param fromDate
 	 */
 	public void setFromDateTime(DateTime fromDate) {
-		fromDateTime_ = fromDate;
+		fromDateTime = fromDate;
 	}
 
 	/**
-	 * Access method that retrieve toDateTime_
+	 * Access method that retrieve toDateTime
 	 * 
-	 * @return toDateTime_
+	 * @return toDateTime
 	 */
+	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getToDateTime() {
-		return toDateTime_;
+		return toDateTime;
 	}
 
 	/**
-	 * Mutator used to set the value of toDateTime_
+	 * Mutator used to set the value of toDateTime
 	 * 
 	 * @param toDate
 	 */
 	public void setToDateTime(DateTime toDate) {
-		toDateTime_ = toDate;
+		toDateTime = toDate;
 	}
 
 	/**
-	 * Access method that retrieve tariffInputs_
+	 * Access method that retrieve tariffInputs
 	 * 
-	 * @return tariffInputs_
+	 * @return inputs
 	 */
 	public List<PropertyData> getTariffInputs() {
-		return tariffInputs_;
+		return inputs;
 	}
 
 	/**
-	 * Mutator used to set the value of tariffInputs_
+	 * Mutator used to set the value of tariffInputs
 	 * 
 	 * @param propertyDatas
 	 */
 	public void setTariffInputs(List<PropertyData> propertyDatas) {
-		tariffInputs_ = propertyDatas;
+		inputs = propertyDatas;
 	}
 
 	/**
@@ -168,14 +140,14 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 *            the detailLevel_ to set
 	 */
 	public void setDetailLevel(String detailLevel) {
-		this.detailLevel_ = detailLevel;
+		this.detailLevel = detailLevel;
 	}
 
 	/**
-	 * @return the detailLevel_
+	 * @return the detailLevel
 	 */
 	public String getDetailLevel() {
-		return detailLevel_;
+		return detailLevel;
 	}
 
 	/**
@@ -193,36 +165,27 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		this.accuracy = accuracy;
 	}
 
-	public BigDecimal getDataFactor() {
-		return dataFactor_;
-	}
-
-	public void setDataFactor(BigDecimal dataFactor) {
-		dataFactor_ = dataFactor;
-	}
-	
-	public Boolean getBetaPopulateAssumptions() {
-		return betaPopulateAssumptions;
-	}
-
-	public void setBetaPopulateAssumptions(Boolean betaPopulateAssumptions) {
-		this.betaPopulateAssumptions = betaPopulateAssumptions;
-	}
 	
 	public void setMasterTariffId(Long masterTariffId) {
-		masterTariffId_ = masterTariffId;
+		this.masterTariffId = masterTariffId;
 	}
 	
 	@JsonIgnore
 	public Long getMasterTariffId() {
-		return masterTariffId_;
+		return masterTariffId;
 	}
 
-	public void addTariffInput(PropertyData tariffInput) {
-		if (tariffInputs_ == null || tariffInputs_.size() ==0) {
-			tariffInputs_ = new ArrayList<PropertyData>();
+	/**
+	 * Helper method for adding a PropertyData entry into the collection
+	 * of inputs.
+	 * 
+	 * @param input
+	 */
+	public void addInput(PropertyData input) {
+		if (inputs == null || inputs.size() == 0) {
+			inputs = new ArrayList<PropertyData>();
 		}
-		tariffInputs_.add(tariffInput);
+		inputs.add(input);
 	}
 	
 	@Override
@@ -230,7 +193,8 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-		addParam(qparams,"masterTariffId",masterTariffId_);
+		addParam(qparams,"masterTariffId",masterTariffId);
+		addParam(qparams,"betaPopulateAssumptions",true);
 		return qparams;
 		
 	}	
