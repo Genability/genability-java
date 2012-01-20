@@ -29,8 +29,8 @@ public class BulkUploadTests extends BaseServiceTests {
 	public void testUploadCSV() {
 		
 		BulkUploadRequest request = new BulkUploadRequest();
-		request.setUsageProfileId("572e40b8-4e59-41cd-b8d0-17e057e53432");
-		File file = new File("/Users/emileleon/Downloads/NREL_Z4_Baltimore_LargeOffice_2011.csv");
+		request.setUsageProfileId("someProfileId");
+		File file = new File("/Users/thisisme/Downloads/usageData.csv");
 		request.setFileData(file);
 		request.setContentType("text/csv");
 		uploadCSV("Case 1",request);
