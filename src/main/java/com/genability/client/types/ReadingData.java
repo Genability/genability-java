@@ -18,6 +18,11 @@ import org.joda.time.DateTimeZone;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReadingData extends PropertyData implements Serializable, UsageData {
 
+	public static final String REST_TYPE = "ReadingData";
+
+	public static final String KWH_UNIT = "kWh";
+
+	public static final String KW_UNIT = "kW";
 	/**
      * 
      */
@@ -58,10 +63,6 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	 */
 	private BigDecimal quantityValue;
 
-
-	public static final String KWH_UNIT = "kWh";
-
-	public static final String KW_UNIT = "kW";
 
 	/**
 	 * This is the default constructor.

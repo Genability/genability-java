@@ -8,17 +8,23 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentProducer;
 import org.apache.http.entity.EntityTemplate;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
+import com.genability.client.api.request.BulkUploadRequest;
 import com.genability.client.types.Response;
 
 public class BaseService {
@@ -212,6 +218,47 @@ public class BaseService {
 		return restResponse;
 		
 	} // end of callPost
+	
+	/*
+	 * This method is used to upload large datasets, typically CSV or XML files.
+	 * The request object passed in contains the File to upload.
+	 */
+	public Response<?> callFileUpload(String endpointPath, BulkUploadRequest request, TypeReference<?> resultTypeReference) {
+		
+		Response<?> restResponse = null;
+
+		String url = restApiServer + endpointPath + "?" + this.getQueryStringCredentials();
+
+		if(log.isDebugEnabled()) log.debug(url);
+		
+		HttpPost postRequest = new HttpPost(url);
+		// Large files may take a while, so we are setting this to a 5 minute timeout
+		postRequest.getParams().setParameter("http.socket.timeout", new Integer(300000));
+		
+		MultipartEntity reqEntity = new MultipartEntity();
+		FileBody fileBody = new FileBody(request.getFileData());
+		reqEntity.addPart("fileData", fileBody);
+		postRequest.setEntity(reqEntity);
+
+		HttpClient httpclient = new DefaultHttpClient();
+	    httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+
+	    try {
+		    HttpResponse response = httpclient.execute(postRequest);		
+			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
+		} catch (ClientProtocolException e) {
+			
+			log.error("ClientProtocolException",e);
+	
+		} catch (IOException e) {
+	
+			log.error("IOException",e);
+		} finally {
+			httpclient.getConnectionManager().shutdown();
+		}
+		return restResponse;
+		
+	}
 	
 	/**
 	 * Helps build the credentials for the request.
