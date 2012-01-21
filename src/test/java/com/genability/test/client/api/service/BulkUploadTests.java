@@ -32,13 +32,25 @@ public class BulkUploadTests extends BaseServiceTests {
 		request.setUsageProfileId("someProfileId");
 		File file = new File("/Users/thisisme/Downloads/usageData.csv");
 		request.setFileData(file);
-		request.setContentType("text/csv");
-		uploadCSV("Case 1",request);
+		request.setFileFormat("csv");
+		upload("Case upload CSV",request);
 		
 	}
 	
+	// This method uploads Green Button XML data
+	@Test
+	public void testUploadGreenButton() {
+		
+		BulkUploadRequest request = new BulkUploadRequest();
+		request.setUsageProfileId("someProfileId");
+		File file = new File("/Users/thisisme/Downloads/usageData.csv");
+		request.setFileData(file);
+		request.setFileFormat("espi");
+		upload("Case upload XML",request);
+		
+	}
 
-	public void uploadCSV(String testCase, BulkUploadRequest request) {
+	private void upload(String testCase, BulkUploadRequest request) {
 		
 		Response<String> restResponse = bulkUploadService.uploadFile(request);
 		

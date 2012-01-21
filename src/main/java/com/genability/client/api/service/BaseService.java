@@ -3,6 +3,8 @@ package com.genability.client.api.service;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+import java.nio.charset.Charset;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,6 +21,7 @@ import org.apache.http.entity.ContentProducer;
 import org.apache.http.entity.EntityTemplate;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -238,6 +241,11 @@ public class BaseService {
 		MultipartEntity reqEntity = new MultipartEntity();
 		FileBody fileBody = new FileBody(request.getFileData());
 		reqEntity.addPart("fileData", fileBody);
+		try {
+			reqEntity.addPart("fileFormat", new StringBody(request.getFileFormat(), Charset.forName("UTF-8")));
+		} catch (UnsupportedEncodingException uee) {
+			log.error("UnsupportedEncodingException", uee);
+		}
 		postRequest.setEntity(reqEntity);
 
 		HttpClient httpclient = new DefaultHttpClient();
