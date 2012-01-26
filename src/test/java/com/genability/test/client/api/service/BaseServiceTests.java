@@ -15,6 +15,8 @@ public class BaseServiceTests {
 	
 	protected static String appKey = null;
 	
+	protected static String restApiServer = null;
+	
 
 	static {
 		//
@@ -43,6 +45,12 @@ public class BaseServiceTests {
     		appKey = prop.getProperty("appKey");
     		logger.info("appId:" + appId);
     		logger.info("appKey:" + appKey);
+    		
+    		if(prop.containsKey("restApiServer")) {
+    			
+    			restApiServer = prop.getProperty("restApiServer");
+    			logger.info("restApiServer:" + restApiServer);
+    		}
  
     	} catch (IOException ex) {
     		logger.error("Unable to process genability.properties", ex);

@@ -22,6 +22,7 @@ public class BulkUploadTests extends BaseServiceTests {
 		bulkUploadService = new BulkUploadService();
 		bulkUploadService.setAppId(appId);
 		bulkUploadService.setAppKey(appKey);
+		if(restApiServer != null) bulkUploadService.setRestApiServer(restApiServer);
 	}
 	
 	

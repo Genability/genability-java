@@ -25,6 +25,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 		calculateService = new CalculateService();
 		calculateService.setAppId(appId);
 		calculateService.setAppKey(appKey);
+		if(restApiServer != null) calculateService.setRestApiServer(restApiServer);
 	}
 	
 	
@@ -83,23 +84,47 @@ public class CalculateServiceTests extends BaseServiceTests {
 		request.setToDateTime(toDateTime);
 		request.setMasterTariffId(522l); // PGE E1 - residential tariff
 
-		// Set the consumption property
-		PropertyData newProp = new PropertyData();
-		newProp.setFromDateTime(fromDateTime);
-		newProp.setToDateTime(toDateTime);
-		newProp.setDataValue("36500");
-		newProp.setKeyName("consumption");
-		
 		// Set the territoryId property
 		PropertyData newProp2 = new PropertyData();
 		newProp2.setFromDateTime(fromDateTime);
 		newProp2.setToDateTime(toDateTime);
 		newProp2.setDataValue("3534"); //Baseline Region P - 3534
 		newProp2.setKeyName("territoryId");
-
 		
-		request.addInput(newProp);
 		request.addInput(newProp2);
+		
+		//
+		// Create consumption inputs for each hour of the day, first for 
+		// weekdays then for weekends.
+		//
+		DateTime propertyStartDateTime = new DateTime(fromDateTime);
+		while(propertyStartDateTime.isBefore(toDateTime)) {
+			
+			for(int hour = 0; hour < 24; hour++) {
+				
+				// Set the consumption property
+				PropertyData weekdayProp = new PropertyData();
+				weekdayProp.setFromDateTime(propertyStartDateTime);
+				weekdayProp.setToDateTime(propertyStartDateTime.plusMonths(1));
+				weekdayProp.setPeriod("1:5e " + hour + "H");
+				weekdayProp.setDataValue("0.5");
+				weekdayProp.setKeyName("consumption");
+				
+				request.addInput(weekdayProp);
+	
+				PropertyData weekendProp = new PropertyData();
+				weekendProp.setFromDateTime(fromDateTime);
+				weekendProp.setToDateTime(toDateTime);
+				weekendProp.setPeriod("6:7e " + hour + "H");
+				weekendProp.setDataValue("0.5");
+				weekendProp.setKeyName("consumption");
+				
+				request.addInput(weekendProp);
+				
+				propertyStartDateTime = propertyStartDateTime.plusMonths(1);
+				
+			}
+		}
 		
 		callRunCalc("Test for master tariff 522",request);
 		

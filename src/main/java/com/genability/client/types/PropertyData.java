@@ -15,6 +15,8 @@ public class PropertyData {
 	
 	protected DateTime toDateTime;
 	
+	protected String period;
+	
 	protected String unit;
 	
 	protected String dataValue;
@@ -78,6 +80,22 @@ public class PropertyData {
 		this.toDateTime = toDate;
 	}
 
+	/**
+	 * @param unit
+	 *            the unit_ to set
+	 */
+	public void setPeriod(String period) {
+		this.period = period;
+	}
+
+	/**
+	 * @return the unit_
+	 */
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public String getPeriod() {
+		return period;
+	}
+	
 	/**
 	 * @param unit
 	 *            the unit_ to set

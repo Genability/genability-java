@@ -21,6 +21,7 @@ public class TariffServiceTests extends BaseServiceTests {
 		tariffService = new TariffService();
 		tariffService.setAppId(appId);
 		tariffService.setAppKey(appKey);
+		if(restApiServer != null) tariffService.setRestApiServer(restApiServer);
 	}
 	
 	

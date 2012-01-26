@@ -24,6 +24,7 @@ public class AccountServiceTests  extends BaseServiceTests {
 		accountService = new AccountService();
 		accountService.setAppId(appId);
 		accountService.setAppKey(appKey);
+		if(restApiServer != null) accountService.setRestApiServer(restApiServer);
 		
 	}
 

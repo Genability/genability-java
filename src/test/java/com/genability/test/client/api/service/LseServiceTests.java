@@ -20,6 +20,7 @@ public class LseServiceTests extends BaseServiceTests {
 		lseService = new LseService();
 		lseService.setAppId(appId);
 		lseService.setAppKey(appKey);
+		if(restApiServer != null) lseService.setRestApiServer(restApiServer);
 	}
 	
 	

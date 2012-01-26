@@ -21,6 +21,7 @@ public class ProfileServiceTests extends BaseServiceTests {
 		profileService = new ProfileService();
 		profileService.setAppId(appId);
 		profileService.setAppKey(appKey);
+		if(restApiServer != null) profileService.setRestApiServer(restApiServer);
 	}
 	
 	
