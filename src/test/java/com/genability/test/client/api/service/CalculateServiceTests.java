@@ -10,6 +10,7 @@ import com.genability.client.types.Response;
 import com.genability.client.types.CalculatedCost;
 import com.genability.client.types.PropertyData;
 import com.genability.client.api.request.GetCalculatedCostRequest;
+import com.genability.client.api.request.GetCalculationInputsRequest;
 import com.genability.client.api.service.CalculateService;
 
 import org.junit.BeforeClass;
@@ -130,7 +131,62 @@ public class CalculateServiceTests extends BaseServiceTests {
 		
 	}
 	
+	
+	@Test
+	public void testCalculateForAccount() {
+		
+		// Where the tariff has a time zone (most do) you can use it to make sure your dates are the same
+		DateTime fromDateTime = new DateTime(2012, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime = new DateTime(2013, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
+		
+		GetCalculatedCostRequest request = new GetCalculatedCostRequest();
 
+		request.setFromDateTime(fromDateTime);
+		request.setToDateTime(toDateTime);
+
+		// Set the accountId property
+		// This assumes the Account contains the required applicability properties as well as a tariffId.
+		// The calculation will assume default property values for those that aren't found in the Account.
+		// You can specify and override the tariffId with this line:
+		// request.setMasterTariffId(522l)
+		
+		PropertyData newProp2 = new PropertyData();
+		newProp2.setFromDateTime(fromDateTime);
+		newProp2.setToDateTime(toDateTime);
+		newProp2.setDataValue("abc123"); //add the accountId here
+		newProp2.setKeyName("accountId");
+		
+		request.addInput(newProp2);
+		
+		callRunCalc("Test for calculateForAccount",request);
+		
+	}
+	
+	@Test
+	public void testGetCalculationInputs() {
+		
+		// Where the tariff has a time zone (most do) you can use it to make sure your dates are the same
+		DateTime fromDateTime = new DateTime(2012, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime = new DateTime(2013, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
+		
+		GetCalculationInputsRequest request = new GetCalculationInputsRequest();
+
+		request.setFromDateTime(fromDateTime);
+		request.setToDateTime(toDateTime);
+		request.setMasterTariffId(522l);
+		request.setTerritoryId(3534l);
+		
+		Response<PropertyData> restResponse = calculateService.getCalculationInputs(request);
+
+		assertNotNull("restResponse null", restResponse);
+		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
+		assertEquals("bad type",restResponse.getType(),PropertyData.REST_TYPE);
+		assertTrue("bad count",restResponse.getCount() > 0);
+		assertNotNull("results null",restResponse.getResults());
+		assertTrue("results were empty",restResponse.getResults().size() != 0);
+	}
+
+	
 	public void callRunCalc(String testCase, GetCalculatedCostRequest request) {
 		
 		Response<CalculatedCost> restResponse = calculateService.getCalculatedCost(request);

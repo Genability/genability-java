@@ -9,6 +9,8 @@ import org.joda.time.DateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PropertyData {
 	
+	public static final String REST_TYPE = "PropertyData";
+	
 	protected String keyName;
 	
 	protected DateTime fromDateTime;

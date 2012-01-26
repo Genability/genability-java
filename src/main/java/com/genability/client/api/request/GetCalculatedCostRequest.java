@@ -56,6 +56,11 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	private String accuracy;
 
 	/**
+	 * Private member variable accountId
+	 */
+	private String accountId;
+	
+	/**
 	 * Constructor to initialize instance
 	 */
 	public GetCalculatedCostRequest() {
@@ -175,6 +180,14 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	@JsonIgnore
 	public Long getMasterTariffId() {
 		return masterTariffId;
+	}
+	
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+	
+	public String getAccountId() {
+		return accountId;
 	}
 
 	/**

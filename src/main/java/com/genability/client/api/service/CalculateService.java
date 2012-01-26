@@ -3,8 +3,10 @@ package com.genability.client.api.service;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.genability.client.api.request.GetCalculatedCostRequest;
+import com.genability.client.api.request.GetCalculationInputsRequest;
 import com.genability.client.types.Response;
 import com.genability.client.types.CalculatedCost;
+import com.genability.client.types.PropertyData;
 
 public class CalculateService extends BaseService {
 	
@@ -38,5 +40,33 @@ public class CalculateService extends BaseService {
 		return response;
 		
 	}
-
+	
+	/**
+	 * Calls the REST service to get the required inputs to run a Calculation
+	 * for a given tariffId.  The tariffId can be explicitly stated within the
+	 * GetCalculationInputsRequest object, or if it is null, the service will 
+	 * expect it to be in the Account that is passed in. 
+	 */
+	 public Response<PropertyData> getCalculationInputs(GetCalculationInputsRequest request) {
+	
+		 if(log.isDebugEnabled()) log.debug("getCalculationInputs called");
+			
+			String uri = "beta/calculate";
+			if (request.getMasterTariffId() != null) {
+				uri += "/" + request.getMasterTariffId();
+			} else {
+				//This means we will be getting the tariffId from within the Account.
+				//Do nothing.
+			}
+			
+			@SuppressWarnings("unchecked")
+			Response<PropertyData> response = (Response<PropertyData>) this.callGet(
+					uri,
+					request.getQueryParams(),
+					new TypeReference<Response<PropertyData>>() { });
+			
+			if(log.isDebugEnabled()) log.debug("getCalculationInputs completed");
+			
+			return response;
+	 }
 }
