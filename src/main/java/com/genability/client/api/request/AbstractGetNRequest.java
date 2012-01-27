@@ -6,6 +6,17 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 
 public abstract class AbstractGetNRequest extends AbstractRequest {
+
+	/**
+	 * Value to use when wanting to sort on a field in ascending order.
+	 */
+	public static final String ASCENDING = "ASC";
+
+	/**
+	 * Value to use when wanting to sort on a field in descending order.
+	 */
+	public static final String DESCENDING = "DESC";
+	
 	
 	private Integer pageStart;
 

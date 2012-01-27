@@ -9,6 +9,44 @@ public class Tariff {
 
 	public static final String REST_TYPE = "Tariff";
 	
+    /**
+     * Indicates a RESIDENTIAL class of customer.
+     */	
+	public static final String CUSTOMER_CLASS_RESIDENTIAL = "RESIDENTIAL";
+
+    /**
+     * Indicates a GENERAL class of customer.
+     */
+	public static final String CUSTOMER_CLASS_GENERAL = "GENERAL";
+	
+    /**
+     * Indicates a SPECIAL_USE class of customer.
+     */
+	public static final String CUSTOMER_CLASS_SPECIAL_USE = "SPECIAL_USE";
+
+
+
+    /**
+     * Indicates a DEFAULT tariff (residential only).
+     */
+    public static final String TARIFF_TYPE_DEFAULT = "DEFAULT";
+    
+    /**
+     * Indicates an ALTERNATIVE tariff (i.e. an opt in tariff).
+     */
+    public static final String TARIFF_TYPE_ALTERNATIVE = "ALTERNATIVE";
+    
+    /**
+     * Indicates an OPTIONAL_EXTRA tariff (adds on to your tariff).
+     */
+    public static final String TARIFF_TYPE_OPTIONAL_EXTRA = "OPTIONAL_EXTRA";
+    
+    /**
+     * Indicates an RIDER tariff (reusable rates).
+     */
+    public static final String TARIFF_TYPE_RIDER = "RIDER";
+
+    
 	/**
 	 * private member variable for TariffId.
 	 */

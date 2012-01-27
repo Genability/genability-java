@@ -13,6 +13,10 @@ import com.genability.client.util.DateTimeJsonSerializer;
 
 public class GetCalculatedCostRequest extends AbstractRequest implements Serializable {
 
+	
+	
+	
+	
 	/**
 	 * Private member variable serialVersionUID
 	 */

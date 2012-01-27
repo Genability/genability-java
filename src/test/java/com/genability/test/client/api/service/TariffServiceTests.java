@@ -45,6 +45,17 @@ public class TariffServiceTests extends BaseServiceTests {
 		request.setEffectiveOn(new DateTime(DateTime.now().getYear()-1,11,11,1,0,0,0));
 		callGetTariffs(testCase, request);
 		
+		testCase = "Case 4 - common scenario, active residential tariffs for a zipcode";
+		request = new GetTariffsRequest();
+		request.setCustomerClasses(new String[]{Tariff.CUSTOMER_CLASS_RESIDENTIAL});
+		request.setTariffTypes(new String[]{Tariff.TARIFF_TYPE_DEFAULT, Tariff.TARIFF_TYPE_ALTERNATIVE});
+		request.setEffectiveOn(DateTime.now());
+		request.setZipCode("94105");
+		request.setSortOn("tariffType");
+		request.setSortOrder(GetTariffsRequest.DESCENDING); // so default tariffs come before alternative
+		request.setPopulateProperties(true);// so you know what properties it will take to run a calc
+		callGetTariffs(testCase, request);
+		
 	}
 	
 
