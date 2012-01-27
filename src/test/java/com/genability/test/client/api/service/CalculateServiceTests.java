@@ -84,6 +84,8 @@ public class CalculateServiceTests extends BaseServiceTests {
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
 		request.setMasterTariffId(522l); // PGE E1 - residential tariff
+		request.setDetailLevel(GetCalculatedCostRequest.DETAIL_LEVEL_CHARGE_TYPE);
+		request.setGroupBy(GetCalculatedCostRequest.GROUP_BY_MONTH);
 
 		// Set the territoryId property
 		PropertyData newProp2 = new PropertyData();

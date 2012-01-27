@@ -14,9 +14,60 @@ import com.genability.client.util.DateTimeJsonSerializer;
 public class GetCalculatedCostRequest extends AbstractRequest implements Serializable {
 
 	
+	/**
+	 * To request a results at a totals level.
+	 */
+	public static final String DETAIL_LEVEL_TOTAL = "TOTAL";
+	
+	/**
+	 * To request a results at a charge type level (e.g. fixed, consumption, demand).
+	 */
+	public static final String DETAIL_LEVEL_CHARGE_TYPE = "CHARGE_TYPE";
+	
+	/**
+	 * To request a results for each rate.
+	 */
+	public static final String DETAIL_LEVEL_RATE = "RATE";
+	
+	/**
+	 * To request a results for each rate buck ... i.e. all details.
+	 * This is the default response when running a calculation so you don't actually
+	 * need to pass this argument in.
+	 */
+	public static final String DETAIL_LEVEL_ALL = "ALL";
 	
 	
+	/**
+	 * Use this constant for the groupBy value when you want to group readings
+	 * annually.
+	 */
+	public static final String GROUP_BY_YEAR = "YEAR";
+
+	/**
+	 * Use this constant for the groupBy value when you want to group readings
+	 * monthly.
+	 */
+	public static final String GROUP_BY_MONTH = "MONTH";
+
+	/**
+	 * Use this constant for the groupBy value when you want to group readings
+	 * daily.
+	 */
+	// adding next week - public static final String GROUP_BY_DAY = "DAY";
+
+	/**
+	 * Use this constant for the groupBy value when you want to group readings
+	 * hourly.
+	 */
+	// adding next week - public static final String GROUP_BY_HOUR = "HOUR";
 	
+	/**
+	 * Use this constant for the groupBy value when you want to group readings
+	 * into quarter-hour increments.
+	 */
+	// adding next week - public static final String GROUP_BY_QTRHOUR = "QTRHOUR";
+
+
 	/**
 	 * Private member variable serialVersionUID
 	 */
@@ -48,12 +99,19 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	private List<PropertyData> inputs;
 
 	/**
-	 * Private member variable detailLevel_
+	 * Private member variable detailLevel
 	 * Possible values are: ALL, TOTAL, CHARGE_TYPE, RATE
 	 * Default is ALL if not specified.
 	 */
 	private String detailLevel;
 
+	/**
+	 * Private member variable groupBy
+	 * Possible values are: YEAR, MONTH, etc
+	 * Default is no grouping if not specified.
+	 */
+	private String groupBy;
+	
 	/**
 	 * Private member variable estimate_
 	 */
@@ -69,24 +127,6 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 */
 	public GetCalculatedCostRequest() {
 
-	}
-
-	/**
-	 * Access method that retrieve profileId_
-	 * 
-	 * @return profileId
-	 */
-	public String getProfileId() {
-		return profileId;
-	}
-
-	/**
-	 * Mutator used to set the value of profileId_
-	 * 
-	 * @param profileId
-	 */
-	public void setProfileId(String profileId) {
-		this.profileId = profileId;
 	}
 
 	/**
@@ -127,6 +167,100 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		toDateTime = toDate;
 	}
 
+	
+	/**
+	 * The ID of the tariff to calculate for. Only needs to be set when
+	 * not running against an account, or if you want to override the
+	 * accounts tariff.
+	 * @return
+	 */
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public Long getMasterTariffId() {
+		return masterTariffId;
+	}
+	
+	public void setMasterTariffId(Long masterTariffId) {
+		this.masterTariffId = masterTariffId;
+	}
+	
+	
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+	
+	/**
+	 * Access method that retrieve profileId_
+	 * 
+	 * @return profileId
+	 */
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public String getProfileId() {
+		return profileId;
+	}
+
+	/**
+	 * Mutator used to set the value of profileId_
+	 * 
+	 * @param profileId
+	 */
+	public void setProfileId(String profileId) {
+		this.profileId = profileId;
+	}
+
+	/**
+	 * @return the detailLevel
+	 */
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public String getDetailLevel() {
+		return detailLevel;
+	}
+
+	/**
+	 * @param detailLevel
+	 *            the detailLevel to set
+	 */
+	public void setDetailLevel(String detailLevel) {
+		this.detailLevel = detailLevel;
+	}
+
+	/**
+	 * @return the groupBy
+	 */
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public String getGroupBy() {
+		return groupBy;
+	}
+
+	/**
+	 * @param groupBy
+	 *            the groupBy to set
+	 */
+	public void setGroupBy(String groupBy) {
+		this.groupBy = groupBy;
+	}
+
+	/**
+	 * @return the estimate
+	 */
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public String getAccuracy() {
+		return accuracy;
+	}
+
+	/**
+	 * @param estimate
+	 *            the estimate to set
+	 */
+	public void setAccuracy(String accuracy) {
+		this.accuracy = accuracy;
+	}
+
+
 	/**
 	 * Access method that retrieve tariffInputs
 	 * 
@@ -145,55 +279,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	public void setInputs(List<PropertyData> propertyDatas) {
 		inputs = propertyDatas;
 	}
-
-	/**
-	 * @param detailLevel_
-	 *            the detailLevel_ to set
-	 */
-	public void setDetailLevel(String detailLevel) {
-		this.detailLevel = detailLevel;
-	}
-
-	/**
-	 * @return the detailLevel
-	 */
-	public String getDetailLevel() {
-		return detailLevel;
-	}
-
-	/**
-	 * @return the estimate
-	 */
-	public String getAccuracy() {
-		return accuracy;
-	}
-
-	/**
-	 * @param estimate
-	 *            the estimate to set
-	 */
-	public void setAccuracy(String accuracy) {
-		this.accuracy = accuracy;
-	}
-
 	
-	public void setMasterTariffId(Long masterTariffId) {
-		this.masterTariffId = masterTariffId;
-	}
-	
-	@JsonIgnore
-	public Long getMasterTariffId() {
-		return masterTariffId;
-	}
-	
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
-	}
-	
-	public String getAccountId() {
-		return accountId;
-	}
-
 	/**
 	 * Helper method for adding a PropertyData entry into the collection
 	 * of inputs.

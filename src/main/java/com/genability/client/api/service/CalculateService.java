@@ -21,8 +21,9 @@ public class CalculateService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getCalculatedCost called");
 		
 		String uri = "beta/calculate";
-		if (request.getMasterTariffId() != null) {
+		if (request.getAccountId() == null && request.getMasterTariffId() != null) {
 			uri += "/" + request.getMasterTariffId();
+			request.setMasterTariffId(null);
 		} else {
 			//This means we will be getting the tariffId from within the Account.
 			//Do nothing.
