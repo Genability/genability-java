@@ -279,14 +279,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	public void setInputs(List<PropertyData> propertyDatas) {
 		inputs = propertyDatas;
 	}
-	
-<<<<<<< HEAD
-=======
-	public String getAccountId() {
-		return accountId;
-	}
 
->>>>>>> added support for providerAccountId
 	/**
 	 * Helper method for adding a PropertyData entry into the collection
 	 * of inputs.
