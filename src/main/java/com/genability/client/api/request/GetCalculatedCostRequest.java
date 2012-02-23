@@ -121,12 +121,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * Private member variable accountId
 	 */
 	private String accountId;
-
-	/**
-	 * Private member variable providerAccountId
-	 */
-	private String providerAccountId;
-
+	
 	/**
 	 * Constructor to initialize instance
 	 */
@@ -290,14 +285,6 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	public String getAccountId() {
 		return accountId;
 	}
-	
-	public String getProviderAccountId() {
-    	return providerAccountId;
-    }
-
-	public void setProviderAccountId(String providerAccountId) {
-    	this.providerAccountId = providerAccountId;
-    }
 
 >>>>>>> added support for providerAccountId
 	/**

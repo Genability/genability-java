@@ -48,11 +48,6 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	private String accountId_;
 
 	/**
-	 * Private member variable providerAccountId
-	 */
-	private String providerAccountId;
-	
-	/**
 	 * Private member variable estimate_
 	 */
 	private String estimate_;
@@ -132,14 +127,6 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	public void setAccountId(String accountId) {
 		this.accountId_ = accountId;
 	}
-
-	public String getProviderAccountId() {
-    	return providerAccountId;
-    }
-
-	public void setProviderAccountId(String providerAccountId) {
-    	this.providerAccountId = providerAccountId;
-    }	
 
 	/**
 	 * @return the estimate
