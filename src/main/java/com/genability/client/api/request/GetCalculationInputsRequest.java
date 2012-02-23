@@ -48,6 +48,11 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	private String accountId_;
 
 	/**
+	 * private member variable for providerAccountId
+	 */
+	private String providerAccountId_;
+
+	/**
 	 * Private member variable estimate_
 	 */
 	private String estimate_;
