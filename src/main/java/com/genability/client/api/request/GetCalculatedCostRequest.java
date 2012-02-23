@@ -123,6 +123,11 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	private String accountId;
 	
 	/**
+	 * private member variable for providerAccountId
+	 */
+	private String providerAccountId_;
+	
+	/**
 	 * Constructor to initialize instance
 	 */
 	public GetCalculatedCostRequest() {
@@ -192,6 +197,15 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
+
+	public String getProviderAccountId_() {
+    	return providerAccountId_;
+    }
+
+	public void setProviderAccountId_(String providerAccountId_) {
+    	this.providerAccountId_ = providerAccountId_;
+    }
+
 	
 	/**
 	 * Access method that retrieve profileId_

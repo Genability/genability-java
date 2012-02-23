@@ -65,6 +65,11 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	private String accountId;
 	
 	/**
+	 * private member variable for providerAccountId
+	 */
+	private String providerAccountId_;
+	
+	/**
 	 * Private member variable for PopulateProperties.
 	 */
 	private Boolean populateProperties;
@@ -215,6 +220,15 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
+
+	public String getProviderAccountId_() {
+    	return providerAccountId_;
+    }
+
+	public void setProviderAccountId_(String providerAccountId_) {
+    	this.providerAccountId_ = providerAccountId_;
+    }
+
 
 	/**
 	 * @return the populateProperties

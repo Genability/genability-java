@@ -133,6 +133,15 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 		this.accountId_ = accountId;
 	}
 
+	public String getProviderAccountId_() {
+    	return providerAccountId_;
+    }
+
+	public void setProviderAccountId_(String providerAccountId_) {
+    	this.providerAccountId_ = providerAccountId_;
+    }
+
+
 	/**
 	 * @return the estimate
 	 */
