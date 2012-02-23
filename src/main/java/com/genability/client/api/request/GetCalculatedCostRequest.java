@@ -121,7 +121,12 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * Private member variable accountId
 	 */
 	private String accountId;
-	
+
+	/**
+	 * Private member variable providerAccountId
+	 */
+	private String providerAccountId;
+
 	/**
 	 * Constructor to initialize instance
 	 */
@@ -280,6 +285,21 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		inputs = propertyDatas;
 	}
 	
+<<<<<<< HEAD
+=======
+	public String getAccountId() {
+		return accountId;
+	}
+	
+	public String getProviderAccountId() {
+    	return providerAccountId;
+    }
+
+	public void setProviderAccountId(String providerAccountId) {
+    	this.providerAccountId = providerAccountId;
+    }
+
+>>>>>>> added support for providerAccountId
 	/**
 	 * Helper method for adding a PropertyData entry into the collection
 	 * of inputs.
