@@ -2,13 +2,14 @@ package com.genability.client.types;
 
 import java.io.Serializable;
 import java.util.List;
-
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
  * Standard response payload that comes back from REST endpoints.
  *
  * @param <T>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Response<T> implements Serializable {
 
 	/**

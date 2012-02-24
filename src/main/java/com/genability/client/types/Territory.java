@@ -2,7 +2,9 @@ package com.genability.client.types;
 
 import java.util.List;
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Territory {
 	
 	
@@ -166,7 +168,7 @@ public class Territory {
 	/**
 	 * @param territoryItems the territoryItems to set
 	 */
-	public void setTerritoryItems(List<TerritoryItem> items) {
+	public void setItems(List<TerritoryItem> items) {
 		this.items = items;
 	}
 

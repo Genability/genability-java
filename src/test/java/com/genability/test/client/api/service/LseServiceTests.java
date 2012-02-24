@@ -28,11 +28,21 @@ public class LseServiceTests extends BaseServiceTests {
 	public void testGetTerritories() {
 		
 		GetTerritoriesRequest request = new GetTerritoriesRequest();
-		
+		request.setLseId(734l);  //This is PG&E
 		callGetTerritories("Case 1",request);
 		
 	}
-	
+
+	@Test
+	public void testGetTerritoryItems() {
+		
+		GetTerritoriesRequest request = new GetTerritoriesRequest();
+		request.setLseId(734l);
+		request.setPopulateItems(true);
+		callGetTerritories("Case 2",request);
+		
+	}
+
 
 	public void callGetTerritories(String testCase, GetTerritoriesRequest request) {
 		
