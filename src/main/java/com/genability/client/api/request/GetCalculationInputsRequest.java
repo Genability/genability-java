@@ -164,10 +164,22 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 		
 		addParam(qparams,"fromDateTime", fromDateTime_);
 		addParam(qparams,"toDateTime",toDateTime_);
-		addParam(qparams, "accountId", accountId_);
-		addParam(qparams, "tariffId", masterTariffId_);
-		addParam(qparams, "estimate", estimate_);	
-		addParam(qparams, "territoryId", territoryId_);
+		if (accountId_ != null) {
+			addParam(qparams, "accountId", accountId_);
+		}
+		
+		if (masterTariffId_ != null) {
+			addParam(qparams, "tariffId", masterTariffId_);			
+		}
+
+		if (estimate_ != null) {
+			addParam(qparams, "estimate", estimate_);	
+		}
+		
+		if (territoryId_ != null) {
+			addParam(qparams, "territoryId", territoryId_);
+		}
+		
 		return qparams;
 		
 	}	

@@ -6,6 +6,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
+import com.genability.client.util.DateTimeJsonSerializer;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PropertyData {
 	
@@ -54,6 +56,7 @@ public class PropertyData {
 	/**
 	 * @return the fromDate
 	 */
+	@JsonSerialize(using=DateTimeJsonSerializer.class)
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -70,6 +73,7 @@ public class PropertyData {
 	/**
 	 * @return the toDate
 	 */
+	@JsonSerialize(using=DateTimeJsonSerializer.class)
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}

@@ -53,19 +53,19 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * Use this constant for the groupBy value when you want to group readings
 	 * daily.
 	 */
-	// adding next week - public static final String GROUP_BY_DAY = "DAY";
+	// coming soon - public static final String GROUP_BY_DAY = "DAY";
 
 	/**
 	 * Use this constant for the groupBy value when you want to group readings
 	 * hourly.
 	 */
-	// adding next week - public static final String GROUP_BY_HOUR = "HOUR";
+	// coming soon - public static final String GROUP_BY_HOUR = "HOUR";
 	
 	/**
 	 * Use this constant for the groupBy value when you want to group readings
 	 * into quarter-hour increments.
 	 */
-	// adding next week - public static final String GROUP_BY_QTRHOUR = "QTRHOUR";
+	// coming soon - public static final String GROUP_BY_QTRHOUR = "QTRHOUR";
 
 
 	/**
@@ -198,6 +198,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		this.accountId = accountId;
 	}
 
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 	public String getProviderAccountId_() {
     	return providerAccountId_;
     }

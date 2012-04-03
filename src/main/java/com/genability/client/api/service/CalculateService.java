@@ -20,7 +20,7 @@ public class CalculateService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("getCalculatedCost called");
 		
-		String uri = "beta/calculate";
+		String uri = "public/calculate";
 		if (request.getAccountId() == null && request.getMasterTariffId() != null) {
 			uri += "/" + request.getMasterTariffId();
 			request.setMasterTariffId(null);
@@ -52,7 +52,7 @@ public class CalculateService extends BaseService {
 	
 		 if(log.isDebugEnabled()) log.debug("getCalculationInputs called");
 			
-			String uri = "beta/calculate";
+			String uri = "public/calculate";
 			if (request.getMasterTariffId() != null) {
 				uri += "/" + request.getMasterTariffId();
 			} else {
