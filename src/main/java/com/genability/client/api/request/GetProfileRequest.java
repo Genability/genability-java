@@ -64,22 +64,22 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	/**
 	 * private member variable for FromDate
 	 */
-	private DateTime fromDateTime_;
+	private DateTime fromDateTime;
 
 	/**
 	 * private member variable for ToDate
 	 */
-	private DateTime toDateTime_;
+	private DateTime toDateTime;
 
 	/**
 	 * private member variable for PopulateReadingdata
 	 */
-	private Boolean populateUsageData_;
+	private Boolean populateUsageData;
 
 	/**
 	 * private member variable for deriveDemand
 	 */
-	private Boolean deriveDemand_;
+	private Boolean deriveDemand;
 
 	/**
 	 * Private member holding optional group-by argument.
@@ -105,14 +105,14 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	 *            the fromDate to set
 	 */
 	public void setFromDateTime(DateTime fromDateTime) {
-		this.fromDateTime_ = fromDateTime;
+		this.fromDateTime = fromDateTime;
 	}
 
 	/**
 	 * @return the fromDate
 	 */
 	public DateTime getFromDateTime() {
-		return fromDateTime_;
+		return fromDateTime;
 	}
 
 	/**
@@ -120,21 +120,21 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	 *            the toDate to set
 	 */
 	public void setToDateTime(DateTime toDateTime) {
-		this.toDateTime_ = toDateTime;
+		this.toDateTime = toDateTime;
 	}
 
 	/**
 	 * @return the toDate
 	 */
 	public DateTime getToDateTime() {
-		return toDateTime_;
+		return toDateTime;
 	}
 
 	/**
 	 * @return the populateReadingData
 	 */
 	public Boolean getPopulateUsageData() {
-		return populateUsageData_;
+		return populateUsageData;
 	}
 
 	/**
@@ -142,14 +142,14 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	 *            the populateReadingData to set
 	 */
 	public void setPopulateUsageData(Boolean populateUsageData) {
-		populateUsageData_ = populateUsageData;
+		this.populateUsageData = populateUsageData;
 	}
 	
 	/**
 	 * @return the populateReadingData
 	 */
 	public Boolean getDeriveDemand() {
-		return deriveDemand_;
+		return deriveDemand;
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	 *            the populateReadingData to set
 	 */
 	public void setDeriveDemand(Boolean deriveDemand) {
-		deriveDemand_ = deriveDemand;
+		this.deriveDemand = deriveDemand;
 	}
 
 	public String getGroupBy() {
@@ -189,12 +189,13 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 		
-		addParam(qparams,"fromDateTime", fromDateTime_);
-		addParam(qparams,"toDateTime",toDateTime_);
-		addParam(qparams,"populateUsageData",populateUsageData_);
+		addParam(qparams,"fromDateTime", fromDateTime);
+		addParam(qparams,"toDateTime",toDateTime);
+		addParam(qparams,"populateUsageData",populateUsageData);
 		addParam(qparams,"groupBy",groupBy);
 		addParam(qparams,"clipBy",clipBy);
 		return qparams;
 		
-	}	
+	}
+	
 } // end of class GetProfileRestRequest

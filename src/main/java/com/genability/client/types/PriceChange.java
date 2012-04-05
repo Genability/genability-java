@@ -1,0 +1,73 @@
+package com.genability.client.types;
+
+import java.math.BigDecimal;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.joda.time.DateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PriceChange {
+
+	
+	/*
+	 * 
+	 * "changeName": "Winter Partial Peak",
+"changeDateTime": "2012-04-05T17:00:00-07:00",
+"rateAmount": 0.32925,
+"relativePriceIndex": 1,
+"accuracy": 1
+
+	 */
+	
+	private String changeName;
+	
+	private DateTime changeDateTime;
+	
+	private BigDecimal rateAmount;
+	
+	private BigDecimal relativePriceIndex;
+	
+	private BigDecimal accuracy;
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+	public DateTime getChangeDateTime() {
+		return changeDateTime;
+	}
+
+	public void setChangeDateTime(DateTime changeDateTime) {
+		this.changeDateTime = changeDateTime;
+	}
+
+	public BigDecimal getRateAmount() {
+		return rateAmount;
+	}
+
+	public void setRateAmount(BigDecimal rateAmount) {
+		this.rateAmount = rateAmount;
+	}
+
+	public BigDecimal getRelativePriceIndex() {
+		return relativePriceIndex;
+	}
+
+	public void setRelativePriceIndex(BigDecimal relativePriceIndex) {
+		this.relativePriceIndex = relativePriceIndex;
+	}
+
+	public BigDecimal getAccuracy() {
+		return accuracy;
+	}
+
+	public void setAccuracy(BigDecimal accuracy) {
+		this.accuracy = accuracy;
+	}
+	
+	
+}

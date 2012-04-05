@@ -1,5 +1,6 @@
 package com.genability.client.api.request;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -34,6 +35,16 @@ public abstract class AbstractRequest {
 		}
 
 	} // end of addParam for String
+
+	protected void addParam(List<NameValuePair> qparams, String paramName, BigDecimal paramValue) {
+		
+		if(paramValue != null) {
+			
+			qparams.add(new BasicNameValuePair(paramName, paramValue.toPlainString()));
+			
+		}
+
+	} // end of addParam for BigDecimal
 	
 	protected void addParam(List<NameValuePair> qparams, String paramName, String[] paramValues) {
 		
