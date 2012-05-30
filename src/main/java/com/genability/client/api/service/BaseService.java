@@ -24,6 +24,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
+import org.apache.commons.codec.binary.Base64;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -119,14 +120,17 @@ public class BaseService {
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			String qs = null;
 			
-			String url = restApiServer + endpointPath + "?" + this.getQueryStringCredentials();
+			String url = restApiServer + endpointPath; // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
 			if(queryParams != null) qs = URLEncodedUtils.format(queryParams, "UTF-8");
-			if(qs != null) url += "&" + qs;
+			if(qs != null) url += "?" + qs;
 			
 			if(log.isDebugEnabled()) log.debug(qs);
 			
 			HttpGet getRequest = new HttpGet(url);
 			getRequest.addHeader("accept", "application/json");
+
+			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
+			getRequest.addHeader("Authorization", "Basic " + basic_auth);
 
 			HttpResponse response = httpClient.execute(getRequest);
 
@@ -171,11 +175,13 @@ public class BaseService {
 
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			
-			String url = restApiServer + endpointPath + "?" + this.getQueryStringCredentials();
+			String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
 			if(log.isDebugEnabled()) log.debug(url);
 			
 			HttpPost postRequest = new HttpPost(url);
 			postRequest.addHeader("accept", "application/json");
+			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
+			postRequest.addHeader("Authorization", "Basic " + basic_auth);
 			
 			//
 			// Convert the object to a JSON request body.
@@ -230,13 +236,15 @@ public class BaseService {
 		
 		Response<?> restResponse = null;
 
-		String url = restApiServer + endpointPath + "?" + this.getQueryStringCredentials();
+		String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
 
 		if(log.isDebugEnabled()) log.debug(url);
 		
 		HttpPost postRequest = new HttpPost(url);
 		// Large files may take a while, so we are setting this to a 5 minute timeout
 		postRequest.getParams().setParameter("http.socket.timeout", new Integer(300000));
+		String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
+		postRequest.addHeader("Authorization", "Basic " + basic_auth);
 		
 		MultipartEntity reqEntity = new MultipartEntity();
 		FileBody fileBody = new FileBody(request.getFileData());
@@ -269,7 +277,9 @@ public class BaseService {
 	}
 	
 	/**
-	 * Helps build the credentials for the request.
+	 * Helps build the credentials for the request.  This is only needed when
+	 * passing in creds on the query string.  By default the examples here 
+	 * use the Basic Authorization header.
 	 */
 	private String getQueryStringCredentials() {
 		
