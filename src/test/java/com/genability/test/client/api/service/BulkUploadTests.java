@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.genability.client.types.Profile;
 import com.genability.client.types.Response;
 import com.genability.client.types.ReadingData;
 import com.genability.client.api.request.BulkUploadRequest;
@@ -30,7 +31,8 @@ public class BulkUploadTests extends BaseServiceTests {
 	public void testUploadCSV() {
 		
 		BulkUploadRequest request = new BulkUploadRequest();
-		request.setUsageProfileId("someProfileId");
+		Profile newProfile = createProfile();
+		request.setUsageProfileId(newProfile.getProfileId());
 		File file = new File("/Users/thisisme/Downloads/usageData.csv");
 		request.setFileData(file);
 		request.setFileFormat("csv");
@@ -43,7 +45,8 @@ public class BulkUploadTests extends BaseServiceTests {
 	public void testUploadGreenButton() {
 		
 		BulkUploadRequest request = new BulkUploadRequest();
-		request.setUsageProfileId("someProfileId");
+		Profile newProfile = createProfile();
+		request.setUsageProfileId(newProfile.getProfileId());
 		File file = new File("/Users/thisisme/Downloads/usageData.csv");
 		request.setFileData(file);
 		request.setFileFormat("espi");

@@ -4,6 +4,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
+import com.genability.client.types.Account;
 import com.genability.client.types.Response;
 import com.genability.client.types.Profile;
 
@@ -55,6 +56,22 @@ public class ProfileService extends BaseService {
 				new TypeReference<Response<Profile>>() { });
 		
 		if(log.isDebugEnabled()) log.debug("getProfiles completed");
+		
+		return response;
+		
+	}
+	
+	public Response<Profile> addProfile(Profile profile) {
+		
+		if(log.isDebugEnabled()) log.debug("addProfile called");
+	
+		@SuppressWarnings("unchecked")
+		Response<Profile> response = (Response<Profile>) this.callPost(
+				"beta/usage/profiles", 
+				profile,
+				new TypeReference<Response<Profile>>() { });
+		
+		if(log.isDebugEnabled()) log.debug("addProfile completed");
 		
 		return response;
 		

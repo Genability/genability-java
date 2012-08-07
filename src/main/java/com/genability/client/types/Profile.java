@@ -3,14 +3,19 @@ package com.genability.client.types;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * Represents a Usage Profile.
  * 
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Profile implements Serializable {
 
 	public static final String REST_TYPE = "UsageProfile";
@@ -71,7 +76,13 @@ public class Profile implements Serializable {
 	 */
 	private Integer dataStatus;
 	
-
+	private Boolean isDefault;
+	
+	/**
+	 * private member for type of service of this profile
+	 */	
+	private String serviceTypes;
+	
 	/**
 	 * This is the default constructor.
 	 */
@@ -242,7 +253,25 @@ public class Profile implements Serializable {
 	public void setDataStatus(Integer dataStatus) {
 		this.dataStatus = dataStatus;
 	}
+
+	@JsonIgnore
+	public Boolean getIsDefault() {
+	    return isDefault;
+    }
+
+	public void setIsDefault(Boolean isDefault) {
+	    this.isDefault = isDefault;
+    }
 	
+	@JsonIgnore
+	public String getServiceTypes() {
+    	return serviceTypes;
+    }
+
+	public void setServiceTypes(String serviceTypes) {
+    	this.serviceTypes = serviceTypes;
+    }
+
 	/**
 	 * Pass in a quantityUnit value and this will tell you whether there is 
 	 * 1 or more readings for it.
@@ -297,6 +326,7 @@ public class Profile implements Serializable {
 		toCopyToProfile.setProviderOrgId(this.providerOrgId);
 		toCopyToProfile.setDescription(this.description);
 		toCopyToProfile.setSourceId(this.sourceId );
+		toCopyToProfile.setIsDefault(this.isDefault);
 	}
 
 } // end of class Profile
