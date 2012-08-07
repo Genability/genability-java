@@ -1,7 +1,13 @@
 package com.genability.client.types;
 
+import java.util.List;
+import java.util.Map;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.joda.time.DateTime;
+
+import com.genability.client.types.PropertyData;
+import com.genability.client.types.Tariff;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
@@ -23,6 +29,10 @@ public class Account {
 
 	private String status;
 
+	private List<Tariff> tariffs;
+	
+	private Map<String, PropertyData> properties;
+	
 	private DateTime createdDate;
 
 	/**
@@ -123,6 +133,30 @@ public class Account {
 		this.status = status;
 	}
 
+	public Map<String, PropertyData> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Map<String, PropertyData> properties) {
+		this.properties = properties;
+	}	
+	
+	/**
+	 * @return the tariffs
+	 */
+	public List<Tariff> getTariffs() {
+		return tariffs;
+	}
+
+	/**
+	 * @param tariffs
+	 *            the tariffs to set
+	 */
+	public void setTariffs(List<Tariff> tariffs) {
+		this.tariffs = tariffs;
+	}
+	
+	
 	/**
 	 * @return the createdDate
 	 */

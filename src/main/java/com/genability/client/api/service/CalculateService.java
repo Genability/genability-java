@@ -21,12 +21,14 @@ public class CalculateService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getCalculatedCost called");
 		
 		String uri = "public/calculate";
-		if (request.getAccountId() == null && request.getMasterTariffId() != null) {
+		if (request.getAccountId() !=null) {
+			uri += "/account/" + request.getAccountId();
+		} else if (request.getMasterTariffId() != null) {
 			uri += "/" + request.getMasterTariffId();
 			request.setMasterTariffId(null);
 		} else {
-			//This means we will be getting the tariffId from within the Account.
-			//Do nothing.
+			//This will use only query string parameters to run the calc.
+			//Not currently doing this anywhere in the test suite.
 		}
 
 		

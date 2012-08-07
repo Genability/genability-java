@@ -2,16 +2,25 @@ package com.genability.test.client.api.service;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
+import com.genability.client.types.Account;
 import com.genability.client.types.CalculatedCostItem;
 import com.genability.client.types.Response;
 import com.genability.client.types.CalculatedCost;
 import com.genability.client.types.PropertyData;
+import com.genability.client.api.request.DeleteAccountRequest;
 import com.genability.client.api.request.GetCalculatedCostRequest;
 import com.genability.client.api.request.GetCalculationInputsRequest;
+import com.genability.client.api.service.AccountService;
 import com.genability.client.api.service.CalculateService;
+import com.genability.client.types.Tariff;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,6 +28,7 @@ import org.junit.Test;
 public class CalculateServiceTests extends BaseServiceTests {
 
 	private static CalculateService calculateService;
+	private static AccountService accountService;
 
 	@BeforeClass
 	public static void runBeforeClass() {
@@ -27,6 +37,11 @@ public class CalculateServiceTests extends BaseServiceTests {
 		calculateService.setAppId(appId);
 		calculateService.setAppKey(appKey);
 		if(restApiServer != null) calculateService.setRestApiServer(restApiServer);
+		
+		accountService = new AccountService();
+		accountService.setAppId(appId);
+		accountService.setAppKey(appKey);
+		if(restApiServer != null) accountService.setRestApiServer(restApiServer);
 	}
 	
 	
@@ -137,6 +152,52 @@ public class CalculateServiceTests extends BaseServiceTests {
 	@Test
 	public void testCalculateForAccount() {
 		
+		// We first create an account and specify a tariff as well as values
+		// for the tariff's properties.  We use masterTariffId 521 (PGE E-1) and
+		// the only required property is the territoryId.  
+		// We also set the zipCode as an additional example.
+		
+		Account addAccount = new Account();
+		addAccount.setAccountName("Java Client Lib Test Account - CAN DELETE");
+		
+		Map<String, PropertyData> properties = new HashMap<String, PropertyData>();
+		
+		PropertyData zipCodeData = new PropertyData();
+		zipCodeData.setKeyName("zipCode");
+		zipCodeData.setDataValue("94115");
+		properties.put(zipCodeData.getKeyName(), zipCodeData);
+
+		PropertyData territoryData = new PropertyData();
+		territoryData.setKeyName("territoryId");
+		territoryData.setDataValue("3538");
+		properties.put(territoryData.getKeyName(), territoryData);
+
+		addAccount.setProperties(properties);
+		
+		Tariff tariff = new Tariff();
+		tariff.setMasterTariffId(521l);
+		DateTime effDate = new DateTime(2012, 2, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
+		tariff.setEffectiveDate(effDate.toString());
+		List<Tariff> tariffs = new ArrayList<Tariff>();
+		tariffs.add(tariff);
+		addAccount.setTariffs(tariffs);
+							
+		Response<Account> restResponse = accountService.addAccount(addAccount);
+		
+		assertNotNull("restResponse null",restResponse);
+		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
+		assertEquals("bad type",restResponse.getType(),Account.REST_TYPE);
+		assertTrue("bad count",restResponse.getCount() > 0);
+		
+		Account newAccount = null;
+		for(Account account : restResponse.getResults()) {
+			newAccount = account;
+			assertNotNull("accountId null",account.getAccountId());
+		}
+		
+		// Now we run the calculation for the new Account.  We set the date
+		// range for which to run the calc.
+		
 		// Where the tariff has a time zone (most do) you can use it to make sure your dates are the same
 		DateTime fromDateTime = new DateTime(2012, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
 		DateTime toDateTime = new DateTime(2013, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
@@ -145,22 +206,25 @@ public class CalculateServiceTests extends BaseServiceTests {
 
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
-
-		// Set the accountId property
-		// This assumes the Account contains the required applicability properties as well as a tariffId.
-		// The calculation will assume default property values for those that aren't found in the Account.
-		// You can specify and override the tariffId with this line:
-		// request.setMasterTariffId(522l)
 		
+		request.setAccountId(newAccount.getAccountId());
+				
 		PropertyData newProp2 = new PropertyData();
 		newProp2.setFromDateTime(fromDateTime);
 		newProp2.setToDateTime(toDateTime);
-		newProp2.setDataValue("abc123"); //add the accountId here
+		newProp2.setDataValue(newAccount.getAccountId());
 		newProp2.setKeyName("accountId");
+		newProp2.setDataType("String");
 		
 		request.addInput(newProp2);
 		
 		callRunCalc("Test for calculateForAccount",request);
+		
+		// Delete the account we created to keep things clean
+		DeleteAccountRequest deleteAccountrequest = new DeleteAccountRequest();
+		request.setAccountId(newAccount.getAccountId());
+		Response<Account> deleteResponse = accountService.deleteAccount(deleteAccountrequest);
+		assertEquals("bad status",deleteResponse.getStatus(),Response.STATUS_SUCCESS);
 		
 	}
 	

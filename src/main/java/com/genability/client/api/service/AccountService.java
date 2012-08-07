@@ -4,6 +4,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 import com.genability.client.types.Account;
 import com.genability.client.types.Response;
+import com.genability.client.api.request.DeleteAccountRequest;
 import com.genability.client.api.request.GetAccountsRequest;
 import com.genability.client.api.request.GetAccountRequest;
 
@@ -64,7 +65,28 @@ public class AccountService extends BaseService {
 		
 		return response;
 		
+	}
+
+	public Response<Account> deleteAccount(DeleteAccountRequest request) {
+		
+
+		if(log.isDebugEnabled()) log.debug("deleteAccount called");
+	
+		String uri = "beta/accounts";
+		if (request.getAccountId() != null && request.getAccountId().length() !=0) {
+			uri += "/" + request.getAccountId();
+		}		
+		
+		@SuppressWarnings("unchecked")
+		Response<Account> response = (Response<Account>) this.callDelete(
+				uri,
+				request.getQueryParams(),
+				new TypeReference<Response<Account>>() { });
+		if(log.isDebugEnabled()) log.debug("deleteAccount completed");
+		
+		return response;
 		
 	}
+	
 	
 }

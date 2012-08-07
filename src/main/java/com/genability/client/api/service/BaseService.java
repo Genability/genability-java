@@ -14,6 +14,7 @@ import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -127,6 +128,7 @@ public class BaseService {
 			if(log.isDebugEnabled()) log.debug(qs);
 			
 			HttpGet getRequest = new HttpGet(url);
+
 			getRequest.addHeader("accept", "application/json");
 
 			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
@@ -161,7 +163,7 @@ public class BaseService {
 	
 	
 	/**
-	 * Helper method that makes a HTTP GET to the Genability APIs.
+	 * Helper method that makes a HTTP POST to the Genability APIs.
 	 * 
 	 * @param endpointPath
 	 * @param resultTypeReference
@@ -275,6 +277,63 @@ public class BaseService {
 		return restResponse;
 		
 	}
+	
+	/**
+	 * Helper method that makes a HTTP DELETE to the Genability APIs.
+	 * 
+	 * @param endpointPath
+	 * @param resultTypeReference
+	 * @return
+	 */
+	protected Response<?> callDelete(String endpointPath, List<NameValuePair> queryParams, TypeReference<?> resultTypeReference) {
+
+		Response<?> restResponse = null;
+
+		try {
+
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			String qs = null;
+			
+			String url = restApiServer + endpointPath; // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
+			if(queryParams != null) qs = URLEncodedUtils.format(queryParams, "UTF-8");
+			if(qs != null) url += "?" + qs;
+			
+			if(log.isDebugEnabled()) log.debug(qs);
+			
+			HttpDelete deleteRequest = new HttpDelete(url);
+			
+			deleteRequest.addHeader("accept", "application/json");
+
+			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
+			deleteRequest.addHeader("Authorization", "Basic " + basic_auth);
+
+			HttpResponse response = httpClient.execute(deleteRequest);
+
+			if (response.getStatusLine().getStatusCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatusLine().getStatusCode());
+			}
+
+			//
+			// Convert the JSON pay-load to the standard Response object.
+			//
+			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
+			
+			httpClient.getConnectionManager().shutdown();
+
+		} catch (ClientProtocolException e) {
+
+			log.error("ClientProtocolException",e);
+
+		} catch (IOException e) {
+
+			log.error("IOException",e);
+		}
+
+		return restResponse;
+		
+	} // end of callGet	
+	
 	
 	/**
 	 * Helps build the credentials for the request.  This is only needed when

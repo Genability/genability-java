@@ -110,7 +110,7 @@ public class Tariff {
 	/**
 	 * private member variable for EffectiveDate.
 	 */
-	private DateTime effectiveDate;
+	private String effectiveDate;
 
 	/**
 	 * private member variable for EndDate.
@@ -305,14 +305,14 @@ public class Tariff {
 	/**
 	 * @return the effectiveDate
 	 */
-	public DateTime getEffectiveDate() {
+	public String getEffectiveDate() {
 		return effectiveDate;
 	}
 
 	/**
 	 * @param effectiveDate the effectiveDate to set
 	 */
-	public void setEffectiveDate(DateTime effectiveDate) {
+	public void setEffectiveDate(String effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
 
