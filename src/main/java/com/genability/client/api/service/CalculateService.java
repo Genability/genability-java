@@ -23,6 +23,7 @@ public class CalculateService extends BaseService {
 		String uri = "public/calculate";
 		if (request.getAccountId() !=null) {
 			uri += "/account/" + request.getAccountId();
+			request.setAccountId(null);
 		} else if (request.getMasterTariffId() != null) {
 			uri += "/" + request.getMasterTariffId();
 			request.setMasterTariffId(null);

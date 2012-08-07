@@ -206,6 +206,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
+		request.setDetailLevel("ALL");
 		
 		request.setAccountId(newAccount.getAccountId());
 				
@@ -214,16 +215,15 @@ public class CalculateServiceTests extends BaseServiceTests {
 		newProp2.setToDateTime(toDateTime);
 		newProp2.setDataValue(newAccount.getAccountId());
 		newProp2.setKeyName("accountId");
-		newProp2.setDataType("String");
 		
 		request.addInput(newProp2);
 		
 		callRunCalc("Test for calculateForAccount",request);
 		
 		// Delete the account we created to keep things clean
-		DeleteAccountRequest deleteAccountrequest = new DeleteAccountRequest();
-		request.setAccountId(newAccount.getAccountId());
-		Response<Account> deleteResponse = accountService.deleteAccount(deleteAccountrequest);
+		DeleteAccountRequest deleteAccountRequest = new DeleteAccountRequest();
+		deleteAccountRequest.setAccountId(newAccount.getAccountId());
+		Response<Account> deleteResponse = accountService.deleteAccount(deleteAccountRequest);
 		assertEquals("bad status",deleteResponse.getStatus(),Response.STATUS_SUCCESS);
 		
 	}
