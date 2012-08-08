@@ -31,8 +31,6 @@ public class BulkUploadTests extends BaseServiceTests {
 	public void testUploadCSV() {
 		
 		BulkUploadRequest request = new BulkUploadRequest();
-		Profile newProfile = createProfile();
-		request.setUsageProfileId(newProfile.getProfileId());
 		File file = new File("/Users/thisisme/Downloads/usageData.csv");
 		request.setFileData(file);
 		request.setFileFormat("csv");
@@ -45,9 +43,7 @@ public class BulkUploadTests extends BaseServiceTests {
 	public void testUploadGreenButton() {
 		
 		BulkUploadRequest request = new BulkUploadRequest();
-		Profile newProfile = createProfile();
-		request.setUsageProfileId(newProfile.getProfileId());
-		File file = new File("/Users/thisisme/Downloads/usageData.csv");
+		File file = new File("/Users/thisisme/Downloads/pge_electric_interval_data.xml");
 		request.setFileData(file);
 		request.setFileFormat("espi");
 		upload("Case upload XML",request);

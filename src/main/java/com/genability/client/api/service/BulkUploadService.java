@@ -17,11 +17,7 @@ public class BulkUploadService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("uploadFile called");
 		
-		String uri = "beta/usage/bulk";
-		if (request.getUsageProfileId() != null) {
-			uri += "/" + request.getUsageProfileId();
-		}
-		
+		String uri = "beta/loader/bulk/up";		
 		Response<String> response =  (Response<String>) this.callFileUpload(uri, request, new TypeReference<Response<String>>() { });
 
 		if(log.isDebugEnabled()) log.debug("uploadFile completed");
