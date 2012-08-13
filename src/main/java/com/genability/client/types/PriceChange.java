@@ -7,44 +7,54 @@ import org.joda.time.DateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PriceChange {
-
 	
-	/*
-	 * 
-	 * "changeName": "Winter Partial Peak",
-"changeDateTime": "2012-04-05T17:00:00-07:00",
-"rateAmount": 0.32925,
-"relativePriceIndex": 1,
-"accuracy": 1
-
-	 */
 	
-	private String changeName;
+	private String name;
 	
-	private DateTime changeDateTime;
+	private DateTime fromDateTime;
+	
+	private DateTime toDateTime;
+	
+	private String quantityKey;
 	
 	private BigDecimal rateAmount;
 	
-	private BigDecimal relativePriceIndex;
+	private BigDecimal rateMeanDelta;
 	
-	private BigDecimal accuracy;
+	
 
-	public String getChangeName() {
-		return changeName;
+	public String getName() {
+		return name;
 	}
 
-	public void setChangeName(String changeName) {
-		this.changeName = changeName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public DateTime getChangeDateTime() {
-		return changeDateTime;
+	public DateTime getFromDateTime() {
+		return fromDateTime;
 	}
 
-	public void setChangeDateTime(DateTime changeDateTime) {
-		this.changeDateTime = changeDateTime;
+	public void setFromDateTime(DateTime fromDateTime) {
+		this.fromDateTime = fromDateTime;
 	}
 
+	public DateTime getToDateTime() {
+		return toDateTime;
+	}
+
+	public void setToDateTime(DateTime toDateTime) {
+		this.toDateTime = toDateTime;
+	}
+
+	public String getQuantityKey() {
+		return quantityKey;
+	}
+
+	public void setQuantityKey(String quantityKey) {
+		this.quantityKey = quantityKey;
+	}
+	
 	public BigDecimal getRateAmount() {
 		return rateAmount;
 	}
@@ -53,20 +63,12 @@ public class PriceChange {
 		this.rateAmount = rateAmount;
 	}
 
-	public BigDecimal getRelativePriceIndex() {
-		return relativePriceIndex;
+	public BigDecimal getRateMeanDelta() {
+		return rateMeanDelta;
 	}
 
-	public void setRelativePriceIndex(BigDecimal relativePriceIndex) {
-		this.relativePriceIndex = relativePriceIndex;
-	}
-
-	public BigDecimal getAccuracy() {
-		return accuracy;
-	}
-
-	public void setAccuracy(BigDecimal accuracy) {
-		this.accuracy = accuracy;
+	public void setRateMeanDelta(BigDecimal relativePriceIndex) {
+		this.rateMeanDelta = relativePriceIndex;
 	}
 	
 	

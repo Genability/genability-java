@@ -121,8 +121,8 @@ public class GetPriceRequest extends AbstractRequest implements Serializable {
 		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 		
-		addParam(qparams,"fromDateTime", fromDateTime);
-		addParam(qparams,"toDateTime",toDateTime);
+		addParam(qparams,"fromDateTime", fromDateTime,ISO_8601_SHORT_DATE_FORMAT);
+		addParam(qparams,"toDateTime",toDateTime,ISO_8601_SHORT_DATE_FORMAT);
 		addParam(qparams,"consumptionAmount",consumptionAmount);
 		addParam(qparams,"demandAmount",demandAmount);
 		return qparams;
