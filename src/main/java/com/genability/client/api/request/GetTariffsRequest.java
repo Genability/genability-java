@@ -1,6 +1,7 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -78,8 +79,16 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	 * Private member variable for PopulateRates.
 	 */
 	private Boolean populateRates;
+	
+	/**
+	 * Private member variable for searching by consumption
+	 */
+	private BigDecimal consumption;
 
-
+	/**
+	 * Private member variable for searching by demand
+	 */
+	private BigDecimal demand;
 
 	/**
 	 * @return the lseId
@@ -259,6 +268,22 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	}
 
 	
+	public BigDecimal getConsumption() {
+    	return consumption;
+    }
+
+	public void setConsumption(BigDecimal consumption) {
+    	this.consumption = consumption;
+    }
+
+	public BigDecimal getDemand() {
+    	return demand;
+    }
+
+	public void setDemand(BigDecimal demand) {
+    	this.demand = demand;
+    }
+
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
