@@ -89,7 +89,12 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	 * Private member variable for searching by demand
 	 */
 	private BigDecimal demand;
-
+	
+	/**
+	 * Private member variable for searching by net metered tariffs
+	 */
+	private Boolean hasNetMetering;
+	
 	/**
 	 * @return the lseId
 	 */
@@ -284,6 +289,14 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
     	this.demand = demand;
     }
 
+	public Boolean getHasNetMetering() {
+    	return hasNetMetering;
+    }
+
+	public void setHasNetMetering(Boolean hasNetMetering) {
+    	this.hasNetMetering = hasNetMetering;
+    }
+
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
@@ -301,6 +314,9 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		addParam(qparams,"accountId",accountId);
 		addParam(qparams,"populateProperties",populateProperties);
 		addParam(qparams,"populateRates",populateRates);
+		addParam(qparams,"consumption",consumption);
+		addParam(qparams,"demand",demand);
+		addParam(qparams,"hasNetMetering",hasNetMetering);
 		
 		return qparams;
 		

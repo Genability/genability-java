@@ -159,6 +159,12 @@ public class Tariff {
 	private BigDecimal maxMonthlyDemand;
 	
 	/**
+	 * private member variable for whether this tariff
+	 * has net metered tariff rates or not
+	 */
+	private Boolean hasNetMetering;
+	
+	/**
 	 * @return the tariffId
 	 */
 	public Long getTariffId() {
@@ -427,4 +433,12 @@ public class Tariff {
 	public void setMaxMonthlyDemand(BigDecimal maxMonthlyDemand) {
     	this.maxMonthlyDemand = maxMonthlyDemand;
 	}
+
+	public Boolean getHasNetMetering() {
+    	return hasNetMetering;
+    }
+
+	public void setHasNetMetering(Boolean hasNetMetering) {
+    	this.hasNetMetering = hasNetMetering;
+    }
 }
