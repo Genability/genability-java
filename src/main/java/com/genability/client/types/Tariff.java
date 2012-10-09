@@ -133,6 +133,30 @@ public class Tariff {
 	 * private member variable for isoCurrency
 	 */
 	private String currency;
+
+	/**
+	 * private member variable for minimum monthly consumption
+	 * required to be eligible for this tariff
+	 */
+	private BigDecimal minMonthlyConsumption;
+	
+	/**
+	 * private member variable for maximum monthly consumption
+	 * required to be eligible for this tariff
+	 */
+	private BigDecimal maxMonthlyConsumption;
+	
+	/**
+	 * private member variable for minimum monthly demand
+	 * required to be eligible for this tariff
+	 */
+	private BigDecimal minMonthlyDemand;
+	
+	/**
+	 * private member variable for maximum monthly demand
+	 * required to be eligible for this tariff
+	 */
+	private BigDecimal maxMonthlyDemand;
 	
 	/**
 	 * @return the tariffId
@@ -372,4 +396,35 @@ public class Tariff {
 		this.currency = currency;
 	}
 
+	public BigDecimal getMinMonthlyConsumption() {
+    	return minMonthlyConsumption;
+    }
+
+	public void setMinMonthlyConsumption(BigDecimal minMonthlyConsumption) {
+    	this.minMonthlyConsumption = minMonthlyConsumption;
+    }
+
+	public BigDecimal getMaxMonthlyConsumption() {
+    	return maxMonthlyConsumption;
+    }
+
+	public void setMaxMonthlyConsumption(BigDecimal maxMonthlyConsumption) {
+    	this.maxMonthlyConsumption = maxMonthlyConsumption;
+    }
+
+	public BigDecimal getMinMonthlyDemand() {
+    	return minMonthlyDemand;
+    }
+
+	public void setMinMonthlyDemand(BigDecimal minMonthlyDemand) {
+    	this.minMonthlyDemand = minMonthlyDemand;
+    }
+
+	public BigDecimal getMaxMonthlyDemand() {
+    	return maxMonthlyDemand;
+    }
+
+	public void setMaxMonthlyDemand(BigDecimal maxMonthlyDemand) {
+    	this.maxMonthlyDemand = maxMonthlyDemand;
+	}
 }
