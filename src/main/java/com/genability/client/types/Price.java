@@ -9,65 +9,44 @@ import org.joda.time.DateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Price {
 	
-	public static final String REST_TYPE = "TariffRateSummary";
+	public static final String REST_TYPE = "Price";
+
 	
-	/*
-	"tariffId": 512,
-	"chargeType": "FIXED_PRICE",
-	"quantityKey": null,
-	"fromDateTime": "2012-04-05T03:00:00-04:00",
-	"toDateTime": "2012-04-06T03:00:00-04:00",
-	"rateAmount": 9,
-	"relativePriceIndex": 1,
-	"currency": "USD",
-	"priceChanges": [],
-	"name": "FIXED_PRICE rate change"
-	*/
+	private String description;
 	
-	
-	private Long tariffId;
-	
-	private String chargeType;
-	
-	private String quantityKey;
-	
+	private Long masterTariffId;
+
 	private DateTime fromDateTime;
 	
 	private DateTime toDateTime;
 	
-	private String name;
-	
-	private BigDecimal rateAmount;
-	
-	private BigDecimal relativePriceIndex;
-	
+	private String detailLevel;
+
 	private String currency;
 	
-	private List<PriceChange> priceChanges;
+	private BigDecimal rateMean;
+	
+	private BigDecimal rateStandardDeviation;
 	
 
-	public Long getTariffId() {
-		return tariffId;
+
+	private List<PriceChange> priceChanges;
+
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setTariffId(Long tariffId) {
-		this.tariffId = tariffId;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getChargeType() {
-		return chargeType;
+	public Long getMasterTariffId() {
+		return masterTariffId;
 	}
 
-	public void setChargeType(String chargeType) {
-		this.chargeType = chargeType;
-	}
-
-	public String getQuantityKey() {
-		return quantityKey;
-	}
-
-	public void setQuantityKey(String quantityKey) {
-		this.quantityKey = quantityKey;
+	public void setMasterTariffId(Long masterTariffId) {
+		this.masterTariffId = masterTariffId;
 	}
 
 	public DateTime getFromDateTime() {
@@ -85,29 +64,13 @@ public class Price {
 	public void setToDateTime(DateTime toDateTime) {
 		this.toDateTime = toDateTime;
 	}
-
-	public String getName() {
-		return name;
+	
+	public String getDetailLevel() {
+		return detailLevel;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public BigDecimal getRateAmount() {
-		return rateAmount;
-	}
-
-	public void setRateAmount(BigDecimal rateAmount) {
-		this.rateAmount = rateAmount;
-	}
-
-	public BigDecimal getRelativePriceIndex() {
-		return relativePriceIndex;
-	}
-
-	public void setRelativePriceIndex(BigDecimal relativePriceIndex) {
-		this.relativePriceIndex = relativePriceIndex;
+	public void setDetailLevel(String chargeType) {
+		this.detailLevel = chargeType;
 	}
 
 	public String getCurrency() {
@@ -116,6 +79,22 @@ public class Price {
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
+	}
+
+	public BigDecimal getRateMean() {
+		return rateMean;
+	}
+
+	public void setRateMean(BigDecimal rateMean) {
+		this.rateMean = rateMean;
+	}
+
+	public BigDecimal getRateStandardDeviation() {
+		return rateStandardDeviation;
+	}
+
+	public void setRateStandardDeviation(BigDecimal rateStandardDeviation) {
+		this.rateStandardDeviation = rateStandardDeviation;
 	}
 	
 	public List<PriceChange> getPriceChanges() {
