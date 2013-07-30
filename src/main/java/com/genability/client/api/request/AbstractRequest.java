@@ -14,10 +14,13 @@ public abstract class AbstractRequest {
 	protected abstract List<NameValuePair> getQueryParams();
 	
 	public static final String ISO_8601_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
+	public static final DateTimeFormatter ISO_8601_DATE_TIME_FORMATTER = DateTimeFormat.forPattern(ISO_8601_DATE_TIME_FORMAT);
 	
 	public static final String ISO_8601_SHORT_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm";
+	public static final DateTimeFormatter ISO_8601_SHORT_DATE_TIME_FORMATTER = DateTimeFormat.forPattern(ISO_8601_SHORT_DATE_TIME_FORMAT);
 
 	public static final String ISO_8601_SHORT_DATE_FORMAT = "yyyy-MM-dd";
+	public static final DateTimeFormatter ISO_8601_SHORT_DATE_FORMATTER = DateTimeFormat.forPattern(ISO_8601_SHORT_DATE_FORMAT);
 	
 	protected void addParam(List<NameValuePair> qparams, String paramName, Long paramValue) {
 		
@@ -81,7 +84,17 @@ public abstract class AbstractRequest {
 		if(paramValue != null) {
 
 			qparams.add(new BasicNameValuePair(paramName, paramValue
-					.toString(DateTimeFormat.forPattern(ISO_8601_SHORT_DATE_FORMAT))));
+					.toString(DateTimeFormat.forPattern(format))));
+			
+		}
+
+	} // end of addParam for DateTime
+
+	protected void addParam(List<NameValuePair> qparams, String paramName, DateTime paramValue, DateTimeFormatter formatter) {
+		
+		if(paramValue != null) {
+
+			qparams.add(new BasicNameValuePair(paramName, paramValue.toString(formatter)));
 			
 		}
 
