@@ -2,8 +2,9 @@ package com.genability.client.types;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**

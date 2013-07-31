@@ -1,7 +1,6 @@
 package com.genability.client.api.service;
 
-import org.codehaus.jackson.type.TypeReference;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.api.request.GetPriceRequest;
 import com.genability.client.types.Price;
 import com.genability.client.types.Response;

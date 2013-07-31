@@ -26,9 +26,11 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.genability.client.api.request.BulkUploadRequest;
 import com.genability.client.types.Response;
 
@@ -58,8 +60,14 @@ public class BaseService {
 	/**
 	 * Private member holding the Jackson Object Mapper (for JSON conversions).
 	 */
-	private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper mapper;
 	
+
+	public BaseService() {
+	    mapper = new ObjectMapper();
+	    mapper.registerModule(new JodaModule());
+	    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    }
 
 
 	/**

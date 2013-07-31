@@ -2,11 +2,9 @@ package com.genability.client.types;
 
 import java.math.BigDecimal;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
-import com.genability.client.util.DateTimeJsonSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CalculatedCostItem {
@@ -95,7 +93,6 @@ public class CalculatedCostItem {
 	/**
 	 * @return the fromDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -110,7 +107,6 @@ public class CalculatedCostItem {
 	/**
 	 * @return the toDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}

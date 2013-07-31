@@ -3,13 +3,14 @@ package com.genability.client.api.request;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.genability.client.types.PropertyData;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import com.genability.client.util.DateTimeJsonSerializer;
 
 public class GetCalculatedCostRequest extends AbstractRequest implements Serializable {
 
@@ -139,7 +140,6 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * 
 	 * @return fromDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -158,7 +158,6 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * 
 	 * @return toDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
@@ -179,7 +178,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * accounts tariff.
 	 * @return
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public Long getMasterTariffId() {
 		return masterTariffId;
 	}
@@ -189,7 +188,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	}
 	
 	
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getAccountId() {
 		return accountId;
 	}
@@ -198,7 +197,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		this.accountId = accountId;
 	}
 
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getProviderAccountId_() {
     	return providerAccountId_;
     }
@@ -213,7 +212,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * 
 	 * @return profileId
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getProfileId() {
 		return profileId;
 	}
@@ -230,7 +229,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	/**
 	 * @return the detailLevel
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getDetailLevel() {
 		return detailLevel;
 	}
@@ -246,7 +245,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	/**
 	 * @return the groupBy
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getGroupBy() {
 		return groupBy;
 	}
@@ -262,7 +261,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	/**
 	 * @return the estimate
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getAccuracy() {
 		return accuracy;
 	}

@@ -2,11 +2,12 @@ package com.genability.client.types;
 
 import java.math.BigDecimal;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
-import com.genability.client.util.DateTimeJsonSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PropertyData {
@@ -56,7 +57,6 @@ public class PropertyData {
 	/**
 	 * @return the fromDate
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class)
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -73,7 +73,6 @@ public class PropertyData {
 	/**
 	 * @return the toDate
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class)
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
@@ -97,7 +96,7 @@ public class PropertyData {
 	/**
 	 * @return the unit_
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getPeriod() {
 		return period;
 	}
@@ -113,7 +112,7 @@ public class PropertyData {
 	/**
 	 * @return the unit_
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getUnit() {
 		return unit;
 	}
@@ -128,7 +127,7 @@ public class PropertyData {
 	/**
 	 * @return the unit_
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getDataValue() {
 		return dataValue;
 	}
@@ -145,7 +144,7 @@ public class PropertyData {
 	/**
 	 * @return the accuracy_
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public BigDecimal getAccuracy() {
 		return accuracy;
 	}

@@ -3,8 +3,9 @@ package com.genability.client.types;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Price {

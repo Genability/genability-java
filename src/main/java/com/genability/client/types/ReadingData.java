@@ -3,11 +3,13 @@ package com.genability.client.types;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * This class represents a reading of a measurement. It has a start time and an
@@ -177,7 +179,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	/**
 	 * Access method for TimeAccuracy.
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public Integer getTimeAccuracy() {
 		return timeAccuracy;
 	}
@@ -226,7 +228,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	/**
 	 * Access method for QuantityAccuracy.
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public BigDecimal getQuantityAccuracy() {
 		return accuracy;
 	}

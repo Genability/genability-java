@@ -3,9 +3,9 @@ package com.genability.client.types;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.genability.client.types.PropertyData;
 import com.genability.client.types.Tariff;
 
