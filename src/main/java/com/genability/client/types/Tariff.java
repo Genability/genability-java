@@ -1,6 +1,7 @@
 package com.genability.client.types;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -57,26 +58,6 @@ public class Tariff {
 	 * private member variable for MasterTariffId.
 	 */
 	private Long masterTariffId;
-
-	/**
-	 * private member variable for PriorTariffId.
-	 */
-	private Long priorTariffId;
-
-	/**
-	 * private member variable for LseId.
-	 */
-	private Long lseId;
-
-	/**
-	 * private member variable for LseName.
-	 */
-	private String lseName;
-
-	/**
-	 * private member variable for DistributionLseId.
-	 */
-	private Long distributionLseId;
 	
 	/**
 	 * private member variable for TariffCode.
@@ -89,19 +70,54 @@ public class Tariff {
 	private String tariffName;
 
 	/**
+	 * private member variable for LseId.
+	 */
+	private Long lseId;
+
+	/**
+	 * private member variable for LseName.
+	 */
+	private String lseName;
+
+	/**
+	 * private member variable for ServiceType.
+	 */
+	private String serviceType;
+
+	/**
+	 * private member variable for PriorTariffId.
+	 */
+	private Long priorTariffId;
+
+	/**
+	 * private member variable for DistributionLseId.
+	 */
+	private Long distributionLseId;
+
+	/**
 	 * private member variable for TariffType.
 	 */
 	private String tariffType;
 
 	/**
-	 * private member variable for ChargePeriod. the default value is MONTHLY
-	 */
-	private String billingPeriod;
-
-	/**
 	 * private member variable for CustomerClass.
 	 */
 	private String customerClass;
+
+	/**
+	 * private member variable for CustomerCount.
+	 */
+	private Integer customerCount;
+
+	/**
+	 * private member variable for CustomerLikelihood.
+	 */
+	private BigDecimal customerLikelihood;
+
+	/**
+	 * private member variable for CustomerCountSource.
+	 */
+	private String customerCountSource;
 
 	/**
 	 * private member variable for TerritoryId.
@@ -122,16 +138,26 @@ public class Tariff {
 	 * private member variable for the time zone for this tariff.
 	 */
 	private String timeZone;
-	
-	/**
-	 * private member variable for the isActive flag.
-	 */
-	private Boolean isActive;
 
 	/**
-	 * private member variable for isoCurrency
+	 * private member variable for BillingPeriod. the default value is MONTHLY
+	 */
+	private String billingPeriod;
+
+	/**
+	 * private member variable for Currency
 	 */
 	private String currency;
+	
+	/**
+	 * private member variable for ChargeTypes
+	 */
+	private String chargeTypes;
+
+	/**
+	 * private member variable for ChargePeriod. the default value is MONTHLY
+	 */
+	private String chargePeriod;
 
 	/**
 	 * private member variable for minimum monthly consumption
@@ -159,9 +185,54 @@ public class Tariff {
 	
 	/**
 	 * private member variable for whether this tariff
+	 * has time of use rates or not
+	 */
+	private Boolean hasTimeOfUseRates;
+
+	/**
+	 * private member variable for whether this tariff
+	 * has tiered rates or not
+	 */
+	private Boolean hasTieredRates;
+
+	/**
+	 * private member variable for whether this tariff
+	 * has contracted rates or not
+	 */
+	private Boolean hasContractedRates;
+
+	/**
+	 * private member variable for whether this tariff
+	 * has additional eligibility criteria, specified by tariff properties
+	 */
+	private Boolean hasTariffApplicability;
+
+	/**
+	 * private member variable for whether this tariff
+	 * has additional eligibility criteria, specified by tariff properties
+	 */
+	private Boolean hasRateApplicability;
+
+	/**
+	 * private member variable for whether this tariff
 	 * has net metered tariff rates or not
 	 */
 	private Boolean hasNetMetering;
+
+	/**
+	 * private member variable for the isActive flag.
+	 */
+	private Boolean isActive;
+
+	/**
+	 * private member variable for Properties.
+	 */
+	private List<TariffProperty> properties;
+
+	/**
+	 * private member variable for Properties.
+	 */
+	private List<TariffRate> rates;
 	
 	/**
 	 * @return the tariffId
@@ -440,4 +511,109 @@ public class Tariff {
 	public void setHasNetMetering(Boolean hasNetMetering) {
     	this.hasNetMetering = hasNetMetering;
     }
+
+  public String getServiceType() {
+    return serviceType;
+  }
+
+  public void setServiceType(String serviceType) {
+    this.serviceType = serviceType;
+  }
+
+  public Integer getCustomerCount() {
+    return customerCount;
+  }
+
+  public void setCustomerCount(Integer customerCount) {
+    this.customerCount = customerCount;
+  }
+
+  public BigDecimal getCustomerLikelihood() {
+    return customerLikelihood;
+  }
+
+  public void setCustomerLikelihood(BigDecimal customerLikelihood) {
+    this.customerLikelihood = customerLikelihood;
+  }
+
+  public String getCustomerCountSource() {
+    return customerCountSource;
+  }
+
+  public void setCustomerCountSource(String customerCountSource) {
+    this.customerCountSource = customerCountSource;
+  }
+
+  public String getChargeTypes() {
+    return chargeTypes;
+  }
+
+  public void setChargeTypes(String chargeTypes) {
+    this.chargeTypes = chargeTypes;
+  }
+
+  public String getChargePeriod() {
+    return chargePeriod;
+  }
+
+  public void setChargePeriod(String chargePeriod) {
+    this.chargePeriod = chargePeriod;
+  }
+
+  public Boolean getHasTimeOfUseRates() {
+    return hasTimeOfUseRates;
+  }
+
+  public void setHasTimeOfUseRates(Boolean hasTimeOfUseRates) {
+    this.hasTimeOfUseRates = hasTimeOfUseRates;
+  }
+
+  public Boolean getHasTieredRates() {
+    return hasTieredRates;
+  }
+
+  public void setHasTieredRates(Boolean hasTieredRates) {
+    this.hasTieredRates = hasTieredRates;
+  }
+
+  public Boolean getHasContractedRates() {
+    return hasContractedRates;
+  }
+
+  public void setHasContractedRates(Boolean hasContractedRates) {
+    this.hasContractedRates = hasContractedRates;
+  }
+
+  public Boolean getHasTariffApplicability() {
+    return hasTariffApplicability;
+  }
+
+  public void setHasTariffApplicability(Boolean hasTariffApplicability) {
+    this.hasTariffApplicability = hasTariffApplicability;
+  }
+
+  public Boolean getHasRateApplicability() {
+    return hasRateApplicability;
+  }
+
+  public void setHasRateApplicability(Boolean hasRateApplicability) {
+    this.hasRateApplicability = hasRateApplicability;
+  }
+
+  public List<TariffProperty> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(List<TariffProperty> properties) {
+    this.properties = properties;
+  }
+
+  public List<TariffRate> getRates() {
+    return rates;
+  }
+
+  public void setRates(List<TariffRate> rates) {
+    this.rates = rates;
+  }
+	
 }
