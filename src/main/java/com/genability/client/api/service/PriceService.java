@@ -17,7 +17,7 @@ public class PriceService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("getPrice called");
 		
-		String uri = "beta/prices";
+		String uri = "public/prices";
 		if (request.getMasterTariffId() != null) {
 			uri += "/" + request.getMasterTariffId();
 		}

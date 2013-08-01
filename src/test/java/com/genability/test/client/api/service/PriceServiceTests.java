@@ -57,14 +57,12 @@ public class PriceServiceTests extends BaseServiceTests {
 
 			assertNotNull("price null",price);
 
-			log.debug("Price " + price.getDescription());
-
 
 			if(price.getPriceChanges() != null ) {
 
 				for(PriceChange priceChange : price.getPriceChanges()) {
 
-					log.debug("Price Change " + priceChange.getName());
+					log.debug("Price Change " + priceChange.getChangeName());
 
 					assertNotNull("priceChange null",priceChange);
 
