@@ -1,4 +1,4 @@
-package com.genability.test.client.api.service;
+package com.genability.client.api.service;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

@@ -1,4 +1,4 @@
-package com.genability.test.client.api.service;
+package com.genability.client.api.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
