@@ -120,9 +120,9 @@ public class BaseService {
 	 * @param resultTypeReference
 	 * @return
 	 */
-	protected Response<?> callGet(String endpointPath, List<NameValuePair> queryParams, TypeReference<?> resultTypeReference) {
+	protected <T extends Response<R>, R> T callGet(String endpointPath, List<NameValuePair> queryParams, TypeReference<T> resultTypeReference) {
 
-		Response<?> restResponse = null;
+		T restResponse = null;
 
 		try {
 
@@ -177,9 +177,9 @@ public class BaseService {
 	 * @param resultTypeReference
 	 * @return
 	 */
-	protected Response<?> callPost(String endpointPath, final Object requestPayload, TypeReference<?> resultTypeReference) {
+	protected <T extends Response<R>, R> T callPost(String endpointPath, final Object requestPayload, TypeReference<T> resultTypeReference) {
 		
-		Response<?> restResponse = null;
+		T restResponse = null;
 
 		try {
 
@@ -240,9 +240,9 @@ public class BaseService {
 	 * This method is used to upload large datasets, typically CSV or XML files.
 	 * The request object passed in contains the File to upload.
 	 */
-	public Response<?> callFileUpload(String endpointPath, BulkUploadRequest request, TypeReference<?> resultTypeReference) {
+	public <T extends Response<R>, R> T callFileUpload(String endpointPath, BulkUploadRequest request, TypeReference<T> resultTypeReference) {
 		
-		Response<?> restResponse = null;
+		T restResponse = null;
 
 		String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
 
@@ -291,9 +291,9 @@ public class BaseService {
 	 * @param resultTypeReference
 	 * @return
 	 */
-	protected Response<?> callDelete(String endpointPath, List<NameValuePair> queryParams, TypeReference<?> resultTypeReference) {
+	protected <T extends Response<R>, R> T callDelete(String endpointPath, List<NameValuePair> queryParams, TypeReference<T> resultTypeReference) {
 
-		Response<?> restResponse = null;
+		T restResponse = null;
 
 		try {
 

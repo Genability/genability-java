@@ -24,8 +24,7 @@ public class ProfileService extends BaseService {
 			uri += "/" + request.getUsageProfileId();
 		}
 		
-		@SuppressWarnings("unchecked")
-		Response<Profile> response = (Response<Profile>) this.callGet(
+		Response<Profile> response = this.callGet(
 				uri,
 				request.getQueryParams(),
 				new TypeReference<Response<Profile>>() { });
@@ -47,8 +46,7 @@ public class ProfileService extends BaseService {
 		
 		String uri = "beta/usage/profiles";
 		
-		@SuppressWarnings("unchecked")
-		Response<Profile> response = (Response<Profile>) this.callGet(
+		Response<Profile> response = this.callGet(
 				uri,
 				request.getQueryParams(),
 				new TypeReference<Response<Profile>>() { });
@@ -63,8 +61,7 @@ public class ProfileService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("addProfile called");
 	
-		@SuppressWarnings("unchecked")
-		Response<Profile> response = (Response<Profile>) this.callPost(
+		Response<Profile> response = this.callPost(
 				"beta/usage/profiles", 
 				profile,
 				new TypeReference<Response<Profile>>() { });

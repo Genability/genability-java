@@ -17,8 +17,7 @@ public class BulkUploadService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("uploadFile called");
 		
 		String uri = "beta/loader/bulk/up";		
-		@SuppressWarnings("unchecked")
-        Response<String> response =  (Response<String>) this.callFileUpload(uri, request, new TypeReference<Response<String>>() { });
+        Response<String> response = this.callFileUpload(uri, request, new TypeReference<Response<String>>() { });
 
 		if(log.isDebugEnabled()) log.debug("uploadFile completed");
 		return response;

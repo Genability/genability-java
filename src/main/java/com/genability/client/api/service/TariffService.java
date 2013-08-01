@@ -20,8 +20,7 @@ public class TariffService extends BaseService {
 		
 		//betaStandardCurrency into Query parameters
 		
-		@SuppressWarnings("unchecked")
-		Response<Tariff> response = (Response<Tariff>) this.callGet(
+		Response<Tariff> response = this.callGet(
 				"public/tariffs", 
 				request.getQueryParams(),
 				new TypeReference<Response<Tariff>>() { });
@@ -42,8 +41,7 @@ public class TariffService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("getTariff called");
 		
-		@SuppressWarnings("unchecked")
-		Response<Tariff> response = (Response<Tariff>) this.callGet(
+		Response<Tariff> response = this.callGet(
 				"public/tariffs", 
 				request.getQueryParams(),
 				new TypeReference<Response<Tariff>>() { });

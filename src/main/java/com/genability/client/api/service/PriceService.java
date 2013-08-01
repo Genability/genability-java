@@ -22,8 +22,7 @@ public class PriceService extends BaseService {
 			uri += "/" + request.getMasterTariffId();
 		}
 		
-		@SuppressWarnings("unchecked")
-		Response<Price> response = (Response<Price>) this.callGet(
+		Response<Price> response = this.callGet(
 				uri,
 				request.getQueryParams(),
 				new TypeReference<Response<Price>>() { });

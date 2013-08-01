@@ -21,11 +21,10 @@ public class LseService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("getTerritories called");
 		
-		@SuppressWarnings("unchecked")
-		Response<Territory> response = (Response<Territory>) this.callGet(
+		Response<Territory> response = this.callGet(
 				"public/territories", 
 				request.getQueryParams(),
-				new TypeReference<Response<Lse>>() { });
+				new TypeReference<Response<Territory>>() { });
 		
 		if(log.isDebugEnabled()) log.debug("getTerritories completed");
 		
@@ -47,8 +46,7 @@ public class LseService extends BaseService {
 			uri += "/" + request.getLseId();
 		}
 
-		@SuppressWarnings("unchecked")
-		Response<Lse> response = (Response<Lse>) this.callGet(
+		Response<Lse> response = this.callGet(
 				uri, 
 				request.getQueryParams(),
 				new TypeReference<Response<Lse>>() { });
@@ -68,8 +66,7 @@ public class LseService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("getLses called");
 		
-		@SuppressWarnings("unchecked")
-		Response<Lse> response = (Response<Lse>) this.callGet(
+		Response<Lse> response = this.callGet(
 				"public/lses", 
 				request.getQueryParams(),
 				new TypeReference<Response<Lse>>() { });

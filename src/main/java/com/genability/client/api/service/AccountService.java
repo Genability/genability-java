@@ -14,8 +14,7 @@ public class AccountService extends BaseService {
 	{
 		if(log.isDebugEnabled()) log.debug("getAccounts called");
 		
-		@SuppressWarnings("unchecked")
-		Response<Account> response = (Response<Account>) this.callGet(
+		Response<Account> response = this.callGet(
 				"beta/accounts", 
 				request.getQueryParams(),
 				new TypeReference<Response<Account>>() { });
@@ -36,8 +35,7 @@ public class AccountService extends BaseService {
 			uri += "/" + request.getAccountId();
 		}
 
-		@SuppressWarnings("unchecked")
-		Response<Account> response = (Response<Account>) this.callGet(
+		Response<Account> response = this.callGet(
 				uri,
 				request.getQueryParams(),
 				new TypeReference<Response<Account>>() { });
@@ -54,8 +52,7 @@ public class AccountService extends BaseService {
 
 		if(log.isDebugEnabled()) log.debug("addAccount called");
 	
-		@SuppressWarnings("unchecked")
-		Response<Account> response = (Response<Account>) this.callPost(
+		Response<Account> response = this.callPost(
 				"beta/accounts", 
 				account,
 				new TypeReference<Response<Account>>() { });
@@ -76,8 +73,7 @@ public class AccountService extends BaseService {
 			uri += "/" + request.getAccountId();
 		}		
 		
-		@SuppressWarnings("unchecked")
-		Response<Account> response = (Response<Account>) this.callDelete(
+		Response<Account> response = this.callDelete(
 				uri,
 				request.getQueryParams(),
 				new TypeReference<Response<Account>>() { });

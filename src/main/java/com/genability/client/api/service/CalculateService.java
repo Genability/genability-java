@@ -32,8 +32,7 @@ public class CalculateService extends BaseService {
 		}
 
 		
-		@SuppressWarnings("unchecked")
-		Response<CalculatedCost> response = (Response<CalculatedCost>) this.callPost(
+		Response<CalculatedCost> response = this.callPost(
 				uri,
 				request,
 				new TypeReference<Response<CalculatedCost>>() { });
@@ -62,8 +61,7 @@ public class CalculateService extends BaseService {
 				//Do nothing.
 			}
 			
-			@SuppressWarnings("unchecked")
-			Response<PropertyData> response = (Response<PropertyData>) this.callGet(
+			Response<PropertyData> response = this.callGet(
 					uri,
 					request.getQueryParams(),
 					new TypeReference<Response<PropertyData>>() { });
