@@ -2,11 +2,6 @@ package com.genability.test.client.api.service;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 

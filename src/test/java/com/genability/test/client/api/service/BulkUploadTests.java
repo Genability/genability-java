@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
-import com.genability.client.types.Profile;
 import com.genability.client.types.Response;
 import com.genability.client.types.ReadingData;
 import com.genability.client.api.request.BulkUploadRequest;

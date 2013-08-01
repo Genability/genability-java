@@ -4,7 +4,6 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 
@@ -82,7 +81,7 @@ public class BulkUploadRequest extends AbstractRequest implements Serializable {
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		//List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 		
 		// addParam(qparams,"providerAccountId", providerAccountId);
 		// addParam(qparams,"providerOrgId",providerOrgId);

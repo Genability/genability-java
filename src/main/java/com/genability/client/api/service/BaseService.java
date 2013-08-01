@@ -197,7 +197,6 @@ public class BaseService {
 			// Convert the object to a JSON request body.
 			//
 			postRequest.addHeader("Content-Type", "application/json");
-			@SuppressWarnings("deprecation")
 			ContentProducer cp = new ContentProducer() {
 				
 				@Override
@@ -207,7 +206,6 @@ public class BaseService {
 					
 			    }
 			};
-			@SuppressWarnings("deprecation")
 			HttpEntity entity = new EntityTemplate(cp);
 			postRequest.setEntity(entity);
 
@@ -341,17 +339,5 @@ public class BaseService {
 		return restResponse;
 		
 	} // end of callGet	
-	
-	
-	/**
-	 * Helps build the credentials for the request.  This is only needed when
-	 * passing in creds on the query string.  By default the examples here 
-	 * use the Basic Authorization header.
-	 */
-	private String getQueryStringCredentials() {
-		
-		return "appId=" + appId + "&appKey=" + appKey;
-
-	}
 
 }

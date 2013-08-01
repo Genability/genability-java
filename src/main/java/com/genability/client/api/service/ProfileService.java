@@ -3,7 +3,6 @@ package com.genability.client.api.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
-import com.genability.client.types.Account;
 import com.genability.client.types.Response;
 import com.genability.client.types.Profile;
 

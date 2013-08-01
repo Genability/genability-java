@@ -4,11 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,7 +13,6 @@ import com.genability.client.types.Response;
 import com.genability.client.api.request.DeleteAccountRequest;
 import com.genability.client.api.request.GetAccountsRequest;
 import com.genability.client.api.request.GetAccountRequest;
-import com.genability.client.types.PropertyData;
 
 public class AccountServiceTests  extends BaseServiceTests {
 	
