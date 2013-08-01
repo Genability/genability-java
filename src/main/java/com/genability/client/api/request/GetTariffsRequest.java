@@ -21,31 +21,6 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	private Long lseId;
 
 	/**
-	 * Private member variable for DistributionLseId.
-	 */
-	private Long distributionLseId;
-
-	/**
-	 * Private member variable for masterTariffId.
-	 */
-	private Long masterTariffId;
-
-	/**
-	 * Private member variable for CustomerClasses.
-	 */
-	private String[] customerClasses;
-
-	/**
-	 * Private member variable for TariffTypes.
-	 */
-	private String[] tariffTypes;
-
-	/**
-	 * Private member variable for ZipCode
-	 */
-	private String zipCode;
-
-	/**
 	 * Private member variable for effectiveOn.
 	 */
 	private DateTime effectiveOn;
@@ -59,26 +34,46 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	 * Private member variable for toDateTime.
 	 */
 	private DateTime toDateTime;
-	
-    /**
-	 * Private member variable for account
-	 */
-	private String accountId;
-	
+
 	/**
-	 * private member variable for providerAccountId
+	 * Private member variable for CustomerClasses.
 	 */
-	private String providerAccountId;
+	private String[] customerClasses;
+
+	/**
+	 * Private member variable for TariffTypes.
+	 */
+	private String[] tariffTypes;
+
+	/**
+	 * Private member variable for ServiceTypes.
+	 */
+	private String[] serviceTypes;
+
+	/**
+	 * Private member variable for ChargeTypes.
+	 */
+	private String[] chargeTypes;
+
+	/**
+	 * Private member variable for ZipCode
+	 */
+	private String zipCode;
+
+	/**
+	 * Private member variable for PopulateRates.
+	 */
+	private Boolean populateRates;
 	
 	/**
 	 * Private member variable for PopulateProperties.
 	 */
 	private Boolean populateProperties;
 
-	/**
-	 * Private member variable for PopulateRates.
+    /**
+	 * Private member variable for account
 	 */
-	private Boolean populateRates;
+	private String accountId;
 	
 	/**
 	 * Private member variable for searching by consumption
@@ -94,6 +89,16 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	 * Private member variable for searching by net metered tariffs
 	 */
 	private Boolean hasNetMetering;
+
+	/**
+	 * Private member variable for searching by tiered rates
+	 */
+	private Boolean hasTieredRates;
+
+	/**
+	 * Private member variable for searching by contracted rates
+	 */
+	private Boolean hasContractedRates;
 	
 	/**
 	 * @return the lseId
@@ -107,34 +112,6 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	 */
 	public void setLseId(Long lseId) {
 		this.lseId = lseId;
-	}
-
-	/**
-	 * @return the distributionLseId
-	 */
-	public Long getDistributionLseId() {
-		return distributionLseId;
-	}
-
-	/**
-	 * @param distributionLseId the distributionLseId to set
-	 */
-	public void setDistributionLseId(Long distributionLseId) {
-		this.distributionLseId = distributionLseId;
-	}
-
-	/**
-	 * @return the masterTariffId
-	 */
-	public Long getMasterTariffId() {
-		return masterTariffId;
-	}
-
-	/**
-	 * @param masterTariffId the masterTariffId to set
-	 */
-	public void setMasterTariffId(Long masterTariffId) {
-		this.masterTariffId = masterTariffId;
 	}
 
 	/**
@@ -164,6 +141,34 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	public void setTariffTypes(String[] tariffTypes) {
 		this.tariffTypes = tariffTypes;
 	}
+
+	/**
+	 * @return the chargeTypes
+	 */
+	public String[] getChargeTypes() {
+        return chargeTypes;
+    }
+
+	/**
+	 * @param chargeTypes the chargeTypes to set
+	 */
+	public void setChargeTypes(String[] chargeTypes) {
+        this.chargeTypes = chargeTypes;
+    }
+
+	/**
+	 * @return the serviceTypes
+	 */
+	public String[] getServiceTypes() {
+        return serviceTypes;
+    }
+
+	/**
+	 * @param serviceTypes the serviceTypes to set
+	 */
+	public void setServiceTypes(String[] serviceTypes) {
+        this.serviceTypes = serviceTypes;
+    }
 
 	/**
 	 * @return the zipCode
@@ -235,15 +240,6 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		this.accountId = accountId;
 	}
 
-	public String getProviderAccountId() {
-    	return providerAccountId;
-    }
-
-	public void setProviderAccountId(String providerAccountId) {
-    	this.providerAccountId = providerAccountId;
-    }
-
-
 	/**
 	 * @return the populateProperties
 	 */
@@ -297,27 +293,45 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
     	this.hasNetMetering = hasNetMetering;
     }
 
+	public Boolean getHasContractedRates() {
+      return hasContractedRates;
+    }
+
+	public void setHasContractedRates(Boolean hasContractedRates) {
+      this.hasContractedRates = hasContractedRates;
+    }
+
+	public Boolean getHasTieredRates() {
+      return hasTieredRates;
+    }
+
+	public void setHasTieredRates(Boolean hasTieredRates) {
+      this.hasTieredRates = hasTieredRates;
+	}
+
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = super.getQueryParams();
 
 		addParam(qparams,"lseId",lseId);
-		addParam(qparams,"distributionLseId",distributionLseId);
-		addParam(qparams,"masterTariffId",masterTariffId);
-		addParam(qparams,"customerClasses",customerClasses);
-		addParam(qparams,"tariffTypes",tariffTypes);
-		addParam(qparams,"zipCode",zipCode);
 		addParam(qparams,"effectiveOn",effectiveOn);
 		addParam(qparams,"fromDateTime",fromDateTime);
 		addParam(qparams,"toDateTime",toDateTime);
-		addParam(qparams,"accountId",accountId);
+		addParam(qparams,"customerClasses",customerClasses);
+		addParam(qparams,"tariffTypes",tariffTypes);
+		addParam(qparams,"serviceTypes",serviceTypes);
+		addParam(qparams,"chargeTypes",chargeTypes);
+		addParam(qparams,"zipCode",zipCode);
 		addParam(qparams,"populateProperties",populateProperties);
 		addParam(qparams,"populateRates",populateRates);
+		addParam(qparams,"accountId",accountId);
 		addParam(qparams,"consumption",consumption);
 		addParam(qparams,"demand",demand);
 		addParam(qparams,"hasNetMetering",hasNetMetering);
-		
+		addParam(qparams,"hasTieredRates",hasTieredRates);
+		addParam(qparams,"hasContractedRates",hasContractedRates);
+
 		return qparams;
 		
 	}
