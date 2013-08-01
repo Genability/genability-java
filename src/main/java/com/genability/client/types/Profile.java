@@ -92,8 +92,8 @@ public class Profile implements Serializable {
 	 * This is the constructor that sets the primary key information on
 	 * construction. In other words, it sets the property.
 	 */
-	public Profile(String profileId_) {
-		this.profileId = profileId_;
+	public Profile(String profileId) {
+		this.profileId = profileId;
 
 	} // end of constructor
 
@@ -107,8 +107,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for ProfileId.
 	 */
-	public void setProfileId(String profileId_) {
-		this.profileId = profileId_;
+	public void setProfileId(String profileId) {
+		this.profileId = profileId;
 	}
 
 	/**
@@ -121,8 +121,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for ProfileName.
 	 */
-	public void setProfileName(String profileName_) {
-		this.profileName = profileName_;
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
 	}
 
 	/**
@@ -135,8 +135,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for Description.
 	 */
-	public void setDescription(String description_) {
-		this.description = description_;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
@@ -149,8 +149,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for SourceId.
 	 */
-	public void setSourceId(String sourceId_) {
-		this.sourceId = sourceId_;
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
 	}
 
 	/**

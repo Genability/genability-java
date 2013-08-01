@@ -15,13 +15,13 @@ public class GetProfilesRequest extends AbstractGetNRequest implements Serializa
     /**
 	 * Private member variable for accountId.
 	 */
-	private String accountId_;
+	private String accountId;
 
 	/**
 	 * @return the accountId
 	 */
 	public String getAccountId() {
-		return accountId_;
+		return accountId;
 	}
 
 	/**
@@ -29,13 +29,13 @@ public class GetProfilesRequest extends AbstractGetNRequest implements Serializa
 	 *            the accountId to set
 	 */
 	public void setAccountId(String accountId) {
-		accountId_ = accountId;
+		this.accountId = accountId;
 	}
 	
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		List<NameValuePair> qparams = super.getQueryParams();
-		addParam(qparams,"accountId",accountId_);		
+		addParam(qparams,"accountId",accountId);		
 		return qparams;
 		
 	}

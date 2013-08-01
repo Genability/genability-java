@@ -114,7 +114,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	private String groupBy;
 	
 	/**
-	 * Private member variable estimate_
+	 * Private member variable estimate
 	 */
 	private String accuracy;
 
@@ -126,7 +126,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	/**
 	 * private member variable for providerAccountId
 	 */
-	private String providerAccountId_;
+	private String providerAccountId;
 	
 	/**
 	 * Constructor to initialize instance
@@ -198,17 +198,17 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	}
 
 	@JsonInclude(Include.NON_NULL)
-	public String getProviderAccountId_() {
-    	return providerAccountId_;
+	public String getProviderAccountId() {
+    	return providerAccountId;
     }
 
-	public void setProviderAccountId_(String providerAccountId_) {
-    	this.providerAccountId_ = providerAccountId_;
+	public void setProviderAccountId(String providerAccountId) {
+    	this.providerAccountId = providerAccountId;
     }
 
 	
 	/**
-	 * Access method that retrieve profileId_
+	 * Access method that retrieve profileId
 	 * 
 	 * @return profileId
 	 */
@@ -218,7 +218,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	}
 
 	/**
-	 * Mutator used to set the value of profileId_
+	 * Mutator used to set the value of profileId
 	 * 
 	 * @param profileId
 	 */

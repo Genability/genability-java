@@ -20,32 +20,32 @@ public class ReadingDataSummary implements Serializable {
 	/**
 	 * private member variable for ProfileId.
 	 */
-	private String profileId_;
+	private String profileId;
 
 	/**
 	 * private member variable for QuantityUnit.
 	 */
-	private String quantityUnit_;
+	private String quantityUnit;
 
 	/**
 	 * private member variable for fromDateTime.
 	 */
-	private DateTime fromDateTime_;
+	private DateTime fromDateTime;
 
 	/**
 	 * private member variable for toDateTime.
 	 */
-	private DateTime toDateTime_;
+	private DateTime toDateTime;
 
 	/**
 	 * private member variable for NumberOfReadings.
 	 */
-	private Integer numberOfReadings_;
+	private Integer numberOfReadings;
 
 	/**
 	 * private member variable for MeanIntervalTime.
 	 */
-	private Long meanIntervalTime_;
+	private Long meanIntervalTime;
 
 	/**
 	 * This is the default constructor.
@@ -59,28 +59,28 @@ public class ReadingDataSummary implements Serializable {
 	 */
 	@JsonIgnore
 	public String getProfileId() {
-		return profileId_;
+		return profileId;
 	}
 
 	/**
 	 * Mutator for ProfileId.
 	 */
-	public void setProfileId(String profileId_) {
-		this.profileId_ = profileId_;
+	public void setProfileId(String profileId) {
+		this.profileId = profileId;
 	}
 
 	/**
 	 * Access method for QuantityUnit.
 	 */
 	public String getQuantityUnit() {
-		return quantityUnit_;
+		return quantityUnit;
 	}
 
 	/**
 	 * Mutator for QuantityUnit.
 	 */
 	public void setQuantityUnit(String quantityUnit) {
-		this.quantityUnit_ = quantityUnit;
+		this.quantityUnit = quantityUnit;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class ReadingDataSummary implements Serializable {
 	 */
 	@JsonIgnore
 	public DateTime getFromDateTime() {
-		return fromDateTime_;
+		return fromDateTime;
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class ReadingDataSummary implements Serializable {
 	 *            the fromDateTime to set
 	 */
 	public void setFromDateTime(DateTime fromDateTime) {
-		fromDateTime_ = fromDateTime;
+		this.fromDateTime = fromDateTime;
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class ReadingDataSummary implements Serializable {
 	 */
 	@JsonIgnore
 	public DateTime getToDateTime() {
-		return toDateTime_;
+		return toDateTime;
 	}
 
 	/**
@@ -112,14 +112,14 @@ public class ReadingDataSummary implements Serializable {
 	 *            the toDateTime to set
 	 */
 	public void setToDateTime(DateTime toDateTime) {
-		toDateTime_ = toDateTime;
+		this.toDateTime = toDateTime;
 	}
 
 	/**
 	 * @return the numberOfReadings
 	 */
 	public Integer getNumberOfReadings() {
-		return numberOfReadings_;
+		return numberOfReadings;
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class ReadingDataSummary implements Serializable {
 	 *            the numberOfReadings to set
 	 */
 	public void setNumberOfReadings(Integer numberOfReadings) {
-		numberOfReadings_ = numberOfReadings;
+		this.numberOfReadings = numberOfReadings;
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class ReadingDataSummary implements Serializable {
 	 */
 	@JsonIgnore
 	public Long getMeanIntervalTime() {
-		return meanIntervalTime_;
+		return meanIntervalTime;
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class ReadingDataSummary implements Serializable {
 	 *            the meanIntervalTime to set
 	 */
 	public void setMeanIntervalTime(Long meanIntervalTime) {
-		meanIntervalTime_ = meanIntervalTime;
+		this.meanIntervalTime = meanIntervalTime;
 	}
 
 }

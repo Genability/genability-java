@@ -25,43 +25,43 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	/**
 	 * private member variable for masterTariffId
 	 */
-	private Long masterTariffId_;
+	private Long masterTariffId;
 
 	/**
 	 * private member variable for FromDate
 	 */
-	private DateTime fromDateTime_;
+	private DateTime fromDateTime;
 
 	/**
 	 * private member variable for ToDate
 	 */
-	private DateTime toDateTime_;
+	private DateTime toDateTime;
 
 	/**
 	 * private member variable for TerritoryId
 	 */
-	private Long territoryId_;
+	private Long territoryId;
 
 	/**
 	 * private member variable for AccountId
 	 */
-	private String accountId_;
+	private String accountId;
 
 	/**
 	 * private member variable for providerAccountId
 	 */
-	private String providerAccountId_;
+	private String providerAccountId;
 
 	/**
-	 * Private member variable estimate_
+	 * Private member variable estimate
 	 */
-	private String estimate_;
+	private String estimate;
 
 	/**
 	 * @return the masterTariffId
 	 */
 	public Long getMasterTariffId() {
-		return masterTariffId_;
+		return masterTariffId;
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	 *            the masterTariffId to set
 	 */
 	public void setMasterTariffId(Long masterTariffId) {
-		this.masterTariffId_ = masterTariffId;
+		this.masterTariffId = masterTariffId;
 	}
 
 	/**
@@ -77,14 +77,14 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	 *            the fromDate to set
 	 */
 	public void setFromDateTime(DateTime fromDateTime) {
-		this.fromDateTime_ = fromDateTime;
+		this.fromDateTime = fromDateTime;
 	}
 
 	/**
 	 * @return the fromDate
 	 */
 	public DateTime getFromDateTime() {
-		return fromDateTime_;
+		return fromDateTime;
 	}
 
 	/**
@@ -92,14 +92,14 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	 *            the toDate to set
 	 */
 	public void setToDateTime(DateTime toDateTime) {
-		this.toDateTime_ = toDateTime;
+		this.toDateTime = toDateTime;
 	}
 
 	/**
 	 * @return the toDate
 	 */
 	public DateTime getToDateTime() {
-		return toDateTime_;
+		return toDateTime;
 	}
 
 	/**
@@ -107,14 +107,14 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	 *            the territoryId to set
 	 */
 	public void setTerritoryId(Long territoryId) {
-		this.territoryId_ = territoryId;
+		this.territoryId = territoryId;
 	}
 
 	/**
 	 * @return the territoryId
 	 */
 	public Long getTerritoryId() {
-		return territoryId_;
+		return territoryId;
 
 	}
 
@@ -122,7 +122,7 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	 * @return the accountId
 	 */
 	public String getAccountId() {
-		return accountId_;
+		return accountId;
 	}
 
 	/**
@@ -130,15 +130,15 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	 *            the territoryId to set
 	 */
 	public void setAccountId(String accountId) {
-		this.accountId_ = accountId;
+		this.accountId = accountId;
 	}
 
-	public String getProviderAccountId_() {
-    	return providerAccountId_;
+	public String getProviderAccountId() {
+    	return providerAccountId;
     }
 
-	public void setProviderAccountId_(String providerAccountId_) {
-    	this.providerAccountId_ = providerAccountId_;
+	public void setProviderAccountId(String providerAccountId) {
+    	this.providerAccountId = providerAccountId;
     }
 
 
@@ -146,7 +146,7 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	 * @return the estimate
 	 */
 	public String getEstimate() {
-		return estimate_;
+		return estimate;
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	 *            the estimate to set
 	 */
 	public void setEstimate(String estimate) {
-		estimate_ = estimate;
+		this.estimate = estimate;
 	}
 	
 	@Override
@@ -162,22 +162,22 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 		
 		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 		
-		addParam(qparams,"fromDateTime", fromDateTime_);
-		addParam(qparams,"toDateTime",toDateTime_);
-		if (accountId_ != null) {
-			addParam(qparams, "accountId", accountId_);
+		addParam(qparams,"fromDateTime", fromDateTime);
+		addParam(qparams,"toDateTime",toDateTime);
+		if (accountId != null) {
+			addParam(qparams, "accountId", accountId);
 		}
 		
-		if (masterTariffId_ != null) {
-			addParam(qparams, "tariffId", masterTariffId_);			
+		if (masterTariffId != null) {
+			addParam(qparams, "tariffId", masterTariffId);			
 		}
 
-		if (estimate_ != null) {
-			addParam(qparams, "estimate", estimate_);	
+		if (estimate != null) {
+			addParam(qparams, "estimate", estimate);	
 		}
 		
-		if (territoryId_ != null) {
-			addParam(qparams, "territoryId", territoryId_);
+		if (territoryId != null) {
+			addParam(qparams, "territoryId", territoryId);
 		}
 		
 		return qparams;

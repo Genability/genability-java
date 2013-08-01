@@ -7,7 +7,6 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PropertyData {
@@ -46,8 +45,8 @@ public class PropertyData {
 	}
 
 
-	public void setKeyName(String keyName_) {
-		keyName = keyName_;
+	public void setKeyName(String keyName) {
+		this.keyName = keyName;
 	}
 	
 	public String getKeyName() {
@@ -87,14 +86,14 @@ public class PropertyData {
 
 	/**
 	 * @param unit
-	 *            the unit_ to set
+	 *            the unit to set
 	 */
 	public void setPeriod(String period) {
 		this.period = period;
 	}
 
 	/**
-	 * @return the unit_
+	 * @return the unit
 	 */
 	@JsonInclude(Include.NON_NULL)
 	public String getPeriod() {
@@ -103,14 +102,14 @@ public class PropertyData {
 	
 	/**
 	 * @param unit
-	 *            the unit_ to set
+	 *            the unit to set
 	 */
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
 
 	/**
-	 * @return the unit_
+	 * @return the unit
 	 */
 	@JsonInclude(Include.NON_NULL)
 	public String getUnit() {
@@ -125,7 +124,7 @@ public class PropertyData {
 	}
 
 	/**
-	 * @return the unit_
+	 * @return the unit
 	 */
 	@JsonInclude(Include.NON_NULL)
 	public String getDataValue() {
@@ -134,7 +133,7 @@ public class PropertyData {
 
 	/**
 	 * @param accuracy
-	 *            the accuracy_ to set
+	 *            the accuracy to set
 	 */
 	public void setAccuracy(BigDecimal accuracy) {
 		this.accuracy = accuracy;
@@ -142,15 +141,15 @@ public class PropertyData {
 
 	
 	/**
-	 * @return the accuracy_
+	 * @return the accuracy
 	 */
 	@JsonInclude(Include.NON_NULL)
 	public BigDecimal getAccuracy() {
 		return accuracy;
 	}
 	
-	public void setDataType(String dataType_) {
-		dataType = dataType_;
+	public void setDataType(String dataType) {
+		this.dataType = dataType;
 	}
 
 	public String getDataType() {

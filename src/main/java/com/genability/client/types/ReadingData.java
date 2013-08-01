@@ -221,8 +221,8 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	/**
 	 * Mutator for QuantityValue.
 	 */
-	public void setQuantityValue(BigDecimal quantityValue_) {
-		this.quantityValue = quantityValue_;
+	public void setQuantityValue(BigDecimal quantityValue) {
+		this.quantityValue = quantityValue;
 	}
 
 	/**
@@ -264,9 +264,9 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	 * DataType for ReadingData and BillingData is always a Decimal.
 	 */
 	@Override 
-	public void setDataType(String dataType_) {
+	public void setDataType(String dataType) {
 		
-		this.dataType = dataType_;
+		this.dataType = dataType;
 		
 	}
 
