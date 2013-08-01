@@ -1,6 +1,5 @@
 package com.genability.client.api.request;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -125,9 +124,9 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 		this.sortOrder = sortOrder;
 	}
 
-	protected List<NameValuePair> getQueryParams() {
+	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 		addParam(qparams, "pageStart", pageStart);
 		addParam(qparams, "pageCount", pageCount);
 		addParam(qparams, "search", search);

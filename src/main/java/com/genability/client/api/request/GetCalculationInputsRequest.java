@@ -4,7 +4,6 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -160,25 +159,14 @@ public class GetCalculationInputsRequest extends AbstractRequest implements Seri
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 		
 		addParam(qparams,"fromDateTime", fromDateTime);
 		addParam(qparams,"toDateTime",toDateTime);
-		if (accountId != null) {
-			addParam(qparams, "accountId", accountId);
-		}
-		
-		if (masterTariffId != null) {
-			addParam(qparams, "tariffId", masterTariffId);			
-		}
-
-		if (estimate != null) {
-			addParam(qparams, "estimate", estimate);	
-		}
-		
-		if (territoryId != null) {
-			addParam(qparams, "territoryId", territoryId);
-		}
+		addParam(qparams, "accountId", accountId);
+		addParam(qparams, "tariffId", masterTariffId);			
+		addParam(qparams, "estimate", estimate);	
+		addParam(qparams, "territoryId", territoryId);
 		
 		return qparams;
 		

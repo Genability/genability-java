@@ -2,7 +2,6 @@ package com.genability.client.api.request;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -119,7 +118,7 @@ public class GetPriceRequest extends AbstractRequest implements Serializable {
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 		
 		addParam(qparams,"fromDateTime", fromDateTime,ISO_8601_SHORT_DATE_FORMATTER);
 		addParam(qparams,"toDateTime",toDateTime,ISO_8601_SHORT_DATE_FORMATTER);

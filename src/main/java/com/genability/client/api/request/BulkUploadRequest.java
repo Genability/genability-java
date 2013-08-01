@@ -80,13 +80,12 @@ public class BulkUploadRequest extends AbstractRequest implements Serializable {
 	
 	@Override
 	public List<NameValuePair> getQueryParams() {
-		
-		//List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 		
 		// addParam(qparams,"providerAccountId", providerAccountId);
 		// addParam(qparams,"providerOrgId",providerOrgId);
 		
-		return null;
+		return qparams;
 		
 	}	
 }

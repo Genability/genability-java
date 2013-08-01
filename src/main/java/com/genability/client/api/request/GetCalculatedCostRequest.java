@@ -311,7 +311,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 		addParam(qparams,"masterTariffId",masterTariffId);
 		addParam(qparams,"betaPopulateAssumptions",true);
 		return qparams;

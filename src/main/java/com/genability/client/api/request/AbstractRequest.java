@@ -1,6 +1,7 @@
 package com.genability.client.api.request;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -9,9 +10,9 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.genability.client.types.Fields;
+
 public abstract class AbstractRequest {
-	
-	protected abstract List<NameValuePair> getQueryParams();
 	
 	public static final String ISO_8601_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
 	public static final DateTimeFormatter ISO_8601_DATE_TIME_FORMATTER = DateTimeFormat.forPattern(ISO_8601_DATE_TIME_FORMAT);
@@ -22,6 +23,24 @@ public abstract class AbstractRequest {
 	public static final String ISO_8601_SHORT_DATE_FORMAT = "yyyy-MM-dd";
 	public static final DateTimeFormatter ISO_8601_SHORT_DATE_FORMATTER = DateTimeFormat.forPattern(ISO_8601_SHORT_DATE_FORMAT);
 	
+	protected Fields fields = Fields.DEFAULT;
+
+	public Fields getFields() {
+      return fields;
+    }
+	
+	public void setFields(Fields fields) {
+      this.fields = fields;
+    }
+
+	public List<NameValuePair> getQueryParams() {
+	  List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+	  if (fields != null) {
+	    addParam(qparams, "fields", fields.getValue());
+	  }
+	  return qparams;
+	}
+
 	protected void addParam(List<NameValuePair> qparams, String paramName, Long paramValue) {
 		
 		if(paramValue != null) 
