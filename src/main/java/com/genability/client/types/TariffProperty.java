@@ -1,5 +1,10 @@
 package com.genability.client.types;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class TariffProperty {
 
   private String keyName;
@@ -11,9 +16,11 @@ public class TariffProperty {
   private String propertyTypes;
   private String operator;
   private String propertyValue;
+  private String quantityUnit;
   private String minValue;
   private String maxValue;
-  private String[] choices;
+  private List<Choice> choices;
+  private String period;
   private String formulaDetail;
   private Boolean isDefault;
   
@@ -89,6 +96,14 @@ public class TariffProperty {
     this.propertyValue = propertyValue;
   }
   
+  public String getQuantityUnit() {
+    return quantityUnit;
+  }
+  
+  public void setQuantityUnit(String quantityUnit) {
+    this.quantityUnit = quantityUnit;
+  }
+  
   public String getMinValue() {
     return minValue;
   }
@@ -105,12 +120,20 @@ public class TariffProperty {
     this.maxValue = maxValue;
   }
   
-  public String[] getChoices() {
+  public List<Choice> getChoices() {
     return choices;
   }
   
-  public void setChoices(String[] choices) {
+  public void setChoices(List<Choice> choices) {
     this.choices = choices;
+  }
+
+  public String getPeriod() {
+    return period;
+  }
+  
+  public void setPeriod(String period) {
+    this.period = period;
   }
   
   public String getFormulaDetail() {
@@ -128,4 +151,5 @@ public class TariffProperty {
   public void setIsDefault(Boolean isDefault) {
     this.isDefault = isDefault;
   }
+  
 }

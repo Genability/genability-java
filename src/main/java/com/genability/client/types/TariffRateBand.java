@@ -21,6 +21,7 @@ public class TariffRateBand {
   private BigDecimal rateAmount;
   private String rateUnit;
   private Boolean isCredit;
+  private String prevUpperLimit;
   
   public Long getTariffRateBandId() {
     return tariffRateBandId;
@@ -134,4 +135,11 @@ public class TariffRateBand {
     this.isCredit = isCredit;
   }
   
+  public String getPrevUpperLimit() {
+    return prevUpperLimit;
+  }
+  
+  public void setPrevUpperLimit(String prevUpperLimit) {
+    this.prevUpperLimit = prevUpperLimit;
+  }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Tariff {
 
 
@@ -68,6 +68,11 @@ public class Tariff {
 	 * private member variable for TariffName.
 	 */
 	private String tariffName;
+
+	/**
+	 * private member variable for TariffBookName.
+	 */
+	private String tariffBookName;
 
 	/**
 	 * private member variable for LseId.
@@ -225,6 +230,11 @@ public class Tariff {
 	private Boolean isActive;
 
 	/**
+	 * private member variable for Privacy.
+	 */
+	private String privacy;
+
+	/**
 	 * private member variable for Properties.
 	 */
 	private List<TariffProperty> properties;
@@ -344,6 +354,20 @@ public class Tariff {
 	 */
 	public void setTariffName(String tariffName) {
 		this.tariffName = tariffName;
+	}
+
+	/**
+	 * @return the tariffBookName
+	 */
+	public String getTariffBookName() {
+		return tariffBookName;
+	}
+
+	/**
+	 * @param tariffBookName the tariffBookName to set
+	 */
+	public void setTariffBookName(String tariffBookName) {
+		this.tariffBookName = tariffBookName;
 	}
 
 	/**
@@ -616,4 +640,12 @@ public class Tariff {
     this.rates = rates;
   }
 	
+  public String getPrivacy() {
+    return privacy;
+  }
+  
+  public void setPrivacy(String privacy) {
+    this.privacy = privacy;
+  }
+  
 }

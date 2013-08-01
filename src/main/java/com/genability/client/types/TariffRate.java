@@ -5,6 +5,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.JsonNode;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TariffRate {
@@ -12,14 +13,18 @@ public class TariffRate {
   private Long tariffRateId;
   private Long tariffId;
   private Long riderId;
+  private Long masterTariffRateId;
   private Integer tariffSequenceNumber;
+  private Integer tariffBookSequenceNumber;
   private String rateGroupName;
+  private String tariffBookRateGroupName;
   private String rateName;
+  private String tariffBookRateName;
   private DateTime fromDateTime;
   private DateTime toDateTime;
   private Territory territory;
-  //private Season season;
-  //private TimeOfUse timeOfUse;
+  private JsonNode season;
+  private JsonNode timeOfUse;
   private String chargeType;
   private String chargeClass;
   private String chargePeriod;
@@ -55,12 +60,28 @@ public class TariffRate {
     this.riderId = riderId;
   }
   
+  public Long getMasterTariffRateId() {
+    return masterTariffRateId;
+  }
+  
+  public void setMasterTariffRateId(Long masterTariffRateId) {
+    this.masterTariffRateId = masterTariffRateId;
+  }
+  
   public Integer getTariffSequenceNumber() {
     return tariffSequenceNumber;
   }
   
   public void setTariffSequenceNumber(Integer tariffSequenceNumber) {
     this.tariffSequenceNumber = tariffSequenceNumber;
+  }
+  
+  public Integer getTariffBookSequenceNumber() {
+    return tariffBookSequenceNumber;
+  }
+  
+  public void setTariffBookSequenceNumber(Integer tariffBookSequenceNumber) {
+    this.tariffBookSequenceNumber = tariffBookSequenceNumber;
   }
   
   public String getRateGroupName() {
@@ -71,6 +92,14 @@ public class TariffRate {
     this.rateGroupName = rateGroupName;
   }
   
+  public String getTariffBookRateGroupName() {
+    return tariffBookRateGroupName;
+  }
+  
+  public void setTariffBookRateGroupName(String tariffBookRateGroupName) {
+    this.tariffBookRateGroupName = tariffBookRateGroupName;
+  }
+  
   public String getRateName() {
     return rateName;
   }
@@ -79,6 +108,14 @@ public class TariffRate {
     this.rateName = rateName;
   }
 
+  public String getTariffBookRateName() {
+    return tariffBookRateName;
+  }
+  
+  public void setTariffBookRateName(String tariffBookRateName) {
+    this.tariffBookRateName = tariffBookRateName;
+  }
+  
   public DateTime getFromDateTime() {
     return fromDateTime;
   }
@@ -103,21 +140,21 @@ public class TariffRate {
     this.territory = territory;
   }
   
-//  public Season getSeason() {
-//    return season;
-//  }
-//  
-//  public void setSeason(Season season) {
-//    this.season = season;
-//  }
-//  
-//  public TimeOfUse getTimeOfUse() {
-//    return timeOfUse;
-//  }
-//  
-//  public void setTimeOfUse(TimeOfUse timeOfUse) {
-//    this.timeOfUse = timeOfUse;
-//  }
+  public JsonNode getSeason() {
+    return season;
+  }
+  
+  public void setSeason(JsonNode season) {
+    this.season = season;
+  }
+  
+  public JsonNode getTimeOfUse() {
+    return timeOfUse;
+  }
+  
+  public void setTimeOfUse(JsonNode timeOfUse) {
+    this.timeOfUse = timeOfUse;
+  }
   
   public String getChargeType() {
     return chargeType;
