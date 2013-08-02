@@ -5,7 +5,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.JsonNode;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TariffRate {
@@ -23,8 +22,8 @@ public class TariffRate {
   private DateTime fromDateTime;
   private DateTime toDateTime;
   private Territory territory;
-  private JsonNode season;
-  private JsonNode timeOfUse;
+  private Season season;
+  private TimeOfUse timeOfUse;
   private ChargeType chargeType;
   private ChargeClass chargeClass;
   private Period chargePeriod;
@@ -140,19 +139,19 @@ public class TariffRate {
     this.territory = territory;
   }
   
-  public JsonNode getSeason() {
+  public Season getSeason() {
     return season;
   }
   
-  public void setSeason(JsonNode season) {
+  public void setSeason(Season season) {
     this.season = season;
   }
   
-  public JsonNode getTimeOfUse() {
+  public TimeOfUse getTimeOfUse() {
     return timeOfUse;
   }
   
-  public void setTimeOfUse(JsonNode timeOfUse) {
+  public void setTimeOfUse(TimeOfUse timeOfUse) {
     this.timeOfUse = timeOfUse;
   }
   

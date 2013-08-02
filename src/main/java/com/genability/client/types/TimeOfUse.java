@@ -3,7 +3,6 @@ package com.genability.client.types;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.JsonNode;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TimeOfUse {
@@ -14,7 +13,7 @@ public class TimeOfUse {
   private String touName;
   private Integer calendarId;
   private Boolean isDynamic;
-  private JsonNode season;
+  private Season season;
   private String touType;
   private List<TimeOfUsePeriod> touPeriods;
   
@@ -66,11 +65,11 @@ public class TimeOfUse {
     this.isDynamic = isDynamic;
   }
   
-  public JsonNode getSeason() {
+  public Season getSeason() {
     return season;
   }
   
-  public void setSeason(JsonNode season) {
+  public void setSeason(Season season) {
     this.season = season;
   }
   
