@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.genability.client.util.EnumUtil;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TariffRate {
@@ -25,7 +28,7 @@ public class TariffRate {
   private Season season;
   private TimeOfUse timeOfUse;
   private ChargeType chargeType;
-  private ChargeClass chargeClass;
+  private ChargeClass[] chargeClass;
   private Period chargePeriod;
   private TransactionType transactionType;
   private String quantityKey;
@@ -163,12 +166,22 @@ public class TariffRate {
     this.chargeType = chargeType;
   }
   
-  public ChargeClass getChargeClass() {
+  @JsonIgnore
+  public ChargeClass[] getChargeClass() {
     return chargeClass;
   }
   
-  public void setChargeClass(ChargeClass chargeClass) {
+  public void setChargeClass(ChargeClass... chargeClass) {
     this.chargeClass = chargeClass;
+  }
+  
+  @JsonProperty("chargeClass")
+  public String getChargeClassAsString() {
+    return EnumUtil.enumListString(chargeClass);
+  }
+  
+  public void setChargeClassAsString(String chargeClassStr) {
+    this.chargeClass = EnumUtil.parseEnumList(chargeClassStr, ChargeClass.class);
   }
   
   public Period getChargePeriod() {
