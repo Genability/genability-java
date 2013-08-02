@@ -36,6 +36,11 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	private DateTime toDateTime;
 
 	/**
+	 * Private member variable for active field.
+	 */
+	private Boolean isActive;
+
+	/**
 	 * Private member variable for CustomerClasses.
 	 */
 	private String[] customerClasses;
@@ -99,7 +104,12 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	 * Private member variable for searching by contracted rates
 	 */
 	private Boolean hasContractedRates;
-	
+
+	/**
+	 * Private member variable for searching by time of use rates
+	 */
+	private Boolean hasTimeOfUseRates;
+
 	/**
 	 * @return the lseId
 	 */
@@ -227,6 +237,20 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	}
 
 	/**
+	 * @return
+	 */
+	public Boolean getIsActive() {
+      return isActive;
+    }
+
+	/**
+	 * @param isActive
+	 */
+	public void setIsActive(Boolean isActive) {
+      this.isActive = isActive;
+    }
+
+	/**
 	 * @return the accountId
 	 */
 	public String getAccountId() {
@@ -309,6 +333,14 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
       this.hasTieredRates = hasTieredRates;
 	}
 
+	public Boolean getHasTimeOfUseRates() {
+      return hasTimeOfUseRates;
+    }
+
+	public void setHasTimeOfUseRates(Boolean hasTimeOfUseRates) {
+      this.hasTimeOfUseRates = hasTimeOfUseRates;
+    }
+
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
@@ -318,6 +350,7 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		addParam(qparams,"effectiveOn",effectiveOn);
 		addParam(qparams,"fromDateTime",fromDateTime);
 		addParam(qparams,"toDateTime",toDateTime);
+		addParam(qparams,"isActive",isActive);
 		addParam(qparams,"customerClasses",customerClasses);
 		addParam(qparams,"tariffTypes",tariffTypes);
 		addParam(qparams,"serviceTypes",serviceTypes);
@@ -331,6 +364,7 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		addParam(qparams,"hasNetMetering",hasNetMetering);
 		addParam(qparams,"hasTieredRates",hasTieredRates);
 		addParam(qparams,"hasContractedRates",hasContractedRates);
+		addParam(qparams,"hasTimeOfUseRates",hasTimeOfUseRates);
 
 		return qparams;
 		
