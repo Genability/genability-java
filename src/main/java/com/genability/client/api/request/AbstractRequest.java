@@ -11,6 +11,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import com.genability.client.types.Fields;
+import com.genability.client.util.EnumUtil;
 
 public abstract class AbstractRequest {
 	
@@ -85,6 +86,17 @@ public abstract class AbstractRequest {
 		}
 
 	} // end of addParam for String[]
+
+
+	protected <E extends Enum<E>> void addParam(List<NameValuePair> qparams, String paramName, E[] paramValues) {
+		
+		if(paramValues != null) {
+			
+			qparams.add(new BasicNameValuePair(paramName, EnumUtil.enumListString(paramValues)));
+			
+		}
+
+	} // end of addParam for Enum[]
 
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, DateTime paramValue) {

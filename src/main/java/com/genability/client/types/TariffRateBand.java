@@ -19,7 +19,7 @@ public class TariffRateBand {
   private String applicabilityValue;
   private BigDecimal calculationFactor;
   private BigDecimal rateAmount;
-  private String rateUnit;
+  private RateUnit rateUnit;
   private Boolean isCredit;
   private String prevUpperLimit;
   
@@ -119,11 +119,11 @@ public class TariffRateBand {
     this.rateAmount = rateAmount;
   }
   
-  public String getRateUnit() {
+  public RateUnit getRateUnit() {
     return rateUnit;
   }
   
-  public void setRateUnit(String rateUnit) {
+  public void setRateUnit(RateUnit rateUnit) {
     this.rateUnit = rateUnit;
   }
   

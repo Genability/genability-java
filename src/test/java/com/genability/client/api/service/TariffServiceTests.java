@@ -2,8 +2,11 @@ package com.genability.client.api.service;
 
 import static org.junit.Assert.*;
 
+import com.genability.client.types.CustomerClass;
 import com.genability.client.types.Response;
+import com.genability.client.types.SortOrder;
 import com.genability.client.types.Tariff;
+import com.genability.client.types.TariffType;
 import com.genability.client.api.request.GetTariffsRequest;
 import com.genability.client.api.service.TariffService;
 
@@ -47,12 +50,12 @@ public class TariffServiceTests extends BaseServiceTests {
 		
 		testCase = "Case 4 - common scenario, active residential tariffs for a zipcode";
 		request = new GetTariffsRequest();
-		request.setCustomerClasses(new String[]{Tariff.CUSTOMER_CLASS_RESIDENTIAL});
-		request.setTariffTypes(new String[]{Tariff.TARIFF_TYPE_DEFAULT, Tariff.TARIFF_TYPE_ALTERNATIVE});
+		request.setCustomerClasses(CustomerClass.RESIDENTIAL);
+		request.setTariffTypes(TariffType.DEFAULT, TariffType.ALTERNATIVE);
 		request.setEffectiveOn(DateTime.now());
 		request.setZipCode("94105");
 		request.setSortOn("tariffType");
-		request.setSortOrder(GetTariffsRequest.DESCENDING); // so default tariffs come before alternative
+		request.setSortOrder(SortOrder.DESCENDING); // so default tariffs come before alternative
 		request.setPopulateProperties(true);// so you know what properties it will take to run a calc
 		callGetTariffs(testCase, request);
 		

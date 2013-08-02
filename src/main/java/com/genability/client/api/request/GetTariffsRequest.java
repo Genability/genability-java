@@ -7,6 +7,11 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
+import com.genability.client.types.ChargeType;
+import com.genability.client.types.CustomerClass;
+import com.genability.client.types.ServiceType;
+import com.genability.client.types.TariffType;
+
 public class GetTariffsRequest extends AbstractGetNRequest implements Serializable {
 
 
@@ -43,22 +48,22 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	/**
 	 * Private member variable for CustomerClasses.
 	 */
-	private String[] customerClasses;
+	private CustomerClass[] customerClasses;
 
 	/**
 	 * Private member variable for TariffTypes.
 	 */
-	private String[] tariffTypes;
+	private TariffType[] tariffTypes;
 
 	/**
 	 * Private member variable for ServiceTypes.
 	 */
-	private String[] serviceTypes;
+	private ServiceType[] serviceTypes;
 
 	/**
 	 * Private member variable for ChargeTypes.
 	 */
-	private String[] chargeTypes;
+	private ChargeType[] chargeTypes;
 
 	/**
 	 * Private member variable for ZipCode
@@ -127,56 +132,56 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	/**
 	 * @return the customerClasses
 	 */
-	public String[] getCustomerClasses() {
+	public CustomerClass[] getCustomerClasses() {
 		return customerClasses;
 	}
 
 	/**
 	 * @param customerClasses the customerClasses to set
 	 */
-	public void setCustomerClasses(String[] customerClasses) {
+	public void setCustomerClasses(CustomerClass... customerClasses) {
 		this.customerClasses = customerClasses;
 	}
 
 	/**
 	 * @return the tariffTypes
 	 */
-	public String[] getTariffTypes() {
+	public TariffType[] getTariffTypes() {
 		return tariffTypes;
 	}
 
 	/**
 	 * @param tariffTypes the tariffTypes to set
 	 */
-	public void setTariffTypes(String[] tariffTypes) {
+	public void setTariffTypes(TariffType... tariffTypes) {
 		this.tariffTypes = tariffTypes;
 	}
 
 	/**
 	 * @return the chargeTypes
 	 */
-	public String[] getChargeTypes() {
+	public ChargeType[] getChargeTypes() {
         return chargeTypes;
     }
 
 	/**
 	 * @param chargeTypes the chargeTypes to set
 	 */
-	public void setChargeTypes(String[] chargeTypes) {
+	public void setChargeTypes(ChargeType... chargeTypes) {
         this.chargeTypes = chargeTypes;
     }
 
 	/**
 	 * @return the serviceTypes
 	 */
-	public String[] getServiceTypes() {
+	public ServiceType[] getServiceTypes() {
         return serviceTypes;
     }
 
 	/**
 	 * @param serviceTypes the serviceTypes to set
 	 */
-	public void setServiceTypes(String[] serviceTypes) {
+	public void setServiceTypes(ServiceType... serviceTypes) {
         this.serviceTypes = serviceTypes;
     }
 

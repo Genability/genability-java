@@ -25,10 +25,10 @@ public class TariffRate {
   private Territory territory;
   private JsonNode season;
   private JsonNode timeOfUse;
-  private String chargeType;
-  private String chargeClass;
-  private String chargePeriod;
-  private String transactionType;
+  private ChargeType chargeType;
+  private ChargeClass chargeClass;
+  private Period chargePeriod;
+  private TransactionType transactionType;
   private String quantityKey;
   private String applicabilityKey;
   private String variableLimitKey;
@@ -156,35 +156,35 @@ public class TariffRate {
     this.timeOfUse = timeOfUse;
   }
   
-  public String getChargeType() {
+  public ChargeType getChargeType() {
     return chargeType;
   }
   
-  public void setChargeType(String chargeType) {
+  public void setChargeType(ChargeType chargeType) {
     this.chargeType = chargeType;
   }
   
-  public String getChargeClass() {
+  public ChargeClass getChargeClass() {
     return chargeClass;
   }
   
-  public void setChargeClass(String chargeClass) {
+  public void setChargeClass(ChargeClass chargeClass) {
     this.chargeClass = chargeClass;
   }
   
-  public String getChargePeriod() {
+  public Period getChargePeriod() {
     return chargePeriod;
   }
   
-  public void setChargePeriod(String chargePeriod) {
+  public void setChargePeriod(Period chargePeriod) {
     this.chargePeriod = chargePeriod;
   }
   
-  public String getTransactionType() {
+  public TransactionType getTransactionType() {
     return transactionType;
   }
   
-  public void setTransactionType(String transactionType) {
+  public void setTransactionType(TransactionType transactionType) {
     this.transactionType = transactionType;
   }
   

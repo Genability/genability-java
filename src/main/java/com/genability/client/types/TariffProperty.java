@@ -13,7 +13,7 @@ public class TariffProperty {
   private String keyspace;
   private String description;
   private String dataType;
-  private String propertyTypes;
+  private TariffPropertyType propertyTypes;
   private String operator;
   private String propertyValue;
   private String quantityUnit;
@@ -72,11 +72,11 @@ public class TariffProperty {
     this.dataType = dataType;
   }
   
-  public String getPropertyTypes() {
+  public TariffPropertyType getPropertyTypes() {
     return propertyTypes;
   }
   
-  public void setPropertyTypes(String propertyTypes) {
+  public void setPropertyTypes(TariffPropertyType propertyTypes) {
     this.propertyTypes = propertyTypes;
   }
   
