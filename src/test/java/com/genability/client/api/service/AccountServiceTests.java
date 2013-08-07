@@ -4,10 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.genability.client.api.service.AccountService;
 import com.genability.client.types.Account;
 import com.genability.client.types.Response;
 import com.genability.client.api.request.DeleteAccountRequest;
@@ -15,21 +13,7 @@ import com.genability.client.api.request.GetAccountsRequest;
 import com.genability.client.api.request.GetAccountRequest;
 
 public class AccountServiceTests  extends BaseServiceTests {
-	
-	
-	private static AccountService accountService;
-	
-	@BeforeClass
-	public static void runBeforeClass() {
 
-		accountService = new AccountService();
-		accountService.setAppId(appId);
-		accountService.setAppKey(appKey);
-		if(restApiServer != null) accountService.setRestApiServer(restApiServer);
-		
-	}
-
-	
 	@Test
 	public void testAddAccount() {
 		

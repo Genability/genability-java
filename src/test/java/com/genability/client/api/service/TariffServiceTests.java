@@ -11,22 +11,12 @@ import com.genability.client.api.request.GetTariffsRequest;
 import com.genability.client.api.service.TariffService;
 
 import org.joda.time.DateTime;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TariffServiceTests extends BaseServiceTests {
 
-	private static TariffService tariffService;
+	private static TariffService tariffService = genabilityClient.getTariffService();
 
-	@BeforeClass
-	public static void runBeforeClass() {
-
-		tariffService = new TariffService();
-		tariffService.setAppId(appId);
-		tariffService.setAppKey(appKey);
-		if(restApiServer != null) tariffService.setRestApiServer(restApiServer);
-	}
-	
 	
 	@Test
 	public void testGetTariffs() {

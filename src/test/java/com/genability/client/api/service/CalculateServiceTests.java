@@ -14,24 +14,12 @@ import com.genability.client.api.request.GetCalculatedCostRequest;
 import com.genability.client.api.request.GetCalculationInputsRequest;
 import com.genability.client.api.service.CalculateService;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CalculateServiceTests extends BaseServiceTests {
 
-	private static CalculateService calculateService;
+	private static CalculateService calculateService = genabilityClient.getCalculateService();
 
-	@BeforeClass
-	public static void runBeforeClass() {
-
-		calculateService = new CalculateService();
-		calculateService.setAppId(appId);
-		calculateService.setAppKey(appKey);
-		if(restApiServer != null) calculateService.setRestApiServer(restApiServer);
-		
-	}
-	
-	
 	@Test
 	public void testCalculateTariff512() {
 		

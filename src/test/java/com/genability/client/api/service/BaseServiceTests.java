@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
+import com.genability.client.api.GenabilityClient;
 import com.genability.client.api.request.DeleteAccountRequest;
 import com.genability.client.api.service.AccountService;
 import com.genability.client.api.service.ProfileService;
@@ -30,15 +31,9 @@ public class BaseServiceTests {
 
 	protected Logger log = Logger.getLogger(this.getClass());
 	
-	protected static String appId = null;
-	
-	protected static String appKey = null;
-	
-	protected static String restApiServer = null;
-	
-	protected static AccountService accountService = null;
-	
-	protected static ProfileService profileService = null;
+	protected static final GenabilityClient genabilityClient;
+	protected static final AccountService accountService;
+	protected static final ProfileService profileService;
 	
 	static {
 		//
@@ -53,40 +48,32 @@ public class BaseServiceTests {
 		Properties prop = new Properties();
 		 
     	try {
-    		
     		//
     		//load the properties file from in the classpath
     		//
     		InputStream inputStream = BaseServiceTests.class.getClassLoader().getResourceAsStream("genability.properties");
     		prop.load(inputStream);
- 
-    		//
-            // get the properties and print them out
-    		//
-    		appId = prop.getProperty("appId");
-    		appKey = prop.getProperty("appKey");
-    		logger.info("appId:" + appId);
-    		logger.info("appKey:" + appKey);
-    		
-    		if(prop.containsKey("restApiServer")) {
-    			
-    			restApiServer = prop.getProperty("restApiServer");
-    			logger.info("restApiServer:" + restApiServer);
-    		}
- 
     	} catch (IOException ex) {
     		logger.error("Unable to process genability.properties", ex);
+    		throw new RuntimeException(ex);
         }
-    	
-		accountService = new AccountService();
-		accountService.setAppId(appId);
-		accountService.setAppKey(appKey);
-		if(restApiServer != null) accountService.setRestApiServer(restApiServer);
-		
-		profileService = new ProfileService();
-		profileService.setAppId(appId);
-		profileService.setAppKey(appKey);
-		if(restApiServer != null) profileService.setRestApiServer(restApiServer);
+ 
+  		//
+        // get the properties and print them out
+  		//
+  		String appId = prop.getProperty("appId");
+  		String appKey = prop.getProperty("appKey");
+  		String restApiServer = prop.getProperty("restApiServer");
+  		logger.info("appId: " + appId);
+  		logger.info("appKey: " + appKey);
+  		logger.info("restApiServer: " + restApiServer);
+ 
+  		genabilityClient = new GenabilityClient(appId, appKey);
+  		if (restApiServer != null && !restApiServer.equals("")) {
+		    genabilityClient.setRestApiServer(restApiServer);
+  		}
+  		accountService = genabilityClient.getAccountService();
+  		profileService = genabilityClient.getProfileService();
 	}
 	
 	// Helper method:  We create an account and specify a tariff as well as values
