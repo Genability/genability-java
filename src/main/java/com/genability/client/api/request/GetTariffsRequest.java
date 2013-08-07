@@ -26,6 +26,11 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	private Long lseId;
 
 	/**
+	 * Private member variable for MasterTariffId.
+	 */
+	private Long masterTariffId;
+
+	/**
 	 * Private member variable for effectiveOn.
 	 */
 	private DateTime effectiveOn;
@@ -127,6 +132,14 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	 */
 	public void setLseId(Long lseId) {
 		this.lseId = lseId;
+	}
+
+	public Long getMasterTariffId() {
+		return masterTariffId;
+	}
+
+	public void setMasterTariffId(Long masterTariffId) {
+		this.masterTariffId = masterTariffId;
 	}
 
 	/**
@@ -352,6 +365,7 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		List<NameValuePair> qparams = super.getQueryParams();
 
 		addParam(qparams,"lseId",lseId);
+		addParam(qparams,"masterTariffId",masterTariffId);
 		addParam(qparams,"effectiveOn",effectiveOn);
 		addParam(qparams,"fromDateTime",fromDateTime);
 		addParam(qparams,"toDateTime",toDateTime);
