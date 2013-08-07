@@ -3,6 +3,8 @@ package com.genability.client.api.service;
 import static org.junit.Assert.*;
 
 import com.genability.client.types.Account;
+import com.genability.client.types.ClipBy;
+import com.genability.client.types.GroupBy;
 import com.genability.client.types.Response;
 import com.genability.client.types.Profile;
 import com.genability.client.api.request.GetProfileRequest;
@@ -33,10 +35,10 @@ public class ProfileServiceTests extends BaseServiceTests {
 		GetProfileRequest request = new GetProfileRequest();
 		
 		// set a valid usageProfileId
-		request.setUsageProfileId(newProfile.getProfileId());
-		request.setGroupBy("MONTH");
-		request.setClipBy("OUTER");
-		request.setPopulateUsageData(true);
+		request.setProfileId(newProfile.getProfileId());
+		request.setGroupBy(GroupBy.MONTH);
+		request.setClipBy(ClipBy.OUTER);
+		request.setPopulateReadings(true);
 		callGetProfile("Test get one profile",request);
 		
 		cleanup(newProfile.getAccountId());

@@ -99,6 +99,17 @@ public abstract class AbstractRequest {
 	} // end of addParam for Enum[]
 
 
+	protected <E extends Enum<E>> void addParam(List<NameValuePair> qparams, String paramName, E paramValue) {
+		
+		if(paramValue != null) {
+			
+			qparams.add(new BasicNameValuePair(paramName,  paramValue.name()));
+			
+		}
+
+	} // end of addParam for Enum
+
+
 	protected void addParam(List<NameValuePair> qparams, String paramName, DateTime paramValue) {
 		
 		if(paramValue != null) {

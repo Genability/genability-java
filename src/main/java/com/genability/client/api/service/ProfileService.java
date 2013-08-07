@@ -20,8 +20,8 @@ public class ProfileService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getProfile called");
 		
 		String uri = "beta/usage/profiles";
-		if (request.getUsageProfileId() != null && request.getUsageProfileId().length() !=0) {
-			uri += "/" + request.getUsageProfileId();
+		if (request.getProfileId() != null && request.getProfileId().length() !=0) {
+			uri += "/" + request.getProfileId();
 		}
 		
 		Response<Profile> response = this.callGet(
