@@ -7,6 +7,8 @@ import org.joda.time.DateTimeZone;
 
 import com.genability.client.types.Account;
 import com.genability.client.types.CalculatedCostItem;
+import com.genability.client.types.DetailLevel;
+import com.genability.client.types.GroupBy;
 import com.genability.client.types.Response;
 import com.genability.client.types.CalculatedCost;
 import com.genability.client.types.PropertyData;
@@ -74,8 +76,8 @@ public class CalculateServiceTests extends BaseServiceTests {
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
 		request.setMasterTariffId(522l); // PGE E1 - residential tariff
-		request.setDetailLevel(GetCalculatedCostRequest.DETAIL_LEVEL_CHARGE_TYPE);
-		request.setGroupBy(GetCalculatedCostRequest.GROUP_BY_MONTH);
+		request.setDetailLevel(DetailLevel.CHARGE_TYPE);
+		request.setGroupBy(GroupBy.MONTH);
 
 		// Set the territoryId property
 		PropertyData newProp2 = new PropertyData();
@@ -139,7 +141,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
-		request.setDetailLevel("ALL");
+		request.setDetailLevel(DetailLevel.ALL);
 		
 		request.setAccountId(newAccount.getAccountId());
 				

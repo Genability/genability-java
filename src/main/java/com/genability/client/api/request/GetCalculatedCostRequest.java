@@ -8,65 +8,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.genability.client.types.DetailLevel;
+import com.genability.client.types.GroupBy;
 import com.genability.client.types.PropertyData;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
 public class GetCalculatedCostRequest extends AbstractRequest implements Serializable {
-
-	
-	/**
-	 * To request a results at a totals level.
-	 */
-	public static final String DETAIL_LEVEL_TOTAL = "TOTAL";
-	
-	/**
-	 * To request a results at a charge type level (e.g. fixed, consumption, demand).
-	 */
-	public static final String DETAIL_LEVEL_CHARGE_TYPE = "CHARGE_TYPE";
-	
-	/**
-	 * To request a results for each rate.
-	 */
-	public static final String DETAIL_LEVEL_RATE = "RATE";
-	
-	/**
-	 * To request a results for each rate buck ... i.e. all details.
-	 * This is the default response when running a calculation so you don't actually
-	 * need to pass this argument in.
-	 */
-	public static final String DETAIL_LEVEL_ALL = "ALL";
-	
-	
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * annually.
-	 */
-	public static final String GROUP_BY_YEAR = "YEAR";
-
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * monthly.
-	 */
-	public static final String GROUP_BY_MONTH = "MONTH";
-
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * daily.
-	 */
-	// coming soon - public static final String GROUP_BY_DAY = "DAY";
-
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * hourly.
-	 */
-	// coming soon - public static final String GROUP_BY_HOUR = "HOUR";
-	
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * into quarter-hour increments.
-	 */
-	// coming soon - public static final String GROUP_BY_QTRHOUR = "QTRHOUR";
 
 
 	/**
@@ -104,14 +52,14 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * Possible values are: ALL, TOTAL, CHARGE_TYPE, RATE
 	 * Default is ALL if not specified.
 	 */
-	private String detailLevel;
+	private DetailLevel detailLevel;
 
 	/**
 	 * Private member variable groupBy
 	 * Possible values are: YEAR, MONTH, etc
 	 * Default is no grouping if not specified.
 	 */
-	private String groupBy;
+	private GroupBy groupBy;
 	
 	/**
 	 * Private member variable estimate
@@ -230,7 +178,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * @return the detailLevel
 	 */
 	@JsonInclude(Include.NON_NULL)
-	public String getDetailLevel() {
+	public DetailLevel getDetailLevel() {
 		return detailLevel;
 	}
 
@@ -238,7 +186,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * @param detailLevel
 	 *            the detailLevel to set
 	 */
-	public void setDetailLevel(String detailLevel) {
+	public void setDetailLevel(DetailLevel detailLevel) {
 		this.detailLevel = detailLevel;
 	}
 
@@ -246,7 +194,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * @return the groupBy
 	 */
 	@JsonInclude(Include.NON_NULL)
-	public String getGroupBy() {
+	public GroupBy getGroupBy() {
 		return groupBy;
 	}
 
@@ -254,7 +202,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * @param groupBy
 	 *            the groupBy to set
 	 */
-	public void setGroupBy(String groupBy) {
+	public void setGroupBy(GroupBy groupBy) {
 		this.groupBy = groupBy;
 	}
 
