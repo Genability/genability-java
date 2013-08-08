@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Represents a Usage Profile.
@@ -56,11 +55,6 @@ public class Profile implements Serializable {
 	 * private member to hold list of <code>ReadingDataSummary</code>
 	 */
 	private List<ReadingDataSummary> readingDataSummaries;
-
-	/**
-	 * private member to hold list of <code>UsageData</code>
-	 */
-	private List<? extends UsageData> usageData;
 	
 	/**
 	 * private member to hold list of <code>ReadingData</code>
@@ -171,7 +165,6 @@ public class Profile implements Serializable {
 	/**
 	 * Access method for ReadingData.
 	 */
-	@JsonIgnore
 	public List<ReadingData> getReadingData() {
 		return readingData;
 	}
@@ -179,25 +172,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator method for ReadingData.
 	 */
-	@JsonProperty("readingData")
 	public void setReadingData(List<ReadingData> readingData) {
 		this.readingData = readingData;
-	}
-
-	/**
-	 * Access method for UsageData.
-	 */
-	@JsonProperty("readingData")
-	public List<? extends UsageData> getUsageData() {
-		return usageData;
-	}
-
-	/**
-	 * Mutator method for UsageData.
-	 */
-	@JsonIgnore
-	public void setUsageData(List<? extends UsageData> usageData) {
-		this.usageData = usageData;
 	}
 	
 	/**
