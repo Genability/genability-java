@@ -72,7 +72,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	public ReadingData() {
 		// no-op
 		
-		this.dataType = "DECIMAL";
+		this.dataType = DataType.DECIMAL;
 
 	} // end of constructor
 
@@ -264,10 +264,8 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	 * DataType for ReadingData and BillingData is always a Decimal.
 	 */
 	@Override 
-	public void setDataType(String dataType) {
-		
-		this.dataType = dataType;
-		
+	@JsonIgnore
+	public void setDataType(DataType dataType) {
 	}
 
 	/**
@@ -275,7 +273,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	 */
 	@Override 
 	@JsonIgnore
-	public String getDataType() {
+	public DataType getDataType() {
 		
 		return dataType;
 		

@@ -22,7 +22,7 @@ public class CalculatedCostItem {
     
     private DateTime toDateTime;
     
-    private String rateType;
+    private RateUnit rateType;
     
     private String quantityKey;
     
@@ -121,14 +121,14 @@ public class CalculatedCostItem {
 	/**
 	 * @return the rateType
 	 */
-	public String getRateType() {
+	public RateUnit getRateType() {
 		return rateType;
 	}
 
 	/**
 	 * @param rateType the rateType to set
 	 */
-	public void setRateType(String rateType) {
+	public void setRateType(RateUnit rateType) {
 		this.rateType = rateType;
 	}
 

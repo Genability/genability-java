@@ -27,18 +27,7 @@ public class PropertyData {
 	
 	protected BigDecimal accuracy;
 	
-	/*
-	 * Possible values for dataType are:
-	 * CHOICE
-	 * STRING
-	 * BOOLEAN
-	 * DATE
-	 * DECIMAL
-	 * INTEGER
-	 * FORMULA
-	 * LOOKUP
-	 */
-	protected String dataType;
+	protected DataType dataType;
 	
 	public PropertyData() {
 		//constructor
@@ -148,11 +137,11 @@ public class PropertyData {
 		return accuracy;
 	}
 	
-	public void setDataType(String dataType) {
+	public void setDataType(DataType dataType) {
 		this.dataType = dataType;
 	}
 
-	public String getDataType() {
+	public DataType getDataType() {
 		return dataType;
 	}
 }
