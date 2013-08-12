@@ -43,6 +43,11 @@ public class GetTerritoriesRequest extends AbstractGetNRequest implements Serial
 	private Boolean populateItems;
 
 	/**
+	 * Private member variable for populating Territory Lses.
+	 */
+	private Boolean populateLses;
+
+	/**
 	 * @return the lseId
 	 */
 	public Long getLseId() {
@@ -126,12 +131,27 @@ public class GetTerritoriesRequest extends AbstractGetNRequest implements Serial
 		this.populateItems = populateItems;
 	}
 
+	/**
+	 * @return the populateLses
+	 */
+	public Boolean getPopulateLses() {
+		return populateLses;
+	}
+
+	/**
+	 * @param populateLses the populateLses to set
+	 */
+	public void setPopulateLses(Boolean populateLses) {
+		this.populateLses = populateLses;
+	}
+
 	@Override
 	public List<NameValuePair> getQueryParams() {
 
 		List<NameValuePair> qparams = super.getQueryParams();
 
 		addParam(qparams,"populateItems",populateItems);
+		addParam(qparams,"populateLses",populateLses);
 		addParam(qparams,"lseId",lseId);
 		addParam(qparams,"masterTariffId",masterTariffId);
 		addParam(qparams,"containsItemType",containsItemType);
