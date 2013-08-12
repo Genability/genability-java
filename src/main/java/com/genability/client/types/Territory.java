@@ -2,7 +2,11 @@ package com.genability.client.types;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.genability.client.api.service.TerritoryType;
+import com.genability.client.util.EnumUtil;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Territory {
@@ -38,7 +42,7 @@ public class Territory {
 	/**
 	 * private member variable for ItemTypes.
 	 */
-	private String itemTypes;
+	private TerritoryType[] itemTypes;
 
 	/**
 	 * private member variable for UsageTypes.
@@ -133,15 +137,31 @@ public class Territory {
 	/**
 	 * @return the territoryTypes
 	 */
-	public String getItemTypes() {
+	@JsonIgnore
+	public TerritoryType[] getItemTypes() {
 		return itemTypes;
 	}
 
 	/**
 	 * @param territoryTypes the territoryTypes to set
 	 */
-	public void setItemTypes(String itemTypes) {
+	public void setItemTypes(TerritoryType[] itemTypes) {
 		this.itemTypes = itemTypes;
+	}
+
+	/**
+	 * @return the territoryTypes
+	 */
+	@JsonProperty("itemTypes")
+	public String getItemTypesAsString() {
+		return EnumUtil.enumListString(itemTypes);
+	}
+
+	/**
+	 * @param territoryTypes the territoryTypes to set
+	 */
+	public void setItemTypesAsString(String itemTypes) {
+		this.itemTypes = EnumUtil.parseEnumList(itemTypes, TerritoryType.class);
 	}
 
 	/**
@@ -198,13 +218,6 @@ public class Territory {
 	 */
 	public void setDeregCandi(Boolean deregCandi) {
 		this.deregCandi = deregCandi;
-	}
-
-	/**
-	 * @return the restType
-	 */
-	public static String getRestType() {
-		return REST_TYPE;
 	}
 
 }
