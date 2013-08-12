@@ -26,9 +26,15 @@ public class Account {
 	private String customerOrgId;
 
 	private String customerOrgName;
+	
+	private String owner;
 
-	private String status;
+	private AccountStatus status;
+	
+	private AccountType type;
 
+	private Address address;
+	
 	private List<Tariff> tariffs;
 	
 	private Map<String, PropertyData> properties;
@@ -119,20 +125,44 @@ public class Account {
 		this.customerOrgName = customerOrgName;
 	}
 
+	public String getOwner() {
+      return owner;
+    }
+	
+	public void setOwner(String owner) {
+      this.owner = owner;
+    }
+	
 	/**
 	 * @return the status
 	 */
-	public String getStatus() {
+	public AccountStatus getStatus() {
 		return status;
 	}
 
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(String status) {
+	public void setStatus(AccountStatus status) {
 		this.status = status;
 	}
 
+	public AccountType getType() {
+      return type;
+    }
+	
+	public void setType(AccountType type) {
+      this.type = type;
+    }
+	
+	public Address getAddress() {
+      return address;
+    }
+	
+	public void setAddress(Address address) {
+      this.address = address;
+    }
+	
 	public Map<String, PropertyData> getProperties() {
 		return properties;
 	}
