@@ -8,6 +8,7 @@ import com.genability.client.types.Tariff;
 
 public class TariffService extends BaseService {
 
+    private static final TypeReference<Response<Tariff>> TARIFF_RESPONSE_TYPEREF = new TypeReference<Response<Tariff>>() {};
 	
 	/**
 	 * Calls the REST service to get a list of tariffs based on the arguments passed in.
@@ -23,7 +24,7 @@ public class TariffService extends BaseService {
 		Response<Tariff> response = this.callGet(
 				"public/tariffs", 
 				request.getQueryParams(),
-				new TypeReference<Response<Tariff>>() { });
+				TARIFF_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getTariffs completed");
 		
@@ -44,7 +45,7 @@ public class TariffService extends BaseService {
 		Response<Tariff> response = this.callGet(
 				"public/tariffs", 
 				request.getQueryParams(),
-				new TypeReference<Response<Tariff>>() { });
+				TARIFF_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getTariff completed");
 		

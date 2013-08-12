@@ -9,7 +9,8 @@ import com.genability.client.types.Profile;
 
 public class ProfileService extends BaseService {
 	
-	
+    private static final TypeReference<Response<Profile>> PROFILE_RESPONSE_TYPEREF = new TypeReference<Response<Profile>>() {};
+
 	/**
 	 * Calls the REST service to get a Profile based on the arguments passed in.
 	 * 
@@ -27,7 +28,7 @@ public class ProfileService extends BaseService {
 		Response<Profile> response = this.callGet(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Profile>>() { });
+				PROFILE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getProfile completed");
 		
@@ -49,7 +50,7 @@ public class ProfileService extends BaseService {
 		Response<Profile> response = this.callGet(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Profile>>() { });
+				PROFILE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getProfiles completed");
 		
@@ -64,7 +65,7 @@ public class ProfileService extends BaseService {
 		Response<Profile> response = this.callPost(
 				"beta/usage/profiles", 
 				profile,
-				new TypeReference<Response<Profile>>() { });
+				PROFILE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("addProfile completed");
 		

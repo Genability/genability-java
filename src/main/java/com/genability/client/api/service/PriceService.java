@@ -7,6 +7,7 @@ import com.genability.client.types.Response;
 
 public class PriceService extends BaseService {
 
+    private static final TypeReference<Response<Price>> PRICE_RESPONSE_TYPEREF = new TypeReference<Response<Price>>() {};
 	
 	/**
 	 * Calls the REST service to get a Profile based on the arguments passed in.
@@ -25,7 +26,7 @@ public class PriceService extends BaseService {
 		Response<Price> response = this.callGet(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Price>>() { });
+				PRICE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getPrice completed");
 		

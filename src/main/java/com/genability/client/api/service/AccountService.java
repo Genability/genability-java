@@ -9,6 +9,7 @@ import com.genability.client.api.request.GetAccountRequest;
 
 public class AccountService extends BaseService {
 
+    private static final TypeReference<Response<Account>> ACCOUNT_RESPONSE_TYPEREF = new TypeReference<Response<Account>>() {};
 	
 	public Response<Account> getAccounts(GetAccountsRequest request)
 	{
@@ -17,7 +18,7 @@ public class AccountService extends BaseService {
 		Response<Account> response = this.callGet(
 				"beta/accounts", 
 				request.getQueryParams(),
-				new TypeReference<Response<Account>>() { });
+				ACCOUNT_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getAccounts completed");
 		
@@ -38,7 +39,7 @@ public class AccountService extends BaseService {
 		Response<Account> response = this.callGet(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Account>>() { });
+				ACCOUNT_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getAccount completed");
 		
@@ -55,7 +56,7 @@ public class AccountService extends BaseService {
 		Response<Account> response = this.callPost(
 				"beta/accounts", 
 				account,
-				new TypeReference<Response<Account>>() { });
+				ACCOUNT_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("addAccount completed");
 		
@@ -76,7 +77,7 @@ public class AccountService extends BaseService {
 		Response<Account> response = this.callDelete(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Account>>() { });
+				ACCOUNT_RESPONSE_TYPEREF);
 		if(log.isDebugEnabled()) log.debug("deleteAccount completed");
 		
 		return response;

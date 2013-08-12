@@ -11,7 +11,9 @@ import com.genability.client.types.Territory;
 
 public class LseService extends BaseService {
 	
-	
+    private static final TypeReference<Response<Territory>> TERRITORY_RESPONSE_TYPEREF = new TypeReference<Response<Territory>>() {};
+    private static final TypeReference<Response<Lse>> LSE_RESPONSE_TYPEREF = new TypeReference<Response<Lse>>() {};
+
 	/**
 	 * Calls the REST service to get a list of tariffs based on the arguments passed in.
 	 * 
@@ -24,7 +26,7 @@ public class LseService extends BaseService {
 		Response<Territory> response = this.callGet(
 				"public/territories", 
 				request.getQueryParams(),
-				new TypeReference<Response<Territory>>() { });
+				TERRITORY_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getTerritories completed");
 		
@@ -49,7 +51,7 @@ public class LseService extends BaseService {
 		Response<Lse> response = this.callGet(
 				uri, 
 				request.getQueryParams(),
-				new TypeReference<Response<Lse>>() { });
+				LSE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getLse completed");
 		
@@ -69,7 +71,7 @@ public class LseService extends BaseService {
 		Response<Lse> response = this.callGet(
 				"public/lses", 
 				request.getQueryParams(),
-				new TypeReference<Response<Lse>>() { });
+				LSE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getLses completed");
 		

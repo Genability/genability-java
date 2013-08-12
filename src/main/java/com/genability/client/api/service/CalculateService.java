@@ -9,6 +9,8 @@ import com.genability.client.types.PropertyData;
 
 public class CalculateService extends BaseService {
 	
+    private static final TypeReference<Response<CalculatedCost>> CALCULATEDCOST_RESPONSE_TYPEREF = new TypeReference<Response<CalculatedCost>>() {};
+    private static final TypeReference<Response<PropertyData>> PROPERTYDATA_RESPONSE_TYPEREF = new TypeReference<Response<PropertyData>>() {};
 	
 	/**
 	 * Calls the REST service to run a calculation
@@ -35,7 +37,7 @@ public class CalculateService extends BaseService {
 		Response<CalculatedCost> response = this.callPost(
 				uri,
 				request,
-				new TypeReference<Response<CalculatedCost>>() { });
+				CALCULATEDCOST_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getCalculatedCost completed");
 		
@@ -64,7 +66,7 @@ public class CalculateService extends BaseService {
 			Response<PropertyData> response = this.callGet(
 					uri,
 					request.getQueryParams(),
-					new TypeReference<Response<PropertyData>>() { });
+					PROPERTYDATA_RESPONSE_TYPEREF);
 			
 			if(log.isDebugEnabled()) log.debug("getCalculationInputs completed");
 			
