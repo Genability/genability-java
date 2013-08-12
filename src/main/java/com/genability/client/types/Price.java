@@ -15,7 +15,7 @@ public class Price {
 	
 	private Long tariffId;
 
-	private String chargeType;
+	private ChargeType chargeType;
 
 	private String quantityKey;
 
@@ -43,20 +43,11 @@ public class Price {
 		this.tariffId = tariffId;
 	}
 
-	/**
-	 * Possible values:
-     *   FIXED_PRICE - a fixed charge for the period
-     *   CONSUMPTION_BASED - based on quantity used (e.g. kW/h),
-     *   DEMAND_BASED - based on the peak demand (e.g. kW)
-     *   QUANTITY - a rate per number of items (e.g. $5 per street light)
-     *   FORMULA - a rate that has a specific or custom formula
-     *   MINIMUM - a minimum amount that the LSE will charge you, regardless of the other charges
-	 */
-	public String getChargeType() {
+	public ChargeType getChargeType() {
         return chargeType;
     }
 
-	public void setChargeType(String chargeType) {
+	public void setChargeType(ChargeType chargeType) {
         this.chargeType = chargeType;
     }
 
