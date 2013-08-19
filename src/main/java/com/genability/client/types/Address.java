@@ -1,7 +1,12 @@
 package com.genability.client.types;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonInclude(Include.NON_NULL)
 public class Address {
   
   private String addressString;
@@ -12,8 +17,8 @@ public class Address {
   private String state;
   private String zipCode;
   private String country;
-  private double latitude;
-  private double longitude;
+  private Double latitude;
+  private Double longitude;
   
   public String getAddressString() {
     return addressString;
@@ -81,20 +86,20 @@ public class Address {
   }
   
   @JsonProperty("lat")
-  public double getLatitude() {
+  public Double getLatitude() {
     return latitude;
   }
   
-  public void setLatitude(double latitude) {
+  public void setLatitude(Double latitude) {
     this.latitude = latitude;
   }
   
   @JsonProperty("lon")
-  public double getLongitude() {
+  public Double getLongitude() {
     return longitude;
   }
   
-  public void setLongitude(double longitude) {
+  public void setLongitude(Double longitude) {
     this.longitude = longitude;
   }
 

@@ -1,5 +1,6 @@
 package com.genability.client.types;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -248,4 +249,11 @@ public class TariffRate {
     this.rateBands = rateBands;
   }
   
+  public void addRateBand(TariffRateBand rateBand) {
+    if (this.rateBands == null) {
+      this.rateBands = new ArrayList<TariffRateBand>();
+    }
+    this.rateBands.add(rateBand);
+  }
+
 }
