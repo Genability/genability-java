@@ -55,9 +55,9 @@ public class CalculateServiceTests extends BaseServiceTests {
 		newProp2.setDataValue("Primary");
 		newProp2.setKeyName("connectionType");
 		
-		request.addInput(newProp);
-		request.addInput(newProp2);
-		request.addInput(newProp3);
+		request.addTariffInput(newProp);
+		request.addTariffInput(newProp2);
+		request.addTariffInput(newProp3);
 		
 		callRunCalc("Test for master tariff 512",request);
 		
@@ -86,7 +86,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 		newProp2.setDataValue("3534"); //Baseline Region P - 3534
 		newProp2.setKeyName("territoryId");
 		
-		request.addInput(newProp2);
+		request.addTariffInput(newProp2);
 		
 		//
 		// Create consumption inputs for each hour of the day, first for 
@@ -105,7 +105,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 				weekdayProp.setDataValue("0.5");
 				weekdayProp.setKeyName("consumption");
 				
-				request.addInput(weekdayProp);
+				request.addTariffInput(weekdayProp);
 	
 				PropertyData weekendProp = new PropertyData();
 				weekendProp.setFromDateTime(fromDateTime);
@@ -114,7 +114,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 				weekendProp.setDataValue("0.5");
 				weekendProp.setKeyName("consumption");
 				
-				request.addInput(weekendProp);
+				request.addTariffInput(weekendProp);
 				
 				propertyStartDateTime = propertyStartDateTime.plusMonths(1);
 				
@@ -151,7 +151,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 		newProp2.setDataValue(newAccount.getAccountId());
 		newProp2.setKeyName("accountId");
 		
-		request.addInput(newProp2);
+		request.addTariffInput(newProp2);
 		
 		callRunCalc("Test for calculateForAccount",request);
 		

@@ -7,13 +7,15 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.genability.client.types.DetailLevel;
 import com.genability.client.types.GroupBy;
 import com.genability.client.types.PropertyData;
+import com.genability.client.types.TariffRate;
+
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
+@JsonInclude(Include.NON_NULL)
 public class GetCalculatedCostRequest extends AbstractRequest implements Serializable {
 
 
@@ -45,7 +47,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	/**
 	 * Private member variable Inputs
 	 */
-	private List<PropertyData> inputs;
+	private List<PropertyData> tariffInputs;
 
 	/**
 	 * Private member variable detailLevel
@@ -76,6 +78,10 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 */
 	private String providerAccountId;
 	
+	private Boolean betaPopulateAssumptions;
+	
+	private List<TariffRate> rateInputs;
+
 	/**
 	 * Constructor to initialize instance
 	 */
@@ -228,32 +234,54 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * 
 	 * @return inputs
 	 */
-	@JsonProperty("tariffInputs")
-	public List<PropertyData> getInputs() {
-		return inputs;
+	public List<PropertyData> getTariffInputs() {
+		return tariffInputs;
 	}
 
 	/**
 	 * Mutator used to set the value of tariffInputs
 	 * 
-	 * @param propertyDatas
+	 * @param tariffInputs
 	 */
-	public void setInputs(List<PropertyData> propertyDatas) {
-		inputs = propertyDatas;
+	public void setTariffInputs(List<PropertyData> tariffInputs) {
+		this.tariffInputs = tariffInputs;
 	}
 
 	/**
 	 * Helper method for adding a PropertyData entry into the collection
 	 * of inputs.
 	 * 
-	 * @param input
+	 * @param tariffInput
 	 */
-	public void addInput(PropertyData input) {
-		if (inputs == null || inputs.size() == 0) {
-			inputs = new ArrayList<PropertyData>();
+	public void addTariffInput(PropertyData tariffInput) {
+		if (tariffInputs == null) {
+			tariffInputs = new ArrayList<PropertyData>();
 		}
-		inputs.add(input);
+		tariffInputs.add(tariffInput);
 	}
+	
+	public List<TariffRate> getRateInputs() {
+        return rateInputs;
+    }
+	
+	public void setRateInputs(List<TariffRate> rateInputs) {
+        this.rateInputs = rateInputs;
+    }
+	
+	public void addRateInput(TariffRate rateInput) {
+		if (rateInputs == null) {
+			rateInputs = new ArrayList<TariffRate>();
+		}
+		rateInputs.add(rateInput);
+	}
+	
+	public Boolean getBetaPopulateAssumptions() {
+        return betaPopulateAssumptions;
+    }
+	
+	public void setBetaPopulateAssumptions(Boolean betaPopulateAssumptions) {
+        this.betaPopulateAssumptions = betaPopulateAssumptions;
+    }
 	
 	@Override
 	@JsonIgnore
