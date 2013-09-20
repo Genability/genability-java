@@ -77,6 +77,11 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * private member variable for providerAccountId
 	 */
 	private String providerAccountId;
+
+	/**
+	 * Private member variable billingPeriod
+	 */
+	private Boolean billingPeriod;
 	
 	private Boolean betaPopulateAssumptions;
 	
@@ -275,6 +280,14 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		rateInputs.add(rateInput);
 	}
 	
+	public Boolean getBillingPeriod() {
+      return billingPeriod;
+    }
+
+	public void setBillingPeriod(Boolean billingPeriod) {
+      this.billingPeriod = billingPeriod;
+    }
+
 	public Boolean getBetaPopulateAssumptions() {
         return betaPopulateAssumptions;
     }
