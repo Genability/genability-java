@@ -13,9 +13,10 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.genability.client.api.GenabilityClient;
 import com.genability.client.api.request.DeleteAccountRequest;
@@ -29,7 +30,7 @@ import com.genability.client.types.Tariff;
 
 public class BaseServiceTests {
 
-	protected Logger log = Logger.getLogger(this.getClass());
+	protected Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	protected static final GenabilityClient genabilityClient;
 	protected static final AccountService accountService;
@@ -40,7 +41,7 @@ public class BaseServiceTests {
 		// Very simple configuration of logging to console.
 		//
 		BasicConfigurator.configure();
-		Logger logger = Logger.getLogger(BaseServiceTests.class);
+		Logger logger = LoggerFactory.getLogger(BaseServiceTests.class);
 		
 		//
 		// Very simple configuration of API keys etc.
