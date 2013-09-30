@@ -25,6 +25,9 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	public static final String KWH_UNIT = "kWh";
 
 	public static final String KW_UNIT = "kW";
+
+	public static final String KVA_UNIT = "kVA";
+
 	/**
      * 
      */
@@ -278,6 +281,11 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 		return dataType;
 		
 	}
+
+    @Override
+    public String toString() {
+        return "ReadingData [startTime=" + new DateTime(startTime) + ", endTime=" + new DateTime(endTime) + ", quantityUnit=" + quantityUnit + ", quantityValue=" + quantityValue + "]";
+    }
 
 } // end of class ReadingData
 
