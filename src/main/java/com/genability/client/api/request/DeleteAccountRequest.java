@@ -35,6 +35,12 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 	private String providerOrgId;
 
 	/**
+	 * private field hardDelete
+	 * -- unpublished functionality --
+	 */
+	private Boolean hardDelete;
+
+	/**
 	 * @return the accountId
 	 */
 	public String getAccountId() {
@@ -53,6 +59,10 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 	 */
 	public String getProviderOrgId() {
 		return providerOrgId;
+	}
+
+	public Boolean getHardDelete() {
+	    return hardDelete;
 	}
 
 	/**
@@ -82,6 +92,17 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 		this.providerOrgId = providerOrgId;
 	}
 
+	/**
+	 * @param hardDelete
+	 * 
+	 * If true, fully delete the account,
+	 * otherwise the account just has its
+	 * status changed to DELETED.
+	 */
+	public void setHardDelete(Boolean hardDelete) {
+	    this.hardDelete = hardDelete;
+	}
+
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
@@ -89,6 +110,7 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 		
 		addParam(qparams,"providerAccountId", providerAccountId);
 		addParam(qparams,"providerOrgId",providerOrgId);
+		addParam(qparams,"hardDelete",hardDelete);
 		
 		return qparams;
 		
