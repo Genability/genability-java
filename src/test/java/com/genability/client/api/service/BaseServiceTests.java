@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.BasicConfigurator;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -40,7 +39,6 @@ public class BaseServiceTests {
 		//
 		// Very simple configuration of logging to console.
 		//
-		BasicConfigurator.configure();
 		Logger logger = LoggerFactory.getLogger(BaseServiceTests.class);
 		
 		//
