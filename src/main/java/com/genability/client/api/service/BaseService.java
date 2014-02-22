@@ -6,8 +6,6 @@ import java.util.List;
 import java.nio.charset.Charset;
 import java.io.UnsupportedEncodingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -26,9 +24,13 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.genability.client.api.request.BulkUploadRequest;
 import com.genability.client.types.Response;
 
@@ -38,7 +40,7 @@ public class BaseService {
 	/**
 	 * Protected member of logger
 	 */
-	protected final Log log = LogFactory.getLog(this.getClass());
+	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * Protected member of URL of the server to call
@@ -58,8 +60,14 @@ public class BaseService {
 	/**
 	 * Private member holding the Jackson Object Mapper (for JSON conversions).
 	 */
-	private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper mapper;
 	
+
+	public BaseService() {
+	    mapper = new ObjectMapper();
+	    mapper.registerModule(new JodaModule());
+	    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    }
 
 
 	/**
@@ -112,9 +120,9 @@ public class BaseService {
 	 * @param resultTypeReference
 	 * @return
 	 */
-	protected Response<?> callGet(String endpointPath, List<NameValuePair> queryParams, TypeReference<?> resultTypeReference) {
+	protected <T extends Response<R>, R> T callGet(String endpointPath, List<NameValuePair> queryParams, TypeReference<T> resultTypeReference) {
 
-		Response<?> restResponse = null;
+		T restResponse = null;
 
 		try {
 
@@ -169,9 +177,9 @@ public class BaseService {
 	 * @param resultTypeReference
 	 * @return
 	 */
-	protected Response<?> callPost(String endpointPath, final Object requestPayload, TypeReference<?> resultTypeReference) {
+	protected <T extends Response<R>, R> T callPost(String endpointPath, final Object requestPayload, TypeReference<T> resultTypeReference) {
 		
-		Response<?> restResponse = null;
+		T restResponse = null;
 
 		try {
 
@@ -189,7 +197,6 @@ public class BaseService {
 			// Convert the object to a JSON request body.
 			//
 			postRequest.addHeader("Content-Type", "application/json");
-			@SuppressWarnings("deprecation")
 			ContentProducer cp = new ContentProducer() {
 				
 				@Override
@@ -199,7 +206,6 @@ public class BaseService {
 					
 			    }
 			};
-			@SuppressWarnings("deprecation")
 			HttpEntity entity = new EntityTemplate(cp);
 			postRequest.setEntity(entity);
 
@@ -234,9 +240,9 @@ public class BaseService {
 	 * This method is used to upload large datasets, typically CSV or XML files.
 	 * The request object passed in contains the File to upload.
 	 */
-	public Response<?> callFileUpload(String endpointPath, BulkUploadRequest request, TypeReference<?> resultTypeReference) {
+	public <T extends Response<R>, R> T callFileUpload(String endpointPath, BulkUploadRequest request, TypeReference<T> resultTypeReference) {
 		
-		Response<?> restResponse = null;
+		T restResponse = null;
 
 		String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
 
@@ -285,9 +291,9 @@ public class BaseService {
 	 * @param resultTypeReference
 	 * @return
 	 */
-	protected Response<?> callDelete(String endpointPath, List<NameValuePair> queryParams, TypeReference<?> resultTypeReference) {
+	protected <T extends Response<R>, R> T callDelete(String endpointPath, List<NameValuePair> queryParams, TypeReference<T> resultTypeReference) {
 
-		Response<?> restResponse = null;
+		T restResponse = null;
 
 		try {
 
@@ -333,17 +339,5 @@ public class BaseService {
 		return restResponse;
 		
 	} // end of callGet	
-	
-	
-	/**
-	 * Helps build the credentials for the request.  This is only needed when
-	 * passing in creds on the query string.  By default the examples here 
-	 * use the Basic Authorization header.
-	 */
-	private String getQueryStringCredentials() {
-		
-		return "appId=" + appId + "&appKey=" + appKey;
-
-	}
 
 }

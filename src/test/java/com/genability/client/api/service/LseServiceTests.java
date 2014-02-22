@@ -1,4 +1,4 @@
-package com.genability.test.client.api.service;
+package com.genability.client.api.service;
 
 import static org.junit.Assert.*;
 
@@ -7,23 +7,12 @@ import com.genability.client.types.Territory;
 import com.genability.client.api.request.GetTerritoriesRequest;
 import com.genability.client.api.service.LseService;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class LseServiceTests extends BaseServiceTests {
 
-	private static LseService lseService;
+	private static LseService lseService = genabilityClient.getLseService();
 
-	@BeforeClass
-	public static void runBeforeClass() {
-
-		lseService = new LseService();
-		lseService.setAppId(appId);
-		lseService.setAppKey(appKey);
-		if(restApiServer != null) lseService.setRestApiServer(restApiServer);
-	}
-	
-	
 	@Test
 	public void testGetTerritories() {
 		

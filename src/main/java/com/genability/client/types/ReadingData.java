@@ -3,11 +3,13 @@ package com.genability.client.types;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * This class represents a reading of a measurement. It has a start time and an
@@ -23,6 +25,9 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	public static final String KWH_UNIT = "kWh";
 
 	public static final String KW_UNIT = "kW";
+
+	public static final String KVA_UNIT = "kVA";
+
 	/**
      * 
      */
@@ -70,7 +75,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	public ReadingData() {
 		// no-op
 		
-		this.dataType = "DECIMAL";
+		this.dataType = DataType.DECIMAL;
 
 	} // end of constructor
 
@@ -177,7 +182,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	/**
 	 * Access method for TimeAccuracy.
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public Integer getTimeAccuracy() {
 		return timeAccuracy;
 	}
@@ -219,14 +224,14 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	/**
 	 * Mutator for QuantityValue.
 	 */
-	public void setQuantityValue(BigDecimal quantityValue_) {
-		this.quantityValue = quantityValue_;
+	public void setQuantityValue(BigDecimal quantityValue) {
+		this.quantityValue = quantityValue;
 	}
 
 	/**
 	 * Access method for QuantityAccuracy.
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public BigDecimal getQuantityAccuracy() {
 		return accuracy;
 	}
@@ -262,10 +267,8 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	 * DataType for ReadingData and BillingData is always a Decimal.
 	 */
 	@Override 
-	public void setDataType(String dataType_) {
-		
-		this.dataType = dataType_;
-		
+	@JsonIgnore
+	public void setDataType(DataType dataType) {
 	}
 
 	/**
@@ -273,11 +276,16 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	 */
 	@Override 
 	@JsonIgnore
-	public String getDataType() {
+	public DataType getDataType() {
 		
 		return dataType;
 		
 	}
+
+    @Override
+    public String toString() {
+        return "ReadingData [startTime=" + new DateTime(startTime) + ", endTime=" + new DateTime(endTime) + ", quantityUnit=" + quantityUnit + ", quantityValue=" + quantityValue + "]";
+    }
 
 } // end of class ReadingData
 

@@ -1,11 +1,13 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
+
+import com.genability.client.types.ClipBy;
+import com.genability.client.types.GroupBy;
 
 public class GetProfileRequest extends AbstractRequest implements Serializable{
 
@@ -14,52 +16,8 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-		
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * annually.
-	 */
-	public static final String GROUP_BY_YEAR = "YEAR";
 
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * monthly.
-	 */
-	public static final String GROUP_BY_MONTH = "MONTH";
-
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * daily.
-	 */
-	public static final String GROUP_BY_DAY = "DAY";
-
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * hourly.
-	 */
-	public static final String GROUP_BY_HOUR = "HOUR";
-	
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * into quarter-hour increments.
-	 */
-	public static final String GROUP_BY_QTRHOUR = "QTRHOUR";
-	
-	
-	public static final String CLIP_OUTER = "OUTER";
-	
-	
-	public static final String CLIP_INNER = "INNER";
-	
-	
-	public static final String CLIP_NONE = "NONE";
-	
-	
-	public static long QuaterHourMillis = 900000;
-	
-	public static long HourMillis = 3600000;
-	
-	private String usageProfileId;
+	private String profileId;
 
 	/**
 	 * private member variable for FromDate
@@ -74,7 +32,7 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	/**
 	 * private member variable for PopulateReadingdata
 	 */
-	private Boolean populateUsageData;
+	private Boolean populateReadings;
 
 	/**
 	 * private member variable for deriveDemand
@@ -84,20 +42,20 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	/**
 	 * Private member holding optional group-by argument.
 	 */
-	private String groupBy;
+	private GroupBy groupBy;
 
 	/**
 	 * Private member holding optional clip-by argument.
 	 */
-	private String clipBy;
+	private ClipBy clipBy;
 
 
-	public String getUsageProfileId() {
-		return usageProfileId;
+	public String getProfileId() {
+		return profileId;
 	}
 
-	public void setUsageProfileId(String usageProfileId) {
-		this.usageProfileId = usageProfileId;
+	public void setProfileId(String profileId) {
+		this.profileId = profileId;
 	}
 
 	/**
@@ -133,16 +91,16 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	/**
 	 * @return the populateReadingData
 	 */
-	public Boolean getPopulateUsageData() {
-		return populateUsageData;
+	public Boolean getPopulateReadings() {
+		return populateReadings;
 	}
 
 	/**
 	 * @param populateReadingData
 	 *            the populateReadingData to set
 	 */
-	public void setPopulateUsageData(Boolean populateUsageData) {
-		this.populateUsageData = populateUsageData;
+	public void setPopulateReadings(Boolean populateReadings) {
+		this.populateReadings = populateReadings;
 	}
 	
 	/**
@@ -160,38 +118,30 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 		this.deriveDemand = deriveDemand;
 	}
 
-	public String getGroupBy() {
+	public GroupBy getGroupBy() {
 		return groupBy;
 	}
 
-	public void setGroupBy(String groupBy) {
+	public void setGroupBy(GroupBy groupBy) {
 		this.groupBy = groupBy;
 	}
 
-	public String getClipBy() {
+	public ClipBy getClipBy() {
 		return clipBy;
 	}
 
-	public void setClipBy(String clipBy) {
+	public void setClipBy(ClipBy clipBy) {
 		this.clipBy = clipBy;
-	}
-
-	public String getGroupReadingsBy() {
-		return groupBy;
-	}
-
-	public void setGroupReadingsBy(String groupReadingsBy) {
-		this.groupBy = groupReadingsBy;
 	}
 
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 		
 		addParam(qparams,"fromDateTime", fromDateTime);
 		addParam(qparams,"toDateTime",toDateTime);
-		addParam(qparams,"populateUsageData",populateUsageData);
+		addParam(qparams,"populateReadings",populateReadings);
 		addParam(qparams,"groupBy",groupBy);
 		addParam(qparams,"clipBy",clipBy);
 		return qparams;

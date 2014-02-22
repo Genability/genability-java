@@ -1,29 +1,21 @@
-package com.genability.test.client.api.service;
+package com.genability.client.api.service;
 
 import static org.junit.Assert.*;
 
 import com.genability.client.types.Account;
+import com.genability.client.types.ClipBy;
+import com.genability.client.types.GroupBy;
 import com.genability.client.types.Response;
 import com.genability.client.types.Profile;
 import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
 import com.genability.client.api.service.ProfileService;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ProfileServiceTests extends BaseServiceTests {
 
-	private static ProfileService profileService;
-
-	@BeforeClass
-	public static void runBeforeClass() {
-
-		profileService = new ProfileService();
-		profileService.setAppId(appId);
-		profileService.setAppKey(appKey);
-		if(restApiServer != null) profileService.setRestApiServer(restApiServer);
-	}
+	private static ProfileService profileService = genabilityClient.getProfileService();
 	
 	
 	@Test
@@ -33,10 +25,10 @@ public class ProfileServiceTests extends BaseServiceTests {
 		GetProfileRequest request = new GetProfileRequest();
 		
 		// set a valid usageProfileId
-		request.setUsageProfileId(newProfile.getProfileId());
-		request.setGroupBy("MONTH");
-		request.setClipBy("OUTER");
-		request.setPopulateUsageData(true);
+		request.setProfileId(newProfile.getProfileId());
+		request.setGroupBy(GroupBy.MONTH);
+		request.setClipBy(ClipBy.OUTER);
+		request.setPopulateReadings(true);
 		callGetProfile("Test get one profile",request);
 		
 		cleanup(newProfile.getAccountId());

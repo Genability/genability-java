@@ -1,15 +1,19 @@
 package com.genability.client.types;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.genability.client.types.PropertyData;
 import com.genability.client.types.Tariff;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class Account {
 
 	
@@ -26,9 +30,17 @@ public class Account {
 	private String customerOrgId;
 
 	private String customerOrgName;
+	
+	private CustomerClass customerClass;
+	
+	private String owner;
 
-	private String status;
+	private AccountStatus status;
+	
+	private AccountType type;
 
+	private Address address;
+	
 	private List<Tariff> tariffs;
 	
 	private Map<String, PropertyData> properties;
@@ -119,20 +131,44 @@ public class Account {
 		this.customerOrgName = customerOrgName;
 	}
 
+	public String getOwner() {
+      return owner;
+    }
+	
+	public void setOwner(String owner) {
+      this.owner = owner;
+    }
+	
 	/**
 	 * @return the status
 	 */
-	public String getStatus() {
+	public AccountStatus getStatus() {
 		return status;
 	}
 
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(String status) {
+	public void setStatus(AccountStatus status) {
 		this.status = status;
 	}
 
+	public AccountType getType() {
+      return type;
+    }
+	
+	public void setType(AccountType type) {
+      this.type = type;
+    }
+	
+	public Address getAddress() {
+      return address;
+    }
+	
+	public void setAddress(Address address) {
+      this.address = address;
+    }
+	
 	public Map<String, PropertyData> getProperties() {
 		return properties;
 	}
@@ -141,6 +177,24 @@ public class Account {
 		this.properties = properties;
 	}	
 	
+	public PropertyData getProperty(String key) {
+	    if (this.properties == null) {
+	      return null;
+	    }
+	    return this.properties.get(key);
+	}
+
+	public void setProperty(PropertyData value) {
+	    this.setProperty(value.getKeyName(), value);
+	}
+
+	public void setProperty(String key, PropertyData value) {
+	    if (this.properties == null) {
+	      this.properties = new HashMap<String, PropertyData>();
+	    }
+	    this.properties.put(key, value);
+	}
+
 	/**
 	 * @return the tariffs
 	 */
@@ -170,5 +224,14 @@ public class Account {
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
+	
+	
+	public CustomerClass getCustomerClass() {
+      return customerClass;
+    }
+	
+	public void setCustomerClass(CustomerClass customerClass) {
+      this.customerClass = customerClass;
+    }
 	
 }

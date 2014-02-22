@@ -1,21 +1,12 @@
 package com.genability.client.api.request;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.genability.client.types.SortOrder;
+
 public abstract class AbstractGetNRequest extends AbstractRequest {
-
-	/**
-	 * Value to use when wanting to sort on a field in ascending order.
-	 */
-	public static final String ASCENDING = "ASC";
-
-	/**
-	 * Value to use when wanting to sort on a field in descending order.
-	 */
-	public static final String DESCENDING = "DESC";
 	
 	
 	private Integer pageStart;
@@ -34,7 +25,7 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 	
     protected String sortOn;
     
-    protected String sortOrder;
+    protected SortOrder sortOrder;
 
     
 	/**
@@ -117,17 +108,17 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 		this.sortOn = sortOn;
 	}
 
-	public String getSortOrder() {
+	public SortOrder getSortOrder() {
 		return sortOrder;
 	}
 
-	public void setSortOrder(String sortOrder) {
+	public void setSortOrder(SortOrder sortOrder) {
 		this.sortOrder = sortOrder;
 	}
 
-	protected List<NameValuePair> getQueryParams() {
+	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 		addParam(qparams, "pageStart", pageStart);
 		addParam(qparams, "pageCount", pageCount);
 		addParam(qparams, "search", search);
@@ -136,7 +127,7 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 		addParam(qparams, "endsWith", endsWith);
 		addParam(qparams, "isRegex", isRegex);
 		addParam(qparams, "sortOn", sortOn);
-		addParam(qparams, "sortOrder", sortOrder);
+		addParam(qparams, "sortOrder", sortOrder == null ? null : sortOrder.getValue());
 
 		return qparams;
 		

@@ -3,12 +3,8 @@ package com.genability.client.types;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlTransient;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Represents a Usage Profile.
@@ -59,11 +55,6 @@ public class Profile implements Serializable {
 	 * private member to hold list of <code>ReadingDataSummary</code>
 	 */
 	private List<ReadingDataSummary> readingDataSummaries;
-
-	/**
-	 * private member to hold list of <code>UsageData</code>
-	 */
-	private List<? extends UsageData> usageData;
 	
 	/**
 	 * private member to hold list of <code>ReadingData</code>
@@ -95,8 +86,8 @@ public class Profile implements Serializable {
 	 * This is the constructor that sets the primary key information on
 	 * construction. In other words, it sets the property.
 	 */
-	public Profile(String profileId_) {
-		this.profileId = profileId_;
+	public Profile(String profileId) {
+		this.profileId = profileId;
 
 	} // end of constructor
 
@@ -110,8 +101,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for ProfileId.
 	 */
-	public void setProfileId(String profileId_) {
-		this.profileId = profileId_;
+	public void setProfileId(String profileId) {
+		this.profileId = profileId;
 	}
 
 	/**
@@ -124,8 +115,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for ProfileName.
 	 */
-	public void setProfileName(String profileName_) {
-		this.profileName = profileName_;
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
 	}
 
 	/**
@@ -138,8 +129,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for Description.
 	 */
-	public void setDescription(String description_) {
-		this.description = description_;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
@@ -152,8 +143,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for SourceId.
 	 */
-	public void setSourceId(String sourceId_) {
-		this.sourceId = sourceId_;
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
 	}
 
 	/**
@@ -174,7 +165,6 @@ public class Profile implements Serializable {
 	/**
 	 * Access method for ReadingData.
 	 */
-	@JsonIgnore
 	public List<ReadingData> getReadingData() {
 		return readingData;
 	}
@@ -182,25 +172,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator method for ReadingData.
 	 */
-	@JsonProperty("readingData")
 	public void setReadingData(List<ReadingData> readingData) {
 		this.readingData = readingData;
-	}
-
-	/**
-	 * Access method for UsageData.
-	 */
-	@JsonProperty("readingData")
-	public List<? extends UsageData> getUsageData() {
-		return usageData;
-	}
-
-	/**
-	 * Mutator method for UsageData.
-	 */
-	@JsonIgnore
-	public void setUsageData(List<? extends UsageData> usageData) {
-		this.usageData = usageData;
 	}
 	
 	/**

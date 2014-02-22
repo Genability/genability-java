@@ -3,52 +3,70 @@ package com.genability.client.types;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Price {
 	
-	public static final String REST_TYPE = "Price";
+	public static final String REST_TYPE = "TariffRateSummary";
 
 	
-	private String description;
-	
-	private Long masterTariffId;
+	private Long tariffId;
+
+	private ChargeType chargeType;
+
+	private String quantityKey;
 
 	private DateTime fromDateTime;
 	
 	private DateTime toDateTime;
 	
-	private String detailLevel;
+	private BigDecimal rateAmount;
 
+	private BigDecimal relativePriceIndex;
+	
 	private String currency;
 	
-	private BigDecimal rateMean;
-	
-	private BigDecimal rateStandardDeviation;
-	
-
-
 	private List<PriceChange> priceChanges;
 
 
-	public String getDescription() {
-		return description;
+	/**
+	 * Unique Genability ID (primary key) for this tariff
+	 */
+	public Long getTariffId() {
+		return tariffId;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setTariffId(Long tariffId) {
+		this.tariffId = tariffId;
 	}
 
-	public Long getMasterTariffId() {
-		return masterTariffId;
-	}
+	public ChargeType getChargeType() {
+        return chargeType;
+    }
 
-	public void setMasterTariffId(Long masterTariffId) {
-		this.masterTariffId = masterTariffId;
-	}
+	public void setChargeType(ChargeType chargeType) {
+        this.chargeType = chargeType;
+    }
 
+	/**
+	 * When not null, the Property that defines
+	 * the type of quantity this rate applies to.
+	 * @return
+	 */
+	public String getQuantityKey() {
+        return quantityKey;
+    }
+
+	public void setQuantityKey(String quantityKey) {
+        this.quantityKey = quantityKey;
+    }
+
+	/**
+	 * The starting date and time for this Price summary.
+	 */
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -57,6 +75,9 @@ public class Price {
 		this.fromDateTime = fromDateTime;
 	}
 
+	/**
+	 * The ending date and time for this Price summary.
+	 */
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
@@ -65,14 +86,9 @@ public class Price {
 		this.toDateTime = toDateTime;
 	}
 	
-	public String getDetailLevel() {
-		return detailLevel;
-	}
-
-	public void setDetailLevel(String chargeType) {
-		this.detailLevel = chargeType;
-	}
-
+	/**
+	 * Currently all prices are returned in USD.
+	 */
 	public String getCurrency() {
 		return currency;
 	}
@@ -81,22 +97,34 @@ public class Price {
 		this.currency = currency;
 	}
 
-	public BigDecimal getRateMean() {
-		return rateMean;
-	}
+	/**
+	 * The charge amount in dollars for
+	 * this Tariff at the time passed in.
+	 */
+	public BigDecimal getRateAmount() {
+        return rateAmount;
+    }
 
-	public void setRateMean(BigDecimal rateMean) {
-		this.rateMean = rateMean;
-	}
+	public void setRateAmount(BigDecimal rateAmount) {
+        this.rateAmount = rateAmount;
+    }
 
-	public BigDecimal getRateStandardDeviation() {
-		return rateStandardDeviation;
-	}
+	/**
+	 * The relative price of this rateAmount compared to other rate
+	 * amounts in this summary. This is useful for change in price
+	 * notifications. The highest price will have an RPI of 1.0.
+	 */
+	public BigDecimal getRelativePriceIndex() {
+        return relativePriceIndex;
+    }
 
-	public void setRateStandardDeviation(BigDecimal rateStandardDeviation) {
-		this.rateStandardDeviation = rateStandardDeviation;
-	}
-	
+	public void setRelativePriceIndex(BigDecimal relativePriceIndex) {
+        this.relativePriceIndex = relativePriceIndex;
+    }
+
+	/**
+	 * List of all the price changes within the specified time period
+	 */
 	public List<PriceChange> getPriceChanges() {
 		return priceChanges;
 	}

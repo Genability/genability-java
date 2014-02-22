@@ -7,6 +7,11 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
+import com.genability.client.types.ChargeType;
+import com.genability.client.types.CustomerClass;
+import com.genability.client.types.ServiceType;
+import com.genability.client.types.TariffType;
+
 public class GetTariffsRequest extends AbstractGetNRequest implements Serializable {
 
 
@@ -21,29 +26,9 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	private Long lseId;
 
 	/**
-	 * Private member variable for DistributionLseId.
-	 */
-	private Long distributionLseId;
-
-	/**
-	 * Private member variable for masterTariffId.
+	 * Private member variable for MasterTariffId.
 	 */
 	private Long masterTariffId;
-
-	/**
-	 * Private member variable for CustomerClasses.
-	 */
-	private String[] customerClasses;
-
-	/**
-	 * Private member variable for TariffTypes.
-	 */
-	private String[] tariffTypes;
-
-	/**
-	 * Private member variable for ZipCode
-	 */
-	private String zipCode;
 
 	/**
 	 * Private member variable for effectiveOn.
@@ -59,26 +44,51 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	 * Private member variable for toDateTime.
 	 */
 	private DateTime toDateTime;
-	
-    /**
-	 * Private member variable for account
-	 */
-	private String accountId;
-	
+
 	/**
-	 * private member variable for providerAccountId
+	 * Private member variable for active field.
 	 */
-	private String providerAccountId_;
+	private Boolean isActive;
+
+	/**
+	 * Private member variable for CustomerClasses.
+	 */
+	private CustomerClass[] customerClasses;
+
+	/**
+	 * Private member variable for TariffTypes.
+	 */
+	private TariffType[] tariffTypes;
+
+	/**
+	 * Private member variable for ServiceTypes.
+	 */
+	private ServiceType[] serviceTypes;
+
+	/**
+	 * Private member variable for ChargeTypes.
+	 */
+	private ChargeType[] chargeTypes;
+
+	/**
+	 * Private member variable for ZipCode
+	 */
+	private String zipCode;
+
+	/**
+	 * Private member variable for PopulateRates.
+	 */
+	private Boolean populateRates;
 	
 	/**
 	 * Private member variable for PopulateProperties.
 	 */
 	private Boolean populateProperties;
 
-	/**
-	 * Private member variable for PopulateRates.
+    /**
+	 * Private member variable for account
 	 */
-	private Boolean populateRates;
+	private String accountId;
 	
 	/**
 	 * Private member variable for searching by consumption
@@ -94,7 +104,22 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	 * Private member variable for searching by net metered tariffs
 	 */
 	private Boolean hasNetMetering;
-	
+
+	/**
+	 * Private member variable for searching by tiered rates
+	 */
+	private Boolean hasTieredRates;
+
+	/**
+	 * Private member variable for searching by contracted rates
+	 */
+	private Boolean hasContractedRates;
+
+	/**
+	 * Private member variable for searching by time of use rates
+	 */
+	private Boolean hasTimeOfUseRates;
+
 	/**
 	 * @return the lseId
 	 */
@@ -109,30 +134,10 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		this.lseId = lseId;
 	}
 
-	/**
-	 * @return the distributionLseId
-	 */
-	public Long getDistributionLseId() {
-		return distributionLseId;
-	}
-
-	/**
-	 * @param distributionLseId the distributionLseId to set
-	 */
-	public void setDistributionLseId(Long distributionLseId) {
-		this.distributionLseId = distributionLseId;
-	}
-
-	/**
-	 * @return the masterTariffId
-	 */
 	public Long getMasterTariffId() {
 		return masterTariffId;
 	}
 
-	/**
-	 * @param masterTariffId the masterTariffId to set
-	 */
 	public void setMasterTariffId(Long masterTariffId) {
 		this.masterTariffId = masterTariffId;
 	}
@@ -140,30 +145,58 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	/**
 	 * @return the customerClasses
 	 */
-	public String[] getCustomerClasses() {
+	public CustomerClass[] getCustomerClasses() {
 		return customerClasses;
 	}
 
 	/**
 	 * @param customerClasses the customerClasses to set
 	 */
-	public void setCustomerClasses(String[] customerClasses) {
+	public void setCustomerClasses(CustomerClass... customerClasses) {
 		this.customerClasses = customerClasses;
 	}
 
 	/**
 	 * @return the tariffTypes
 	 */
-	public String[] getTariffTypes() {
+	public TariffType[] getTariffTypes() {
 		return tariffTypes;
 	}
 
 	/**
 	 * @param tariffTypes the tariffTypes to set
 	 */
-	public void setTariffTypes(String[] tariffTypes) {
+	public void setTariffTypes(TariffType... tariffTypes) {
 		this.tariffTypes = tariffTypes;
 	}
+
+	/**
+	 * @return the chargeTypes
+	 */
+	public ChargeType[] getChargeTypes() {
+        return chargeTypes;
+    }
+
+	/**
+	 * @param chargeTypes the chargeTypes to set
+	 */
+	public void setChargeTypes(ChargeType... chargeTypes) {
+        this.chargeTypes = chargeTypes;
+    }
+
+	/**
+	 * @return the serviceTypes
+	 */
+	public ServiceType[] getServiceTypes() {
+        return serviceTypes;
+    }
+
+	/**
+	 * @param serviceTypes the serviceTypes to set
+	 */
+	public void setServiceTypes(ServiceType... serviceTypes) {
+        this.serviceTypes = serviceTypes;
+    }
 
 	/**
 	 * @return the zipCode
@@ -222,6 +255,20 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	}
 
 	/**
+	 * @return
+	 */
+	public Boolean getIsActive() {
+      return isActive;
+    }
+
+	/**
+	 * @param isActive
+	 */
+	public void setIsActive(Boolean isActive) {
+      this.isActive = isActive;
+    }
+
+	/**
 	 * @return the accountId
 	 */
 	public String getAccountId() {
@@ -234,15 +281,6 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
-
-	public String getProviderAccountId_() {
-    	return providerAccountId_;
-    }
-
-	public void setProviderAccountId_(String providerAccountId_) {
-    	this.providerAccountId_ = providerAccountId_;
-    }
-
 
 	/**
 	 * @return the populateProperties
@@ -297,27 +335,56 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
     	this.hasNetMetering = hasNetMetering;
     }
 
+	public Boolean getHasContractedRates() {
+      return hasContractedRates;
+    }
+
+	public void setHasContractedRates(Boolean hasContractedRates) {
+      this.hasContractedRates = hasContractedRates;
+    }
+
+	public Boolean getHasTieredRates() {
+      return hasTieredRates;
+    }
+
+	public void setHasTieredRates(Boolean hasTieredRates) {
+      this.hasTieredRates = hasTieredRates;
+	}
+
+	public Boolean getHasTimeOfUseRates() {
+      return hasTimeOfUseRates;
+    }
+
+	public void setHasTimeOfUseRates(Boolean hasTimeOfUseRates) {
+      this.hasTimeOfUseRates = hasTimeOfUseRates;
+    }
+
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = super.getQueryParams();
 
 		addParam(qparams,"lseId",lseId);
-		addParam(qparams,"distributionLseId",distributionLseId);
 		addParam(qparams,"masterTariffId",masterTariffId);
-		addParam(qparams,"customerClasses",customerClasses);
-		addParam(qparams,"tariffTypes",tariffTypes);
-		addParam(qparams,"zipCode",zipCode);
 		addParam(qparams,"effectiveOn",effectiveOn);
 		addParam(qparams,"fromDateTime",fromDateTime);
 		addParam(qparams,"toDateTime",toDateTime);
-		addParam(qparams,"accountId",accountId);
+		addParam(qparams,"isActive",isActive);
+		addParam(qparams,"customerClasses",customerClasses);
+		addParam(qparams,"tariffTypes",tariffTypes);
+		addParam(qparams,"serviceTypes",serviceTypes);
+		addParam(qparams,"chargeTypes",chargeTypes);
+		addParam(qparams,"zipCode",zipCode);
 		addParam(qparams,"populateProperties",populateProperties);
 		addParam(qparams,"populateRates",populateRates);
+		addParam(qparams,"accountId",accountId);
 		addParam(qparams,"consumption",consumption);
 		addParam(qparams,"demand",demand);
 		addParam(qparams,"hasNetMetering",hasNetMetering);
-		
+		addParam(qparams,"hasTieredRates",hasTieredRates);
+		addParam(qparams,"hasContractedRates",hasContractedRates);
+		addParam(qparams,"hasTimeOfUseRates",hasTimeOfUseRates);
+
 		return qparams;
 		
 	}

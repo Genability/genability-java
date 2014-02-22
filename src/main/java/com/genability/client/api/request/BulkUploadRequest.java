@@ -4,7 +4,6 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 
@@ -20,24 +19,24 @@ public class BulkUploadRequest extends AbstractRequest implements Serializable {
 	/**
 	 * private member variable for UsageProfileId
 	 */
-	private String usageProfileId_;
+	private String usageProfileId;
 	/**
 	 * private member variable for Name
 	 */
-	private String name_;
+	private String name;
 	
 	private String fileFormat;
 	
-	private File fileData_;
+	private File fileData;
 	
 	private String contentType;
 
 	public String getName() {
-		return name_;
+		return name;
 	}
 
 	public void setName(String name) {
-		this.name_ = name;
+		this.name = name;
 	}
 
 	public String getFileFormat() {
@@ -49,26 +48,26 @@ public class BulkUploadRequest extends AbstractRequest implements Serializable {
 	}
 	
 	public File getFileData() {
-		return fileData_;
+		return fileData;
 	}
 
 	public void setFileData(File file) {
-		this.fileData_ = file;
+		this.fileData = file;
 	}
 
 	/**
 	 * @return the usageProfileId_
 	 */
 	public String getUsageProfileId() {
-		return usageProfileId_;
+		return usageProfileId;
 	}
 
 	/**
-	 * @param usageProfileId_
-	 *            the usageProfileId_ to set
+	 * @param usageProfileId
+	 *            the usageProfileId to set
 	 */
 	public void setUsageProfileId(String usageProfileId) {
-		this.usageProfileId_ = usageProfileId;
+		this.usageProfileId = usageProfileId;
 	}
 	
 	public void setContentType(String contentType) {
@@ -81,13 +80,12 @@ public class BulkUploadRequest extends AbstractRequest implements Serializable {
 	
 	@Override
 	public List<NameValuePair> getQueryParams() {
+		List<NameValuePair> qparams = super.getQueryParams();
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		// addParam(qparams,"providerAccountId", providerAccountId);
+		// addParam(qparams,"providerOrgId",providerOrgId);
 		
-		// addParam(qparams,"providerAccountId", providerAccountId_);
-		// addParam(qparams,"providerOrgId",providerOrgId_);
-		
-		return null;
+		return qparams;
 		
 	}	
 }

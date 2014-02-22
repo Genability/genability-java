@@ -2,11 +2,9 @@ package com.genability.client.types;
 
 import java.math.BigDecimal;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
-import com.genability.client.util.DateTimeJsonSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CalculatedCostItem {
@@ -24,7 +22,7 @@ public class CalculatedCostItem {
     
     private DateTime toDateTime;
     
-    private String rateType;
+    private RateUnit rateType;
     
     private String quantityKey;
     
@@ -95,7 +93,6 @@ public class CalculatedCostItem {
 	/**
 	 * @return the fromDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -110,7 +107,6 @@ public class CalculatedCostItem {
 	/**
 	 * @return the toDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
@@ -125,14 +121,14 @@ public class CalculatedCostItem {
 	/**
 	 * @return the rateType
 	 */
-	public String getRateType() {
+	public RateUnit getRateType() {
 		return rateType;
 	}
 
 	/**
 	 * @param rateType the rateType to set
 	 */
-	public void setRateType(String rateType) {
+	public void setRateType(RateUnit rateType) {
 		this.rateType = rateType;
 	}
 

@@ -1,7 +1,6 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -66,7 +65,7 @@ public class GetTariffRequest extends AbstractRequest implements Serializable {
 	@Override
 	public List<NameValuePair> getQueryParams() {
 
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 
 		addParam(qparams,"masterTariffId",masterTariffId);
 		addParam(qparams,"accountId",accountId);

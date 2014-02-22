@@ -1,7 +1,6 @@
 package com.genability.client.api.service;
 
-import org.codehaus.jackson.type.TypeReference;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.api.request.GetCalculatedCostRequest;
 import com.genability.client.api.request.GetCalculationInputsRequest;
 import com.genability.client.types.Response;
@@ -10,6 +9,8 @@ import com.genability.client.types.PropertyData;
 
 public class CalculateService extends BaseService {
 	
+    private static final TypeReference<Response<CalculatedCost>> CALCULATEDCOST_RESPONSE_TYPEREF = new TypeReference<Response<CalculatedCost>>() {};
+    private static final TypeReference<Response<PropertyData>> PROPERTYDATA_RESPONSE_TYPEREF = new TypeReference<Response<PropertyData>>() {};
 	
 	/**
 	 * Calls the REST service to run a calculation
@@ -33,11 +34,10 @@ public class CalculateService extends BaseService {
 		}
 
 		
-		@SuppressWarnings("unchecked")
-		Response<CalculatedCost> response = (Response<CalculatedCost>) this.callPost(
+		Response<CalculatedCost> response = this.callPost(
 				uri,
 				request,
-				new TypeReference<Response<CalculatedCost>>() { });
+				CALCULATEDCOST_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getCalculatedCost completed");
 		
@@ -63,11 +63,10 @@ public class CalculateService extends BaseService {
 				//Do nothing.
 			}
 			
-			@SuppressWarnings("unchecked")
-			Response<PropertyData> response = (Response<PropertyData>) this.callGet(
+			Response<PropertyData> response = this.callGet(
 					uri,
 					request.getQueryParams(),
-					new TypeReference<Response<PropertyData>>() { });
+					PROPERTYDATA_RESPONSE_TYPEREF);
 			
 			if(log.isDebugEnabled()) log.debug("getCalculationInputs completed");
 			

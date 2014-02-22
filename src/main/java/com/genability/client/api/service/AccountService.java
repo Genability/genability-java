@@ -1,7 +1,6 @@
 package com.genability.client.api.service;
 
-import org.codehaus.jackson.type.TypeReference;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.types.Account;
 import com.genability.client.types.Response;
 import com.genability.client.api.request.DeleteAccountRequest;
@@ -10,16 +9,16 @@ import com.genability.client.api.request.GetAccountRequest;
 
 public class AccountService extends BaseService {
 
+    private static final TypeReference<Response<Account>> ACCOUNT_RESPONSE_TYPEREF = new TypeReference<Response<Account>>() {};
 	
 	public Response<Account> getAccounts(GetAccountsRequest request)
 	{
 		if(log.isDebugEnabled()) log.debug("getAccounts called");
 		
-		@SuppressWarnings("unchecked")
-		Response<Account> response = (Response<Account>) this.callGet(
+		Response<Account> response = this.callGet(
 				"beta/accounts", 
 				request.getQueryParams(),
-				new TypeReference<Response<Account>>() { });
+				ACCOUNT_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getAccounts completed");
 		
@@ -37,11 +36,10 @@ public class AccountService extends BaseService {
 			uri += "/" + request.getAccountId();
 		}
 
-		@SuppressWarnings("unchecked")
-		Response<Account> response = (Response<Account>) this.callGet(
+		Response<Account> response = this.callGet(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Account>>() { });
+				ACCOUNT_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getAccount completed");
 		
@@ -55,11 +53,10 @@ public class AccountService extends BaseService {
 
 		if(log.isDebugEnabled()) log.debug("addAccount called");
 	
-		@SuppressWarnings("unchecked")
-		Response<Account> response = (Response<Account>) this.callPost(
+		Response<Account> response = this.callPost(
 				"beta/accounts", 
 				account,
-				new TypeReference<Response<Account>>() { });
+				ACCOUNT_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("addAccount completed");
 		
@@ -77,11 +74,10 @@ public class AccountService extends BaseService {
 			uri += "/" + request.getAccountId();
 		}		
 		
-		@SuppressWarnings("unchecked")
-		Response<Account> response = (Response<Account>) this.callDelete(
+		Response<Account> response = this.callDelete(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Account>>() { });
+				ACCOUNT_RESPONSE_TYPEREF);
 		if(log.isDebugEnabled()) log.debug("deleteAccount completed");
 		
 		return response;

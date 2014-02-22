@@ -1,17 +1,14 @@
-package com.genability.test.client.api.service;
+package com.genability.client.api.service;
 
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 import com.genability.client.types.Account;
 import com.genability.client.types.CalculatedCostItem;
+import com.genability.client.types.DetailLevel;
+import com.genability.client.types.GroupBy;
 import com.genability.client.types.Response;
 import com.genability.client.types.CalculatedCost;
 import com.genability.client.types.PropertyData;
@@ -19,24 +16,12 @@ import com.genability.client.api.request.GetCalculatedCostRequest;
 import com.genability.client.api.request.GetCalculationInputsRequest;
 import com.genability.client.api.service.CalculateService;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CalculateServiceTests extends BaseServiceTests {
 
-	private static CalculateService calculateService;
+	private static CalculateService calculateService = genabilityClient.getCalculateService();
 
-	@BeforeClass
-	public static void runBeforeClass() {
-
-		calculateService = new CalculateService();
-		calculateService.setAppId(appId);
-		calculateService.setAppKey(appKey);
-		if(restApiServer != null) calculateService.setRestApiServer(restApiServer);
-		
-	}
-	
-	
 	@Test
 	public void testCalculateTariff512() {
 		
@@ -70,9 +55,9 @@ public class CalculateServiceTests extends BaseServiceTests {
 		newProp2.setDataValue("Primary");
 		newProp2.setKeyName("connectionType");
 		
-		request.addInput(newProp);
-		request.addInput(newProp2);
-		request.addInput(newProp3);
+		request.addTariffInput(newProp);
+		request.addTariffInput(newProp2);
+		request.addTariffInput(newProp3);
 		
 		callRunCalc("Test for master tariff 512",request);
 		
@@ -91,8 +76,8 @@ public class CalculateServiceTests extends BaseServiceTests {
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
 		request.setMasterTariffId(522l); // PGE E1 - residential tariff
-		request.setDetailLevel(GetCalculatedCostRequest.DETAIL_LEVEL_CHARGE_TYPE);
-		request.setGroupBy(GetCalculatedCostRequest.GROUP_BY_MONTH);
+		request.setDetailLevel(DetailLevel.CHARGE_TYPE);
+		request.setGroupBy(GroupBy.MONTH);
 
 		// Set the territoryId property
 		PropertyData newProp2 = new PropertyData();
@@ -101,7 +86,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 		newProp2.setDataValue("3534"); //Baseline Region P - 3534
 		newProp2.setKeyName("territoryId");
 		
-		request.addInput(newProp2);
+		request.addTariffInput(newProp2);
 		
 		//
 		// Create consumption inputs for each hour of the day, first for 
@@ -120,7 +105,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 				weekdayProp.setDataValue("0.5");
 				weekdayProp.setKeyName("consumption");
 				
-				request.addInput(weekdayProp);
+				request.addTariffInput(weekdayProp);
 	
 				PropertyData weekendProp = new PropertyData();
 				weekendProp.setFromDateTime(fromDateTime);
@@ -129,7 +114,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 				weekendProp.setDataValue("0.5");
 				weekendProp.setKeyName("consumption");
 				
-				request.addInput(weekendProp);
+				request.addTariffInput(weekendProp);
 				
 				propertyStartDateTime = propertyStartDateTime.plusMonths(1);
 				
@@ -156,7 +141,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
-		request.setDetailLevel("ALL");
+		request.setDetailLevel(DetailLevel.ALL);
 		
 		request.setAccountId(newAccount.getAccountId());
 				
@@ -166,7 +151,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 		newProp2.setDataValue(newAccount.getAccountId());
 		newProp2.setKeyName("accountId");
 		
-		request.addInput(newProp2);
+		request.addTariffInput(newProp2);
 		
 		callRunCalc("Test for calculateForAccount",request);
 		

@@ -1,17 +1,16 @@
 package com.genability.client.api.service;
 
-import org.codehaus.jackson.type.TypeReference;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
-import com.genability.client.types.Account;
 import com.genability.client.types.Response;
 import com.genability.client.types.Profile;
 
 
 public class ProfileService extends BaseService {
 	
-	
+    private static final TypeReference<Response<Profile>> PROFILE_RESPONSE_TYPEREF = new TypeReference<Response<Profile>>() {};
+
 	/**
 	 * Calls the REST service to get a Profile based on the arguments passed in.
 	 * 
@@ -22,15 +21,14 @@ public class ProfileService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getProfile called");
 		
 		String uri = "beta/usage/profiles";
-		if (request.getUsageProfileId() != null && request.getUsageProfileId().length() !=0) {
-			uri += "/" + request.getUsageProfileId();
+		if (request.getProfileId() != null && request.getProfileId().length() !=0) {
+			uri += "/" + request.getProfileId();
 		}
 		
-		@SuppressWarnings("unchecked")
-		Response<Profile> response = (Response<Profile>) this.callGet(
+		Response<Profile> response = this.callGet(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Profile>>() { });
+				PROFILE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getProfile completed");
 		
@@ -49,11 +47,10 @@ public class ProfileService extends BaseService {
 		
 		String uri = "beta/usage/profiles";
 		
-		@SuppressWarnings("unchecked")
-		Response<Profile> response = (Response<Profile>) this.callGet(
+		Response<Profile> response = this.callGet(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Profile>>() { });
+				PROFILE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getProfiles completed");
 		
@@ -65,11 +62,10 @@ public class ProfileService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("addProfile called");
 	
-		@SuppressWarnings("unchecked")
-		Response<Profile> response = (Response<Profile>) this.callPost(
+		Response<Profile> response = this.callPost(
 				"beta/usage/profiles", 
 				profile,
-				new TypeReference<Response<Profile>>() { });
+				PROFILE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("addProfile completed");
 		
