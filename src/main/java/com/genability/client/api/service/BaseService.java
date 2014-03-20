@@ -11,7 +11,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -21,7 +20,8 @@ import org.apache.http.entity.EntityTemplate;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
@@ -62,11 +62,18 @@ public class BaseService {
 	 */
 	private ObjectMapper mapper;
 	
+	/**
+	 * Private member holding the Apache HttpClient
+	 */
+	private CloseableHttpClient httpClient;
+
 
 	public BaseService() {
 	    mapper = new ObjectMapper();
 	    mapper.registerModule(new JodaModule());
 	    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+	    httpClient = HttpClientBuilder.create().build();
     }
 
 
@@ -114,6 +121,17 @@ public class BaseService {
 
 
 	/**
+	 * Mutator for IoC and configuration. Typically you don't need to worry about this
+	 * as the default sets up a mapper for you.
+	 *
+	 * @param mapper the mapper to set
+	 */
+	public void setHttpClient(CloseableHttpClient httpClient) {
+		this.httpClient = httpClient;
+	}
+
+
+	/**
 	 * Helper method that makes a HTTP GET to the Genability APIs.
 	 * 
 	 * @param endpointPath
@@ -126,7 +144,6 @@ public class BaseService {
 
 		try {
 
-			DefaultHttpClient httpClient = new DefaultHttpClient();
 			String qs = null;
 			
 			String url = restApiServer + endpointPath; // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
@@ -153,8 +170,6 @@ public class BaseService {
 			// Convert the JSON pay-load to the standard Response object.
 			//
 			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
-			
-			httpClient.getConnectionManager().shutdown();
 
 		} catch (ClientProtocolException e) {
 
@@ -183,8 +198,6 @@ public class BaseService {
 
 		try {
 
-			DefaultHttpClient httpClient = new DefaultHttpClient();
-			
 			String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
 			if(log.isDebugEnabled()) log.debug(url);
 			
@@ -220,8 +233,6 @@ public class BaseService {
 			// Convert the JSON pay-load to the standard Response object.
 			//
 			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
-			
-			httpClient.getConnectionManager().shutdown();
 
 		} catch (ClientProtocolException e) {
 
@@ -264,11 +275,10 @@ public class BaseService {
 		}
 		postRequest.setEntity(reqEntity);
 
-		HttpClient httpclient = new DefaultHttpClient();
-	    httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+	    httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
 	    try {
-		    HttpResponse response = httpclient.execute(postRequest);		
+		    HttpResponse response = httpClient.execute(postRequest);
 			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
 		} catch (ClientProtocolException e) {
 			
@@ -277,8 +287,6 @@ public class BaseService {
 		} catch (IOException e) {
 	
 			log.error("IOException",e);
-		} finally {
-			httpclient.getConnectionManager().shutdown();
 		}
 		return restResponse;
 		
@@ -297,7 +305,6 @@ public class BaseService {
 
 		try {
 
-			DefaultHttpClient httpClient = new DefaultHttpClient();
 			String qs = null;
 			
 			String url = restApiServer + endpointPath; // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
@@ -324,8 +331,6 @@ public class BaseService {
 			// Convert the JSON pay-load to the standard Response object.
 			//
 			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
-			
-			httpClient.getConnectionManager().shutdown();
 
 		} catch (ClientProtocolException e) {
 
