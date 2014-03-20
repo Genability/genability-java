@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.NameValuePair;
+import org.joda.time.DateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -11,9 +14,6 @@ import com.genability.client.types.DetailLevel;
 import com.genability.client.types.GroupBy;
 import com.genability.client.types.PropertyData;
 import com.genability.client.types.TariffRate;
-
-import org.apache.http.NameValuePair;
-import org.joda.time.DateTime;
 
 @JsonInclude(Include.NON_NULL)
 public class GetCalculatedCostRequest extends AbstractRequest implements Serializable {
@@ -83,8 +83,8 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 */
 	private Boolean billingPeriod;
 	
-	private Boolean betaPopulateAssumptions;
 	
+
 	private List<TariffRate> rateInputs;
 
 	/**
@@ -286,14 +286,6 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 
 	public void setBillingPeriod(Boolean billingPeriod) {
       this.billingPeriod = billingPeriod;
-    }
-
-	public Boolean getBetaPopulateAssumptions() {
-        return betaPopulateAssumptions;
-    }
-	
-	public void setBetaPopulateAssumptions(Boolean betaPopulateAssumptions) {
-        this.betaPopulateAssumptions = betaPopulateAssumptions;
     }
 	
 	@Override
