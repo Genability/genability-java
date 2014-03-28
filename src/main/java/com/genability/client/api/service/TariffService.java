@@ -1,6 +1,7 @@
 package com.genability.client.api.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.genability.client.api.request.DeleteTariffRequest;
 import com.genability.client.api.request.GetTariffRequest;
 import com.genability.client.api.request.GetTariffsRequest;
 import com.genability.client.types.Response;
@@ -54,6 +55,42 @@ public class TariffService extends BaseService {
 	}
 	
 	
+	public Response<Tariff> addTariff(Tariff tariff) {
+
+		if(log.isDebugEnabled()) log.debug("addTariff called");
+
+		Response<Tariff> response = this.callPost(
+				"beta/tariffs",
+				tariff,
+				TARIFF_RESPONSE_TYPEREF);
+
+		if(log.isDebugEnabled()) log.debug("addTariff completed");
+
+		return response;
+
+	}
+
+
+	public Response<Tariff> deleteTariff(DeleteTariffRequest request) {
+
+		if(log.isDebugEnabled()) log.debug("deleteTariff called");
+
+		String uri = "beta/tariffs";
+		if (request.getTariffId() != null) {
+			uri += "/" + request.getTariffId();
+		}
+
+		Response<Tariff> response = this.callDelete(
+				uri,
+				request.getQueryParams(),
+				TARIFF_RESPONSE_TYPEREF);
+
+		if(log.isDebugEnabled()) log.debug("deleteTariff completed");
+
+		return response;
+
+	}
+
 	/******************************************************************************************
 	 * BELOW HERE ARE THE HELPER METHODS
 	 ******************************************************************************************/
