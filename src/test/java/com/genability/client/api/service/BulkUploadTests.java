@@ -9,6 +9,7 @@ import com.genability.client.types.ReadingData;
 import com.genability.client.api.request.BulkUploadRequest;
 import com.genability.client.api.service.BulkUploadService;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class BulkUploadTests extends BaseServiceTests {
@@ -16,6 +17,7 @@ public class BulkUploadTests extends BaseServiceTests {
 	private static BulkUploadService bulkUploadService = genabilityClient.getBulkUploadService();
 	
 	@Test
+	@Ignore
 	public void testUploadCSV() {
 		
 		BulkUploadRequest request = new BulkUploadRequest();
@@ -28,6 +30,7 @@ public class BulkUploadTests extends BaseServiceTests {
 	
 	// This method uploads Green Button XML data
 	@Test
+	@Ignore
 	public void testUploadGreenButton() {
 		
 		BulkUploadRequest request = new BulkUploadRequest();
