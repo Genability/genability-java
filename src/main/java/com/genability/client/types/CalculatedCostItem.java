@@ -26,7 +26,7 @@ public class CalculatedCostItem {
     
     private String quantityKey;
     
-    private Integer itemQuantity;
+    private Double itemQuantity;
     
     private BigDecimal itemCount;
     
@@ -149,14 +149,14 @@ public class CalculatedCostItem {
 	/**
 	 * @return the itemQuantity
 	 */
-	public Integer getItemQuantity() {
+	public Double getItemQuantity() {
 		return itemQuantity;
 	}
 
 	/**
 	 * @param itemQuantity the itemQuantity to set
 	 */
-	public void setItemQuantity(Integer itemQuantity) {
+	public void setItemQuantity(Double itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
 
