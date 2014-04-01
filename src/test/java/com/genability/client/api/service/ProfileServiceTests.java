@@ -11,6 +11,7 @@ import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
 import com.genability.client.api.service.ProfileService;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ProfileServiceTests extends BaseServiceTests {
@@ -19,6 +20,7 @@ public class ProfileServiceTests extends BaseServiceTests {
 	
 	
 	@Test
+	@Ignore
 	public void testGetProfile() {
 		
 		Profile newProfile = createProfile();

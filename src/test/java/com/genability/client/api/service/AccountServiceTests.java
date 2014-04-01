@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.genability.client.types.Account;
@@ -15,6 +16,7 @@ import com.genability.client.api.request.GetAccountRequest;
 public class AccountServiceTests  extends BaseServiceTests {
 
 	@Test
+	@Ignore
 	public void testAddAccount() {
 		
 		Account addAccount = new Account();
