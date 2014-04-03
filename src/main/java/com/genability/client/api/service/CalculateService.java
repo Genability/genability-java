@@ -1,11 +1,17 @@
 package com.genability.client.api.service;
 
+import java.text.MessageFormat;
+
+import org.joda.time.DateTime;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.api.request.GetCalculatedCostRequest;
 import com.genability.client.api.request.GetCalculationInputsRequest;
-import com.genability.client.types.Response;
 import com.genability.client.types.CalculatedCost;
+import com.genability.client.types.DetailLevel;
+import com.genability.client.types.GroupBy;
 import com.genability.client.types.PropertyData;
+import com.genability.client.types.Response;
 
 public class CalculateService extends BaseService {
 	
@@ -72,4 +78,45 @@ public class CalculateService extends BaseService {
 			
 			return response;
 	 }
+
+	/**
+	 * Runs calculation on Account using a simplified method with passed in
+	 * parameters.
+	 * 
+	 * @param accountId
+	 * @param fromDateTime
+	 * @param toDateTime
+	 * @return
+	 */
+	public Response<CalculatedCost> runCalculationOnAccount(String accountId,
+			Long masterTariffId, DateTime fromDateTime, DateTime toDateTime,
+			DetailLevel detailLevel, GroupBy groupBy) {
+
+		if (log.isDebugEnabled())
+			log.debug("runCalculationOnAccount called");
+
+		String uri = "public/calculate/account/{accountId}";
+
+		if (accountId != null) {
+			uri = MessageFormat.format(uri, accountId);
+		}
+
+		GetCalculatedCostRequest request = new GetCalculatedCostRequest();
+		request.setMasterTariffId(masterTariffId);
+		request.setAccountId(accountId);
+		request.setFromDateTime(fromDateTime);
+		request.setToDateTime(toDateTime);
+		request.setDetailLevel(detailLevel);
+		request.setGroupBy(groupBy);
+
+		Response<CalculatedCost> response = this.callGet(uri,
+				request.getQueryParams(),
+				CALCULATEDCOST_RESPONSE_TYPEREF);
+
+		if (log.isDebugEnabled())
+			log.debug("runCalculationOnAccount completed");
+
+		return response;
+	}
+
 }

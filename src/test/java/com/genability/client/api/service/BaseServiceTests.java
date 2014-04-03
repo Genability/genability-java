@@ -19,8 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import com.genability.client.api.GenabilityClient;
 import com.genability.client.api.request.DeleteAccountRequest;
-import com.genability.client.api.service.AccountService;
-import com.genability.client.api.service.ProfileService;
 import com.genability.client.types.Account;
 import com.genability.client.types.Profile;
 import com.genability.client.types.PropertyData;
@@ -146,6 +144,7 @@ public class BaseServiceTests {
 	// on the account
 	protected void cleanup(String accountId) {
 		DeleteAccountRequest deleteAccountRequest = new DeleteAccountRequest();
+		deleteAccountRequest.setHardDelete(Boolean.TRUE);
 		deleteAccountRequest.setAccountId(accountId);
 		Response<Account> deleteResponse = accountService.deleteAccount(deleteAccountRequest);
 		assertEquals("bad status",deleteResponse.getStatus(),Response.STATUS_SUCCESS);

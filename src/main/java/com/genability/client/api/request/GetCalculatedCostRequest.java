@@ -294,6 +294,8 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		
 		List<NameValuePair> qparams = super.getQueryParams();
 		addParam(qparams,"masterTariffId",masterTariffId);
+		addParam(qparams, "fromDateTime", fromDateTime);
+		addParam(qparams, "toDateTime", toDateTime);
 		addParam(qparams,"betaPopulateAssumptions",true);
 		return qparams;
 		
