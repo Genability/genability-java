@@ -155,6 +155,12 @@ public class AccountService extends BaseService {
 			uri = MessageFormat.format(uri, accountId);
 		}
 
+		// Workaround so the route catches. A null request payload will hit the
+		// wrong route.
+		if (interviewAnswer == null) {
+			interviewAnswer = new PropertyData();
+		}
+
 		Response<PropertyData> response = this.callPut(uri, interviewAnswer,
 				PROPERTY_DATA_RESPONSE_TYPEREF);
 

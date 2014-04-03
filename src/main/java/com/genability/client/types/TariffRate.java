@@ -39,6 +39,8 @@ public class TariffRate {
   private String variableFactorKey;
   private List<TariffRateBand> rateBands;
 
+	public static final String REST_TYPE = "TariffRate";
+
   public Long getTariffRateId() {
     return tariffRateId;
   }
