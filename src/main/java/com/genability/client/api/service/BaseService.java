@@ -2,10 +2,11 @@ package com.genability.client.api.service;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.List;
-import java.nio.charset.Charset;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -14,6 +15,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentProducer;
 import org.apache.http.entity.EntityTemplate;
@@ -23,7 +25,6 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.params.CoreProtocolPNames;
-import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -248,6 +249,76 @@ public class BaseService {
 		return restResponse;
 		
 	} // end of callPost
+
+	/**
+	 * Helper method that makes a HTTP POST to the Genability APIs.
+	 * 
+	 * @param endpointPath
+	 * @param resultTypeReference
+	 * @return
+	 */
+	protected <T extends Response<R>, R> T callPut(String endpointPath,
+			final Object requestPayload, TypeReference<T> resultTypeReference) {
+
+		T restResponse = null;
+
+		try {
+
+			String url = restApiServer + endpointPath; // + "?" +
+														// this.getQueryStringCredentials();
+														// // if you prefer to
+														// pass creds on query
+														// string
+			if (log.isDebugEnabled())
+				log.debug(url);
+
+			HttpPut putRequest = new HttpPut(url);
+			putRequest.addHeader("accept", "application/json");
+			String basic_auth = new String(
+					Base64.encodeBase64((appId + ":" + appKey).getBytes()));
+			putRequest.addHeader("Authorization", "Basic " + basic_auth);
+
+			//
+			// Convert the object to a JSON request body.
+			//
+			putRequest.addHeader("Content-Type", "application/json");
+			ContentProducer cp = new ContentProducer() {
+
+				@Override
+				public void writeTo(OutputStream outstream) throws IOException {
+
+					mapper.writeValue(outstream, requestPayload);
+
+				}
+			};
+			HttpEntity entity = new EntityTemplate(cp);
+			putRequest.setEntity(entity);
+
+			HttpResponse response = httpClient.execute(putRequest);
+
+			if (response.getStatusLine().getStatusCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatusLine().getStatusCode());
+			}
+
+			//
+			// Convert the JSON pay-load to the standard Response object.
+			//
+			restResponse = mapper.readValue(response.getEntity().getContent(),
+					resultTypeReference);
+
+		} catch (ClientProtocolException e) {
+
+			log.error("ClientProtocolException", e);
+
+		} catch (IOException e) {
+
+			log.error("IOException", e);
+		}
+
+		return restResponse;
+
+	} // end of callPut
 	
 	/*
 	 * This method is used to upload large datasets, typically CSV or XML files.
