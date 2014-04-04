@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class GetTariffRequest extends AbstractRequest implements Serializable {
 
 	/**
@@ -63,6 +65,7 @@ public class GetTariffRequest extends AbstractRequest implements Serializable {
 
 
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 
 		List<NameValuePair> qparams = super.getQueryParams();

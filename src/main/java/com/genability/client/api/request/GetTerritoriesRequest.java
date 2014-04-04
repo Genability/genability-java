@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class GetTerritoriesRequest extends AbstractGetNRequest implements Serializable {
 
 	/**
@@ -146,6 +148,7 @@ public class GetTerritoriesRequest extends AbstractGetNRequest implements Serial
 	}
 
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 
 		List<NameValuePair> qparams = super.getQueryParams();

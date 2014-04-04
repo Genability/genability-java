@@ -7,12 +7,15 @@ import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
 import com.genability.client.api.request.ReadingDataRequest;
 import com.genability.client.types.Profile;
+import com.genability.client.types.ReadingData;
 import com.genability.client.types.Response;
 
 
 public class ProfileService extends BaseService {
 	
     private static final TypeReference<Response<Profile>> PROFILE_RESPONSE_TYPEREF = new TypeReference<Response<Profile>>() {};
+	private static final TypeReference<Response<ReadingData>> READING_DATA_RESPONSE_TYPEREF = new TypeReference<Response<ReadingData>>() {
+	};
 
 	/**
 	 * Calls the REST service to get a Profile based on the arguments passed in.
@@ -99,19 +102,19 @@ public class ProfileService extends BaseService {
 
 	}
 
-	public Response<Profile> updateReadings(ReadingDataRequest request) {
+	public Response<ReadingData> updateReadings(ReadingDataRequest request) {
 
 		if (log.isDebugEnabled())
 			log.debug("updateReadings called");
 
-		String uri = "v1/profiles/{0}";
+		String uri = "v1/profiles/{0}/readings";
 
-		if (request.getProfileId() != null) {
-			uri = MessageFormat.format(uri, request.getProfileId());
+		if (request.getUsageProfileId() != null) {
+			uri = MessageFormat.format(uri, request.getUsageProfileId());
 		}
 
-		Response<Profile> response = this.callPut(uri, request,
-				PROFILE_RESPONSE_TYPEREF);
+		Response<ReadingData> response = this.callPut(uri, request,
+				READING_DATA_RESPONSE_TYPEREF);
 
 		if (log.isDebugEnabled())
 			log.debug("updateReadings completed");
@@ -120,22 +123,22 @@ public class ProfileService extends BaseService {
 
 	}
 
-	public Response<Profile> addReadings(ReadingDataRequest request) {
+	public Response<ReadingData> addReadings(ReadingDataRequest request) {
 
 		if (log.isDebugEnabled())
-			log.debug("updateReadings called");
+			log.debug("addReadings called");
 
-		String uri = "v1/profiles/{0}";
+		String uri = "v1/profiles/{0}/readings";
 
-		if (request.getProfileId() != null) {
-			uri = MessageFormat.format(uri, request.getProfileId());
+		if (request.getUsageProfileId() != null) {
+			uri = MessageFormat.format(uri, request.getUsageProfileId());
 		}
 
-		Response<Profile> response = this.callPost(uri, request,
-				PROFILE_RESPONSE_TYPEREF);
+		Response<ReadingData> response = this.callPost(uri, request,
+				READING_DATA_RESPONSE_TYPEREF);
 
 		if (log.isDebugEnabled())
-			log.debug("updateReadings completed");
+			log.debug("addReadings completed");
 
 		return response;
 

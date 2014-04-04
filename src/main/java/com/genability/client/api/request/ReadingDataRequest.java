@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.genability.client.types.ReadingData;
 
 public class ReadingDataRequest extends AbstractRequest implements Serializable{
@@ -15,22 +16,22 @@ public class ReadingDataRequest extends AbstractRequest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 
-	private String profileId;
+	private String usageProfileId;
 	private List<ReadingData> readings;
 
 	/**
 	 * @return the usageProfileId_
 	 */
-	public String getProfileId() {
-		return profileId;
+	public String getUsageProfileId() {
+		return usageProfileId;
 	}
 
 	/**
 	 * @param usageProfileId_
 	 *            the usageProfileId_ to set
 	 */
-	public void setProfileId(String profileId) {
-		this.profileId = profileId;
+	public void setUsageProfileId(String profileId) {
+		this.usageProfileId = profileId;
 	}
 	
 	public List<ReadingData> getReadings() {
@@ -42,11 +43,11 @@ public class ReadingDataRequest extends AbstractRequest implements Serializable{
 	}
 
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = super.getQueryParams();
-		
-		addParam(qparams, "profileId", profileId);
+		addParam(qparams, "usageProfileId", usageProfileId);
 		return qparams;
 		
 	}
