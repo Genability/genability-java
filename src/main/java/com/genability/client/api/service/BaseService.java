@@ -2,29 +2,28 @@ package com.genability.client.api.service;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.config.RequestConfig.Builder;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentProducer;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.EntityTemplate;
-import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.params.CoreProtocolPNames;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -331,28 +330,34 @@ public class BaseService {
 		String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
 
 		if(log.isDebugEnabled()) log.debug(url);
-		
+
+		// Set up post request and set header auth
 		HttpPost postRequest = new HttpPost(url);
-		// Large files may take a while, so we are setting this to a 5 minute timeout
-		postRequest.getParams().setParameter("http.socket.timeout", new Integer(300000));
 		String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
 		postRequest.addHeader("Authorization", "Basic " + basic_auth);
 		
-		MultipartEntity reqEntity = new MultipartEntity();
-		FileBody fileBody = new FileBody(request.getFileData());
-		reqEntity.addPart("fileData", fileBody);
-		try {
-			reqEntity.addPart("fileFormat", new StringBody(request.getFileFormat(), Charset.forName("UTF-8")));
-		} catch (UnsupportedEncodingException uee) {
-			log.error("UnsupportedEncodingException", uee);
-		}
-		postRequest.setEntity(reqEntity);
+		// Large files may take a while, so we are setting this to a 5 minute
+		// timeout
+		Builder requestConfigBuilder = RequestConfig.custom();
+		requestConfigBuilder.setSocketTimeout(300000);
+		postRequest.setConfig(requestConfigBuilder.build());
 
-	    httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+		MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+		builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+		// Set file data
+		FileBody fileBody = new FileBody(request.getFileData());
+		builder.addPart("fileData", fileBody);
+		builder.addTextBody("fileFormat", request.getFileFormat(),
+				ContentType.TEXT_XML);
+		postRequest.setEntity(builder.build());
+
 
 	    try {
 		    HttpResponse response = httpClient.execute(postRequest);
-			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
+			restResponse = mapper.readValue(response.getEntity().getContent(),
+					resultTypeReference);
+
 		} catch (ClientProtocolException e) {
 			
 			log.error("ClientProtocolException",e);

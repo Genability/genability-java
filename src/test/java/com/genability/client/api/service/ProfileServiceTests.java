@@ -163,10 +163,11 @@ public class ProfileServiceTests extends BaseServiceTests {
 		// .getQuantityValue().equals(new BigDecimal("1000")));
 		// assertTrue("reading2 is not equal", profile.getReadingData().get(0)
 		// .getQuantityValue().equals(new BigDecimal("900")));
-		
-		
+
 		cleanup(account.getAccountId());
 	}
+
+
 
 
 }
