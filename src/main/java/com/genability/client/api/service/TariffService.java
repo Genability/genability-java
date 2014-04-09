@@ -70,6 +70,26 @@ public class TariffService extends BaseService {
 
 	}
 
+	public Response<Tariff> updateTariff(Tariff tariff) {
+
+		if(log.isDebugEnabled()) log.debug("updateTariff called");
+
+		String uri = "beta/tariffs";
+		if (tariff.getTariffId() != null) {
+			uri += "/" + tariff.getTariffId();
+		}
+
+		Response<Tariff> response = this.callPut(
+				uri,
+				tariff,
+				TARIFF_RESPONSE_TYPEREF);
+
+		if(log.isDebugEnabled()) log.debug("updateTariff completed");
+
+		return response;
+
+	}
+
 
 	public Response<Tariff> deleteTariff(DeleteTariffRequest request) {
 
