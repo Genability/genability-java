@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.api.request.DeleteTariffRequest;
 import com.genability.client.api.request.GetTariffRequest;
 import com.genability.client.api.request.GetTariffsRequest;
+import com.genability.client.types.Fields;
 import com.genability.client.types.Response;
 import com.genability.client.types.Tariff;
 
@@ -21,6 +22,7 @@ public class TariffService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getTariffs called");
 		
 		//betaStandardCurrency into Query parameters
+		request.setFields(Fields.EXT);
 		
 		Response<Tariff> response = this.callGet(
 				"public/tariffs", 
@@ -30,6 +32,7 @@ public class TariffService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getTariffs completed");
 		
 		return response;
+
 		
 	}
 	
@@ -54,6 +57,26 @@ public class TariffService extends BaseService {
 		
 	}
 	
+	/**
+	 * Calls the REST service to get one tariff based on the arguments passed
+	 * in.
+	 * 
+	 * @return
+	 */
+	public Response<Tariff> getTariffProperties(GetTariffRequest request) {
+
+		if (log.isDebugEnabled())
+			log.debug("getTariffProperties called");
+
+		Response<Tariff> response = this.callGet("public/tariffs/properties",
+				request.getQueryParams(), TARIFF_RESPONSE_TYPEREF);
+
+		if (log.isDebugEnabled())
+			log.debug("getTariffProperties completed");
+
+		return response;
+
+	}
 	
 	public Response<Tariff> addTariff(Tariff tariff) {
 
