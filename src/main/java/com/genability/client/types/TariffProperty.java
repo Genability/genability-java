@@ -24,7 +24,7 @@ public class TariffProperty {
 	private String formulaDetail;
 	private Boolean isDefault;
 	private Long lookbackItemQuantity;
-	private Long lookbackPeriod;
+	private String lookbackPeriod;
 	private Long lookbackQuantity;
 	private Long lookbackTimeOfUseId;
 	private Long lookbackSeasonId;
@@ -165,11 +165,11 @@ public class TariffProperty {
 		this.lookbackItemQuantity = lookbackItemQuantity;
 	}
 
-	public Long getLookbackPeriod() {
+	public String getLookbackPeriod() {
 		return lookbackPeriod;
 	}
 
-	public void setLookbackPeriod(Long lookbackPeriod) {
+	public void setLookbackPeriod(String lookbackPeriod) {
 		this.lookbackPeriod = lookbackPeriod;
 	}
 
