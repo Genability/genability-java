@@ -23,8 +23,13 @@ public class TariffProperty {
   private String period;
   private String formulaDetail;
   private Boolean isDefault;
+	private Long lookbackItemQuantity;
+	private Long lookbackPeriod;
+	private Long lookbackQuantity;
+	private Long lookbackTimeOfUseId;
+	private Long lookbackSeasonId;
   
-  public String getKeyName() {
+	public String getKeyName() {
     return keyName;
   }
   
@@ -151,5 +156,45 @@ public class TariffProperty {
   public void setIsDefault(Boolean isDefault) {
     this.isDefault = isDefault;
   }
+
+	public Long getLookbackItemQuantity() {
+		return lookbackItemQuantity;
+	}
+
+	public void setLookbackItemQuantity(Long lookbackItemQuantity) {
+		this.lookbackItemQuantity = lookbackItemQuantity;
+	}
+
+	public Long getLookbackPeriod() {
+		return lookbackPeriod;
+	}
+
+	public void setLookbackPeriod(Long lookbackPeriod) {
+		this.lookbackPeriod = lookbackPeriod;
+	}
+
+	public Long getLookbackQuantity() {
+		return lookbackQuantity;
+	}
+
+	public void setLookbackQuantity(Long lookbackQuantity) {
+		this.lookbackQuantity = lookbackQuantity;
+	}
+
+	public Long getLookbackTimeOfUseId() {
+		return lookbackTimeOfUseId;
+	}
+
+	public void setLookbackTimeOfUseId(Long lookbackTimeOfUseId) {
+		this.lookbackTimeOfUseId = lookbackTimeOfUseId;
+	}
+
+	public Long getLookbackSeasonId() {
+		return lookbackSeasonId;
+	}
+
+	public void setLookbackSeasonId(Long lookbackSeasonId) {
+		this.lookbackSeasonId = lookbackSeasonId;
+	}
   
 }
