@@ -1,6 +1,7 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,31 +24,20 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * Private member variable serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Private member variable fromDate
-	 */
 	private DateTime fromDateTime;
-
-	/**
-	 * Private member variable toDate
-	 */
 	private DateTime toDateTime;
-
-	/**
-	 * Private member variable masterTariffId
-	 */
 	private Long masterTariffId;
-
-	/**
-	 * Private member variable profileId
-	 */
+	private Long tariffRateId;
 	private String profileId;
-
-	/**
-	 * Private member variable Inputs
-	 */
 	private List<PropertyData> tariffInputs;
+	private String accuracy;
+	private String accountId;
+	private String providerAccountId;
+	private Boolean billingPeriod;
+	private Boolean useMostRecentUsageData;
+	private Boolean includeDefaultProfile;
+	private Boolean minimums;
+	private BigDecimal dataFactor;
 
 	/**
 	 * Private member variable detailLevel
@@ -62,27 +52,6 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * Default is no grouping if not specified.
 	 */
 	private GroupBy groupBy;
-	
-	/**
-	 * Private member variable estimate
-	 */
-	private String accuracy;
-
-	/**
-	 * Private member variable accountId
-	 */
-	private String accountId;
-	
-	/**
-	 * private member variable for providerAccountId
-	 */
-	private String providerAccountId;
-
-	/**
-	 * Private member variable billingPeriod
-	 */
-	private Boolean billingPeriod;
-	
 	
 
 	private List<TariffRate> rateInputs;
@@ -145,7 +114,15 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	public void setMasterTariffId(Long masterTariffId) {
 		this.masterTariffId = masterTariffId;
 	}
-	
+
+	@JsonInclude(Include.NON_NULL)
+	public Long getTariffRateId() {
+		return tariffRateId;
+	}
+
+	public void setTariffRateId(Long tariffRateId_) {
+		this.tariffRateId = tariffRateId_;
+	}
 	
 	@JsonInclude(Include.NON_NULL)
 	public String getAccountId() {
@@ -280,6 +257,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		rateInputs.add(rateInput);
 	}
 	
+	@JsonInclude(Include.NON_NULL)
 	public Boolean getBillingPeriod() {
       return billingPeriod;
     }
@@ -288,6 +266,42 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
       this.billingPeriod = billingPeriod;
     }
 	
+	@JsonInclude(Include.NON_NULL)
+	public Boolean getIncludeDefaultProfile() {
+		return includeDefaultProfile;
+	}
+
+	public void setIncludeDefaultProfile(Boolean includeDefaultProfile) {
+		this.includeDefaultProfile = includeDefaultProfile;
+	}
+
+	@JsonInclude(Include.NON_NULL)
+	public Boolean getUseMostRecentUsageData() {
+		return useMostRecentUsageData;
+	}
+
+	public void setUseMostRecentUsageData(Boolean useMostRecentUsageData) {
+		this.useMostRecentUsageData = useMostRecentUsageData;
+	}
+
+	@JsonInclude(Include.NON_NULL)
+	public Boolean getMinimums() {
+		return minimums;
+	}
+
+	public void setMinimums(Boolean minimums) {
+		this.minimums = minimums;
+	}
+
+	@JsonInclude(Include.NON_NULL)
+	public BigDecimal getDataFactor() {
+		return dataFactor;
+	}
+
+	public void setDataFactor(BigDecimal dataFactor) {
+		this.dataFactor = dataFactor;
+	}
+
 	@Override
 	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
