@@ -34,7 +34,13 @@ public class CalculatedCostItem {
     
     private BigDecimal rateAmount;
     
-    /**
+	private String family;
+
+	private String formula;
+
+	private DateTime demandInterval;
+
+	/**
 	 * @return the tariffRateId
 	 */
 	public Long getTariffRateId() {
@@ -133,6 +139,20 @@ public class CalculatedCostItem {
 	}
 
 	/**
+	 * @return the family
+	 */
+	public String getFamily() {
+		return family;
+	}
+
+	/**
+	 * @param family
+	 */
+	public void setFamily(String family) {
+		this.family = family;
+	}
+
+	/**
 	 * @return the quantityKey
 	 */
 	public String getQuantityKey() {
@@ -174,6 +194,7 @@ public class CalculatedCostItem {
 		this.itemCount = itemCount;
 	}
 
+
 	/**
 	 * @return the cost
 	 */
@@ -202,5 +223,32 @@ public class CalculatedCostItem {
 		this.rateAmount = rateAmount;
 	}    
     
-    
+	/**
+	 * @return formula
+	 */
+	public String getFormula() {
+		return formula;
+	}
+
+	/**
+	 * @param formula
+	 */
+	public void setFormula(String formula) {
+		this.formula = formula;
+	}
+
+	/**
+	 * @return demandInterval
+	 */
+	public DateTime getDemandInterval() {
+		return demandInterval;
+	}
+
+	/**
+	 * @param demandInterval
+	 */
+	public void setDemandInterval(DateTime demandInterval) {
+		this.demandInterval = demandInterval;
+	}
+
 }
