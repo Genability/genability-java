@@ -1,22 +1,28 @@
 package com.genability.client.api.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.junit.Test;
 
+import com.genability.client.api.request.GetCalculatedCostRequest;
+import com.genability.client.api.request.GetCalculationInputsRequest;
 import com.genability.client.types.Account;
+import com.genability.client.types.CalculatedCost;
 import com.genability.client.types.CalculatedCostItem;
 import com.genability.client.types.DetailLevel;
 import com.genability.client.types.GroupBy;
-import com.genability.client.types.Response;
-import com.genability.client.types.CalculatedCost;
+import com.genability.client.types.Profile;
 import com.genability.client.types.PropertyData;
-import com.genability.client.api.request.GetCalculatedCostRequest;
-import com.genability.client.api.request.GetCalculationInputsRequest;
-import com.genability.client.api.service.CalculateService;
-
-import org.junit.Test;
+import com.genability.client.types.ReadingData;
+import com.genability.client.types.Response;
 
 public class CalculateServiceTests extends BaseServiceTests {
 
@@ -159,6 +165,81 @@ public class CalculateServiceTests extends BaseServiceTests {
 		
 	}
 	
+
+	@Test
+	public void testCalculateMultipleProfiles() {
+
+		// create profile with readings
+		List<ReadingData> readings = new ArrayList<ReadingData>();
+		// add two months of readings
+		ReadingData readingData1 = new ReadingData();
+		readingData1.setQuantityUnit("kWh");
+		DateTime fromDateTime1 = new DateTime(2014, 3, 1, 1, 0, 0, 0,
+				DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime1 = new DateTime(2014, 4, 1, 1, 0, 0, 0,
+				DateTimeZone.forID("US/Pacific"));
+		readingData1.setFromDateTime(fromDateTime1);
+		readingData1.setToDateTime(toDateTime1);
+		readingData1.setQuantityValue(new BigDecimal("1000"));
+		readings.add(readingData1);
+
+		// create profile 1
+		Profile profile1 = createProfileWithReadings(readings);
+		List<ReadingData> readings2 = new ArrayList<ReadingData>();
+		ReadingData readingData2 = new ReadingData();
+		readingData2.setQuantityUnit("kWh");
+		DateTime fromDateTime2 = new DateTime(2014, 3, 1, 1, 0, 0, 0,
+				DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime2 = new DateTime(2014, 4, 1, 1, 0, 0, 0,
+				DateTimeZone.forID("US/Pacific"));
+		readingData2.setFromDateTime(fromDateTime2);
+		readingData2.setToDateTime(toDateTime2);
+		readingData2.setQuantityValue(new BigDecimal("900"));
+		readings2.add(readingData2);
+
+		// create profile 2
+		Profile profile2 = createProfileWithReadings(readings2);
+		DateTime fromDateTime = new DateTime(2014, 3, 1, 1, 0, 0, 0,
+				DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime = new DateTime(2014, 4, 1, 1, 0, 0, 0,
+				DateTimeZone.forID("US/Pacific"));
+
+		// set up calculation request
+		GetCalculatedCostRequest request = new GetCalculatedCostRequest();
+		request.setFromDateTime(fromDateTime);
+		request.setToDateTime(toDateTime);
+		request.setDetailLevel(DetailLevel.ALL);
+
+		// add profile1 input
+		PropertyData profileProp1 = new PropertyData();
+		profileProp1.setFromDateTime(fromDateTime);
+		profileProp1.setToDateTime(toDateTime);
+		profileProp1.setDataValue(profile1.getProfileId());
+		profileProp1.setKeyName("profileId");
+		request.addTariffInput(profileProp1);
+
+		// add profile2 input
+		PropertyData profileProp2 = new PropertyData();
+		profileProp2.setFromDateTime(fromDateTime);
+		profileProp2.setToDateTime(toDateTime);
+		profileProp2.setDataValue(profile2.getProfileId());
+		profileProp2.setKeyName("profileId");
+		request.addTariffInput(profileProp2);
+
+		// run calc
+		CalculatedCost calcCost = callRunCalc("Test for calculateForAccount",
+				request);
+
+		//
+		// Add tests
+		//
+
+		// clean up data
+		cleanup(profile1.getAccountId());
+		cleanup(profile2.getAccountId());
+
+	}
+
 	@Test
 	public void testGetCalculationInputs() {
 		
@@ -184,7 +265,8 @@ public class CalculateServiceTests extends BaseServiceTests {
 	}
 
 	
-	public void callRunCalc(String testCase, GetCalculatedCostRequest request) {
+	public CalculatedCost callRunCalc(String testCase,
+			GetCalculatedCostRequest request) {
 		
 		Response<CalculatedCost> restResponse = calculateService.getCalculatedCost(request);
 		
@@ -206,5 +288,6 @@ public class CalculateServiceTests extends BaseServiceTests {
 			
 		}
 		
+		return calculatedCost;
 	}
 }

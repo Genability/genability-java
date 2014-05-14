@@ -22,6 +22,7 @@ import com.genability.client.api.request.DeleteAccountRequest;
 import com.genability.client.types.Account;
 import com.genability.client.types.Profile;
 import com.genability.client.types.PropertyData;
+import com.genability.client.types.ReadingData;
 import com.genability.client.types.Response;
 import com.genability.client.types.Tariff;
 
@@ -134,6 +135,29 @@ public class BaseServiceTests {
 		
 		Profile newProfile = null;
 		for(Profile profile: restResponse.getResults()) {
+			newProfile = profile;
+			assertNotNull("profileId null", profile.getProfileId());
+		}
+		return newProfile;
+	}
+
+	protected Profile createProfileWithReadings(List<ReadingData> readings) {
+
+		Account account = createAccount();
+		Profile addProfile = new Profile();
+		addProfile.setAccountId(account.getAccountId());
+		addProfile.setReadingData(readings);
+
+		Response<Profile> restResponse = profileService.addProfile(addProfile);
+
+		assertNotNull("new Profile response is null", restResponse);
+		assertEquals("bad status", restResponse.getStatus(),
+				Response.STATUS_SUCCESS);
+		assertEquals("bad type", restResponse.getType(), Profile.REST_TYPE);
+		assertTrue("bad count", restResponse.getCount() > 0);
+
+		Profile newProfile = null;
+		for (Profile profile : restResponse.getResults()) {
 			newProfile = profile;
 			assertNotNull("profileId null", profile.getProfileId());
 		}
