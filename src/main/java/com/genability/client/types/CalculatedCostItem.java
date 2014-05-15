@@ -40,6 +40,8 @@ public class CalculatedCostItem {
 
 	private DateTime demandInterval;
 
+	private ChargeType chargeType;
+
 	/**
 	 * @return the tariffRateId
 	 */
@@ -136,6 +138,21 @@ public class CalculatedCostItem {
 	 */
 	public void setRateType(RateUnit rateType) {
 		this.rateType = rateType;
+	}
+
+	/**
+	 * 
+	 * @return chargeType
+	 */
+	public ChargeType getChargeType() {
+		return chargeType;
+	}
+
+	/**
+	 * @param chargeType
+	 */
+	public void setChargeType(ChargeType chargeType) {
+		this.chargeType = chargeType;
 	}
 
 	/**

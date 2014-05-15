@@ -61,6 +61,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 */
 	public GetCalculatedCostRequest() {
 
+
 	}
 
 	/**

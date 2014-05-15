@@ -24,7 +24,9 @@ public abstract class AbstractRequest {
 	public static final String ISO_8601_SHORT_DATE_FORMAT = "yyyy-MM-dd";
 	public static final DateTimeFormatter ISO_8601_SHORT_DATE_FORMATTER = DateTimeFormat.forPattern(ISO_8601_SHORT_DATE_FORMAT);
 	
-	protected Fields fields = Fields.DEFAULT;
+	// To avoid confusion with fields null/versus not returning - we will
+	// default to extended fields.
+	protected Fields fields = Fields.EXT;
 
 	public Fields getFields() {
       return fields;

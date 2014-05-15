@@ -2,7 +2,7 @@ package com.genability.client.types;
 
 public enum Fields {
 
-  DEFAULT(null), MIN("min"), EXT("ext");
+	DEFAULT("std"), MIN("min"), EXT("ext");
   
   private final String value;
 
