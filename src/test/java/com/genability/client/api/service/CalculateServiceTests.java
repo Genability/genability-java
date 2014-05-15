@@ -209,6 +209,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
 		request.setDetailLevel(DetailLevel.ALL);
+		request.setMasterTariffId(512l);
 
 		// add profile1 input
 		PropertyData profileProp1 = new PropertyData();
