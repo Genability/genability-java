@@ -40,6 +40,16 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	private Boolean deriveDemand;
 
 	/**
+	 * private member variable for deriveConsumption
+	 */
+	private Boolean deriveConsumption;
+
+	/**
+	 * private member variable for demandInterval
+	 */
+	private Long demandInterval;
+
+	/**
 	 * Private member holding optional group-by argument.
 	 */
 	private GroupBy groupBy;
@@ -110,12 +120,24 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 		return deriveDemand;
 	}
 
-	/**
-	 * @param populateReadingData
-	 *            the populateReadingData to set
-	 */
 	public void setDeriveDemand(Boolean deriveDemand) {
 		this.deriveDemand = deriveDemand;
+	}
+
+	public Boolean getDeriveConsumption() {
+		return deriveConsumption;
+	}
+
+	public void setDeriveConsumption(Boolean deriveConsumption) {
+		this.deriveConsumption = deriveConsumption;
+	}
+
+	public Long getDemandInterval() {
+		return demandInterval;
+	}
+
+	public void setDemandInterval(Long demandInterval) {
+		this.demandInterval = demandInterval;
 	}
 
 	public GroupBy getGroupBy() {
