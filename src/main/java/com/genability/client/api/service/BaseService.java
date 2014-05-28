@@ -1,29 +1,32 @@
 package com.genability.client.api.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.config.RequestConfig.Builder;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.entity.ContentProducer;
+import org.apache.http.entity.AbstractHttpEntity;
 import org.apache.http.entity.ContentType;
-import org.apache.http.entity.EntityTemplate;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -141,49 +144,17 @@ public class BaseService {
 	 * @return
 	 */
 	protected <T extends Response<R>, R> T callGet(String endpointPath, List<NameValuePair> queryParams, TypeReference<T> resultTypeReference) {
+		String qs = null;
 
-		T restResponse = null;
+		String url = restApiServer + endpointPath; // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
+		if(queryParams != null) qs = URLEncodedUtils.format(queryParams, "UTF-8");
+		if(qs != null) url += "?" + qs;
 
-		try {
+		if(log.isDebugEnabled()) log.debug(qs);
 
-			String qs = null;
-			
-			String url = restApiServer + endpointPath; // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
-			if(queryParams != null) qs = URLEncodedUtils.format(queryParams, "UTF-8");
-			if(qs != null) url += "?" + qs;
-			
-			if(log.isDebugEnabled()) log.debug(qs);
-			
-			HttpGet getRequest = new HttpGet(url);
+		HttpGet getRequest = new HttpGet(url);
 
-			getRequest.addHeader("accept", "application/json");
-
-			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
-			getRequest.addHeader("Authorization", "Basic " + basic_auth);
-
-			HttpResponse response = httpClient.execute(getRequest);
-
-			if (response.getStatusLine().getStatusCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ response.getStatusLine().getStatusCode());
-			}
-
-			//
-			// Convert the JSON pay-load to the standard Response object.
-			//
-			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
-
-		} catch (ClientProtocolException e) {
-
-			log.error("ClientProtocolException",e);
-
-		} catch (IOException e) {
-
-			log.error("IOException",e);
-		}
-
-		return restResponse;
-		
+		return execute(getRequest, resultTypeReference);
 	} // end of callGet
 	
 	
@@ -195,58 +166,13 @@ public class BaseService {
 	 * @return
 	 */
 	protected <T extends Response<R>, R> T callPost(String endpointPath, final Object requestPayload, TypeReference<T> resultTypeReference) {
-		
-		T restResponse = null;
+		String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
+		if(log.isDebugEnabled()) log.debug(url);
 
-		try {
+		HttpPost postRequest = new HttpPost(url);
+		postRequest.setEntity(new JacksonHttpEntity(requestPayload));
 
-			String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
-			if(log.isDebugEnabled()) log.debug(url);
-			
-			HttpPost postRequest = new HttpPost(url);
-			postRequest.addHeader("accept", "application/json");
-			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
-			postRequest.addHeader("Authorization", "Basic " + basic_auth);
-			
-			//
-			// Convert the object to a JSON request body.
-			//
-			postRequest.addHeader("Content-Type", "application/json");
-			ContentProducer cp = new ContentProducer() {
-				
-				@Override
-			    public void writeTo(OutputStream outstream) throws IOException {
-					
-					mapper.writeValue(outstream, requestPayload);
-					
-			    }
-			};
-			HttpEntity entity = new EntityTemplate(cp);
-			postRequest.setEntity(entity);
-
-			HttpResponse response = httpClient.execute(postRequest);
-
-			if (response.getStatusLine().getStatusCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ response.getStatusLine().getStatusCode());
-			}
-
-			//
-			// Convert the JSON pay-load to the standard Response object.
-			//
-			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
-
-		} catch (ClientProtocolException e) {
-
-			log.error("ClientProtocolException",e);
-
-		} catch (IOException e) {
-
-			log.error("IOException",e);
-		}
-
-		return restResponse;
-		
+		return execute(postRequest, resultTypeReference);
 	} // end of callPost
 
 	/**
@@ -256,67 +182,19 @@ public class BaseService {
 	 * @param resultTypeReference
 	 * @return
 	 */
-	protected <T extends Response<R>, R> T callPut(String endpointPath,
-			final Object requestPayload, TypeReference<T> resultTypeReference) {
-
-		T restResponse = null;
-
-		try {
-
-			String url = restApiServer + endpointPath; // + "?" +
+	protected <T extends Response<R>, R> T callPut(String endpointPath, final Object requestPayload, TypeReference<T> resultTypeReference) {
+		String url = restApiServer + endpointPath; // + "?" +
 														// this.getQueryStringCredentials();
 														// // if you prefer to
 														// pass creds on query
 														// string
-			if (log.isDebugEnabled())
-				log.debug(url);
+		if (log.isDebugEnabled())
+			log.debug(url);
 
-			HttpPut putRequest = new HttpPut(url);
-			putRequest.addHeader("accept", "application/json");
-			String basic_auth = new String(
-					Base64.encodeBase64((appId + ":" + appKey).getBytes()));
-			putRequest.addHeader("Authorization", "Basic " + basic_auth);
+		HttpPut putRequest = new HttpPut(url);
+		putRequest.setEntity(new JacksonHttpEntity(requestPayload));
 
-			//
-			// Convert the object to a JSON request body.
-			//
-			putRequest.addHeader("Content-Type", "application/json");
-			ContentProducer cp = new ContentProducer() {
-
-				@Override
-				public void writeTo(OutputStream outstream) throws IOException {
-
-					mapper.writeValue(outstream, requestPayload);
-
-				}
-			};
-			HttpEntity entity = new EntityTemplate(cp);
-			putRequest.setEntity(entity);
-
-			HttpResponse response = httpClient.execute(putRequest);
-
-			if (response.getStatusLine().getStatusCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ response.getStatusLine().getStatusCode());
-			}
-
-			//
-			// Convert the JSON pay-load to the standard Response object.
-			//
-			restResponse = mapper.readValue(response.getEntity().getContent(),
-					resultTypeReference);
-
-		} catch (ClientProtocolException e) {
-
-			log.error("ClientProtocolException", e);
-
-		} catch (IOException e) {
-
-			log.error("IOException", e);
-		}
-
-		return restResponse;
-
+		return execute(putRequest, resultTypeReference);
 	} // end of callPut
 	
 	/*
@@ -324,17 +202,12 @@ public class BaseService {
 	 * The request object passed in contains the File to upload.
 	 */
 	public <T extends Response<R>, R> T callFileUpload(String endpointPath, BulkUploadRequest request, TypeReference<T> resultTypeReference) {
-		
-		T restResponse = null;
-
 		String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
 
 		if(log.isDebugEnabled()) log.debug(url);
 
 		// Set up post request and set header auth
 		HttpPost postRequest = new HttpPost(url);
-		String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
-		postRequest.addHeader("Authorization", "Basic " + basic_auth);
 		
 		// Large files may take a while, so we are setting this to a 5 minute
 		// timeout
@@ -352,22 +225,7 @@ public class BaseService {
 				ContentType.TEXT_XML);
 		postRequest.setEntity(builder.build());
 
-
-	    try {
-		    HttpResponse response = httpClient.execute(postRequest);
-			restResponse = mapper.readValue(response.getEntity().getContent(),
-					resultTypeReference);
-
-		} catch (ClientProtocolException e) {
-			
-			log.error("ClientProtocolException",e);
-	
-		} catch (IOException e) {
-	
-			log.error("IOException",e);
-		}
-		return restResponse;
-		
+		return execute(postRequest, resultTypeReference);
 	}
 	
 	/**
@@ -378,49 +236,95 @@ public class BaseService {
 	 * @return
 	 */
 	protected <T extends Response<R>, R> T callDelete(String endpointPath, List<NameValuePair> queryParams, TypeReference<T> resultTypeReference) {
+		String qs = null;
 
-		T restResponse = null;
+		String url = restApiServer + endpointPath; // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
+		if(queryParams != null) qs = URLEncodedUtils.format(queryParams, "UTF-8");
+		if(qs != null) url += "?" + qs;
 
+		if(log.isDebugEnabled()) log.debug(qs);
+
+		HttpDelete deleteRequest = new HttpDelete(url);
+
+		return execute(deleteRequest, resultTypeReference);
+	} // end of callGet
+
+	protected <T extends Response<R>, R> T execute(HttpRequestBase request, final TypeReference<T> resultTypeReference) {
 		try {
-
-			String qs = null;
-			
-			String url = restApiServer + endpointPath; // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
-			if(queryParams != null) qs = URLEncodedUtils.format(queryParams, "UTF-8");
-			if(qs != null) url += "?" + qs;
-			
-			if(log.isDebugEnabled()) log.debug(qs);
-			
-			HttpDelete deleteRequest = new HttpDelete(url);
-			
-			deleteRequest.addHeader("accept", "application/json");
+			request.addHeader("accept", "application/json");
 
 			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
-			deleteRequest.addHeader("Authorization", "Basic " + basic_auth);
+			request.addHeader("Authorization", "Basic " + basic_auth);
 
-			HttpResponse response = httpClient.execute(deleteRequest);
+			return httpClient.execute(request, new ResponseHandler<T>() {
+				@Override
+				public T handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
+					if (httpResponse.getStatusLine().getStatusCode() != 200) {
+						String responseBody = null;
+						try {
+							responseBody = EntityUtils.toString(httpResponse.getEntity());
+						}
+						catch (IOException ex) {}
 
-			if (response.getStatusLine().getStatusCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ response.getStatusLine().getStatusCode());
-			}
+						throw new GenabilityException("Failed : HTTP error code : " + httpResponse.getStatusLine().getStatusCode(), responseBody);
+					}
 
-			//
-			// Convert the JSON pay-load to the standard Response object.
-			//
-			restResponse = mapper.readValue(response.getEntity().getContent(), resultTypeReference);
+					//
+					// Convert the JSON pay-load to the standard Response object.
+					//
+					return mapper.readValue(httpResponse.getEntity().getContent(), resultTypeReference);
+				}
+			});
 
-		} catch (ClientProtocolException e) {
+		}
+		catch (ClientProtocolException e) {
+			log.error("ClientProtocolException", e);
+			throw new GenabilityException(e);
+		}
+		catch (IOException e) {
+			log.error("IOException", e);
+			throw new GenabilityException(e);
+		}
+	}
 
-			log.error("ClientProtocolException",e);
+	private class JacksonHttpEntity extends AbstractHttpEntity {
 
-		} catch (IOException e) {
+		private final Object object;
 
-			log.error("IOException",e);
+		public JacksonHttpEntity(final Object object) {
+			this.object = object;
+
+			setContentType(ContentType.APPLICATION_JSON.getMimeType());
 		}
 
-		return restResponse;
-		
-	} // end of callGet	
+		@Override
+		public long getContentLength() {
+			return -1;
+		}
+
+		@Override
+		public boolean isRepeatable() {
+			return true;
+		}
+
+		@Override
+		public boolean isStreaming() {
+			return false;
+		}
+
+		@Override
+		public InputStream getContent() throws IOException {
+			return new ByteArrayInputStream(mapper.writeValueAsBytes(object));
+		}
+
+		@Override
+		public void writeTo(final OutputStream outstream) throws IOException {
+			if (outstream == null) {
+				throw new IllegalArgumentException("Output stream may not be null");
+			}
+			mapper.writeValue(outstream, object);
+		}
+
+	}
 
 }
