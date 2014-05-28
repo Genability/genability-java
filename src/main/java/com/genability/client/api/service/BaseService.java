@@ -7,11 +7,12 @@ import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.config.RequestConfig.Builder;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -248,30 +249,32 @@ public class BaseService {
 		return execute(deleteRequest, resultTypeReference);
 	} // end of callGet
 
-	protected <T extends Response<R>, R> T execute(HttpRequestBase request, TypeReference<T> resultTypeReference) {
-		CloseableHttpResponse httpResponse = null;
+	protected <T extends Response<R>, R> T execute(HttpRequestBase request, final TypeReference<T> resultTypeReference) {
 		try {
 			request.addHeader("accept", "application/json");
 
 			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
 			request.addHeader("Authorization", "Basic " + basic_auth);
 
-			httpResponse = httpClient.execute(request);
+			return httpClient.execute(request, new ResponseHandler<T>() {
+				@Override
+				public T handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
+					if (httpResponse.getStatusLine().getStatusCode() != 200) {
+						String responseBody = null;
+						try {
+							responseBody = EntityUtils.toString(httpResponse.getEntity());
+						}
+						catch (IOException ex) {}
 
-			if (httpResponse.getStatusLine().getStatusCode() != 200) {
-				String responseBody = null;
-				try {
-					responseBody = EntityUtils.toString(httpResponse.getEntity());
+						throw new GenabilityException("Failed : HTTP error code : " + httpResponse.getStatusLine().getStatusCode(), responseBody);
+					}
+
+					//
+					// Convert the JSON pay-load to the standard Response object.
+					//
+					return mapper.readValue(httpResponse.getEntity().getContent(), resultTypeReference);
 				}
-				catch (IOException ex) {}
-
-				throw new GenabilityException("Failed : HTTP error code : " + httpResponse.getStatusLine().getStatusCode(), responseBody);
-			}
-
-			//
-			// Convert the JSON pay-load to the standard Response object.
-			//
-			return mapper.readValue(httpResponse.getEntity().getContent(), resultTypeReference);
+			});
 
 		}
 		catch (ClientProtocolException e) {
@@ -281,16 +284,6 @@ public class BaseService {
 		catch (IOException e) {
 			log.error("IOException", e);
 			throw new GenabilityException(e);
-		}
-		finally {
-			try {
-				if (httpResponse != null) {
-					httpResponse.close();
-				}
-			}
-			catch (IOException ex) {
-				log.error("Problem closing response", ex);
-			}
 		}
 	}
 
