@@ -25,21 +25,28 @@ public class ProfileService extends BaseService {
 	public Response<Profile> getProfile(GetProfileRequest request) {
 		
 		if(log.isDebugEnabled()) log.debug("getProfile called");
-		
+
+		// Set uri based on if providerProfileId was used
 		String uri = "v1/usage/profiles";
-		if (request.getProfileId() != null && request.getProfileId().length() !=0) {
+		if (request.getProviderProfileId() != null
+				&& request.getProviderProfileId().length() != 0) {
+
+			uri += "/pid" + request.getProviderProfileId();
+
+		} else if (request.getProfileId() != null
+				&& request.getProfileId().length() != 0) {
+
 			uri += "/" + request.getProfileId();
 		}
-		
-		Response<Profile> response = this.callGet(
-				uri,
-				request.getQueryParams(),
-				PROFILE_RESPONSE_TYPEREF);
-		
-		if(log.isDebugEnabled()) log.debug("getProfile completed");
-		
+
+		Response<Profile> response = this.callGet(uri,
+				request.getQueryParams(), PROFILE_RESPONSE_TYPEREF);
+
+		if (log.isDebugEnabled())
+			log.debug("getProfile completed");
+
 		return response;
-		
+
 	}
 
 	/**
@@ -65,32 +72,26 @@ public class ProfileService extends BaseService {
 	}
 	
 	public Response<Profile> addProfile(Profile profile) {
-		
-		if(log.isDebugEnabled()) log.debug("addProfile called");
-	
-		Response<Profile> response = this.callPost(
-"v1/usage/profiles",
-				profile,
-				PROFILE_RESPONSE_TYPEREF);
-		
-		if(log.isDebugEnabled()) log.debug("addProfile completed");
-		
+
+		if (log.isDebugEnabled())
+			log.debug("addProfile called");
+
+		Response<Profile> response = this.callPost("v1/usage/profiles",
+				profile, PROFILE_RESPONSE_TYPEREF);
+
+		if (log.isDebugEnabled())
+			log.debug("addProfile completed");
+
 		return response;
-		
+
 	}
-	
 
 	public Response<Profile> updateProfile(Profile profile) {
 
 		if (log.isDebugEnabled())
 			log.debug("updateProfile called");
 
-		String uri = "v1/profiles/{0}";
-
-		if (profile.getProfileId() != null
-				&& profile.getProfileId().length() != 0) {
-			uri = MessageFormat.format(uri, profile.getProfileId());
-		}
+		String uri = "v1/usage/profiles";
 
 		Response<Profile> response = this.callPut(uri, profile,
 				PROFILE_RESPONSE_TYPEREF);

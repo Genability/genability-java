@@ -20,6 +20,11 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 	private String profileId;
 
 	/**
+	 * private member variable for providerProfileId
+	 */
+	private String providerProfileId;
+
+	/**
 	 * private member variable for FromDate
 	 */
 	private DateTime fromDateTime;
@@ -154,6 +159,14 @@ public class GetProfileRequest extends AbstractRequest implements Serializable{
 
 	public void setClipBy(ClipBy clipBy) {
 		this.clipBy = clipBy;
+	}
+
+	public String getProviderProfileId() {
+		return providerProfileId;
+	}
+
+	public void setProviderProfileId(String providerProfileId) {
+		this.providerProfileId = providerProfileId;
 	}
 
 	@Override

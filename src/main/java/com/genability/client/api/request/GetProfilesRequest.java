@@ -18,6 +18,11 @@ public class GetProfilesRequest extends AbstractGetNRequest implements Serializa
 	private String accountId;
 
 	/**
+	 * Private member variable for providerAccountId.
+	 */
+	private String providerAccountId;
+
+	/**
 	 * @return the accountId
 	 */
 	public String getAccountId() {
@@ -31,11 +36,27 @@ public class GetProfilesRequest extends AbstractGetNRequest implements Serializa
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
+
+	/**
+	 * @return providerAccountId
+	 */
+	public String getProviderAccountId() {
+		return providerAccountId;
+	}
+
+	/**
+	 * @param providerAccountId
+	 *            the providerAccountId to set
+	 */
+	public void setProviderAccountId(String providerAccountId) {
+		this.providerAccountId = providerAccountId;
+	}
 	
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		List<NameValuePair> qparams = super.getQueryParams();
-		addParam(qparams,"accountId",accountId);		
+		addParam(qparams, "accountId", accountId);
+		addParam(qparams, "providerAccountId", providerAccountId);
 		return qparams;
 		
 	}
