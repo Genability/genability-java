@@ -37,6 +37,11 @@ public class Profile implements Serializable {
 	private String profileName;
 
 	/**
+	 * private member variable for providerAccountId.
+	 */
+	private String providerAccountId;
+
+	/**
 	 * Private member variable for accountId
 	 */
 	private String accountId;
@@ -212,6 +217,21 @@ public class Profile implements Serializable {
 	}
 
 	/**
+	 * @return the accountId
+	 */
+	public String getProviderAccountId() {
+		return providerAccountId;
+	}
+
+	/**
+	 * @param accountId
+	 *            the accountId to set
+	 */
+	public void setProviderAccountId(String providerAccountId) {
+		this.providerAccountId = providerAccountId;
+	}
+
+	/**
 	 * This is the Genability ID of the provider of this account.
 	 * 
 	 * @return
@@ -317,8 +337,10 @@ public class Profile implements Serializable {
 	public void copy(Profile toCopyToProfile) {
 
 		toCopyToProfile.setProfileId(this.profileId);
+		toCopyToProfile.setProviderProfileId(this.providerProfileId);
 		toCopyToProfile.setProfileName(this.profileName);
 		toCopyToProfile.setAccountId(this.accountId);
+		toCopyToProfile.setProviderAccountId(this.providerAccountId);
 		toCopyToProfile.setProviderOrgId(this.providerOrgId);
 		toCopyToProfile.setDescription(this.description);
 		toCopyToProfile.setSourceId(this.sourceId);

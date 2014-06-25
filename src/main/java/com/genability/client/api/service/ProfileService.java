@@ -31,7 +31,7 @@ public class ProfileService extends BaseService {
 		if (request.getProviderProfileId() != null
 				&& request.getProviderProfileId().length() != 0) {
 
-			uri += "/pid" + request.getProviderProfileId();
+			uri += "/pid/" + request.getProviderProfileId();
 
 		} else if (request.getProfileId() != null
 				&& request.getProfileId().length() != 0) {
