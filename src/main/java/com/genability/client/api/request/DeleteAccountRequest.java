@@ -30,11 +30,6 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 	private String providerAccountId;
 
 	/**
-	 * private field providerOrgId
-	 */
-	private String providerOrgId;
-
-	/**
 	 * private field hardDelete
 	 * -- unpublished functionality --
 	 */
@@ -52,13 +47,6 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 	 */
 	public String getProviderAccountId() {
 		return providerAccountId;
-	}
-
-	/**
-	 * @return the providerOrgId
-	 */
-	public String getProviderOrgId() {
-		return providerOrgId;
 	}
 
 	public Boolean getHardDelete() {
@@ -81,16 +69,6 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 		this.providerAccountId = providerAccountId;
 	}
 
-	/**
-	 * @param providerOrgId
-	 *            the providerOrgId to set
-	 * The providerOrgId should be specified when you have created more
-	 * than one Org.  If it is not specified, Accounts for your default
-	 * (or only) Org will be returned.   
-	 */
-	public void setProviderOrgId(String providerOrgId) {
-		this.providerOrgId = providerOrgId;
-	}
 
 	/**
 	 * @param hardDelete
@@ -109,7 +87,6 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 		List<NameValuePair> qparams = super.getQueryParams();
 		
 		addParam(qparams,"providerAccountId", providerAccountId);
-		addParam(qparams,"providerOrgId",providerOrgId);
 		addParam(qparams,"hardDelete",hardDelete);
 		
 		return qparams;

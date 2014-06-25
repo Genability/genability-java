@@ -29,10 +29,6 @@ public class GetAccountRequest extends AbstractRequest implements Serializable {
 	 */
 	private String providerAccountId;
 
-	/**
-	 * private field providerOrgId
-	 */
-	private String providerOrgId;
 
 	/**
 	 * @return the accountId
@@ -48,12 +44,7 @@ public class GetAccountRequest extends AbstractRequest implements Serializable {
 		return providerAccountId;
 	}
 
-	/**
-	 * @return the providerOrgId
-	 */
-	public String getProviderOrgId() {
-		return providerOrgId;
-	}
+
 
 	/**
 	 * @param accountId
@@ -71,25 +62,12 @@ public class GetAccountRequest extends AbstractRequest implements Serializable {
 		this.providerAccountId = providerAccountId;
 	}
 
-	/**
-	 * @param providerOrgId
-	 *            the providerOrgId to set
-	 * The providerOrgId should be specified when you have created more
-	 * than one Org.  If it is not specified, Accounts for your default
-	 * (or only) Org will be returned.   
-	 */
-	public void setProviderOrgId(String providerOrgId) {
-		this.providerOrgId = providerOrgId;
-	}
-
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = super.getQueryParams();
 		
 		addParam(qparams,"providerAccountId", providerAccountId);
-		addParam(qparams,"providerOrgId",providerOrgId);
-		
 		return qparams;
 		
 	}	

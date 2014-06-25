@@ -95,11 +95,6 @@ public class GetAccountTariffsRequest extends AbstractGetNRequest implements Ser
 	private Boolean populateProperties;
 
 	/**
-	 * private field providerOrgId
-	 */
-	private String providerOrgId;
-
-	/**
 	 * private field providerAccountId
 	 */
 	private String providerAccountId;
@@ -303,7 +298,7 @@ public class GetAccountTariffsRequest extends AbstractGetNRequest implements Ser
 		List<NameValuePair> qparams = super.getQueryParams();
 		
 		addParam(qparams, "providerAccountId", providerAccountId);
-		addParam(qparams, "providerOrgId", providerOrgId);
+
 
 		return qparams;
 		
