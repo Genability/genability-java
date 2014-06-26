@@ -3,6 +3,7 @@ package com.genability.client.api.request;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -243,6 +244,13 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		tariffInputs.add(tariffInput);
 	}
 	
+	public void addTariffInputs(Collection<PropertyData> tariffInputs) {
+		if (this.tariffInputs == null) {
+			this.tariffInputs = new ArrayList<PropertyData>();
+		}
+		this.tariffInputs.addAll(tariffInputs);
+	}
+
 	public List<TariffRate> getRateInputs() {
         return rateInputs;
     }
@@ -258,6 +266,13 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		rateInputs.add(rateInput);
 	}
 	
+	public void addRateInputs(Collection<TariffRate> rateInputs) {
+		if (this.rateInputs == null) {
+			this.rateInputs = new ArrayList<TariffRate>();
+		}
+		this.rateInputs.addAll(rateInputs);
+	}
+
 	@JsonInclude(Include.NON_NULL)
 	public Boolean getBillingPeriod() {
       return billingPeriod;
