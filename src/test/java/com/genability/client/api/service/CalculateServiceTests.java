@@ -70,12 +70,13 @@ public class CalculateServiceTests extends BaseServiceTests {
 	}
 	
 	
+
 	@Test
 	public void testCalculateTariff522() {
 		
 		// Where the tariff has a time zone (most do) you can use it to make sure your dates are the same
-		DateTime fromDateTime = new DateTime(2012, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
-		DateTime toDateTime = new DateTime(2013, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
+		DateTime fromDateTime = new DateTime(2012, 1, 1, 0, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime = new DateTime(2013, 1, 1, 0, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
 		
 		GetCalculatedCostRequest request = new GetCalculatedCostRequest();
 
@@ -131,6 +132,41 @@ public class CalculateServiceTests extends BaseServiceTests {
 		
 	}
 	
+	@Test
+	public void testCalculateTariff522GroupBy() {
+
+		DateTime fromDateTime = new DateTime(2014, 1, 1, 0, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles"));
+		DateTime toDateTime = new DateTime(2014, 2, 1, 0, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles"));
+
+		GetCalculatedCostRequest request = new GetCalculatedCostRequest();
+
+		// Group by chargeType
+		request.setFromDateTime(fromDateTime);
+		request.setToDateTime(toDateTime);
+		request.setMasterTariffId(522l);
+		request.setDetailLevel(DetailLevel.CHARGE_TYPE);
+		request.setGroupBy(GroupBy.MONTH);
+
+		// Set the consumption property
+		PropertyData newProp = new PropertyData();
+		newProp.setFromDateTime(fromDateTime);
+		newProp.setToDateTime(toDateTime);
+		newProp.setDataValue("220");
+		newProp.setKeyName("consumption");
+
+		request.addTariffInput(newProp);
+
+		CalculatedCost calculatedCost = callRunCalc("Test for grouping master tariff 522", request);
+
+		// Assert groupBy dates
+		for (CalculatedCostItem costItem : calculatedCost.getItems()) {
+
+			assertEquals(costItem.getFromDateTime().getMillis(), fromDateTime.getMillis());
+			assertEquals(costItem.getToDateTime().getMillis(), toDateTime.getMillis());
+
+		}
+
+	}
 	
 	@Test
 	public void testCalculateForAccount() {
@@ -245,8 +281,8 @@ public class CalculateServiceTests extends BaseServiceTests {
 	public void testGetCalculationInputs() {
 		
 		// Where the tariff has a time zone (most do) you can use it to make sure your dates are the same
-		DateTime fromDateTime = new DateTime(2012, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
-		DateTime toDateTime = new DateTime(2013, 1, 1, 1, 0, 0, 0,DateTimeZone.forID("US/Pacific"));
+		DateTime fromDateTime = new DateTime(2012, 1, 1, 0, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime = new DateTime(2013, 1, 1, 0, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
 		
 		GetCalculationInputsRequest request = new GetCalculationInputsRequest();
 
