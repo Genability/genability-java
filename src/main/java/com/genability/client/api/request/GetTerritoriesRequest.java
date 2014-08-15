@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class GetTerritoriesRequest extends AbstractGetNRequest implements Serializable {
 
 	/**
@@ -41,6 +43,11 @@ public class GetTerritoriesRequest extends AbstractGetNRequest implements Serial
 	 * Private member variable for populating Territory Items.
 	 */
 	private Boolean populateItems;
+
+	/**
+	 * Private member variable for populating Territory Lses.
+	 */
+	private Boolean populateLses;
 
 	/**
 	 * @return the lseId
@@ -126,12 +133,28 @@ public class GetTerritoriesRequest extends AbstractGetNRequest implements Serial
 		this.populateItems = populateItems;
 	}
 
+	/**
+	 * @return the populateLses
+	 */
+	public Boolean getPopulateLses() {
+		return populateLses;
+	}
+
+	/**
+	 * @param populateLses the populateLses to set
+	 */
+	public void setPopulateLses(Boolean populateLses) {
+		this.populateLses = populateLses;
+	}
+
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 
 		List<NameValuePair> qparams = super.getQueryParams();
 
 		addParam(qparams,"populateItems",populateItems);
+		addParam(qparams,"populateLses",populateLses);
 		addParam(qparams,"lseId",lseId);
 		addParam(qparams,"masterTariffId",masterTariffId);
 		addParam(qparams,"containsItemType",containsItemType);

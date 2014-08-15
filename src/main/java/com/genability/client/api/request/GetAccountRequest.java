@@ -4,7 +4,6 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -23,74 +22,52 @@ public class GetAccountRequest extends AbstractRequest implements Serializable {
 	/**
 	 * private field accountId_
 	 */
-	private String accountId_;
+	private String accountId;
 
 	/**
-	 * private field providerAccountId_
+	 * private field providerAccountId
 	 */
-	private String providerAccountId_;
+	private String providerAccountId;
+
 
 	/**
-	 * private field providerOrgId_
-	 */
-	private String providerOrgId_;
-
-	/**
-	 * @return the accountId_
+	 * @return the accountId
 	 */
 	public String getAccountId() {
-		return accountId_;
+		return accountId;
 	}
 
 	/**
-	 * @return the providerAccountId_
+	 * @return the providerAccountId
 	 */
 	public String getProviderAccountId() {
-		return providerAccountId_;
+		return providerAccountId;
 	}
 
-	/**
-	 * @return the providerOrgId_
-	 */
-	public String getProviderOrgId() {
-		return providerOrgId_;
-	}
+
 
 	/**
-	 * @param accountId_
-	 *            the accountId_ to set
+	 * @param accountId
+	 *            the accountId to set
 	 */
 	public void setAccountId(String accountId) {
-		this.accountId_ = accountId;
+		this.accountId = accountId;
 	}
 
 	/**
-	 * @param providerAccountId_
-	 *            the providerAccountId_ to set
+	 * @param providerAccountId
+	 *            the providerAccountId to set
 	 */
 	public void setProviderAccountId(String providerAccountId) {
-		this.providerAccountId_ = providerAccountId;
-	}
-
-	/**
-	 * @param providerOrgId_
-	 *            the providerOrgId_ to set
-	 * The providerOrgId should be specified when you have created more
-	 * than one Org.  If it is not specified, Accounts for your default
-	 * (or only) Org will be returned.   
-	 */
-	public void setProviderOrgId(String providerOrgId) {
-		this.providerOrgId_ = providerOrgId;
+		this.providerAccountId = providerAccountId;
 	}
 
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 		
-		addParam(qparams,"providerAccountId", providerAccountId_);
-		addParam(qparams,"providerOrgId",providerOrgId_);
-		
+		addParam(qparams,"providerAccountId", providerAccountId);
 		return qparams;
 		
 	}	

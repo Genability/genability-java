@@ -2,7 +2,8 @@ package com.genability.client.types;
 
 import java.io.Serializable;
 import java.util.List;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Standard response payload that comes back from REST endpoints.

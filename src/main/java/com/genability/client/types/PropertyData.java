@@ -2,12 +2,15 @@ package com.genability.client.types;
 
 import java.math.BigDecimal;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
-import com.genability.client.util.DateTimeJsonSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PropertyData {
 	
@@ -27,26 +30,15 @@ public class PropertyData {
 	
 	protected BigDecimal accuracy;
 	
-	/*
-	 * Possible values for dataType are:
-	 * CHOICE
-	 * STRING
-	 * BOOLEAN
-	 * DATE
-	 * DECIMAL
-	 * INTEGER
-	 * FORMULA
-	 * LOOKUP
-	 */
-	protected String dataType;
+	protected DataType dataType;
 	
 	public PropertyData() {
 		//constructor
 	}
 
 
-	public void setKeyName(String keyName_) {
-		keyName = keyName_;
+	public void setKeyName(String keyName) {
+		this.keyName = keyName;
 	}
 	
 	public String getKeyName() {
@@ -56,7 +48,6 @@ public class PropertyData {
 	/**
 	 * @return the fromDate
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class)
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -73,7 +64,6 @@ public class PropertyData {
 	/**
 	 * @return the toDate
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class)
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
@@ -88,32 +78,32 @@ public class PropertyData {
 
 	/**
 	 * @param unit
-	 *            the unit_ to set
+	 *            the unit to set
 	 */
 	public void setPeriod(String period) {
 		this.period = period;
 	}
 
 	/**
-	 * @return the unit_
+	 * @return the unit
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getPeriod() {
 		return period;
 	}
 	
 	/**
 	 * @param unit
-	 *            the unit_ to set
+	 *            the unit to set
 	 */
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
 
 	/**
-	 * @return the unit_
+	 * @return the unit
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getUnit() {
 		return unit;
 	}
@@ -126,16 +116,49 @@ public class PropertyData {
 	}
 
 	/**
-	 * @return the unit_
+	 * 
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonIgnore
+	public void setDataValue(Number dataValue) {
+		this.dataValue = dataValue != null ? dataValue.toString() : null;
+	}
+
+	/**
+	 * 
+	 */
+	@JsonIgnore
+	public void setDataValue(Enum<?> dataValue) {
+		this.dataValue = dataValue != null ? dataValue.name() : null;
+	}
+
+	/**
+	 * 
+	 */
+	@JsonIgnore
+	public void setDataValue(DateTime dataValue) {
+		this.dataValue = dataValue != null ? dataValue.toString() : null;
+	}
+
+	/**
+	 * 
+	 */
+	@JsonIgnore
+	public void setDataValue(Boolean dataValue) {
+		this.dataValue = dataValue != null ? Boolean.toString(dataValue) : null;
+	}
+
+	/**
+	 * @return the unit
+	 */
+	@JsonProperty("dataValue")
+	@JsonInclude(Include.NON_NULL)
 	public String getDataValue() {
 		return dataValue;
 	}
 
 	/**
 	 * @param accuracy
-	 *            the accuracy_ to set
+	 *            the accuracy to set
 	 */
 	public void setAccuracy(BigDecimal accuracy) {
 		this.accuracy = accuracy;
@@ -143,18 +166,18 @@ public class PropertyData {
 
 	
 	/**
-	 * @return the accuracy_
+	 * @return the accuracy
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public BigDecimal getAccuracy() {
 		return accuracy;
 	}
 	
-	public void setDataType(String dataType_) {
-		dataType = dataType_;
+	public void setDataType(DataType dataType) {
+		this.dataType = dataType;
 	}
 
-	public String getDataType() {
+	public DataType getDataType() {
 		return dataType;
 	}
 }

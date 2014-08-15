@@ -2,11 +2,9 @@ package com.genability.client.types;
 
 import java.math.BigDecimal;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
-import com.genability.client.util.DateTimeJsonSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CalculatedCostItem {
@@ -24,11 +22,11 @@ public class CalculatedCostItem {
     
     private DateTime toDateTime;
     
-    private String rateType;
+    private RateUnit rateType;
     
     private String quantityKey;
     
-    private Integer itemQuantity;
+    private Double itemQuantity;
     
     private BigDecimal itemCount;
     
@@ -36,7 +34,15 @@ public class CalculatedCostItem {
     
     private BigDecimal rateAmount;
     
-    /**
+	private String family;
+
+	private String formula;
+
+	private DateTime demandInterval;
+
+	private ChargeType chargeType;
+
+	/**
 	 * @return the tariffRateId
 	 */
 	public Long getTariffRateId() {
@@ -95,7 +101,6 @@ public class CalculatedCostItem {
 	/**
 	 * @return the fromDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -110,7 +115,6 @@ public class CalculatedCostItem {
 	/**
 	 * @return the toDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
@@ -125,15 +129,44 @@ public class CalculatedCostItem {
 	/**
 	 * @return the rateType
 	 */
-	public String getRateType() {
+	public RateUnit getRateType() {
 		return rateType;
 	}
 
 	/**
 	 * @param rateType the rateType to set
 	 */
-	public void setRateType(String rateType) {
+	public void setRateType(RateUnit rateType) {
 		this.rateType = rateType;
+	}
+
+	/**
+	 * 
+	 * @return chargeType
+	 */
+	public ChargeType getChargeType() {
+		return chargeType;
+	}
+
+	/**
+	 * @param chargeType
+	 */
+	public void setChargeType(ChargeType chargeType) {
+		this.chargeType = chargeType;
+	}
+
+	/**
+	 * @return the family
+	 */
+	public String getFamily() {
+		return family;
+	}
+
+	/**
+	 * @param family
+	 */
+	public void setFamily(String family) {
+		this.family = family;
 	}
 
 	/**
@@ -153,14 +186,14 @@ public class CalculatedCostItem {
 	/**
 	 * @return the itemQuantity
 	 */
-	public Integer getItemQuantity() {
+	public Double getItemQuantity() {
 		return itemQuantity;
 	}
 
 	/**
 	 * @param itemQuantity the itemQuantity to set
 	 */
-	public void setItemQuantity(Integer itemQuantity) {
+	public void setItemQuantity(Double itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
 
@@ -177,6 +210,7 @@ public class CalculatedCostItem {
 	public void setItemCount(BigDecimal itemCount) {
 		this.itemCount = itemCount;
 	}
+
 
 	/**
 	 * @return the cost
@@ -206,5 +240,32 @@ public class CalculatedCostItem {
 		this.rateAmount = rateAmount;
 	}    
     
-    
+	/**
+	 * @return formula
+	 */
+	public String getFormula() {
+		return formula;
+	}
+
+	/**
+	 * @param formula
+	 */
+	public void setFormula(String formula) {
+		this.formula = formula;
+	}
+
+	/**
+	 * @return demandInterval
+	 */
+	public DateTime getDemandInterval() {
+		return demandInterval;
+	}
+
+	/**
+	 * @param demandInterval
+	 */
+	public void setDemandInterval(DateTime demandInterval) {
+		this.demandInterval = demandInterval;
+	}
+
 }

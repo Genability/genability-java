@@ -1,136 +1,66 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import com.genability.client.types.PropertyData;
+
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import com.genability.client.util.DateTimeJsonSerializer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.genability.client.types.DetailLevel;
+import com.genability.client.types.GroupBy;
+import com.genability.client.types.PropertyData;
+import com.genability.client.types.TariffRate;
+
+@JsonInclude(Include.NON_NULL)
 public class GetCalculatedCostRequest extends AbstractRequest implements Serializable {
-
-	
-	/**
-	 * To request a results at a totals level.
-	 */
-	public static final String DETAIL_LEVEL_TOTAL = "TOTAL";
-	
-	/**
-	 * To request a results at a charge type level (e.g. fixed, consumption, demand).
-	 */
-	public static final String DETAIL_LEVEL_CHARGE_TYPE = "CHARGE_TYPE";
-	
-	/**
-	 * To request a results for each rate.
-	 */
-	public static final String DETAIL_LEVEL_RATE = "RATE";
-	
-	/**
-	 * To request a results for each rate buck ... i.e. all details.
-	 * This is the default response when running a calculation so you don't actually
-	 * need to pass this argument in.
-	 */
-	public static final String DETAIL_LEVEL_ALL = "ALL";
-	
-	
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * annually.
-	 */
-	public static final String GROUP_BY_YEAR = "YEAR";
-
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * monthly.
-	 */
-	public static final String GROUP_BY_MONTH = "MONTH";
-
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * daily.
-	 */
-	// coming soon - public static final String GROUP_BY_DAY = "DAY";
-
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * hourly.
-	 */
-	// coming soon - public static final String GROUP_BY_HOUR = "HOUR";
-	
-	/**
-	 * Use this constant for the groupBy value when you want to group readings
-	 * into quarter-hour increments.
-	 */
-	// coming soon - public static final String GROUP_BY_QTRHOUR = "QTRHOUR";
 
 
 	/**
 	 * Private member variable serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Private member variable fromDate
-	 */
 	private DateTime fromDateTime;
-
-	/**
-	 * Private member variable toDate
-	 */
 	private DateTime toDateTime;
-
-	/**
-	 * Private member variable masterTariffId
-	 */
 	private Long masterTariffId;
-
-	/**
-	 * Private member variable profileId
-	 */
+	private Long tariffRateId;
 	private String profileId;
-
-	/**
-	 * Private member variable Inputs
-	 */
-	private List<PropertyData> inputs;
+	private List<PropertyData> tariffInputs;
+	private String accuracy;
+	private String accountId;
+	private String providerAccountId;
+	private Boolean billingPeriod;
+	private Boolean useMostRecentUsageData;
+	private Boolean includeDefaultProfile;
+	private Boolean minimums;
+	private BigDecimal dataFactor;
 
 	/**
 	 * Private member variable detailLevel
 	 * Possible values are: ALL, TOTAL, CHARGE_TYPE, RATE
 	 * Default is ALL if not specified.
 	 */
-	private String detailLevel;
+	private DetailLevel detailLevel;
 
 	/**
 	 * Private member variable groupBy
 	 * Possible values are: YEAR, MONTH, etc
 	 * Default is no grouping if not specified.
 	 */
-	private String groupBy;
+	private GroupBy groupBy;
 	
-	/**
-	 * Private member variable estimate_
-	 */
-	private String accuracy;
 
-	/**
-	 * Private member variable accountId
-	 */
-	private String accountId;
-	
-	/**
-	 * private member variable for providerAccountId
-	 */
-	private String providerAccountId_;
-	
+	private List<TariffRate> rateInputs;
+
 	/**
 	 * Constructor to initialize instance
 	 */
 	public GetCalculatedCostRequest() {
+
 
 	}
 
@@ -139,7 +69,6 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * 
 	 * @return fromDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -158,7 +87,6 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * 
 	 * @return toDateTime
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
@@ -179,7 +107,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * accounts tariff.
 	 * @return
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public Long getMasterTariffId() {
 		return masterTariffId;
 	}
@@ -187,9 +115,17 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	public void setMasterTariffId(Long masterTariffId) {
 		this.masterTariffId = masterTariffId;
 	}
+
+	@JsonInclude(Include.NON_NULL)
+	public Long getTariffRateId() {
+		return tariffRateId;
+	}
+
+	public void setTariffRateId(Long tariffRateId_) {
+		this.tariffRateId = tariffRateId_;
+	}
 	
-	
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getAccountId() {
 		return accountId;
 	}
@@ -198,28 +134,28 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 		this.accountId = accountId;
 	}
 
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	public String getProviderAccountId_() {
-    	return providerAccountId_;
+	@JsonInclude(Include.NON_NULL)
+	public String getProviderAccountId() {
+    	return providerAccountId;
     }
 
-	public void setProviderAccountId_(String providerAccountId_) {
-    	this.providerAccountId_ = providerAccountId_;
+	public void setProviderAccountId(String providerAccountId) {
+    	this.providerAccountId = providerAccountId;
     }
 
 	
 	/**
-	 * Access method that retrieve profileId_
+	 * Access method that retrieve profileId
 	 * 
 	 * @return profileId
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getProfileId() {
 		return profileId;
 	}
 
 	/**
-	 * Mutator used to set the value of profileId_
+	 * Mutator used to set the value of profileId
 	 * 
 	 * @param profileId
 	 */
@@ -230,8 +166,8 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	/**
 	 * @return the detailLevel
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	public String getDetailLevel() {
+	@JsonInclude(Include.NON_NULL)
+	public DetailLevel getDetailLevel() {
 		return detailLevel;
 	}
 
@@ -239,15 +175,15 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * @param detailLevel
 	 *            the detailLevel to set
 	 */
-	public void setDetailLevel(String detailLevel) {
+	public void setDetailLevel(DetailLevel detailLevel) {
 		this.detailLevel = detailLevel;
 	}
 
 	/**
 	 * @return the groupBy
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	public String getGroupBy() {
+	@JsonInclude(Include.NON_NULL)
+	public GroupBy getGroupBy() {
 		return groupBy;
 	}
 
@@ -255,14 +191,14 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * @param groupBy
 	 *            the groupBy to set
 	 */
-	public void setGroupBy(String groupBy) {
+	public void setGroupBy(GroupBy groupBy) {
 		this.groupBy = groupBy;
 	}
 
 	/**
 	 * @return the estimate
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public String getAccuracy() {
 		return accuracy;
 	}
@@ -281,39 +217,100 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	 * 
 	 * @return inputs
 	 */
-	@JsonProperty("tariffInputs")
-	public List<PropertyData> getInputs() {
-		return inputs;
+	public List<PropertyData> getTariffInputs() {
+		return tariffInputs;
 	}
 
 	/**
 	 * Mutator used to set the value of tariffInputs
 	 * 
-	 * @param propertyDatas
+	 * @param tariffInputs
 	 */
-	public void setInputs(List<PropertyData> propertyDatas) {
-		inputs = propertyDatas;
+	public void setTariffInputs(List<PropertyData> tariffInputs) {
+		this.tariffInputs = tariffInputs;
 	}
 
 	/**
 	 * Helper method for adding a PropertyData entry into the collection
 	 * of inputs.
 	 * 
-	 * @param input
+	 * @param tariffInput
 	 */
-	public void addInput(PropertyData input) {
-		if (inputs == null || inputs.size() == 0) {
-			inputs = new ArrayList<PropertyData>();
+	public void addTariffInput(PropertyData tariffInput) {
+		if (tariffInputs == null) {
+			tariffInputs = new ArrayList<PropertyData>();
 		}
-		inputs.add(input);
+		tariffInputs.add(tariffInput);
 	}
 	
+	public List<TariffRate> getRateInputs() {
+        return rateInputs;
+    }
+	
+	public void setRateInputs(List<TariffRate> rateInputs) {
+        this.rateInputs = rateInputs;
+    }
+	
+	public void addRateInput(TariffRate rateInput) {
+		if (rateInputs == null) {
+			rateInputs = new ArrayList<TariffRate>();
+		}
+		rateInputs.add(rateInput);
+	}
+	
+	@JsonInclude(Include.NON_NULL)
+	public Boolean getBillingPeriod() {
+      return billingPeriod;
+    }
+
+	public void setBillingPeriod(Boolean billingPeriod) {
+      this.billingPeriod = billingPeriod;
+    }
+	
+	@JsonInclude(Include.NON_NULL)
+	public Boolean getIncludeDefaultProfile() {
+		return includeDefaultProfile;
+	}
+
+	public void setIncludeDefaultProfile(Boolean includeDefaultProfile) {
+		this.includeDefaultProfile = includeDefaultProfile;
+	}
+
+	@JsonInclude(Include.NON_NULL)
+	public Boolean getUseMostRecentUsageData() {
+		return useMostRecentUsageData;
+	}
+
+	public void setUseMostRecentUsageData(Boolean useMostRecentUsageData) {
+		this.useMostRecentUsageData = useMostRecentUsageData;
+	}
+
+	@JsonInclude(Include.NON_NULL)
+	public Boolean getMinimums() {
+		return minimums;
+	}
+
+	public void setMinimums(Boolean minimums) {
+		this.minimums = minimums;
+	}
+
+	@JsonInclude(Include.NON_NULL)
+	public BigDecimal getDataFactor() {
+		return dataFactor;
+	}
+
+	public void setDataFactor(BigDecimal dataFactor) {
+		this.dataFactor = dataFactor;
+	}
+
 	@Override
 	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		List<NameValuePair> qparams = super.getQueryParams();
 		addParam(qparams,"masterTariffId",masterTariffId);
+		addParam(qparams, "fromDateTime", fromDateTime);
+		addParam(qparams, "toDateTime", toDateTime);
 		addParam(qparams,"betaPopulateAssumptions",true);
 		return qparams;
 		

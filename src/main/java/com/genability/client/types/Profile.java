@@ -3,12 +3,8 @@ package com.genability.client.types;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlTransient;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Represents a Usage Profile.
@@ -19,7 +15,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class Profile implements Serializable {
 
 	public static final String REST_TYPE = "UsageProfile";
-	
+
 	/**
      * 
      */
@@ -31,20 +27,30 @@ public class Profile implements Serializable {
 	private String profileId;
 
 	/**
+	 * private member variable for providerProfileId.
+	 */
+	private String providerProfileId;
+
+	/**
 	 * private member variable for ProfileName.
 	 */
 	private String profileName;
 
 	/**
+	 * private member variable for providerAccountId.
+	 */
+	private String providerAccountId;
+
+	/**
 	 * Private member variable for accountId
 	 */
 	private String accountId;
-	
+
 	/**
 	 * Private member variable for providerOrgId
 	 */
 	private String providerOrgId;
-	
+
 	/**
 	 * private member variable for Description.
 	 */
@@ -61,28 +67,23 @@ public class Profile implements Serializable {
 	private List<ReadingDataSummary> readingDataSummaries;
 
 	/**
-	 * private member to hold list of <code>UsageData</code>
-	 */
-	private List<? extends UsageData> usageData;
-	
-	/**
 	 * private member to hold list of <code>ReadingData</code>
 	 */
 	private List<ReadingData> readingData;
-	
+
 	/**
-	 * Private member indicating if this profiles interval and other pre-calculated/cached
-	 * data is current.
+	 * Private member indicating if this profiles interval and other
+	 * pre-calculated/cached data is current.
 	 */
 	private Integer dataStatus;
-	
+
 	private Boolean isDefault;
-	
+
 	/**
 	 * private member for type of service of this profile
-	 */	
+	 */
 	private String serviceTypes;
-	
+
 	/**
 	 * This is the default constructor.
 	 */
@@ -95,8 +96,8 @@ public class Profile implements Serializable {
 	 * This is the constructor that sets the primary key information on
 	 * construction. In other words, it sets the property.
 	 */
-	public Profile(String profileId_) {
-		this.profileId = profileId_;
+	public Profile(String profileId) {
+		this.profileId = profileId;
 
 	} // end of constructor
 
@@ -110,8 +111,22 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for ProfileId.
 	 */
-	public void setProfileId(String profileId_) {
-		this.profileId = profileId_;
+	public void setProfileId(String profileId) {
+		this.profileId = profileId;
+	}
+
+	/**
+	 * Access method for ProviderProfileId.
+	 */
+	public String getProviderProfileId() {
+		return providerProfileId;
+	}
+
+	/**
+	 * Mutator for ProviderProfileId.
+	 */
+	public void setProviderProfileId(String providerProfileId) {
+		this.providerProfileId = providerProfileId;
 	}
 
 	/**
@@ -124,8 +139,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for ProfileName.
 	 */
-	public void setProfileName(String profileName_) {
-		this.profileName = profileName_;
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
 	}
 
 	/**
@@ -138,8 +153,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for Description.
 	 */
-	public void setDescription(String description_) {
-		this.description = description_;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
@@ -152,8 +167,8 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for SourceId.
 	 */
-	public void setSourceId(String sourceId_) {
-		this.sourceId = sourceId_;
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
 	}
 
 	/**
@@ -167,14 +182,14 @@ public class Profile implements Serializable {
 	 * @param readingDataSummaries
 	 *            the readingDataSummaries to set
 	 */
-	public void setReadingDataSummaries(List<ReadingDataSummary> readingDataSummaries) {
+	public void setReadingDataSummaries(
+			List<ReadingDataSummary> readingDataSummaries) {
 		this.readingDataSummaries = readingDataSummaries;
 	}
 
 	/**
 	 * Access method for ReadingData.
 	 */
-	@JsonIgnore
 	public List<ReadingData> getReadingData() {
 		return readingData;
 	}
@@ -182,27 +197,10 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator method for ReadingData.
 	 */
-	@JsonProperty("readingData")
 	public void setReadingData(List<ReadingData> readingData) {
 		this.readingData = readingData;
 	}
 
-	/**
-	 * Access method for UsageData.
-	 */
-	@JsonProperty("readingData")
-	public List<? extends UsageData> getUsageData() {
-		return usageData;
-	}
-
-	/**
-	 * Mutator method for UsageData.
-	 */
-	@JsonIgnore
-	public void setUsageData(List<? extends UsageData> usageData) {
-		this.usageData = usageData;
-	}
-	
 	/**
 	 * @return the accountId
 	 */
@@ -216,6 +214,21 @@ public class Profile implements Serializable {
 	 */
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
+	}
+
+	/**
+	 * @return the accountId
+	 */
+	public String getProviderAccountId() {
+		return providerAccountId;
+	}
+
+	/**
+	 * @param accountId
+	 *            the accountId to set
+	 */
+	public void setProviderAccountId(String providerAccountId) {
+		this.providerAccountId = providerAccountId;
 	}
 
 	/**
@@ -238,10 +251,10 @@ public class Profile implements Serializable {
 	public void setProviderOrgId(String providerOrgId) {
 		this.providerOrgId = providerOrgId;
 	}
-	
-	
+
 	/**
 	 * This holds the status of the cached/pre-calculated interval data.
+	 * 
 	 * @return
 	 */
 	@JsonIgnore
@@ -256,44 +269,46 @@ public class Profile implements Serializable {
 
 	@JsonIgnore
 	public Boolean getIsDefault() {
-	    return isDefault;
-    }
+		return isDefault;
+	}
 
 	public void setIsDefault(Boolean isDefault) {
-	    this.isDefault = isDefault;
-    }
-	
+		this.isDefault = isDefault;
+	}
+
 	@JsonIgnore
 	public String getServiceTypes() {
-    	return serviceTypes;
-    }
+		return serviceTypes;
+	}
 
 	public void setServiceTypes(String serviceTypes) {
-    	this.serviceTypes = serviceTypes;
-    }
+		this.serviceTypes = serviceTypes;
+	}
 
 	/**
-	 * Pass in a quantityUnit value and this will tell you whether there is 
-	 * 1 or more readings for it.
+	 * Pass in a quantityUnit value and this will tell you whether there is 1 or
+	 * more readings for it.
 	 * 
 	 * @param quantityUnit
 	 * @return true if has readings, false otherwise
 	 */
 	public boolean hasReadingsFor(String quantityUnit) {
-		
-		if(quantityUnit == null || quantityUnit.isEmpty()) return false;
-		if(this.readingDataSummaries == null) return false;
-			
-		for(ReadingDataSummary summary : this.getReadingDataSummaries()) {
-			if(quantityUnit.equals(summary.getQuantityUnit()) 
+
+		if (quantityUnit == null || quantityUnit.isEmpty())
+			return false;
+		if (this.readingDataSummaries == null)
+			return false;
+
+		for (ReadingDataSummary summary : this.getReadingDataSummaries()) {
+			if (quantityUnit.equals(summary.getQuantityUnit())
 					&& summary.getNumberOfReadings() != null
-					&& summary.getNumberOfReadings() > 0) 
+					&& summary.getNumberOfReadings() > 0)
 				return true;
 		}
 		return false;
-		
+
 	} // end of hasReadingsFor
-	
+
 	/**
 	 * Implementation of the compareTo.
 	 * 
@@ -306,26 +321,29 @@ public class Profile implements Serializable {
 		if (!(anotherClass instanceof Profile)) {
 			throw new ClassCastException("Object is not Profile expected.");
 		}
-		return this.profileId.compareTo(((Profile) anotherClass).getProfileId());
+		return this.profileId
+				.compareTo(((Profile) anotherClass).getProfileId());
 
 	}
-	
-	
+
 	/**
-	 * Helper method to make a copy of the profile. Note it doesn't
-	 * make a copy of the readings or reading summaries.
+	 * Helper method to make a copy of the profile. Note it doesn't make a copy
+	 * of the readings or reading summaries.
 	 * 
-	 * @param anotherProfile to copy data into
+	 * @param anotherProfile
+	 *            to copy data into
 	 * @return void
 	 */
 	public void copy(Profile toCopyToProfile) {
-		
+
 		toCopyToProfile.setProfileId(this.profileId);
+		toCopyToProfile.setProviderProfileId(this.providerProfileId);
 		toCopyToProfile.setProfileName(this.profileName);
 		toCopyToProfile.setAccountId(this.accountId);
+		toCopyToProfile.setProviderAccountId(this.providerAccountId);
 		toCopyToProfile.setProviderOrgId(this.providerOrgId);
 		toCopyToProfile.setDescription(this.description);
-		toCopyToProfile.setSourceId(this.sourceId );
+		toCopyToProfile.setSourceId(this.sourceId);
 		toCopyToProfile.setIsDefault(this.isDefault);
 	}
 

@@ -1,13 +1,13 @@
 package com.genability.client.api.service;
 
-import org.codehaus.jackson.type.TypeReference;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.api.request.GetPriceRequest;
 import com.genability.client.types.Price;
 import com.genability.client.types.Response;
 
 public class PriceService extends BaseService {
 
+    private static final TypeReference<Response<Price>> PRICE_RESPONSE_TYPEREF = new TypeReference<Response<Price>>() {};
 	
 	/**
 	 * Calls the REST service to get a Profile based on the arguments passed in.
@@ -18,16 +18,15 @@ public class PriceService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("getPrice called");
 		
-		String uri = "beta/prices";
+		String uri = "public/prices";
 		if (request.getMasterTariffId() != null) {
 			uri += "/" + request.getMasterTariffId();
 		}
 		
-		@SuppressWarnings("unchecked")
-		Response<Price> response = (Response<Price>) this.callGet(
+		Response<Price> response = this.callGet(
 				uri,
 				request.getQueryParams(),
-				new TypeReference<Response<Price>>() { });
+				PRICE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getPrice completed");
 		

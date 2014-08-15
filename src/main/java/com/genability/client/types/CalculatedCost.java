@@ -3,11 +3,11 @@ package com.genability.client.types;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
-import com.genability.client.util.DateTimeJsonSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CalculatedCost {
@@ -70,7 +70,6 @@ public class CalculatedCost {
 	/**
 	 * @return the fromDateTime_
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
@@ -86,7 +85,6 @@ public class CalculatedCost {
 	/**
 	 * @return the toDateTime_
 	 */
-	@JsonSerialize(using=DateTimeJsonSerializer.class) 
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
@@ -135,7 +133,7 @@ public class CalculatedCost {
 	 * 
 	 * @return
 	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	@JsonInclude(Include.NON_NULL)
 	public List<PropertyData> getAssumptions() {
 		return assumptions;
 	}
