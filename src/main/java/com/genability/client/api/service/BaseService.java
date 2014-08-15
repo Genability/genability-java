@@ -10,6 +10,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.config.RequestConfig.Builder;
@@ -24,7 +25,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -69,7 +69,7 @@ public class BaseService {
 	/**
 	 * Private member holding the Apache HttpClient
 	 */
-	private CloseableHttpClient httpClient;
+	private HttpClient httpClient;
 
 
 	public BaseService() {
@@ -131,7 +131,7 @@ public class BaseService {
 	 *
 	 * @param mapper the mapper to set
 	 */
-	public void setHttpClient(CloseableHttpClient httpClient) {
+	public void setHttpClient(HttpClient httpClient) {
 		this.httpClient = httpClient;
 	}
 
