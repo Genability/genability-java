@@ -11,6 +11,7 @@ import com.genability.client.api.service.LseService;
 import com.genability.client.api.service.PriceService;
 import com.genability.client.api.service.ProfileService;
 import com.genability.client.api.service.TariffService;
+import com.genability.client.api.service.TypicalService;
 
 public class GenabilityClient {
 
@@ -115,6 +116,10 @@ public class GenabilityClient {
 
   public TariffService getTariffService() {
     return initializeService(new TariffService());
+  }
+
+  public TypicalService getTypicalService() {
+    return initializeService(new TypicalService());
   }
 
 }
