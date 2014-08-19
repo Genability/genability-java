@@ -40,6 +40,8 @@ public class CalculatedCostItem {
 
 	private DateTime demandInterval;
 
+	private Integer duration;
+
 	private ChargeType chargeType;
 
 	/**
@@ -266,6 +268,20 @@ public class CalculatedCostItem {
 	 */
 	public void setDemandInterval(DateTime demandInterval) {
 		this.demandInterval = demandInterval;
+	}
+
+	/**
+	 * @return duration
+	 */
+	public Integer getDuration() {
+		return duration;
+	}
+
+	/**
+	 * @param duration
+	 */
+	public void setDuration(Integer duration) {
+		this.duration = duration;
 	}
 
 }
