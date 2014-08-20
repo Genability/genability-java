@@ -3,6 +3,7 @@ package com.genability.client.api.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 import com.genability.client.api.request.GetPropertyKeyRequest;
@@ -31,7 +32,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 		
 		assertNotNull("restResponse null", restResponse);
 		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
-		assertEquals("bad type",restResponse.getType(),Account.REST_TYPE);
+		assertEquals("bad type",restResponse.getType(),PropertyKey.REST_TYPE);
 
 	}
 	
@@ -49,7 +50,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 		
 		assertNotNull("restResponse null", restResponse);
 		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
-		assertEquals("bad type",restResponse.getType(),Account.REST_TYPE);
+		assertEquals("bad type",restResponse.getType(),PropertyKey.REST_TYPE);
 
 	}
 	
@@ -57,16 +58,30 @@ public class PropertyServiceTests extends BaseServiceTests{
 	public void testGetPropertyLookups() {
 		
 		GetPropertyLookupRequest request = new GetPropertyLookupRequest();
-
-		//lookups
-		//to date
-		//from date
-
+		
+		DateTime fromDateTime = new DateTime("2014-01-01T00:00:00.000-05:00");
+		DateTime toDateTime = new DateTime("2014-01-02T00:00:00.000-05:00");
+		request.setKeyName_("hourlyPricingOntario");
+		request.setFromDateTime(fromDateTime);
+		request.setToDateTime(toDateTime);
+		
 		Response<PropertyLookup> restResponse = propertyService.getPropertyLookups(request);
 		
 		assertNotNull("restResponse null", restResponse);
 		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
-		assertEquals("bad type",restResponse.getType(),Account.REST_TYPE);
+		assertEquals("bad type",restResponse.getType(),PropertyLookup.REST_TYPE);
+
+	}
+	@Test
+	public void testGetLookups() {
+		
+		GetPropertyLookupRequest request = new GetPropertyLookupRequest();
+
+		Response<PropertyLookup> restResponse = propertyService.getLookups(request);
+		
+		assertNotNull("restResponse null", restResponse);
+		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
+		assertEquals("bad type",restResponse.getType(),PropertyLookup.REST_TYPE);
 
 	}
 	
@@ -75,14 +90,13 @@ public class PropertyServiceTests extends BaseServiceTests{
 	public void testGetPropertyStats() {
 		
 		GetPropertyKeyRequest request = new GetPropertyKeyRequest();
+		request.setKeyName_("hourlyPricingOntario");
 
 		//check if request.key != null
 		Response<PropertyLookupStats> restResponse = propertyService.getPropertyStats(request);
 		
 		assertNotNull("restResponse null", restResponse);
 		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
-		assertEquals("bad type",restResponse.getType(),Account.REST_TYPE);
-
 	}
 	
 	
