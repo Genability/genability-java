@@ -10,6 +10,7 @@ import com.genability.client.api.service.CalculateService;
 import com.genability.client.api.service.LseService;
 import com.genability.client.api.service.PriceService;
 import com.genability.client.api.service.ProfileService;
+import com.genability.client.api.service.PropertyService;
 import com.genability.client.api.service.TariffService;
 
 public class GenabilityClient {
@@ -116,5 +117,9 @@ public class GenabilityClient {
   public TariffService getTariffService() {
     return initializeService(new TariffService());
   }
+  
+  public PropertyService getPropertyService() {
+	    return initializeService(new PropertyService());
+	  }
 
 }

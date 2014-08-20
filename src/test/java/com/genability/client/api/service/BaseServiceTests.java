@@ -33,6 +33,7 @@ public class BaseServiceTests {
 	protected static final GenabilityClient genabilityClient;
 	protected static final AccountService accountService;
 	protected static final ProfileService profileService;
+	protected static final PropertyService propertyService;
 	
 	static {
 		//
@@ -72,6 +73,7 @@ public class BaseServiceTests {
   		}
   		accountService = genabilityClient.getAccountService();
   		profileService = genabilityClient.getProfileService();
+  		propertyService = genabilityClient.getPropertyService();
 	}
 	
 	// Helper method:  We create an account and specify a tariff as well as values
