@@ -69,7 +69,11 @@ public class BaseServiceTests {
   		logger.info("appId: " + appId);
   		logger.info("appKey: " + appKey);
   		logger.info("restApiServer: " + restApiServer);
- 
+                if (appId.trim().isEmpty() || appKey.trim().isEmpty() || restApiServer.trim().isEmpty()) {
+                        logger.error("appId, appKey, and restApiServer must be set");
+                        throw new RuntimeException("Found one or more unset/empty properties");
+                }
+
   		genabilityClient = new GenabilityClient(appId, appKey);
   		if (restApiServer != null && !restApiServer.equals("")) {
 		    genabilityClient.setRestApiServer(restApiServer);
