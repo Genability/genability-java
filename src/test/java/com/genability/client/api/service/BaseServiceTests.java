@@ -50,6 +50,10 @@ public class BaseServiceTests {
     		//load the properties file from in the classpath
     		//
     		InputStream inputStream = BaseServiceTests.class.getClassLoader().getResourceAsStream("genability.properties");
+                if (inputStream == null) {
+                        logger.error("Can't find genability.properties");
+                        throw new RuntimeException("Can't find genability.properties");
+                }
     		prop.load(inputStream);
     	} catch (IOException ex) {
     		logger.error("Unable to process genability.properties", ex);
