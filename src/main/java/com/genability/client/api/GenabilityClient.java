@@ -7,6 +7,7 @@ import com.genability.client.api.service.AccountService;
 import com.genability.client.api.service.BaseService;
 import com.genability.client.api.service.BulkUploadService;
 import com.genability.client.api.service.CalculateService;
+import com.genability.client.api.service.CalendarService;
 import com.genability.client.api.service.LseService;
 import com.genability.client.api.service.PriceService;
 import com.genability.client.api.service.ProfileService;
@@ -121,5 +122,9 @@ public class GenabilityClient {
   public PropertyService getPropertyService() {
 	    return initializeService(new PropertyService());
 	  }
+
+public CalendarService getCalendarService() {
+	 return initializeService(new CalendarService());
+}
 
 }
