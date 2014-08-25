@@ -25,7 +25,6 @@ public class PropertyService extends BaseService {
 		if (request.getKeyName_() != null && request.getKeyName_().length() !=0) {
 			uri += "/" + request.getKeyName_();
 		}
-		System.out.println("uri"  + uri);
 		Response<PropertyKey> response = this.callGet(uri,request.getQueryParams(),PROPERTY_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getAccount completed");
@@ -49,7 +48,7 @@ public class PropertyService extends BaseService {
 	public Response<PropertyLookup> getPropertyLookups(GetPropertyLookupRequest request) {
 		if(log.isDebugEnabled()) log.debug("getAccount called");
 
-		String uri = "public/properties/";
+		String uri = "public/properties";
 		if (request.getKeyName_() != null && request.getKeyName_().length() !=0) {
 			uri += "/" + request.getKeyName_() + "/lookups";
 		}

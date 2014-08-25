@@ -9,6 +9,11 @@ import org.joda.time.DateTime;
 public class GetPropertyLookupRequest extends AbstractRequest implements Serializable{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Private member variable for KeyName.
 	 */
 	private String keyName_;
@@ -34,7 +39,23 @@ public class GetPropertyLookupRequest extends AbstractRequest implements Seriali
 
 List<NameValuePair> qparams = super.getQueryParams();
 		
-		addParam(qparams,"keyName", keyName_);
+	if(keyName_ != null)
+	{	
+	addParam(qparams,"keyName", keyName_);
+	}
+	if(subPropertyKeyName_ != null)
+	{	
+	addParam(qparams,"subKeyName", subPropertyKeyName_);
+	}
+	
+	if(fromDateTime !=null) {
+		addParam(qparams,"fromDateTime", fromDateTime);
+		
+	}
+	if(toDateTime != null){
+		addParam(qparams,"toDateTime", toDateTime);
+	}
+	
 		return qparams;
 	}
 

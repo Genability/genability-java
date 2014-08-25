@@ -153,6 +153,7 @@ public class BaseService {
 		if(log.isDebugEnabled()) log.debug(qs);
 
 		HttpGet getRequest = new HttpGet(url);
+		if(log.isDebugEnabled()) log.debug(url);
 
 		return execute(getRequest, resultTypeReference);
 	} // end of callGet
