@@ -22,8 +22,8 @@ public class PropertyService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getAccount called");
 
 		String uri = "public/properties";
-		if (request.getKeyName_() != null && request.getKeyName_().length() !=0) {
-			uri += "/" + request.getKeyName_();
+		if (request.getKeyName() != null && request.getKeyName().length() !=0) {
+			uri += "/" + request.getKeyName();
 		}
 		Response<PropertyKey> response = this.callGet(uri,request.getQueryParams(),PROPERTY_RESPONSE_TYPEREF);
 		
@@ -49,8 +49,8 @@ public class PropertyService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getAccount called");
 
 		String uri = "public/properties";
-		if (request.getKeyName_() != null && request.getKeyName_().length() !=0) {
-			uri += "/" + request.getKeyName_() + "/lookups";
+		if (request.getKeyName() != null && request.getKeyName().length() !=0) {
+			uri += "/" + request.getKeyName() + "/lookups";
 		}
 
 		Response<PropertyLookup> response = this.callGet(uri,request.getQueryParams(),PROPERTY_LOOKUP_RESPONSE_TYPEREF);
@@ -76,8 +76,8 @@ public class PropertyService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getAccount called");
 
 		String uri = "public/properties";
-		if (request.getKeyName_() != null && request.getKeyName_().length() !=0) {
-			uri += "/" + request.getKeyName_() + "/stats";
+		if (request.getKeyName() != null && request.getKeyName().length() !=0) {
+			uri += "/" + request.getKeyName() + "/stats";
 		}
 
 		Response<PropertyLookupStats> response = this.callGet(uri,request.getQueryParams(),PROPERTY_LOOKUP_STATS_RESPONSE_TYPEREF);

@@ -21,8 +21,8 @@ public class CalendarService extends BaseService {
 		if (log.isDebugEnabled())
 			log.debug("getCalendar called");
 
-		if (request.getCalendarId_() != null) {
-			uri += "/" + request.getCalendarId_();
+		if (request.getCalendarId() != null) {
+			uri += "/" + request.getCalendarId();
 		}
 		System.out.println("uri" + uri);
 		Response<Calendar> response = this.callGet(uri, request.getQueryParams(), CALENDAR_RESPONSE_TYPEREF);

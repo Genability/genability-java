@@ -22,7 +22,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 	public void testGetPropertyKey() {
 		
 		GetPropertyKeyRequest request = new GetPropertyKeyRequest();
-		request.setKeyName_("qosVariableRateKeyHourly");
+		request.setKeyName("qosVariableRateKeyHourly");
 
 		Response<PropertyKey> restResponse = propertyService.getPropertyKey(request);
 		
@@ -57,7 +57,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 		
 		DateTime fromDateTime = new DateTime("2014-01-01T00:00:00.000-05:00");
 		DateTime toDateTime = new DateTime("2014-01-02T00:00:00.000-05:00");
-		request.setKeyName_("qosVariableRateKeyHourly");
+		request.setKeyName("qosVariableRateKeyHourly");
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
 		
@@ -76,7 +76,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 		
 		DateTime fromDateTime = new DateTime("2014-01-01T00:00:00.000-05:00");
 		DateTime toDateTime = new DateTime("2014-01-02T00:00:00.000-05:00");
-		request.setKeyName_("qosVariableRateKeyHourlyWithSubkey_51291");
+		request.setKeyName("qosVariableRateKeyHourlyWithSubkey_51291");
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
 		
@@ -106,8 +106,8 @@ public class PropertyServiceTests extends BaseServiceTests{
 		GetPropertyLookupRequest request = new GetPropertyLookupRequest();
 		DateTime fromDateTime = new DateTime("2014-01-03T00:00:00.000-05:00");
 		DateTime toDateTime = new DateTime("2014-01-04T00:00:00.000-05:00");
-		request.setKeyName_("qosVariableRateKeyHourlyWithSubkey");
-		request.setSubPropertyKeyName_("51291");
+		request.setKeyName("qosVariableRateKeyHourlyWithSubkey");
+		request.setSubPropertyKeyName("51291");
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
 
@@ -124,7 +124,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 	public void testGetPropertyStats() {
 		
 		GetPropertyKeyRequest request = new GetPropertyKeyRequest();
-		request.setKeyName_("qosVariableRateKeyHourly");
+		request.setKeyName("qosVariableRateKeyHourly");
 
 		//check if request.key != null
 		Response<PropertyLookupStats> restResponse = propertyService.getPropertyStats(request);

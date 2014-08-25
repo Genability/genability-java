@@ -2,7 +2,7 @@ package com.genability.client.api.request;
 
 public class GetCalendarRequest extends AbstractRequest{
 
-	
+
 	/**
 	 * Private member variable for CalendarId.
 	 */
@@ -11,22 +11,22 @@ public class GetCalendarRequest extends AbstractRequest{
 	/**
 	 * Private member variable for PopulateEvents.
 	 */
-	private Boolean populateEvents_;
+	private Boolean populateEvents;
 
-	public Long getCalendarId_() {
+	public Long getCalendarId() {
 		return calendarId;
 	}
 
-	public void setCalendarId_(Long calendarId_) {
-		this.calendarId = calendarId_;
+	public void setCalendarId(Long calendarId) {
+		this.calendarId = calendarId;
 	}
 
-	public Boolean getPopulateEvents_() {
-		return populateEvents_;
+	public Boolean getPopulateEvents() {
+		return populateEvents;
 	}
 
-	public void setPopulateEvents_(Boolean populateEvents_) {
-		this.populateEvents_ = populateEvents_;
+	public void setPopulateEvents(Boolean populateEvents) {
+		this.populateEvents = populateEvents;
 	}
 
 	/**

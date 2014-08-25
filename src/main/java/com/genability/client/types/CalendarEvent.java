@@ -8,7 +8,7 @@ public class CalendarEvent {
 	 * private member variable for CalendarEventId.
 	 */
 	private Long calendarEventId;
-	
+
 	/**
 	 * private member variable for CalendarEventName.
 	 */
@@ -18,22 +18,22 @@ public class CalendarEvent {
 	 * private member variable for LseId.
 	 */
 	private Long lseId;
-	
+
 	/**
 	 * private member variable for CalendarEventType.
 	 */
 	private CalendarEventType calendarEventType;
-	
+
 	/**
 	 * private member variable for DateDefinitionType.
 	 */
 	private DateDefinitionType dateDefinitionType;
-	
+
 	/**
 	 * private member variable for Locale.
 	 */
 	private String locale;
-	
+
 	/**
 	 * private member variable for SeededUntil.
 	 */
@@ -43,22 +43,22 @@ public class CalendarEvent {
 	 * private member variable for FixedMonth.
 	 */
 	private Integer fixedMonth;
-	
+
 	/**
 	 * private member variable for FixedDay.
 	 */
 	private Integer fixedDay;
-	
+
 	/**
 	 * private member variable for DayOfWeek.
 	 */
 	private Integer dayOfWeek;
-	
+
 	/**
 	 * private member variable for WeekOfMonth.
 	 */
 	private Integer weekOfMonth;
-	
+
 	/**
 	 * private member variable for Adjustment.
 	 */
@@ -67,26 +67,26 @@ public class CalendarEvent {
 	/**
 	 * private member variable for createdBy.
 	 */
-	
-	private Long createdBy_;
+
+	private Long createdBy;
 
 	/**
 	 * private member variable for createdDate.
 	 */
 
-	private Date createdDate_;
+	private Date createdDate;
 
 	/**
 	 * private member variable for lastUpdatedBy.
 	 */
-	
-	private Long lastUpdatedBy_;
+
+	private Long lastUpdatedBy;
 
 	/**
 	 * private member variable for lastUpdatedDate.
 	 */
-	
-	private Date lastUpdatedDate_;
+
+	private Date lastUpdatedDate;
 
 	public Long getCalendarEventId() {
 		return calendarEventId;
@@ -184,36 +184,36 @@ public class CalendarEvent {
 		this.adjustment = adjustment;
 	}
 
-	public Long getCreatedBy_() {
-		return createdBy_;
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 
-	public void setCreatedBy_(Long createdBy_) {
-		this.createdBy_ = createdBy_;
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
 	}
 
-	public Date getCreatedDate_() {
-		return createdDate_;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setCreatedDate_(Date createdDate_) {
-		this.createdDate_ = createdDate_;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
-	public Long getLastUpdatedBy_() {
-		return lastUpdatedBy_;
+	public Long getLastUpdatedBy() {
+		return lastUpdatedBy;
 	}
 
-	public void setLastUpdatedBy_(Long lastUpdatedBy_) {
-		this.lastUpdatedBy_ = lastUpdatedBy_;
+	public void setLastUpdatedBy(Long lastUpdatedBy) {
+		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	public Date getLastUpdatedDate_() {
-		return lastUpdatedDate_;
+	public Date getLastUpdatedDate() {
+		return lastUpdatedDate;
 	}
 
-	public void setLastUpdatedDate_(Date lastUpdatedDate_) {
-		this.lastUpdatedDate_ = lastUpdatedDate_;
+	public void setLastUpdatedDate(Date lastUpdatedDate) {
+		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
 }
