@@ -5,49 +5,49 @@ import java.sql.Timestamp;
 
 
 public class CalendarEventDate {
-	
+
 	public static final String REST_TYPE = "CalendarEventDate";
 	/**
-	 * private member variable for calendarEventDateId_.
+	 * private member variable for calendarEventDateId.
 	 */
 
 	private Long calendarEventDateId;
 
-	
+
 	/**
 	 * private member variable for subkey.
 	 */
 
 	private String subKey;
-	
-	
+
+
 	/**
-	 * private member variable for calendarEventDate_.
+	 * private member variable for calendarEventDate.
 	 */
 
 	private Timestamp calendarEventDate;
 
-	
+
 	/**
 	 * private member variable for calendarEventId.
 	 */
-	
+
 	private Long eventDateId;
 
-	
+
 	/**
-	 * private member variable for calendarEventName_.
+	 * private member variable for calendarEventName.
 	 */
-	
+
 	private String eventName;
 
-	
+
 	/**
 	 * private member variable for createdDate.
 	 */
 
 	private Timestamp startDateTime;
-	
+
 	private Timestamp endDateTime;
 
 
@@ -56,33 +56,33 @@ public class CalendarEventDate {
 	 */
 
 	private Long lseId;
-	
-	
+
+
 	/**
 	 * private member variable for createdBy.
 	 */
-	
+
 	private Long createdBy;
 
-	
+
 	/**
 	 * private member variable for createdDate.
 	 */
-	
+
 	private Date createdDate;
 
-	
+
 	/**
 	 * private member variable for lastUpdatedBy.
 	 */
-	
+
 	private Long lastUpdatedBy;
 
-	
+
 	/**
 	 * private member variable for lastUpdatedDate.
 	 */
-	
+
 	private Date lastUpdatedDate;
 
 
@@ -111,8 +111,8 @@ public class CalendarEventDate {
 	}
 
 
-	public void setCalendarEventDate(Timestamp calendarEventDate_) {
-		this.calendarEventDate = calendarEventDate_;
+	public void setCalendarEventDate(Timestamp calendarEventDate) {
+		this.calendarEventDate = calendarEventDate;
 	}
 
 
@@ -121,8 +121,8 @@ public class CalendarEventDate {
 	}
 
 
-	public void setCalendarEventId(Long calendarEventId_) {
-		this.eventDateId = calendarEventId_;
+	public void setCalendarEventId(Long calendarEventId) {
+		this.eventDateId = calendarEventId;
 	}
 
 
@@ -137,43 +137,43 @@ public class CalendarEventDate {
 	}
 
 
-	public Long getCreatedBy_() {
+	public Long getCreatedBy() {
 		return createdBy;
 	}
 
 
-	public void setCreatedBy_(Long createdBy_) {
-		this.createdBy = createdBy_;
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
 	}
 
 
-	public Date getCreatedDate_() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
 
-	public void setCreatedDate_(Date createdDate_) {
-		this.createdDate = createdDate_;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 
-	public Long getLastUpdatedBy_() {
+	public Long getLastUpdatedBy() {
 		return lastUpdatedBy;
 	}
 
 
-	public void setLastUpdatedBy_(Long lastUpdatedBy_) {
-		this.lastUpdatedBy = lastUpdatedBy_;
+	public void setLastUpdatedBy(Long lastUpdatedBy) {
+		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
 
-	public Date getLastUpdatedDate_() {
+	public Date getLastUpdatedDate() {
 		return lastUpdatedDate;
 	}
 
 
-	public void setLastUpdatedDate_(Date lastUpdatedDate_) {
-		this.lastUpdatedDate = lastUpdatedDate_;
+	public void setLastUpdatedDate(Date lastUpdatedDate) {
+		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
 

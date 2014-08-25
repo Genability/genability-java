@@ -7,67 +7,68 @@ import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
 public class GetPropertyLookupRequest extends AbstractRequest implements Serializable{
-	
+
 	/**
 	 * Private member variable for KeyName.
 	 */
-	private String keyName_;
-	
+	private String keyName;
+
 	/**
-	 * Private member variable for subPropertyKeyName_.
+	 * Private member variable for subPropertyKeyName.
 	 */
-	private String subPropertyKeyName_;
-	
+	private String subPropertyKeyName;
+
 	/**
 	 * Private member variable for Choices.
 	 */
-	private Boolean populatePropertyChoices_;
+	private Boolean populatePropertyChoices;
 	/**
 	 * Private member variable for Lookups.
 	 */
-	private Boolean populatePropertyLookups_;
+	private Boolean populatePropertyLookups;
 
 	private DateTime fromDateTime;
 	private DateTime toDateTime;
 
+	@Override
 	public List<NameValuePair> getQueryParams() {
 
 List<NameValuePair> qparams = super.getQueryParams();
-		
-		addParam(qparams,"keyName", keyName_);
+
+		addParam(qparams,"keyName", keyName);
 		return qparams;
 	}
 
-	public String getKeyName_() {
-		return keyName_;
+	public String getKeyName() {
+		return keyName;
 	}
 
-	public void setKeyName_(String keyName_) {
-		this.keyName_ = keyName_;
+	public void setKeyName(String keyName) {
+		this.keyName = keyName;
 	}
 
-	public String getSubPropertyKeyName_() {
-		return subPropertyKeyName_;
+	public String getSubPropertyKeyName() {
+		return subPropertyKeyName;
 	}
 
-	public void setSubPropertyKeyName_(String subPropertyKeyName_) {
-		this.subPropertyKeyName_ = subPropertyKeyName_;
+	public void setSubPropertyKeyName(String subPropertyKeyName) {
+		this.subPropertyKeyName = subPropertyKeyName;
 	}
 
-	public Boolean getPopulatePropertyChoices_() {
-		return populatePropertyChoices_;
+	public Boolean getPopulatePropertyChoices() {
+		return populatePropertyChoices;
 	}
 
-	public void setPopulatePropertyChoices_(Boolean populatePropertyChoices_) {
-		this.populatePropertyChoices_ = populatePropertyChoices_;
+	public void setPopulatePropertyChoices(Boolean populatePropertyChoices) {
+		this.populatePropertyChoices = populatePropertyChoices;
 	}
 
-	public Boolean getPopulatePropertyLookups_() {
-		return populatePropertyLookups_;
+	public Boolean getPopulatePropertyLookups() {
+		return populatePropertyLookups;
 	}
 
-	public void setPopulatePropertyLookups_(Boolean populatePropertyLookups_) {
-		this.populatePropertyLookups_ = populatePropertyLookups_;
+	public void setPopulatePropertyLookups(Boolean populatePropertyLookups) {
+		this.populatePropertyLookups = populatePropertyLookups;
 	}
 
 	public DateTime getFromDateTime() {

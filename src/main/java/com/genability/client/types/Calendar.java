@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public class Calendar {
-	
+
 	public static final String REST_TYPE = "Calendar";
     /**
      * private member variable for CalendarId.
@@ -23,11 +23,11 @@ public class Calendar {
      * private member variable for CalendarName.
      */
     private String calendarName;
-    
+
     private Timestamp startDateTime;
-	
+
 	private Timestamp endDateTime;
-    
+
     /**
      * private member variable for events.
      */
@@ -36,21 +36,21 @@ public class Calendar {
     /**
 	 * private member variable for calendarEventId.
 	 */
-	
+
 	private Long eventDateId;
-	
+
 	/**
 	 * private member variable for subkey.
 	 */
 
 	private String subKey;
-	
+
 	/**
-	 * private member variable for calendarEventName_.
+	 * private member variable for calendarEventName.
 	 */
-	
+
 	private String eventName;
-    
+
     /**
      * private member variable for createdBy.
      */
@@ -75,56 +75,56 @@ public class Calendar {
 		return calendarId;
 	}
 
-	public void setCalendarId_(Long calendarId_) {
-		this.calendarId = calendarId_;
+	public void setCalendarId(Long calendarId) {
+		this.calendarId = calendarId;
 	}
 
 	public Long getLseId() {
 		return lseId;
 	}
 
-	public void setLseId_(Long lseId_) {
-		this.lseId = lseId_;
+	public void setLseId(Long lseId) {
+		this.lseId = lseId;
 	}
 
 	public String getCalendarName() {
 		return calendarName;
 	}
 
-	public void setCalendarName(String calendarName_) {
-		this.calendarName = calendarName_;
+	public void setCalendarName(String calendarName) {
+		this.calendarName = calendarName;
 	}
 
 	public Long getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(Long createdBy_) {
-		this.createdBy = createdBy_;
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate_) {
-		this.createdDate = createdDate_;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	public Long getLastUpdatedBy() {
 		return lastUpdatedBy;
 	}
 
-	public void setLastUpdatedBy(Long lastUpdatedBy_) {
-		this.lastUpdatedBy = lastUpdatedBy_;
+	public void setLastUpdatedBy(Long lastUpdatedBy) {
+		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
 	public Date getLastUpdatedDate() {
 		return lastUpdatedDate;
 	}
 
-	public void setLastUpdatedDate(Date lastUpdatedDate_) {
-		this.lastUpdatedDate = lastUpdatedDate_;
+	public void setLastUpdatedDate(Date lastUpdatedDate) {
+		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
 	public List<CalendarEvent> getEvents() {

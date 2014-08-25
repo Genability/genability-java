@@ -22,7 +22,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 	public void testGetPropertyKey() {
 		
 		GetPropertyKeyRequest request = new GetPropertyKeyRequest();
-		request.setKeyName_("hourlyPricingOntario");
+		request.setKeyName("hourlyPricingOntario");
 	
 		// set key name 
 		//to date
@@ -61,7 +61,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 		
 		DateTime fromDateTime = new DateTime("2014-01-01T00:00:00.000-05:00");
 		DateTime toDateTime = new DateTime("2014-01-02T00:00:00.000-05:00");
-		request.setKeyName_("hourlyPricingOntario");
+		request.setKeyName("hourlyPricingOntario");
 		request.setFromDateTime(fromDateTime);
 		request.setToDateTime(toDateTime);
 		
@@ -90,7 +90,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 	public void testGetPropertyStats() {
 		
 		GetPropertyKeyRequest request = new GetPropertyKeyRequest();
-		request.setKeyName_("hourlyPricingOntario");
+		request.setKeyName("hourlyPricingOntario");
 
 		//check if request.key != null
 		Response<PropertyLookupStats> restResponse = propertyService.getPropertyStats(request);

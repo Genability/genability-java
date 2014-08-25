@@ -21,7 +21,7 @@ public class CalendarServiceTest extends BaseServiceTests{
 	public void testGetCalendar() {
 		
 		GetCalendarRequest request = new GetCalendarRequest();
-		request.setCalendarId_((long) 2);
+		request.setCalendarId((long) 2);
 
 		Response<Calendar> restResponse = calendarService.getCalendar(request);
 		
