@@ -21,7 +21,6 @@ public class TariffService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("getTariffs called");
 		
-		//betaStandardCurrency into Query parameters
 		request.setFields(Fields.EXT);
 		
 		Response<Tariff> response = this.callGet(
