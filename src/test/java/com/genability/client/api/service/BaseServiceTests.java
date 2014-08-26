@@ -69,8 +69,8 @@ public class BaseServiceTests {
   		logger.info("appId: " + appId);
   		logger.info("appKey: " + appKey);
   		logger.info("restApiServer: " + restApiServer);
-                if (appId.trim().isEmpty() || appKey.trim().isEmpty() || restApiServer.trim().isEmpty()) {
-                        logger.error("appId, appKey, and restApiServer must be set");
+                if (appId == null || appId.trim().isEmpty() || appKey == null || appKey.trim().isEmpty()) {
+                        logger.error("appId and appKey must be set");
                         throw new RuntimeException("Found one or more unset/empty properties");
                 }
 
