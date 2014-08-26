@@ -3,3 +3,11 @@ target
 .classpath
 .project
 .settings
+
+# Editor droppings
+*.swp
+*.swo
+*~
+\#*#
+
+
