@@ -1,6 +1,6 @@
 package com.genability.client.types;
 
-import java.sql.Date;
+import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -43,7 +43,7 @@ public class CalendarEvent {
 	/**
 	 * private member variable for SeededUntil.
 	 */
-	private Date seededUntil;
+	private DateTime seededUntil;
 
 	/**
 	 * private member variable for FixedMonth.
@@ -119,11 +119,11 @@ public class CalendarEvent {
 		this.locale = locale;
 	}
 
-	public Date getSeededUntil() {
+	public DateTime getSeededUntil() {
 		return seededUntil;
 	}
 
-	public void setSeededUntil(Date seededUntil) {
+	public void setSeededUntil(DateTime seededUntil) {
 		this.seededUntil = seededUntil;
 	}
 
