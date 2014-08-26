@@ -2,8 +2,14 @@ package com.genability.client.types;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class CalendarEvent {
+
 	/**
 	 * private member variable for CalendarEventId.
 	 */
@@ -64,29 +70,6 @@ public class CalendarEvent {
 	 */
 	private Integer adjustment;
 
-	/**
-	 * private member variable for createdBy.
-	 */
-
-	private Long createdBy;
-
-	/**
-	 * private member variable for createdDate.
-	 */
-
-	private Date createdDate;
-
-	/**
-	 * private member variable for lastUpdatedBy.
-	 */
-
-	private Long lastUpdatedBy;
-
-	/**
-	 * private member variable for lastUpdatedDate.
-	 */
-
-	private Date lastUpdatedDate;
 
 	public Long getCalendarEventId() {
 		return calendarEventId;
@@ -182,38 +165,6 @@ public class CalendarEvent {
 
 	public void setAdjustment(Integer adjustment) {
 		this.adjustment = adjustment;
-	}
-
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Long getLastUpdatedBy() {
-		return lastUpdatedBy;
-	}
-
-	public void setLastUpdatedBy(Long lastUpdatedBy) {
-		this.lastUpdatedBy = lastUpdatedBy;
-	}
-
-	public Date getLastUpdatedDate() {
-		return lastUpdatedDate;
-	}
-
-	public void setLastUpdatedDate(Date lastUpdatedDate) {
-		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
 }

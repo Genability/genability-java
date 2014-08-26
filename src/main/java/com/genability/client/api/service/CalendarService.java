@@ -15,12 +15,13 @@ public class CalendarService extends BaseService {
 	private static final TypeReference<Response<CalendarEventDate>> CALENDAR_DATES_RESPONSE_TYPEREF = new TypeReference<Response<CalendarEventDate>>() {
 	};
 
-	private String uri = "/public/calendars";
+	private static final String CALENDAR_URI = "/public/calendars";
 
 	public Response<Calendar> getCalendar(GetCalendarRequest request) {
 		if (log.isDebugEnabled())
 			log.debug("getCalendar called");
 
+		String uri = CALENDAR_URI;
 		if (request.getCalendarId() != null) {
 			uri += "/" + request.getCalendarId();
 		}
@@ -37,10 +38,7 @@ public class CalendarService extends BaseService {
 		if (log.isDebugEnabled())
 			log.debug("getCalendars called");
 
-		if (request.getLseId() != null) {
-			uri += "/" + request.getLseId();
-		}
-		Response<Calendar> response = this.callGet(uri, request.getQueryParams(), CALENDAR_RESPONSE_TYPEREF);
+		Response<Calendar> response = this.callGet(CALENDAR_URI, request.getQueryParams(), CALENDAR_RESPONSE_TYPEREF);
 
 		if (log.isDebugEnabled())
 			log.debug("getCalendars completed");
@@ -49,12 +47,11 @@ public class CalendarService extends BaseService {
 	}
 
 	public Response<CalendarEventDate> getCalendarEventDates(GetCalendarDatesRequest request) {
+		
 		if (log.isDebugEnabled())
 			log.debug("getCalendarEventDates called");
-		
-			uri += "/dates";
 	
-		Response<CalendarEventDate> response = this.callGet(uri, request.getQueryParams(), CALENDAR_DATES_RESPONSE_TYPEREF);
+		Response<CalendarEventDate> response = this.callGet(CALENDAR_URI + "/dates", request.getQueryParams(), CALENDAR_DATES_RESPONSE_TYPEREF);
 
 		if (log.isDebugEnabled())
 			log.debug("getCalendarEventDates completed");

@@ -1,209 +1,110 @@
 package com.genability.client.types;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class CalendarEventDate {
 
-	public static final String REST_TYPE = "CalendarEventDate";
-	/**
-	 * private member variable for calendarEventDateId.
-	 */
-
-	private Long calendarEventDateId;
-
-
-	/**
-	 * private member variable for subkey.
-	 */
-
-	private String subKey;
-
-
-	/**
-	 * private member variable for calendarEventDate.
-	 */
-
-	private Timestamp calendarEventDate;
+	public static final String REST_TYPE = "CalendarDate";
 
 
 	/**
 	 * private member variable for calendarEventId.
 	 */
-
 	private Long eventDateId;
 
+	/**
+	 * private member variable for subKey.
+	 */
+	private String subKey;
 
 	/**
 	 * private member variable for calendarEventName.
 	 */
-
 	private String eventName;
 
+	/**
+	 * private member variable for startDateTime.
+	 */
+	private DateTime startDateTime;
 
 	/**
-	 * private member variable for createdDate.
+	 * private member variable for endDateTime.
 	 */
-
-	private Timestamp startDateTime;
-
-	private Timestamp endDateTime;
-
+	private DateTime endDateTime;
 
 	/**
-	 * private member variable for createdBy.
+	 * private member variable for calendarEventId.
 	 */
-
+	private Long calendarEventId;
+	
+	/**
+	 * private member variable for lseId.
+	 */
 	private Long lseId;
 
-
-	/**
-	 * private member variable for createdBy.
-	 */
-
-	private Long createdBy;
-
-
-	/**
-	 * private member variable for createdDate.
-	 */
-
-	private Date createdDate;
-
-
-	/**
-	 * private member variable for lastUpdatedBy.
-	 */
-
-	private Long lastUpdatedBy;
-
-
-	/**
-	 * private member variable for lastUpdatedDate.
-	 */
-
-	private Date lastUpdatedDate;
-
+	
 
 	public Long getEventDateId() {
 		return eventDateId;
 	}
 
-
 	public void setEventDateId(Long eventDateId) {
 		this.eventDateId = eventDateId;
 	}
-
 
 	public String getSubKey() {
 		return subKey;
 	}
 
-
 	public void setSubKey(String subKey) {
 		this.subKey = subKey;
 	}
-
-
-	public Timestamp getCalendarEventDate() {
-		return calendarEventDate;
-	}
-
-
-	public void setCalendarEventDate(Timestamp calendarEventDate) {
-		this.calendarEventDate = calendarEventDate;
-	}
-
-
-	public Long getCalendarEventId() {
-		return eventDateId;
-	}
-
-
-	public void setCalendarEventId(Long calendarEventId) {
-		this.eventDateId = calendarEventId;
-	}
-
-
-
-	public Long getLseId() {
-		return lseId;
-	}
-
-
-	public void setLseId(Long lseId) {
-		this.lseId = lseId;
-	}
-
-
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-
-
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-
-	public Long getLastUpdatedBy() {
-		return lastUpdatedBy;
-	}
-
-
-	public void setLastUpdatedBy(Long lastUpdatedBy) {
-		this.lastUpdatedBy = lastUpdatedBy;
-	}
-
-
-	public Date getLastUpdatedDate() {
-		return lastUpdatedDate;
-	}
-
-
-	public void setLastUpdatedDate(Date lastUpdatedDate) {
-		this.lastUpdatedDate = lastUpdatedDate;
-	}
-
 
 	public String getEventName() {
 		return eventName;
 	}
 
-
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
 
-
-	public Timestamp getStartDateTime() {
+	public DateTime getStartDateTime() {
 		return startDateTime;
 	}
 
-
-	public void setStartDateTime(Timestamp startDateTime) {
+	public void setStartDateTime(DateTime startDateTime) {
 		this.startDateTime = startDateTime;
 	}
 
-
-	public Timestamp getEndDateTime() {
+	public DateTime getEndDateTime() {
 		return endDateTime;
 	}
 
-
-	public void setEndDateTime(Timestamp endDateTime) {
+	public void setEndDateTime(DateTime endDateTime) {
 		this.endDateTime = endDateTime;
 	}
+	
+	public Long getCalendarEventId() {
+		return calendarEventId;
+	}
+
+	public void setCalendarEventId(Long calendarEventId) {
+		this.calendarEventId = calendarEventId;
+	}
+
+	public Long getLseId() {
+		return lseId;
+	}
+
+	public void setLseId(Long lseId) {
+		this.lseId = lseId;
+	}
+	
 
 }
