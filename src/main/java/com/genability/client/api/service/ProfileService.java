@@ -3,6 +3,8 @@ package com.genability.client.api.service;
 import java.text.MessageFormat;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import com.genability.client.api.request.DeleteProfileRequest;
 import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
 import com.genability.client.api.request.ReadingDataRequest;
@@ -101,6 +103,29 @@ public class ProfileService extends BaseService {
 
 		return response;
 
+	}
+
+	/**
+	 * Calls the REST service to delete a Profile based on the arguments passed in.
+	 *
+	 * @return
+	 */
+	public Response<Profile> deleteProfile(DeleteProfileRequest request) {
+		if(log.isDebugEnabled()) log.debug("deleteProfile called");
+
+		String profileId = request.getProfileId();
+
+		if (profileId == null || profileId.isEmpty()) {
+			throw new GenabilityException("profileId must be set");
+		}
+
+		String uri = "v1/usage/profiles/" + profileId;
+
+		Response<Profile> response = this.callDelete(uri, request.getQueryParams(), PROFILE_RESPONSE_TYPEREF);
+
+		if (log.isDebugEnabled()) log.debug("deleteProfile completed");
+
+		return response;
 	}
 
 	public Response<ReadingData> updateReadings(ReadingDataRequest request) {

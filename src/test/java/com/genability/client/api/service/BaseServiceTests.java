@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -93,6 +94,7 @@ public class BaseServiceTests {
 		
 		Account addAccount = new Account();
 		addAccount.setAccountName("Java Client Lib Test Account - CAN DELETE");
+		addAccount.setProviderAccountId("TEST-" + UUID.randomUUID());
 		
 		Map<String, PropertyData> properties = new HashMap<String, PropertyData>();
 		
@@ -137,6 +139,7 @@ public class BaseServiceTests {
 		Account account = createAccount();
 		Profile addProfile = new Profile();
 		addProfile.setAccountId(account.getAccountId());
+		addProfile.setProviderProfileId("TEST-" + UUID.randomUUID());
 		Response<Profile> restResponse = profileService.addProfile(addProfile);
 		
 		assertNotNull("new Profile response is null",restResponse);

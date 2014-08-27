@@ -2,7 +2,9 @@ package com.genability.client.api.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import org.joda.time.DateTimeZone;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.genability.client.api.request.DeleteProfileRequest;
 import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
 import com.genability.client.api.request.ReadingDataRequest;
@@ -29,7 +32,6 @@ public class ProfileServiceTests extends BaseServiceTests {
 	
 	
 	@Test
-	@Ignore
 	public void testGetProfile() {
 		
 		Profile newProfile = createProfile();
@@ -72,29 +74,34 @@ public class ProfileServiceTests extends BaseServiceTests {
 		cleanup(account.getAccountId());
 	}
 
-	public Profile callGetProfile(String testCase, GetProfileRequest request) {
-		
-		Response<Profile> restResponse = profileService.getProfile(request);
-		
-		assertNotNull("restResponse null",restResponse);
-		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
-		assertEquals("bad type",restResponse.getType(),Profile.REST_TYPE);
-		assertTrue("bad count", restResponse.getCount() > 0);
+	@Test
+	public void testDeleteProfileByProfileId() {
+		Profile newProfile = createProfile();
+		try {
+			String profileId = newProfile.getProfileId();
 
-		return restResponse.getResults().get(0);
-				
-	}
-	
-	public void callGetProfiles(String testCase, GetProfilesRequest request) {
-		
-		Response<Profile> restResponse = profileService.getProfiles(request);
-		
-		assertNotNull("restResponse null",restResponse);
-		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
-		assertEquals("bad type",restResponse.getType(),Profile.REST_TYPE);
-				
-	}
+			GetProfileRequest request = new GetProfileRequest();
+			request.setProfileId(profileId);
+			Profile returnedProfile = callGetProfile("testDeleteProfileByProfileId first get", request);
+			assertEquals("profileId mismatch on first get", profileId, returnedProfile.getProfileId());
 
+			callDeleteProfile(profileId);
+
+			GetProfileRequest request2 = new GetProfileRequest();
+			request2.setProfileId(profileId);
+			try {
+				Response<Profile> secondGetResponse = profileService.getProfile(request2);
+				fail("second get (after delete) should 404");
+			} catch (GenabilityException e) {
+				// XXX should handle HTTP codes cleanly in the exception
+				if (! "Failed : HTTP error code : 404".equals(e.getMessage())) {
+					throw e;
+				}
+			}
+		} finally {
+			cleanup(newProfile.getAccountId());
+		}
+	}
 
 	@Test
 	public void testAddUpdateReadings() {
@@ -167,6 +174,44 @@ public class ProfileServiceTests extends BaseServiceTests {
 		cleanup(account.getAccountId());
 	}
 
+	/*
+	 * Helper functions
+	 */
+
+	public void callDeleteProfile(String profileId) {
+		DeleteProfileRequest request = new DeleteProfileRequest();
+		request.setProfileId(profileId);
+		Response<Profile> restResponse = profileService.deleteProfile(request);
+
+		assertNotNull("restResponse null", restResponse);
+		assertEquals("bad status", restResponse.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("bad type", restResponse.getType(), Profile.REST_TYPE);
+		assertTrue("bad count", restResponse.getCount() == 0);
+                assertNull("shouldn't have results", restResponse.getResults());
+	}
+
+	public Profile callGetProfile(String testCase, GetProfileRequest request) {
+		
+		Response<Profile> restResponse = profileService.getProfile(request);
+		
+		assertNotNull("restResponse null",restResponse);
+		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
+		assertEquals("bad type",restResponse.getType(),Profile.REST_TYPE);
+		assertTrue("bad count", restResponse.getCount() > 0);
+
+		return restResponse.getResults().get(0);
+				
+	}
+	
+	public void callGetProfiles(String testCase, GetProfilesRequest request) {
+		
+		Response<Profile> restResponse = profileService.getProfiles(request);
+		
+		assertNotNull("restResponse null",restResponse);
+		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
+		assertEquals("bad type",restResponse.getType(),Profile.REST_TYPE);
+				
+	}
 
 
 
