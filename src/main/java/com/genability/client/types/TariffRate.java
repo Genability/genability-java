@@ -37,6 +37,7 @@ public class TariffRate {
   private String variableLimitKey;
   private String variableRateKey;
   private String variableFactorKey;
+  private String variableRateSubKey;
   private List<TariffRateBand> rateBands;
 
 	public static final String REST_TYPE = "TariffRate";
@@ -235,7 +236,15 @@ public class TariffRate {
     this.variableRateKey = variableRateKey;
   }
   
-  public String getVariableFactorKey() {
+  public String getVariableRateSubKey() {
+	return variableRateSubKey;
+}
+
+public void setVariableRateSubKey(String variableRateSubKey) {
+	this.variableRateSubKey = variableRateSubKey;
+}
+
+public String getVariableFactorKey() {
     return variableFactorKey;
   }
   
