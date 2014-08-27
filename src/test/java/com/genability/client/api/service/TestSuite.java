@@ -12,7 +12,8 @@ import org.junit.runners.Suite.SuiteClasses;
   LseServiceTests.class,
   PriceServiceTests.class,
   ProfileServiceTests.class,
-  TariffServiceTests.class
+  TariffServiceTests.class,
+  TypicalServiceTests.class,
 })
 public class TestSuite {
 

@@ -77,6 +77,12 @@ public abstract class AbstractRequest {
 		}
 
 	} // end of addParam for BigDecimal
+
+	protected void addParam(List<NameValuePair> qparams, String paramName, Double paramValue) {
+		if(paramValue != null) {
+			qparams.add(new BasicNameValuePair(paramName, paramValue.toString()));
+		}
+	}
 	
 	protected void addParam(List<NameValuePair> qparams, String paramName, String[] paramValues) {
 		
