@@ -47,6 +47,8 @@ public class CalculatedCostItem {
 
 	private ChargeType chargeType;
 
+	private String period;
+
 	/**
 	 * @return the tariffRateId
 	 */
@@ -216,6 +218,19 @@ public class CalculatedCostItem {
 		this.itemCount = itemCount;
 	}
 
+	/**
+	 * @return the period
+	 */
+	public String getPeriod() {
+		return period;
+	}
+
+	/**
+	 * @param period the period to set
+	 */
+	public void setPeriod(String period) {
+		this.period = period;
+	}
 
 	/**
 	 * @return the cost
