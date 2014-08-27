@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * 
  */
 
+@JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReadingData extends PropertyData implements Serializable, UsageData {
 
