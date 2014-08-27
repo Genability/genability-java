@@ -7,10 +7,13 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.genability.client.util.EnumUtil;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TariffRate {
 
   private Long tariffRateId;
@@ -37,6 +40,7 @@ public class TariffRate {
   private String variableLimitKey;
   private String variableRateKey;
   private String variableFactorKey;
+  private String variableRateSubKey;
   private List<TariffRateBand> rateBands;
 
 	public static final String REST_TYPE = "TariffRate";
@@ -235,7 +239,15 @@ public class TariffRate {
     this.variableRateKey = variableRateKey;
   }
   
-  public String getVariableFactorKey() {
+  public String getVariableRateSubKey() {
+	return variableRateSubKey;
+}
+
+public void setVariableRateSubKey(String variableRateSubKey) {
+	this.variableRateSubKey = variableRateSubKey;
+}
+
+public String getVariableFactorKey() {
     return variableFactorKey;
   }
   

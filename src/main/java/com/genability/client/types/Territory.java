@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.genability.client.api.service.TerritoryType;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.genability.client.util.EnumUtil;
 
+@JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Territory {
 	

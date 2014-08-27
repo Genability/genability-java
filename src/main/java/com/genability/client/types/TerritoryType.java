@@ -1,4 +1,4 @@
-package com.genability.client.api.service;
+package com.genability.client.types;
 
 public enum TerritoryType {
 

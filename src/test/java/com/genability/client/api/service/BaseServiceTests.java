@@ -33,7 +33,8 @@ public class BaseServiceTests {
 	protected static final GenabilityClient genabilityClient;
 	protected static final AccountService accountService;
 	protected static final ProfileService profileService;
-	
+	protected static final PropertyService propertyService;
+	protected static final CalendarService calendarService;
 	static {
 		//
 		// Very simple configuration of logging to console.
@@ -80,6 +81,8 @@ public class BaseServiceTests {
   		}
   		accountService = genabilityClient.getAccountService();
   		profileService = genabilityClient.getProfileService();
+  		propertyService = genabilityClient.getPropertyService();
+  		calendarService = genabilityClient.getCalendarService();
 	}
 	
 	// Helper method:  We create an account and specify a tariff as well as values
