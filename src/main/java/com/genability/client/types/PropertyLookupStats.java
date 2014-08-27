@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 public class PropertyLookupStats {
 
+
 	public static final String REST_TYPE = "PropertyLookupStats";
 
 	private String keyName;

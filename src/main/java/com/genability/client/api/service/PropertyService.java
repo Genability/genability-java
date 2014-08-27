@@ -60,16 +60,16 @@ public class PropertyService extends BaseService {
 		return response;
 	}
 
-	public Response<PropertyLookupStats> getPropertyStats(GetPropertyKeyRequest request) {
+	public Response<PropertyLookupStats> getPropertyStats(String propertyKeyName) {
 		
 		if(log.isDebugEnabled()) log.debug("getPropertyStats called");
 
 		String uri = "public/properties";
-		if (request.getKeyName() != null && request.getKeyName().length() !=0) {
-			uri += "/" + request.getKeyName() + "/stats";
+		if (propertyKeyName != null && propertyKeyName.length() !=0) {
+			uri += "/" + propertyKeyName + "/stats";
 		}
 
-		Response<PropertyLookupStats> response = this.callGet(uri,request.getQueryParams(),PROPERTY_LOOKUP_STATS_RESPONSE_TYPEREF);
+		Response<PropertyLookupStats> response = this.callGet(uri,null,PROPERTY_LOOKUP_STATS_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()) log.debug("getPropertyStats completed");
 		

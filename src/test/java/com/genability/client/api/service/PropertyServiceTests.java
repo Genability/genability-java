@@ -125,13 +125,12 @@ public class PropertyServiceTests extends BaseServiceTests{
 		//
 		// Assign
 		//
-		GetPropertyKeyRequest request = new GetPropertyKeyRequest();
-		request.setKeyName("qosVariableRateKeyHourly");
+		String keyName = "qosVariableRateKeyHourly";
 
 		//
 		// Act
 		//
-		Response<PropertyLookupStats> restResponse = propertyService.getPropertyStats(request);
+		Response<PropertyLookupStats> restResponse = propertyService.getPropertyStats(keyName);
 		
 		//
 		// Assert
