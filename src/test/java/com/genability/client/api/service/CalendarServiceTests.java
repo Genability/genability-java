@@ -12,7 +12,7 @@ import com.genability.client.types.Calendar;
 import com.genability.client.types.CalendarEventDate;
 import com.genability.client.types.Response;
 
-public class CalendarServiceTest extends BaseServiceTests{
+public class CalendarServiceTests extends BaseServiceTests {
 	
 	
 	private static CalendarService calendarService = genabilityClient.getCalendarService();

@@ -9,9 +9,11 @@ import org.junit.runners.Suite.SuiteClasses;
   AccountServiceTests.class,
   BulkUploadTests.class,
   CalculateServiceTests.class,
+  CalendarServiceTests.class,
   LseServiceTests.class,
   PriceServiceTests.class,
   ProfileServiceTests.class,
+  PropertyServiceTests.class,
   TariffServiceTests.class,
   TypicalServiceTests.class,
 })

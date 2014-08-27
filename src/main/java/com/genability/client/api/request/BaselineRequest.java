@@ -1,5 +1,7 @@
 package com.genability.client.api.request;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.genability.client.types.CustomerClass;
 import com.genability.client.types.ServiceType;
@@ -9,6 +11,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+@JsonInclude(Include.NON_NULL)
 public class BaselineRequest extends AbstractRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;

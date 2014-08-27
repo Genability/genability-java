@@ -1,5 +1,9 @@
 package com.genability.client.types;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.math.BigDecimal;
 
 /*
@@ -12,6 +16,8 @@ import java.math.BigDecimal;
  * Sometimes this is used for presenting data of a different granularity. For example, monthly
  * data for a year will have values of i from 1 to 12, inclusive.
  */
+@JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BaselineMeasure {
 
 	private int i;
