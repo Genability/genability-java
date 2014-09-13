@@ -141,14 +141,11 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	// Overriding so we can set ReadData startTime derived from fromDateTime
 	@Override
 	public void setFromDateTime(DateTime fromDate) {
-		this.fromDateTime = fromDate;
 
 		// set milliseconds to corresponding UTC without offsetting
-		if (fromDate == null) {
-			this.startTime = null;
-		} else {
-			this.startTime = fromDate.withZoneRetainFields(DateTimeZone.UTC).getMillis();
-		}
+		this.fromDateTime = convertToUTC(fromDate);
+		this.startTime = fromDate.getMillis();
+
 	}
 
 	/**
@@ -156,13 +153,11 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	 */
 	@Override
 	public void setToDateTime(DateTime toDate) {
-		this.toDateTime = toDate;
 
-		if (toDate == null) {
-			this.endTime = null;
-		} else {
-			this.endTime = toDate.withZoneRetainFields(DateTimeZone.UTC).getMillis();
-		}
+		// set milliseconds to corresponding UTC without offsetting
+		this.toDateTime = convertToUTC(toDate);
+		this.endTime = toDate.getMillis();
+
 	}
 
 	/**
@@ -287,6 +282,28 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
     public String toString() {
         return "ReadingData [startTime=" + new DateTime(startTime) + ", endTime=" + new DateTime(endTime) + ", quantityUnit=" + quantityUnit + ", quantityValue=" + quantityValue + "]";
     }
+    
+    /**
+	 * Convert to UTC datetime adjusting for DST.
+	 */
+	private DateTime convertToUTC(DateTime dateTime) {
+
+		if (dateTime == null) {
+			return null;
+		}
+
+		DateTimeZone timeZone = dateTime.getZone();
+		long ms = dateTime.getMillis();
+		int offset = timeZone.getOffset(ms) - timeZone.getStandardOffset(ms);
+
+		if (offset != 0) {
+			dateTime = dateTime.minusMillis(offset);
+		}
+
+		dateTime = dateTime.withZoneRetainFields(DateTimeZone.UTC);
+
+		return dateTime;
+	}
 
 } // end of class ReadingData
 

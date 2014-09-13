@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.genability.client.api.request.DeleteProfileRequest;
@@ -170,6 +169,62 @@ public class ProfileServiceTests extends BaseServiceTests {
 		// .getQuantityValue().equals(new BigDecimal("1000")));
 		// assertTrue("reading2 is not equal", profile.getReadingData().get(0)
 		// .getQuantityValue().equals(new BigDecimal("900")));
+
+		cleanup(account.getAccountId());
+	}
+
+	@Test
+	public void testAddUpdateReadingsDST() {
+
+		Account account = createAccount();
+		Profile profile = new Profile();
+		profile.setAccountId(account.getAccountId());
+		Response<Profile> results = profileService.addProfile(profile);
+
+		assertNotNull("new Profile is null", results);
+		assertEquals("bad status", results.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("bad type", results.getType(), Profile.REST_TYPE);
+		assertTrue("bad count", results.getCount() > 0);
+
+		profile = results.getResults().get(0);
+
+		List<ReadingData> readings = new ArrayList<ReadingData>();
+
+		// add two months of readings
+		ReadingData readingData1 = new ReadingData();
+		readingData1.setQuantityUnit("kWh");
+		DateTime fromDateTime1 = new DateTime(2014, 6, 1, 0, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime1 = new DateTime(2014, 7, 1, 0, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
+		readingData1.setFromDateTime(fromDateTime1);
+		readingData1.setToDateTime(toDateTime1);
+		readingData1.setQuantityValue(new BigDecimal("1000"));
+		readings.add(readingData1);
+
+		ReadingDataRequest request = new ReadingDataRequest();
+		request.setUsageProfileId(profile.getProfileId());
+		request.setReadings(readings);
+
+		// add readings to profile
+		Response<ReadingData> addReadingResults = profileService.addReadings(request);
+		assertNotNull("new Profile is null", addReadingResults);
+		assertEquals("bad status", addReadingResults.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("bad type", addReadingResults.getType(), ReadingData.REST_TYPE);
+		assertTrue("bad count", addReadingResults.getCount() != 1);
+
+		//
+		// TODO - add paginated readings and intervals lists to profile type
+		//
+
+		// getProfile with readings / ensure readings are there
+		// GetProfileRequest profileRequest = new GetProfileRequest();
+		// profileRequest.setProfileId(profile.getProfileId());
+		// profileRequest.setPopulateReadings(true);
+		// profile = callGetProfile("Test get one profile", profileRequest);
+
+		// assertNotNull("new Profile Readings is null", profile.getReadings());
+		// assertTrue("reading1 is not equal",
+		// profile.getReadings().getList().get(0).getQuantityValue().equals(new
+		// BigDecimal("1000")));
 
 		cleanup(account.getAccountId());
 	}
