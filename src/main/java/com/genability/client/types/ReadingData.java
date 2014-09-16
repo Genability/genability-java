@@ -144,7 +144,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 
 		// set milliseconds to corresponding UTC without offsetting
 		this.fromDateTime = convertToUTC(fromDate);
-		this.startTime = fromDate.getMillis();
+		this.startTime = fromDateTime.getMillis();
 
 	}
 
@@ -156,7 +156,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 
 		// set milliseconds to corresponding UTC without offsetting
 		this.toDateTime = convertToUTC(toDate);
-		this.endTime = toDate.getMillis();
+		this.endTime = toDateTime.getMillis();
 
 	}
 
