@@ -37,6 +37,8 @@ public class CalculatedCostItem {
     
     private BigDecimal rateAmount;
     
+    private BigDecimal rateProration;
+    
 	private String family;
 
 	private String formula;
@@ -258,7 +260,21 @@ public class CalculatedCostItem {
 	 */
 	public void setRateAmount(BigDecimal rateAmount) {
 		this.rateAmount = rateAmount;
-	}    
+	}
+	
+	/**
+	 * @return the rateProration
+	 */
+	public BigDecimal getRateProration() {
+		return rateProration;
+	}
+
+	/**
+	 * @param rateProration the rateProration to set
+	 */
+	public void setRateProration(BigDecimal rateProration) {
+		this.rateProration = rateProration;
+	}
     
 	/**
 	 * @return formula
