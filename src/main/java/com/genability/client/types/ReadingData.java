@@ -286,6 +286,9 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
     /**
 	 * Convert to UTC datetime adjusting for DST.
 	 */
+	/**
+	 * Convert to UTC datetime adjusting for DST.
+	 */
 	private DateTime convertToUTC(DateTime dateTime) {
 
 		if (dateTime == null) {
@@ -296,14 +299,11 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 		long ms = dateTime.getMillis();
 		int offset = timeZone.getOffset(ms) - timeZone.getStandardOffset(ms);
 
-		if (offset != 0) {
-			dateTime = dateTime.minusMillis(offset);
-		}
-
-		dateTime = dateTime.withZoneRetainFields(DateTimeZone.UTC);
+		dateTime = dateTime.withZoneRetainFields(DateTimeZone.UTC).minusMillis(offset);
 
 		return dateTime;
 	}
+
 
 } // end of class ReadingData
 
