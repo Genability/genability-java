@@ -229,6 +229,74 @@ public class ProfileServiceTests extends BaseServiceTests {
 		cleanup(account.getAccountId());
 	}
 
+	@Test
+	public void testAddReadingsDSTRunCalc() {
+
+		Account account = createAccount();
+		Profile profile = new Profile();
+		profile.setAccountId(account.getAccountId());
+		Response<Profile> results = profileService.addProfile(profile);
+
+		assertNotNull("new Profile is null", results);
+		assertEquals("bad status", results.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("bad type", results.getType(), Profile.REST_TYPE);
+		assertTrue("bad count", results.getCount() > 0);
+
+		profile = results.getResults().get(0);
+
+		List<ReadingData> readings = new ArrayList<ReadingData>();
+
+		// add two months of readings
+		ReadingData readingData1 = new ReadingData();
+		readingData1.setQuantityUnit("kWh");
+		readingData1.setFromDateTime(new DateTime(2013, 5, 29, 10, 45, 0, 0, DateTimeZone.forID("America/New_York")));
+		readingData1.setToDateTime(new DateTime(2013, 5, 29, 10, 50, 0, 0, DateTimeZone.forID("America/New_York")));
+		readingData1.setQuantityValue(new BigDecimal("30.1"));
+		readings.add(readingData1);
+
+		ReadingData readingData2 = new ReadingData();
+		readingData2.setQuantityUnit("kWh");
+		readingData2.setFromDateTime(new DateTime(2013, 5, 29, 10, 50, 0, 0, DateTimeZone.forID("America/New_York")));
+		readingData2.setToDateTime(new DateTime(2013, 5, 29, 10, 55, 0, 0, DateTimeZone.forID("America/New_York")));
+		readingData2.setQuantityValue(new BigDecimal("30.2"));
+		readings.add(readingData2);
+
+		ReadingData readingData3 = new ReadingData();
+		readingData3.setQuantityUnit("kWh");
+		readingData3.setFromDateTime(new DateTime(2013, 5, 29, 10, 55, 0, 0, DateTimeZone.forID("America/New_York")));
+		readingData3.setToDateTime(new DateTime(2013, 5, 29, 11, 00, 0, 0, DateTimeZone.forID("America/New_York")));
+		readingData3.setQuantityValue(new BigDecimal("30.3"));
+		readings.add(readingData3);
+
+		ReadingDataRequest request = new ReadingDataRequest();
+		request.setUsageProfileId(profile.getProfileId());
+		request.setReadings(readings);
+
+		// add readings to profile
+		Response<ReadingData> addReadingResults = profileService.addReadings(request);
+		assertNotNull("new Profile is null", addReadingResults);
+		assertEquals("bad status", addReadingResults.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("bad type", addReadingResults.getType(), ReadingData.REST_TYPE);
+		assertTrue("bad count", addReadingResults.getCount() != 1);
+
+		//
+		// TODO - add paginated readings and intervals lists to profile type
+		//
+
+		// getProfile with readings / ensure readings are there
+		// GetProfileRequest profileRequest = new GetProfileRequest();
+		// profileRequest.setProfileId(profile.getProfileId());
+		// profileRequest.setPopulateReadings(true);
+		// profile = callGetProfile("Test get one profile", profileRequest);
+
+		// assertNotNull("new Profile Readings is null", profile.getReadings());
+		// assertTrue("reading1 is not equal",
+		// profile.getReadings().getList().get(0).getQuantityValue().equals(new
+		// BigDecimal("1000")));
+
+		cleanup(account.getAccountId());
+	}
+
 	/*
 	 * Helper functions
 	 */
