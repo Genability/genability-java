@@ -70,6 +70,11 @@ public class Profile implements Serializable {
 	private List<ReadingData> readingData;
 
 	/**
+	 * private member to hold readinglist of <code>Readings</code>
+	 */
+	private ReadingList<ReadingData> readings;
+
+	/**
 	 * Private member indicating if this profiles interval and other
 	 * pre-calculated/cached data is current.
 	 */
@@ -197,6 +202,22 @@ public class Profile implements Serializable {
 	 */
 	public void setReadingData(List<ReadingData> readingData) {
 		this.readingData = readingData;
+	}
+
+	/**
+	 * Access method for Readings.
+	 * 
+	 * @return
+	 */
+	public ReadingList<ReadingData> getReadings() {
+		return readings;
+	}
+
+	/**
+	 * Mutator method for Readings.
+	 */
+	public void setReadings(ReadingList<ReadingData> readings) {
+		this.readings = readings;
 	}
 
 	/**

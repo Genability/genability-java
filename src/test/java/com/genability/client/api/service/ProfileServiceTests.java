@@ -158,17 +158,16 @@ public class ProfileServiceTests extends BaseServiceTests {
 		assertTrue("bad count", addReadingResults.getCount() < 2);
 		
 		// getProfile with readings / ensure readings are there
-		// GetProfileRequest profileRequest = new GetProfileRequest();
-		// profileRequest.setProfileId(profile.getProfileId());
-		// profileRequest.setPopulateReadings(true);
-		// profile = callGetProfile("Test get one profile", profileRequest);
-		//
-		// assertNotNull("new Profile Readings is null",
-		// profile.getReadingData());
-		// assertTrue("reading1 is not equal", profile.getReadingData().get(0)
-		// .getQuantityValue().equals(new BigDecimal("1000")));
-		// assertTrue("reading2 is not equal", profile.getReadingData().get(0)
-		// .getQuantityValue().equals(new BigDecimal("900")));
+		GetProfileRequest profileRequest = new GetProfileRequest();
+		profileRequest.setProfileId(profile.getProfileId());
+		profileRequest.setPopulateReadings(true);
+		profile = callGetProfile("Test get one profile", profileRequest);
+
+		assertNotNull("new Profile Readings is null", profile.getReadings());
+		assertTrue("reading1 is not equal",
+				profile.getReadings().getList().get(0).getQuantityValue().equals(new BigDecimal("1000.0")));
+		assertTrue("reading2 is not equal",
+				profile.getReadings().getList().get(1).getQuantityValue().equals(new BigDecimal("900.0")));
 
 		cleanup(account.getAccountId());
 	}
