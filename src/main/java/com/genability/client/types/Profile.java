@@ -69,10 +69,12 @@ public class Profile implements Serializable {
 	 */
 	private List<ReadingData> readingData;
 
+	private PagedList<IntervalInfo> intervals;
+
 	/**
-	 * private member to hold readinglist of <code>Readings</code>
+	 * private member to hold readings of <code>Readings</code>
 	 */
-	private ReadingList<ReadingData> readings;
+	private PagedList<ReadingData> readings;
 
 	/**
 	 * Private member indicating if this profiles interval and other
@@ -209,15 +211,31 @@ public class Profile implements Serializable {
 	 * 
 	 * @return
 	 */
-	public ReadingList<ReadingData> getReadings() {
+	public PagedList<ReadingData> getReadings() {
 		return readings;
 	}
 
 	/**
 	 * Mutator method for Readings.
 	 */
-	public void setReadings(ReadingList<ReadingData> readings) {
+	public void setReadings(PagedList<ReadingData> readings) {
 		this.readings = readings;
+	}
+
+	/**
+	 * Access method for Intervals.
+	 * 
+	 * @return
+	 */
+	public PagedList<IntervalInfo> getIntervals() {
+		return intervals;
+	}
+
+	/**
+	 * Mutator method for Intervals.
+	 */
+	public void setIntervals(PagedList<IntervalInfo> intervals) {
+		this.intervals = intervals;
 	}
 
 	/**

@@ -161,6 +161,7 @@ public class ProfileServiceTests extends BaseServiceTests {
 		GetProfileRequest profileRequest = new GetProfileRequest();
 		profileRequest.setProfileId(profile.getProfileId());
 		profileRequest.setPopulateReadings(true);
+
 		profile = callGetProfile("Test get one profile", profileRequest);
 
 		assertNotNull("new Profile Readings is null", profile.getReadings());
@@ -168,6 +169,70 @@ public class ProfileServiceTests extends BaseServiceTests {
 				profile.getReadings().getList().get(0).getQuantityValue().equals(new BigDecimal("1000.0")));
 		assertTrue("reading2 is not equal",
 				profile.getReadings().getList().get(1).getQuantityValue().equals(new BigDecimal("900.0")));
+
+		cleanup(account.getAccountId());
+	}
+
+	@Test
+	public void testGetProfileGroupedByHour() {
+
+		Account account = createAccount();
+		Profile profile = new Profile();
+		profile.setAccountId(account.getAccountId());
+		Response<Profile> results = profileService.addProfile(profile);
+
+		assertNotNull("new Profile is null", results);
+		assertEquals("bad status", results.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("bad type", results.getType(), Profile.REST_TYPE);
+		assertTrue("bad count", results.getCount() > 0);
+
+		profile = results.getResults().get(0);
+
+		List<ReadingData> readings = new ArrayList<ReadingData>();
+
+		// add two months of readings
+		ReadingData readingData1 = new ReadingData();
+		readingData1.setQuantityUnit("kWh");
+		DateTime fromDateTime1 = new DateTime(2014, 1, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime1 = new DateTime(2014, 2, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
+		readingData1.setFromDateTime(fromDateTime1);
+		readingData1.setToDateTime(toDateTime1);
+		readingData1.setQuantityValue(new BigDecimal("1000"));
+		readings.add(readingData1);
+
+		ReadingData readingData2 = new ReadingData();
+		readingData2.setQuantityUnit("kWh");
+		DateTime fromDateTime2 = new DateTime(2014, 2, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
+		DateTime toDateTime2 = new DateTime(2014, 3, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
+		readingData2.setFromDateTime(fromDateTime2);
+		readingData2.setToDateTime(toDateTime2);
+		readingData2.setQuantityValue(new BigDecimal("900"));
+		readings.add(readingData2);
+
+		ReadingDataRequest request = new ReadingDataRequest();
+		request.setUsageProfileId(profile.getProfileId());
+		request.setReadings(readings);
+
+		// add readings to profile
+		Response<ReadingData> addReadingResults = profileService.addReadings(request);
+		assertNotNull("new Profile is null", addReadingResults);
+		assertEquals("bad status", addReadingResults.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("bad type", addReadingResults.getType(), ReadingData.REST_TYPE);
+		assertTrue("bad count", addReadingResults.getCount() < 2);
+
+		// getProfile with readings / ensure readings are there
+		GetProfileRequest profileRequest = new GetProfileRequest();
+		profileRequest.setProfileId(profile.getProfileId());
+
+		profileRequest.setGroupBy(GroupBy.DAY);
+		profileRequest.setPageCount(100);
+
+		profile = callGetProfile("Test get one profile", profileRequest);
+
+		assertNotNull("new Profile intervals is null", profile.getIntervals());
+		// assertTrue("interval1 is not equal",
+		// profile.getIntervals().getList().get(0).getkWh().getQuantityAmount()
+		// .equals(new BigDecimal("1.34408602150537650000")));
 
 		cleanup(account.getAccountId());
 	}

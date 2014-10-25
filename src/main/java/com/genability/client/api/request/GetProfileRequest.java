@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 import com.genability.client.types.ClipBy;
 import com.genability.client.types.GroupBy;
 
-public class GetProfileRequest extends AbstractRequest implements Serializable{
+public class GetProfileRequest extends AbstractGetNRequest implements Serializable {
 
 	/**
 	 * private member variable for serial version
