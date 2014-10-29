@@ -1,15 +1,12 @@
 package com.genability.client.types;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import java.io.Serializable;
 
-@JsonInclude(Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class PaginationInfo  {
+public class PaginationInfo implements Serializable {
+
 
 	/**
-	 * serialization version.
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 

@@ -190,24 +190,17 @@ public class ProfileServiceTests extends BaseServiceTests {
 
 		List<ReadingData> readings = new ArrayList<ReadingData>();
 
-		// add two months of readings
+		// Create one year of readings
 		ReadingData readingData1 = new ReadingData();
 		readingData1.setQuantityUnit("kWh");
-		DateTime fromDateTime1 = new DateTime(2014, 1, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
-		DateTime toDateTime1 = new DateTime(2014, 2, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
+		DateTime fromDateTime1 = new DateTime(2014, 1, 1, 1, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles"));
+		DateTime toDateTime1 = new DateTime(2015, 1, 1, 1, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles"));
 		readingData1.setFromDateTime(fromDateTime1);
 		readingData1.setToDateTime(toDateTime1);
-		readingData1.setQuantityValue(new BigDecimal("1000"));
+		readingData1.setQuantityValue(new BigDecimal("3650"));
 		readings.add(readingData1);
 
-		ReadingData readingData2 = new ReadingData();
-		readingData2.setQuantityUnit("kWh");
-		DateTime fromDateTime2 = new DateTime(2014, 2, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
-		DateTime toDateTime2 = new DateTime(2014, 3, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific"));
-		readingData2.setFromDateTime(fromDateTime2);
-		readingData2.setToDateTime(toDateTime2);
-		readingData2.setQuantityValue(new BigDecimal("900"));
-		readings.add(readingData2);
+
 
 		ReadingDataRequest request = new ReadingDataRequest();
 		request.setUsageProfileId(profile.getProfileId());
@@ -220,10 +213,13 @@ public class ProfileServiceTests extends BaseServiceTests {
 		assertEquals("bad type", addReadingResults.getType(), ReadingData.REST_TYPE);
 		assertTrue("bad count", addReadingResults.getCount() < 2);
 
-		// getProfile with readings / ensure readings are there
+		// getProfile by date range
 		GetProfileRequest profileRequest = new GetProfileRequest();
 		profileRequest.setProfileId(profile.getProfileId());
+		profileRequest.setFromDateTime(new DateTime(2014, 6, 1, 1, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles")));
+		profileRequest.setToDateTime(new DateTime(2014, 7, 1, 1, 0, 0, 0,  DateTimeZone.forID("America/Los_Angeles")));
 
+		profileRequest.setPopulateReadings(Boolean.TRUE);
 		profileRequest.setGroupBy(GroupBy.DAY);
 		profileRequest.setPageCount(100);
 
@@ -234,7 +230,7 @@ public class ProfileServiceTests extends BaseServiceTests {
 		// profile.getIntervals().getList().get(0).getkWh().getQuantityAmount()
 		// .equals(new BigDecimal("1.34408602150537650000")));
 
-		cleanup(account.getAccountId());
+		// cleanup(account.getAccountId());
 	}
 
 	@Test
@@ -386,7 +382,8 @@ public class ProfileServiceTests extends BaseServiceTests {
 		assertEquals("bad type",restResponse.getType(),Profile.REST_TYPE);
 		assertTrue("bad count", restResponse.getCount() > 0);
 
-		return restResponse.getResults().get(0);
+		Profile profile = restResponse.getResults().get(0);
+		return profile;
 				
 	}
 	

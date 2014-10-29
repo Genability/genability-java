@@ -1,5 +1,6 @@
 package com.genability.client.types;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,13 +9,16 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PagedList<T> {
+public class PagedList<T> implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
 	protected PaginationInfo paginationInfo_;
 
 	protected List<T> list_;
@@ -48,7 +52,6 @@ public class PagedList<T> {
 	}
 
 	public PagedList(List<T> list, PaginationInfo paginationInfo) {
-		super();
 		this.list_ = list;
 		if (paginationInfo == null) {
 			this.paginationInfo_ = new PaginationInfo();
@@ -68,10 +71,6 @@ public class PagedList<T> {
 	public void setPaginationInfo(PaginationInfo paginationInfo) {
 		this.paginationInfo_ = paginationInfo;
 		this.isPaginated_ = (paginationInfo == null ? false : true);
-	}
-
-	public boolean isPaginated() {
-		return isPaginated_;
 	}
 
 	public int getTotalCount() {
