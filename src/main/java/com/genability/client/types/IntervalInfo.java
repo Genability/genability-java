@@ -5,8 +5,10 @@ import java.util.Map;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.corba.se.spi.ior.ObjectId;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class IntervalInfo {
 
 
