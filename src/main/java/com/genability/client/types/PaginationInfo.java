@@ -1,14 +1,6 @@
 package com.genability.client.types;
 
-import java.io.Serializable;
-
-public class PaginationInfo implements Serializable {
-
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class PaginationInfo {
 
 	private int totalCount;
 
