@@ -230,7 +230,7 @@ public class ProfileServiceTests extends BaseServiceTests {
 		// profile.getIntervals().getList().get(0).getkWh().getQuantityAmount()
 		// .equals(new BigDecimal("1.34408602150537650000")));
 
-		// cleanup(account.getAccountId());
+		cleanup(account.getAccountId());
 	}
 
 	@Test

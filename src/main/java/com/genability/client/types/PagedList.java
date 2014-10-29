@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@JsonInclude(Include.NON_NULL)
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PagedList<T> implements Serializable {
 
@@ -23,18 +21,15 @@ public class PagedList<T> implements Serializable {
 
 	protected List<T> list_;
 
-	protected boolean isPaginated_;
 
 	public PagedList() {
 		super();
 		this.paginationInfo_ = new PaginationInfo();
-		this.isPaginated_ = false;
 	}
 
 	public PagedList(List<T> list) {
 		super();
 		this.paginationInfo_ = new PaginationInfo();
-		this.isPaginated_ = false;
 		this.list_ = list;
 		if (list != null)
 			this.paginationInfo_.setTotalCount(this.list_.size());
@@ -44,10 +39,8 @@ public class PagedList<T> implements Serializable {
 		super();
 		if (paginationInfo == null) {
 			this.paginationInfo_ = new PaginationInfo();
-			this.isPaginated_ = false;
 		} else {
 			this.paginationInfo_ = paginationInfo;
-			this.isPaginated_ = true;
 		}
 	}
 
@@ -55,12 +48,10 @@ public class PagedList<T> implements Serializable {
 		this.list_ = list;
 		if (paginationInfo == null) {
 			this.paginationInfo_ = new PaginationInfo();
-			this.isPaginated_ = false;
 			if (list != null)
 				this.paginationInfo_.setTotalCount(this.list_.size());
 		} else {
 			this.paginationInfo_ = paginationInfo;
-			this.isPaginated_ = true;
 		}
 	}
 
@@ -70,11 +61,19 @@ public class PagedList<T> implements Serializable {
 
 	public void setPaginationInfo(PaginationInfo paginationInfo) {
 		this.paginationInfo_ = paginationInfo;
-		this.isPaginated_ = (paginationInfo == null ? false : true);
 	}
 
 	public int getTotalCount() {
 		return paginationInfo_.getTotalCount();
+	}
+
+	public void setTotalCount(int totalCount) {
+		if (paginationInfo_ == null) {
+			paginationInfo_ = new PaginationInfo(totalCount);
+		} else {
+			paginationInfo_.setTotalCount(totalCount);
+		}
+
 	}
 
 	public int getPageCount() {
