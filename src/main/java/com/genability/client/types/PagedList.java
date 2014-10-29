@@ -67,10 +67,12 @@ public class PagedList<T> implements Serializable {
 		return paginationInfo_.getTotalCount();
 	}
 
+
 	public void setTotalCount(int totalCount) {
 		if (paginationInfo_ == null) {
 			paginationInfo_ = new PaginationInfo(totalCount);
 		} else {
+
 			paginationInfo_.setTotalCount(totalCount);
 		}
 
