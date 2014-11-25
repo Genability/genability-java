@@ -31,7 +31,9 @@ public class PropertyData {
 	protected BigDecimal accuracy;
 	
 	protected DataType dataType;
-	
+
+	protected String scenarios;
+
 	public PropertyData() {
 		//constructor
 	}
@@ -180,4 +182,13 @@ public class PropertyData {
 	public DataType getDataType() {
 		return dataType;
 	}
+
+	public String getScenarios() {
+		return scenarios;
+	}
+
+	public void setScenarios(final String scenarios) {
+		this.scenarios = scenarios;
+	}
+
 }

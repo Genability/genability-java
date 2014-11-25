@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -33,7 +34,8 @@ public class BaseServiceTests {
 	protected static final GenabilityClient genabilityClient;
 	protected static final AccountService accountService;
 	protected static final ProfileService profileService;
-	
+	protected static final AccountsAnalysisService accountsAnalysisService;
+
 	static {
 		//
 		// Very simple configuration of logging to console.
@@ -50,6 +52,10 @@ public class BaseServiceTests {
     		//load the properties file from in the classpath
     		//
     		InputStream inputStream = BaseServiceTests.class.getClassLoader().getResourceAsStream("genability.properties");
+                if (inputStream == null) {
+                        logger.error("Can't find genability.properties");
+                        throw new RuntimeException("Can't find genability.properties");
+                }
     		prop.load(inputStream);
     	} catch (IOException ex) {
     		logger.error("Unable to process genability.properties", ex);
@@ -65,13 +71,18 @@ public class BaseServiceTests {
   		logger.info("appId: " + appId);
   		logger.info("appKey: " + appKey);
   		logger.info("restApiServer: " + restApiServer);
- 
+                if (appId == null || appId.trim().isEmpty() || appKey == null || appKey.trim().isEmpty()) {
+                        logger.error("appId and appKey must be set");
+                        throw new RuntimeException("Found one or more unset/empty properties");
+                }
+
   		genabilityClient = new GenabilityClient(appId, appKey);
   		if (restApiServer != null && !restApiServer.equals("")) {
 		    genabilityClient.setRestApiServer(restApiServer);
   		}
   		accountService = genabilityClient.getAccountService();
   		profileService = genabilityClient.getProfileService();
+		accountsAnalysisService = genabilityClient.getSavingsAnalysisService();
 	}
 	
 	// Helper method:  We create an account and specify a tariff as well as values
@@ -82,6 +93,7 @@ public class BaseServiceTests {
 		
 		Account addAccount = new Account();
 		addAccount.setAccountName("Java Client Lib Test Account - CAN DELETE");
+		addAccount.setProviderAccountId("TEST-" + UUID.randomUUID());
 		
 		Map<String, PropertyData> properties = new HashMap<String, PropertyData>();
 		
@@ -126,6 +138,7 @@ public class BaseServiceTests {
 		Account account = createAccount();
 		Profile addProfile = new Profile();
 		addProfile.setAccountId(account.getAccountId());
+		addProfile.setProviderProfileId("TEST-" + UUID.randomUUID());
 		Response<Profile> restResponse = profileService.addProfile(addProfile);
 		
 		assertNotNull("new Profile response is null",restResponse);

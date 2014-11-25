@@ -1,7 +1,6 @@
 package com.genability.client.api;
 
 import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.CloseableHttpClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.genability.client.api.service.AccountService;
@@ -11,6 +10,7 @@ import com.genability.client.api.service.CalculateService;
 import com.genability.client.api.service.LseService;
 import com.genability.client.api.service.PriceService;
 import com.genability.client.api.service.ProfileService;
+import com.genability.client.api.service.AccountsAnalysisService;
 import com.genability.client.api.service.TariffService;
 
 public class GenabilityClient {
@@ -116,6 +116,10 @@ public class GenabilityClient {
 
   public TariffService getTariffService() {
     return initializeService(new TariffService());
+  }
+  
+  public AccountsAnalysisService getSavingsAnalysisService() {
+      return initializeService(new AccountsAnalysisService());
   }
 
 }
