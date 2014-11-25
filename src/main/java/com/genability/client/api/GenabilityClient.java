@@ -1,6 +1,6 @@
 package com.genability.client.api;
 
-import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.genability.client.api.service.AccountService;
@@ -19,7 +19,7 @@ public class GenabilityClient {
   private String appKey;
   private String restApiServer;
   private ObjectMapper mapper;
-  private HttpClient httpClient;
+  private CloseableHttpClient httpClient;
 
   public GenabilityClient() {
   }
@@ -67,11 +67,11 @@ public class GenabilityClient {
     this.mapper = mapper;
   }
 
-	public HttpClient getHttpClient() {
+	public CloseableHttpClient getHttpClient() {
 		return httpClient;
 	}
 
-	public void setHttpClient(HttpClient httpClient) {
+	public void setHttpClient(CloseableHttpClient httpClient) {
 		this.httpClient = httpClient;
 	}
 
