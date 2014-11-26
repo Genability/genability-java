@@ -23,9 +23,9 @@ public class TariffServiceTests extends BaseServiceTests {
 	@Test
 	public void testGetTariff() {
 
-		String testCase = "Case 1 - call get Australian tariff";
+		String testCase = "Case 1 - call to get SCE's D Domestic tariff";
 		GetTariffRequest request = new GetTariffRequest();
-		request.setMasterTariffId(3183808l);
+		request.setMasterTariffId(447L);
 		callGetTariff(testCase, request);
 
 	}
