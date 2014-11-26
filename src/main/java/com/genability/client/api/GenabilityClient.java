@@ -4,6 +4,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.genability.client.api.service.AccountAnalysisService;
 import com.genability.client.api.service.AccountService;
 import com.genability.client.api.service.BaseService;
 import com.genability.client.api.service.BulkUploadService;
@@ -117,6 +119,10 @@ public class GenabilityClient {
     return initializeService(new ProfileService());
   }
 
+  public AccountAnalysisService getAccountAnalysisService() {
+    return initializeService(new AccountAnalysisService());
+  }
+
   public TariffService getTariffService() {
     return initializeService(new TariffService());
   }
@@ -125,9 +131,9 @@ public class GenabilityClient {
 	    return initializeService(new PropertyService());
 	  }
 
-public CalendarService getCalendarService() {
+  public CalendarService getCalendarService() {
 	 return initializeService(new CalendarService());
-}
+  }
 
   public TypicalService getTypicalService() {
     return initializeService(new TypicalService());

@@ -33,6 +33,7 @@ public class BaseServiceTests {
 	
 	protected static final GenabilityClient genabilityClient;
 	protected static final AccountService accountService;
+	protected static final AccountAnalysisService accountAnalysisService;
 	protected static final ProfileService profileService;
 	protected static final PropertyService propertyService;
 	protected static final CalendarService calendarService;
@@ -81,6 +82,7 @@ public class BaseServiceTests {
 		    genabilityClient.setRestApiServer(restApiServer);
   		}
   		accountService = genabilityClient.getAccountService();
+		accountAnalysisService = genabilityClient.getAccountAnalysisService();
   		profileService = genabilityClient.getProfileService();
   		propertyService = genabilityClient.getPropertyService();
   		calendarService = genabilityClient.getCalendarService();

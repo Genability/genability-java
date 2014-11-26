@@ -42,8 +42,9 @@ public class TariffRate {
   private String variableFactorKey;
   private String variableRateSubKey;
   private List<TariffRateBand> rateBands;
+  private String scenarios;
 
-	public static final String REST_TYPE = "TariffRate";
+  public static final String REST_TYPE = "TariffRate";
 
   public Long getTariffRateId() {
     return tariffRateId;
@@ -269,5 +270,11 @@ public String getVariableFactorKey() {
     }
     this.rateBands.add(rateBand);
   }
+  public String getScenarios() {
+    return scenarios;
+  }
 
+  public void setScenarios(final String scenarios) {
+    this.scenarios = scenarios;
+  }
 }
