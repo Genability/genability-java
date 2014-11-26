@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class GetCalendarsRequest extends AbstractRequest{
 
 	/**
@@ -22,6 +24,7 @@ public class GetCalendarsRequest extends AbstractRequest{
 	
 	
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 
 		List<NameValuePair> qparams = super.getQueryParams();

@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author mihle
@@ -293,6 +294,7 @@ public class GetAccountTariffsRequest extends AbstractGetNRequest implements Ser
 
 	//
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 
 		List<NameValuePair> qparams = super.getQueryParams();

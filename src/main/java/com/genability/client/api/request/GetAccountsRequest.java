@@ -19,15 +19,4 @@ public class GetAccountsRequest extends AbstractGetNRequest implements Serializa
 	 */
 	private static final long serialVersionUID = 1L;
 
-
-
-	@Override
-	public List<NameValuePair> getQueryParams() {
-
-		List<NameValuePair> qparams = super.getQueryParams();
-		
-		return qparams;
-		
-	}	
-	
 }

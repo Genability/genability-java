@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class GetPropertyKeyRequest extends AbstractRequest{
 
@@ -75,6 +76,7 @@ public class GetPropertyKeyRequest extends AbstractRequest{
 	}
 	
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = super.getQueryParams();

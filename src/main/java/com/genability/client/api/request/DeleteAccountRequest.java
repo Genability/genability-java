@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author ebaizel
  * 
@@ -82,6 +84,7 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 	}
 
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = super.getQueryParams();

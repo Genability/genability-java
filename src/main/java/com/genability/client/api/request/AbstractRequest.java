@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.genability.client.types.Fields;
 import com.genability.client.util.EnumUtil;
 
@@ -36,6 +37,7 @@ public abstract class AbstractRequest {
       this.fields = fields;
     }
 
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 	  List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 	  if (fields != null) {

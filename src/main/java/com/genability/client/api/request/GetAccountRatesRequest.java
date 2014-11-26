@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.genability.client.types.ServiceType;
 
 
@@ -70,6 +71,7 @@ public class GetAccountRatesRequest extends AbstractGetNRequest implements Seria
 	//
 
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 
 		List<NameValuePair> qparams = super.getQueryParams();

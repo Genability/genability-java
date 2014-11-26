@@ -77,12 +77,4 @@ public class BulkUploadRequest extends AbstractRequest implements Serializable {
 	public String getContentType() {
 		return contentType;
 	}
-	
-	@Override
-	public List<NameValuePair> getQueryParams() {
-		List<NameValuePair> qparams = super.getQueryParams();
-		
-		return qparams;
-		
-	}	
 }

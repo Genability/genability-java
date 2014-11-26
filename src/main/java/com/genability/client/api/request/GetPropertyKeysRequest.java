@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.genability.client.types.DataType;
 import com.genability.client.types.Privacy;
 
@@ -87,6 +88,7 @@ public class GetPropertyKeysRequest extends AbstractRequest{
 
 
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = super.getQueryParams();

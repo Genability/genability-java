@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.genability.client.types.SortOrder;
 
 public abstract class AbstractGetNRequest extends AbstractRequest {
@@ -116,6 +117,8 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 		this.sortOrder = sortOrder;
 	}
 
+	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = super.getQueryParams();

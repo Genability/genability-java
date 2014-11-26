@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.genability.client.types.PropertyData;
 import com.genability.client.types.TariffRate;
 
@@ -70,12 +69,5 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 
         public void setPropertyInputs(List<PropertyData> propertyInputs) {
                 this.propertyInputs = propertyInputs;
-        }
-
-        @JsonIgnore
-        @Override
-        public List<NameValuePair> getQueryParams() {
-                List<NameValuePair> qparams = super.getQueryParams();
-                return qparams;
         }
 }

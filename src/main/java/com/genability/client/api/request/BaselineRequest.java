@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @JsonInclude(Include.NON_NULL)
 public class BaselineRequest extends AbstractRequest implements Serializable {
 
@@ -141,6 +143,7 @@ public class BaselineRequest extends AbstractRequest implements Serializable {
 	}
 
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 		final List<NameValuePair> queryParams = super.getQueryParams();
 

@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class GetPriceRequest extends AbstractRequest implements Serializable {
 
 	/**
@@ -116,6 +118,7 @@ public class GetPriceRequest extends AbstractRequest implements Serializable {
 	}
 
 	@Override
+	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 		
 		List<NameValuePair> qparams = super.getQueryParams();
