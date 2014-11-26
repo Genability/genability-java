@@ -1,11 +1,13 @@
 package com.genability.client.types;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -27,6 +29,57 @@ public class AccountAnalysis {
 
     private Map<String, BigDecimal> summary;
 
+
+    /**
+     * This allows you access to the Series that you're interested in. E.g.
+     *
+     *    Series monthlyPreSolarUtilitySeries = accountAnalysis.getSeriesByParameters("before", "MONTH", null);
+     *    // check that monthlyPreSolarUtilitySeries != null, then proceed
+     */
+    @JsonIgnore
+    public Series getSeriesByParameters(String scenario, String period, String key) {
+
+        if (this.series == null) return null;
+
+        if (scenario == null || period == null) return null;
+
+        if (key != null && key.isEmpty()) key = null;
+
+        for (Series s : this.series) {
+            if (s.getScenario().equalsIgnoreCase(scenario)
+                && s.getSeriesPeriod().equalsIgnoreCase(period)
+                    && ((key == null && s.getKey() == null) || (key != null && key.equalsIgnoreCase(s.getKey()))))
+                        return s;
+        }
+
+        return null;
+    }
+
+    /**
+     * This allows you access to the SeriesData that you're interested in. E.g.
+     *
+     *    Series monthlyPreSolarUtilitySeries = accountAnalysis.getSeriesByParameters("before", "MONTH", null);
+     *    if (monthlyPreSolarUtilitySeries == null) throw SomeException();
+     *
+     *    Integer seriesId = monthlyPreSolarUtilitySeries.getSeriesId();
+     *    List<SeriesMeasure> monthlyPreSolarUtilitySeriesData = accountAnalysis.getSeriesDataBySeriesId(seriesId);
+     *    // check that monthlyPreSolarUtilitySeriesData != null, then proceed
+     */
+    @JsonIgnore
+    public List<SeriesMeasure> getSeriesDataBySeriesId(Integer seriesId) {
+
+        if (this.seriesData == null) return null;
+
+        List<SeriesMeasure> filteredSeriesData = new ArrayList<SeriesMeasure>();
+
+        for (SeriesMeasure sm : this.seriesData) {
+            if (seriesId.equals(sm.getSeriesId())) {
+                filteredSeriesData.add(sm);
+            }
+        }
+
+        return filteredSeriesData;
+    }
 
     public String getDesignId() {
         return designId;
