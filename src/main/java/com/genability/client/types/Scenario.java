@@ -14,6 +14,10 @@ public class Scenario {
 
     private List<TariffRate> rates;
 
+    /**
+     * If Genability had to make assumptions (eg what service territory the location is in),
+     * they will be listed here. Often null.
+     */
     private List<PropertyData> assumptions;
 
     public String getId() {
