@@ -14,6 +14,8 @@ public class Scenario {
 
     private List<TariffRate> rates;
 
+    private List<PropertyData> assumptions;
+
     public String getId() {
         return id;
     }
@@ -52,5 +54,13 @@ public class Scenario {
 
     public void setRates(List<TariffRate> rates) {
         this.rates = rates;
+    }
+
+    public List<PropertyData> getAssumptions() {
+        return assumptions;
+    }
+
+    public void setAssumptions(List<PropertyData> assumptions) {
+        this.assumptions = assumptions;
     }
 }
