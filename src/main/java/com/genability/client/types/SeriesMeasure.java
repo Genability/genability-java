@@ -6,18 +6,18 @@ import org.joda.time.DateTime;
 
 public class SeriesMeasure {
 
-    private String seriesId;
+    private Integer seriesId;
     private DateTime fromDateTime;
     private DateTime toDateTime;
     private BigDecimal rate;
     private BigDecimal qty;
     private BigDecimal cost;
 
-    public String getSeriesId() {
+    public Integer getSeriesId() {
         return seriesId;
     }
 
-    public void setSeriesId(final String seriesId) {
+    public void setSeriesId(final Integer seriesId) {
         this.seriesId = seriesId;
     }
 
