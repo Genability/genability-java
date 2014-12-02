@@ -19,13 +19,15 @@ import org.junit.Test;
 import com.genability.client.api.request.AccountAnalysisRequest;
 import com.genability.client.api.request.DeleteAccountRequest;
 import com.genability.client.types.Account;
+import com.genability.client.types.AccountAnalysis;
 import com.genability.client.types.Address;
 import com.genability.client.types.ChargeType;
 import com.genability.client.types.Profile;
 import com.genability.client.types.PropertyData;
 import com.genability.client.types.ReadingData;
 import com.genability.client.types.Response;
-import com.genability.client.types.AccountAnalysis;
+import com.genability.client.types.Series;
+import com.genability.client.types.SeriesMeasure;
 import com.genability.client.types.TariffRate;
 import com.genability.client.types.TariffRateBand;
 
@@ -111,6 +113,14 @@ public class AccountAnalysisTests extends BaseServiceTests {
 
             BigDecimal netAvoidedCost = summary.get("netAvoidedCost");
             assertFalse("netAvoidedCost should not be zero", BigDecimal.ZERO.equals(netAvoidedCost));
+
+            Series monthlyPreSolarUtilitySeries = result.getSeriesByParameters("before", "MONTH", null);
+            assertNotNull("no pre-solar monthly series found", monthlyPreSolarUtilitySeries);
+
+            Integer seriesId = monthlyPreSolarUtilitySeries.getSeriesId();
+            List<SeriesMeasure> monthlyPreSolarUtilitySeriesData = result.getSeriesDataBySeriesId(seriesId);
+            assertNotNull("no pre-solar monthly seriesData (seriesId " + seriesId + ")", monthlyPreSolarUtilitySeriesData);
+
         } finally {
             // delete account so we keep things clean
             deleteAccount(accountId);
