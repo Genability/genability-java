@@ -112,7 +112,13 @@ public class AccountAnalysisTests extends BaseServiceTests {
             assertNotNull("summary null", summary);
 
             BigDecimal netAvoidedCost = summary.get("netAvoidedCost");
-            assertFalse("netAvoidedCost should not be zero", BigDecimal.ZERO.equals(netAvoidedCost));
+            assertFalse("netAvoidedCost should not be zero", BigDecimal.ZERO.compareTo(netAvoidedCost) == 0);
+
+            BigDecimal preTotalCost = summary.get("preTotalCost");
+            assertFalse("preTotalCost should not be zero", BigDecimal.ZERO.compareTo(preTotalCost) == 0);
+
+            BigDecimal postTotalCost = summary.get("postTotalCost");
+            assertFalse("postTotalCost should not be zero", BigDecimal.ZERO.compareTo(postTotalCost) == 0);
 
             Series monthlyPreSolarUtilitySeries = result.getSeriesByParameters("before", "MONTH", null);
             assertNotNull("no pre-solar monthly series found", monthlyPreSolarUtilitySeries);
@@ -121,6 +127,9 @@ public class AccountAnalysisTests extends BaseServiceTests {
             List<SeriesMeasure> monthlyPreSolarUtilitySeriesData = result.getSeriesDataBySeriesId(seriesId);
             assertNotNull("no pre-solar monthly seriesData (seriesId " + seriesId + ")", monthlyPreSolarUtilitySeriesData);
 
+	    // Because it starts at 2014-10-10 (and therefore ends at 2015-10-10), we should see 13 months of data:
+	    // Oct 2014 through Nov 2015
+	    assertEquals("for a mid-month fromDateTime, didn't get 13 buckets", 13, monthlyPreSolarUtilitySeriesData.size());
         } finally {
             // delete account so we keep things clean
             deleteAccount(accountId);
@@ -129,7 +138,7 @@ public class AccountAnalysisTests extends BaseServiceTests {
 
     private AccountAnalysisRequest createSavingsAnalysis(Profile usageProfile, Profile productionProfile) {
         AccountAnalysisRequest request = new AccountAnalysisRequest();
-        request.setFromDateTime(new DateTime(2014-10-10));
+        request.setFromDateTime(new DateTime("2014-10-10"));
 
         List<PropertyData> properties = new ArrayList<PropertyData>();
         PropertyData propertyData = new PropertyData();
