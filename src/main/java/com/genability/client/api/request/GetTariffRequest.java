@@ -10,59 +10,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class GetTariffRequest extends AbstractRequest implements Serializable {
 
-	/**
-	 * private member variable for serial version
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	
 	private Long masterTariffId;
-	
-	/**
-	 * Private member variable for accountId
-	 */
+
 	private String accountId;
-	
-	/**
-	 * Private member variable for PopulateProperties.
-	 */
+
 	private Boolean populateProperties;
-	
-	/**
-	 * Private member variable for PopulateRates.
-	 */
+
 	private Boolean populateRates;
 
-	/**
-	 * Private member variable for PopulateDocuments.
-	 */
 	private Boolean populateDocuments;
 
-	/**
-	 * Private member variable for EffectiveOn.
-	 */
 	private DateTime effectiveOn;
 
-	/**
-	 * Private member variable for applicableRatesOnly.
-	 */
 	private Boolean applicableRatesOnly;
 
-	/**
-	 * Private member variable for applyContractedRates.
-	 */
 	private Boolean applyContractedRates;
-	
-	/**
-	 * Private member variable for lookupVariableRates.
-	 */
+
 	private Boolean lookupVariableRates;
 	
-	/**
-	 * Private member variable for bundleRates.
-	 */
 	private Boolean bundleRates;
-	
+
+	private DateTime fromDateTime;
+	private DateTime toDateTime;
 
 	public Long getMasterTariffId() {
 		return masterTariffId;
@@ -163,6 +134,21 @@ public class GetTariffRequest extends AbstractRequest implements Serializable {
 		this.bundleRates = bundleRates;
 	}
 
+        public DateTime getFromDateTime() {
+                return fromDateTime;
+        }
+
+        public void setFromDateTime(DateTime fromDateTime) {
+                this.fromDateTime = fromDateTime;
+        }
+
+        public DateTime getToDateTime() {
+                return toDateTime;
+        }
+
+        public void setToDateTime(DateTime toDateTime) {
+                this.toDateTime = toDateTime;
+        }
 
 	@Override
 	@JsonIgnore
@@ -170,16 +156,17 @@ public class GetTariffRequest extends AbstractRequest implements Serializable {
 
 		List<NameValuePair> qparams = super.getQueryParams();
 
-		addParam(qparams,"masterTariffId",masterTariffId);
-		addParam(qparams,"accountId",accountId);
-		addParam(qparams,"populateProperties",populateProperties);
-		addParam(qparams,"populateRates",populateRates);
-		addParam(qparams,"populateDocuments",populateDocuments);
-		addParam(qparams,"effectiveOn",effectiveOn);
-		addParam(qparams,"applicableRatesOnly",applicableRatesOnly);
-		addParam(qparams,"applyContractedRates",applyContractedRates);
-		addParam(qparams,"lookupVariableRates",lookupVariableRates);
-		addParam(qparams,"bundleRates",bundleRates);
+		addParam(qparams, "accountId", accountId);
+		addParam(qparams, "populateProperties", populateProperties);
+		addParam(qparams, "populateRates", populateRates);
+		addParam(qparams, "populateDocuments", populateDocuments);
+		addParam(qparams, "effectiveOn", effectiveOn);
+		addParam(qparams,"applicableRatesOnly", applicableRatesOnly);
+		addParam(qparams, "applyContractedRates", applyContractedRates);
+		addParam(qparams, "lookupVariableRates", lookupVariableRates);
+		addParam(qparams, "bundleRates", bundleRates);
+		addParam(qparams, "fromDateTime", fromDateTime);
+		addParam(qparams, "toDateTime", toDateTime);
 		
 		return qparams;
 		

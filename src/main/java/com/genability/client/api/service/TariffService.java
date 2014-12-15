@@ -46,7 +46,7 @@ public class TariffService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getTariff called");
 		
 		Response<Tariff> response = this.callGet(
-				"public/tariffs", 
+				"public/tariffs/" + request.getMasterTariffId(),
 				request.getQueryParams(),
 				TARIFF_RESPONSE_TYPEREF);
 		

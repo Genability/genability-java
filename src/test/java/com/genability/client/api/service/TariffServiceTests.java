@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
+
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -12,7 +14,10 @@ import com.genability.client.api.request.GetTariffsRequest;
 import com.genability.client.types.CustomerClass;
 import com.genability.client.types.Response;
 import com.genability.client.types.SortOrder;
+import com.genability.client.types.Fields;
 import com.genability.client.types.Tariff;
+import com.genability.client.types.TariffRate;
+import com.genability.client.types.TariffRateBand;
 import com.genability.client.types.TariffType;
 
 public class TariffServiceTests extends BaseServiceTests {
@@ -28,6 +33,37 @@ public class TariffServiceTests extends BaseServiceTests {
 		request.setMasterTariffId(447L);
 		callGetTariff(testCase, request);
 
+	}
+
+	@Test
+	public void testGetTariffWithVariableRates () {
+
+		String testCase = "Check that variable rates are returned";
+		String variableRateKey = "peakShavingVASchedule1";
+		GetTariffRequest request = new GetTariffRequest();
+		request.setPopulateRates(true);
+		request.setLookupVariableRates(true);
+		request.setFromDateTime(new DateTime("2014-12-10"));
+		request.setToDateTime(new DateTime("2014-12-15"));
+		request.setMasterTariffId(122L);
+
+		Tariff tariff = callGetTariff(testCase, request);
+
+		// Check that the variable rate component has its rateAmount set to a non-zero value
+		// (this happens only when we set lookupVariableRates to true)
+		Boolean foundDesiredVariableRateBand = false;
+		for (TariffRate rate : tariff.getRates()) {
+			if (variableRateKey.equals(rate.getVariableRateKey())) {
+				assertTrue("no rateBands for " + variableRateKey + " component!",
+					rate.getRateBands() != null && rate.getRateBands().size() > 0);
+				TariffRateBand rb = rate.getRateBands().get(0);
+				assertTrue("rateAmount not filled in despite lookupVariableRates=true",
+					BigDecimal.ZERO.compareTo(rb.getRateAmount()) != 0);
+				foundDesiredVariableRateBand = true;
+				break;
+			}
+		}
+		assertTrue("didn't get a variable rate band we were looking for to test!", foundDesiredVariableRateBand);
 	}
 
 	@Test
@@ -69,10 +105,10 @@ public class TariffServiceTests extends BaseServiceTests {
 		
 		Response<Tariff> restResponse = tariffService.getTariffs(request);
 		
-		assertNotNull("restResponse null",restResponse);
-		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
-		assertEquals("bad type",restResponse.getType(),Tariff.REST_TYPE);
-		assertTrue("bad count",restResponse.getCount() > 0);
+		assertNotNull("restResponse null", restResponse);
+		assertEquals("bad status", Response.STATUS_SUCCESS, restResponse.getStatus());
+		assertEquals("bad type", Tariff.REST_TYPE, restResponse.getType());
+		assertTrue("bad count", restResponse.getCount() > 0);
 		
 		for(Tariff tariff : restResponse.getResults()) {
 			
@@ -84,24 +120,22 @@ public class TariffServiceTests extends BaseServiceTests {
 		
 	}
 	
-	public void callGetTariff(String testCase, GetTariffRequest request) {
+	public Tariff callGetTariff(String testCase, GetTariffRequest request) {
 
 		Response<Tariff> restResponse = tariffService.getTariff(request);
 
 		assertNotNull("restResponse null", restResponse);
-		assertEquals("bad status", restResponse.getStatus(),
-				Response.STATUS_SUCCESS);
-		assertEquals("bad type", restResponse.getType(), Tariff.REST_TYPE);
-		assertTrue("bad count", restResponse.getCount() > 0);
+		assertEquals("bad status", Response.STATUS_SUCCESS, restResponse.getStatus());
+		assertEquals("bad type", Tariff.REST_TYPE, restResponse.getType());
+		assertEquals("bad count", new Integer(1), restResponse.getCount());
 
-		for (Tariff tariff : restResponse.getResults()) {
+		Tariff tariff = restResponse.getResults().get(0);
 
-			assertNotNull("tariffId null", tariff.getTariffId());
-			assertNotNull("effectiveDate", tariff.getEffectiveDate());
-			assertNotNull("currency", tariff.getCurrency());
+		assertNotNull("tariffId null", tariff.getTariffId());
+		assertNotNull("effectiveDate", tariff.getEffectiveDate());
+		assertNotNull("currency", tariff.getCurrency());
 
-		}
-
+		return tariff;
 	}
 
 }
