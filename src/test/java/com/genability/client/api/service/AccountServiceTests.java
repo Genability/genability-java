@@ -25,15 +25,60 @@ public class AccountServiceTests  extends BaseServiceTests {
 	@Test
 	public void testAddAccount() {
 		
-		Account addAccount = new Account();
-		addAccount
-				.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
+		Account newAccount = new Account();
+		newAccount.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
 		
 		// call add account helper method
-		addAccount = addAccount(addAccount);
+		newAccount = addAccount(newAccount);
 		
 		// delete account so we keep things clean
-		deleteAccount(addAccount.getAccountId());
+		deleteAccount(newAccount.getAccountId());
+
+	}
+	
+	@Test
+	public void testUpdateAccount() {
+		String owner = "Test User";
+
+		Account newAccount = new Account();
+		newAccount.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
+		
+		// call add account helper method
+		newAccount = addAccount(newAccount);
+		newAccount.setOwner(owner);
+
+		Response<Account> restResponse = accountService.updateAccount(newAccount);
+		assertNotNull("restResponse null", restResponse);
+		assertEquals("bad status", restResponse.getStatus(),
+				Response.STATUS_SUCCESS);
+		assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
+		assertTrue("bad count", restResponse.getCount() > 0);
+
+		for (Account account : restResponse.getResults()) {
+			assertNotNull("accountId null", account.getAccountId());
+			newAccount = account;
+		}
+
+		assertEquals("Didn't update owner",
+				newAccount.getOwner(),
+				owner);
+		
+		// delete account so we keep things clean
+		deleteAccount(newAccount.getAccountId());
+	}
+	
+	@Test
+	public void testUpsertAccount() {
+		
+		Account newAccount = new Account();
+		newAccount.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
+		newAccount.setProviderAccountId("javaapi-test-id-01");
+		
+		// call upsert account helper method
+		newAccount = upsertAccount(newAccount);
+		
+		// delete account so we keep things clean
+		deleteAccount(newAccount.getAccountId());
 
 	}
 	
@@ -227,6 +272,35 @@ public class AccountServiceTests  extends BaseServiceTests {
 
 	}
 
+	/**
+	 * Private method to upsert an account with a provided providerAccountId
+	 * 
+	 * @param newAccount
+	 * @return
+	 */
+	private Account upsertAccount(Account newAccount) {
+		Response<Account> restResponse = accountService.updateAccount(newAccount);
+
+		assertNotNull("restResponse null", restResponse);
+		assertEquals("bad status", restResponse.getStatus(),
+				Response.STATUS_SUCCESS);
+		assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
+		assertTrue("bad count", restResponse.getCount() > 0);
+
+		Account returnedAccount = null;
+		for (Account account : restResponse.getResults()) {
+			assertNotNull("accountId null", account.getAccountId());
+			assertNotNull("providerAccountId null", account.getProviderAccountId());
+			returnedAccount = account;
+		}
+
+		assertEquals("providerAccountIds didn't match",
+				newAccount.getProviderAccountId(),
+				returnedAccount.getProviderAccountId());
+
+		return returnedAccount;
+	}
+	
 	//
 	// TODO - switch to use helper methods on baseServiceTests
 	//
