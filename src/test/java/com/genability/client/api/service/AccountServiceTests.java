@@ -45,40 +45,61 @@ public class AccountServiceTests  extends BaseServiceTests {
 		
 		// call add account helper method
 		newAccount = addAccount(newAccount);
-		newAccount.setOwner(owner);
+		try {
+			newAccount.setOwner(owner);
+	
+			Response<Account> restResponse = accountService.updateAccount(newAccount);
+			assertNotNull("restResponse null", restResponse);
+			assertEquals("bad status", restResponse.getStatus(),
+					Response.STATUS_SUCCESS);
+			assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
+			assertTrue("bad count", restResponse.getCount() == 1);
+			Account returnedAccount = restResponse.getResults().get(0);
+			assertEquals("Didn't update owner",
+					returnedAccount.getOwner(),
+					owner);
+		}
+		
+		finally {
+			// delete account so we keep things clean
+			deleteAccount(newAccount.getAccountId());
+		}
+	}
+	
+	@Test
+	public void testUpsertWithNewAccount() {
+		String accountName = "Java Client Lib Test Add Account - CAN DELETE";
+		String providerAccountId = "javaapi-test-id-01";
 
+		Account newAccount = new Account();
+		newAccount.setAccountName(accountName);
+		newAccount.setProviderAccountId(providerAccountId);
+		
 		Response<Account> restResponse = accountService.updateAccount(newAccount);
+
 		assertNotNull("restResponse null", restResponse);
 		assertEquals("bad status", restResponse.getStatus(),
 				Response.STATUS_SUCCESS);
 		assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
-		assertTrue("bad count", restResponse.getCount() > 0);
+		assertTrue("bad count", restResponse.getCount() == 1);
+		Account returnedAccount = null;
 
-		for (Account account : restResponse.getResults()) {
-			assertNotNull("accountId null", account.getAccountId());
-			newAccount = account;
+		try {
+			returnedAccount = restResponse.getResults().get(0);
+			assertEquals("providerAccountIds didn't match",
+					newAccount.getProviderAccountId(),
+					returnedAccount.getProviderAccountId());
+			assertEquals("Didn't upsert accountName correctly.",
+					returnedAccount.getAccountName(),
+					accountName);
 		}
 
-		assertEquals("Didn't update owner",
-				newAccount.getOwner(),
-				owner);
-		
-		// delete account so we keep things clean
-		deleteAccount(newAccount.getAccountId());
-	}
-	
-	@Test
-	public void testUpsertAccount() {
-		
-		Account newAccount = new Account();
-		newAccount.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
-		newAccount.setProviderAccountId("javaapi-test-id-01");
-		
-		// call upsert account helper method
-		newAccount = upsertAccount(newAccount);
-		
-		// delete account so we keep things clean
-		deleteAccount(newAccount.getAccountId());
+		finally {
+			// delete account so we keep things clean
+			if(returnedAccount != null) {
+				deleteAccount(returnedAccount.getAccountId());
+			}
+		}
 
 	}
 	
@@ -270,35 +291,6 @@ public class AccountServiceTests  extends BaseServiceTests {
 		// delete account so we keep things clean
 		deleteAccount(account.getAccountId());
 
-	}
-
-	/**
-	 * Private method to upsert an account with a provided providerAccountId
-	 * 
-	 * @param newAccount
-	 * @return
-	 */
-	private Account upsertAccount(Account newAccount) {
-		Response<Account> restResponse = accountService.updateAccount(newAccount);
-
-		assertNotNull("restResponse null", restResponse);
-		assertEquals("bad status", restResponse.getStatus(),
-				Response.STATUS_SUCCESS);
-		assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
-		assertTrue("bad count", restResponse.getCount() > 0);
-
-		Account returnedAccount = null;
-		for (Account account : restResponse.getResults()) {
-			assertNotNull("accountId null", account.getAccountId());
-			assertNotNull("providerAccountId null", account.getProviderAccountId());
-			returnedAccount = account;
-		}
-
-		assertEquals("providerAccountIds didn't match",
-				newAccount.getProviderAccountId(),
-				returnedAccount.getProviderAccountId());
-
-		return returnedAccount;
 	}
 	
 	//
