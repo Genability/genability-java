@@ -40,29 +40,29 @@ public class AccountServiceTests  extends BaseServiceTests {
 	public void testUpdateAccount() {
 		String owner = "Test User";
 
-		Account newAccount = new Account();
-		newAccount.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
+		Account unsavedAccount = new Account();
+		unsavedAccount.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
 		
 		// call add account helper method
-		newAccount = addAccount(newAccount);
+		Account savedAccount = addAccount(unsavedAccount);
 		try {
-			newAccount.setOwner(owner);
+			savedAccount.setOwner(owner);
 	
-			Response<Account> restResponse = accountService.updateAccount(newAccount);
+			Response<Account> restResponse = accountService.updateAccount(savedAccount);
 			assertNotNull("restResponse null", restResponse);
 			assertEquals("bad status", restResponse.getStatus(),
 					Response.STATUS_SUCCESS);
 			assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
 			assertTrue("bad count", restResponse.getCount() == 1);
-			Account returnedAccount = restResponse.getResults().get(0);
+			Account updatedAccount = restResponse.getResults().get(0);
 			assertEquals("Didn't update owner",
-					returnedAccount.getOwner(),
+					updatedAccount.getOwner(),
 					owner);
 		}
 		
 		finally {
 			// delete account so we keep things clean
-			deleteAccount(newAccount.getAccountId());
+			deleteAccount(savedAccount.getAccountId());
 		}
 	}
 	
