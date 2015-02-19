@@ -50,17 +50,13 @@ public class AccountServiceTests  extends BaseServiceTests {
 	
 			Response<Account> restResponse = accountService.updateAccount(savedAccount);
 			assertNotNull("restResponse null", restResponse);
-			assertEquals("bad status", restResponse.getStatus(),
-					Response.STATUS_SUCCESS);
+			assertEquals("bad status", restResponse.getStatus(), Response.STATUS_SUCCESS);
 			assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
 			assertTrue("bad count", restResponse.getCount() == 1);
+
 			Account updatedAccount = restResponse.getResults().get(0);
-			assertEquals("Didn't update owner",
-					updatedAccount.getOwner(),
-					owner);
-		}
-		
-		finally {
+			assertEquals("Didn't update owner",	updatedAccount.getOwner(), owner);
+		} finally {
 			// delete account so we keep things clean
 			deleteAccount(savedAccount.getAccountId());
 		}
@@ -78,8 +74,7 @@ public class AccountServiceTests  extends BaseServiceTests {
 		Response<Account> restResponse = accountService.updateAccount(newAccount);
 
 		assertNotNull("restResponse null", restResponse);
-		assertEquals("bad status", restResponse.getStatus(),
-				Response.STATUS_SUCCESS);
+		assertEquals("bad status", restResponse.getStatus(), Response.STATUS_SUCCESS);
 		assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
 		assertTrue("bad count", restResponse.getCount() == 1);
 		Account returnedAccount = null;
@@ -89,14 +84,10 @@ public class AccountServiceTests  extends BaseServiceTests {
 			assertEquals("providerAccountIds didn't match",
 					newAccount.getProviderAccountId(),
 					returnedAccount.getProviderAccountId());
-			assertEquals("Didn't upsert accountName correctly.",
-					returnedAccount.getAccountName(),
-					accountName);
-		}
-
-		finally {
+			assertEquals("Didn't upsert accountName correctly.", returnedAccount.getAccountName(), accountName);
+		} finally {
 			// delete account so we keep things clean
-			if(returnedAccount != null) {
+			if (returnedAccount != null) {
 				deleteAccount(returnedAccount.getAccountId());
 			}
 		}
