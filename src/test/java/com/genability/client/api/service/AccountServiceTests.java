@@ -25,15 +25,72 @@ public class AccountServiceTests  extends BaseServiceTests {
 	@Test
 	public void testAddAccount() {
 		
-		Account addAccount = new Account();
-		addAccount
-				.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
+		Account newAccount = new Account();
+		newAccount.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
 		
 		// call add account helper method
-		addAccount = addAccount(addAccount);
+		newAccount = addAccount(newAccount);
 		
 		// delete account so we keep things clean
-		deleteAccount(addAccount.getAccountId());
+		deleteAccount(newAccount.getAccountId());
+
+	}
+	
+	@Test
+	public void testUpdateAccount() {
+		String owner = "Test User";
+
+		Account unsavedAccount = new Account();
+		unsavedAccount.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
+		
+		// call add account helper method
+		Account savedAccount = addAccount(unsavedAccount);
+		try {
+			savedAccount.setOwner(owner);
+	
+			Response<Account> restResponse = accountService.updateAccount(savedAccount);
+			assertNotNull("restResponse null", restResponse);
+			assertEquals("bad status", restResponse.getStatus(), Response.STATUS_SUCCESS);
+			assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
+			assertTrue("bad count", restResponse.getCount() == 1);
+
+			Account updatedAccount = restResponse.getResults().get(0);
+			assertEquals("Didn't update owner",	updatedAccount.getOwner(), owner);
+		} finally {
+			// delete account so we keep things clean
+			deleteAccount(savedAccount.getAccountId());
+		}
+	}
+	
+	@Test
+	public void testUpsertWithNewAccount() {
+		String accountName = "Java Client Lib Test Add Account - CAN DELETE";
+		String providerAccountId = "javaapi-test-id-01";
+
+		Account newAccount = new Account();
+		newAccount.setAccountName(accountName);
+		newAccount.setProviderAccountId(providerAccountId);
+		
+		Response<Account> restResponse = accountService.updateAccount(newAccount);
+
+		assertNotNull("restResponse null", restResponse);
+		assertEquals("bad status", restResponse.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("bad type", restResponse.getType(), Account.REST_TYPE);
+		assertTrue("bad count", restResponse.getCount() == 1);
+		Account returnedAccount = null;
+
+		try {
+			returnedAccount = restResponse.getResults().get(0);
+			assertEquals("providerAccountIds didn't match",
+					newAccount.getProviderAccountId(),
+					returnedAccount.getProviderAccountId());
+			assertEquals("Didn't upsert accountName correctly.", returnedAccount.getAccountName(), accountName);
+		} finally {
+			// delete account so we keep things clean
+			if (returnedAccount != null) {
+				deleteAccount(returnedAccount.getAccountId());
+			}
+		}
 
 	}
 	
@@ -226,7 +283,7 @@ public class AccountServiceTests  extends BaseServiceTests {
 		deleteAccount(account.getAccountId());
 
 	}
-
+	
 	//
 	// TODO - switch to use helper methods on baseServiceTests
 	//
