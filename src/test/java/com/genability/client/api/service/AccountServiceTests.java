@@ -24,7 +24,7 @@ public class AccountServiceTests  extends BaseServiceTests {
 
 	@Test
 	public void testAddAccount() {
-		
+		//test
 		Account newAccount = new Account();
 		newAccount.setAccountName("Java Client Lib Test Add Account - CAN DELETE");
 		
