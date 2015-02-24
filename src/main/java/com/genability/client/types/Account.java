@@ -23,8 +23,6 @@ public class Account {
 
 	private String providerAccountId;
 
-	private String providerOrgId;
-
 	private String accountName;
 
 	private String customerOrgId;
@@ -73,20 +71,6 @@ public class Account {
 	 */
 	public void setProviderAccountId(String providerAccountId) {
 		this.providerAccountId = providerAccountId;
-	}
-
-	/**
-	 * @return the providerOrgId
-	 */
-	public String getProviderOrgId() {
-		return providerOrgId;
-	}
-
-	/**
-	 * @param providerOrgId the providerOrgId to set
-	 */
-	public void setProviderOrgId(String providerOrgId) {
-		this.providerOrgId = providerOrgId;
 	}
 
 	/**
