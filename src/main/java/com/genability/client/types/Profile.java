@@ -22,7 +22,7 @@ public class Profile implements Serializable {
 	private String meterId;
 	private String providerOrgId;
 	private String description;
-	private String source;
+	private Source source;
 	private List<ReadingDataSummary> readingDataSummaries;
 	private List<ReadingData> readingData;
 	private PagedList<IntervalInfo> intervals;
@@ -114,14 +114,14 @@ public class Profile implements Serializable {
 	/**
 	 * Access method for SourceId.
 	 */
-	public String getSource() {
+	public Source getSource() {
 		return source;
 	}
 
 	/**
 	 * Mutator for Source.
 	 */
-	public void setSource(final String source) {
+	public void setSource(final Source source) {
 		this.source = source;
 	}
 

@@ -50,11 +50,6 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	private Long endTime;
 
 	/**
-	 * private member variable for Duration.
-	 */
-	private Long duration;
-
-	/**
 	 * private member variable for TimeAccuracy.
 	 */
 	private Integer timeAccuracy;
@@ -157,21 +152,6 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 		this.toDateTime = toDate;
 		this.endTime = toDateTime.getMillis();
 
-	}
-
-	/**
-	 * Access method for Duration.
-	 */
-
-	public Long getDuration() {
-		return duration;
-	}
-
-	/**
-	 * Mutator for Duration.
-	 */
-	public void setDuration(Long duration) {
-		this.duration = duration;
 	}
 
 	/**
