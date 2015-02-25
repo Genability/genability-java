@@ -24,7 +24,7 @@ public class TariffRateSummary {
 	private BigDecimal rateAmount;
 	private BigDecimal relativePriceIndex;	
 	private String currency;
-	private List<PriceChange> priceChanges;
+	private List<TariffRateChange> priceChanges;
 	//private List<TariffRateChangePeriod> rateChangePeriods; // TODO: create this class
 
 
@@ -129,11 +129,11 @@ public class TariffRateSummary {
 	/**
 	 * List of all the price changes within the specified time period
 	 */
-	public List<PriceChange> getPriceChanges() {
+	public List<TariffRateChange> getPriceChanges() {
 		return priceChanges;
 	}
 
-	public void setPriceChanges(List<PriceChange> priceChanges) {
+	public void setPriceChanges(List<TariffRateChange> priceChanges) {
 		this.priceChanges = priceChanges;
 	}
 	

@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.genability.client.api.request.GetPriceRequest;
 import com.genability.client.api.service.PriceService;
 import com.genability.client.types.TariffRateSummary;
-import com.genability.client.types.PriceChange;
+import com.genability.client.types.TariffRateChange;
 import com.genability.client.types.Response;
 
 public class PriceServiceTests extends BaseServiceTests {
@@ -39,7 +39,7 @@ public class PriceServiceTests extends BaseServiceTests {
 
 			if(price.getPriceChanges() != null ) {
 
-				for(PriceChange priceChange : price.getPriceChanges()) {
+				for(TariffRateChange priceChange : price.getPriceChanges()) {
 
 					log.debug("Price Change " + priceChange.getChangeName());
 

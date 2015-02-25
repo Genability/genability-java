@@ -37,6 +37,7 @@ public class Baseline {
 	private ServiceType serviceType;
 	private String sourceId;
 	private int startDay;
+	//private GeoCoordinates location TODO: implement this
 
 	public static class BuildingType {
 

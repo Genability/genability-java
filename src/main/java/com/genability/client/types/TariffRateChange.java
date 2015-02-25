@@ -1,6 +1,7 @@
 package com.genability.client.types;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
@@ -10,18 +11,15 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PriceChange {
+public class TariffRateChange {
 	
 	
-	private String changeName;
-	
+	private String changeName;	
 	private DateTime changeDateTime;
-	
-	private BigDecimal rateAmount;
-	
+	private BigDecimal rateAmount;	
 	private BigDecimal relativePriceIndex;
-
 	private BigDecimal accuracy;
+	//private List<TariffRateChangePeriod> rateChangePeriods_; TODO: implement this class
 	
 
 	public String getChangeName() {

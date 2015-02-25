@@ -122,7 +122,6 @@ public class CalculatedCost {
 		this.accuracy = accuracy;
 	}
 
-	@JsonIgnore
 	public List<CalculatedCostItem> getCalculatedCostItems() {
 		return getItems();
 	}
