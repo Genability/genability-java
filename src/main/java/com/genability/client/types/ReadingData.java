@@ -22,77 +22,36 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class ReadingData extends PropertyData implements Serializable, UsageData {
 
 	public static final String REST_TYPE = "ReadingData";
-
 	public static final String KWH_UNIT = "kWh";
-
 	public static final String KW_UNIT = "kW";
-
 	public static final String KVA_UNIT = "kVA";
 
-	/**
-     * 
-     */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * private member variable for ProfileId.
-	 */
 	private String usageProfileId;
 
-	/**
-	 * private member variable for StartTime.
-	 */
 	private Long startTime;
-
-	/**
-	 * private member variable for EndTime.
-	 */
 	private Long endTime;
-
-	/**
-	 * private member variable for TimeAccuracy.
-	 */
 	private Integer timeAccuracy;
 
-	/**
-	 * private member variable for QuantityUnit.
-	 */
 	private String quantityUnit;
-
-	/**
-	 * private member variable for QuantityValue.
-	 */
 	private BigDecimal quantityValue;
+	private BigDecimal quantityCost;
+	private BigDecimal quantityRate;
 
-
-	/**
-	 * This is the default constructor.
-	 */
-	public ReadingData() {
-		// no-op
-		
+	public ReadingData() {		
 		this.dataType = DataType.DECIMAL;
+	}
 
-	} // end of constructor
-
-	/**
-	 * Access method for ProfileId.
-	 */
 	@JsonIgnore
 	public String getUsageProfileId() {
 		return usageProfileId;
 	}
 
-	/**
-	 * Mutator for ProfileId.
-	 */
 	public void setUsageProfileId(String usageProfileId) {
 		this.usageProfileId = usageProfileId;
 	}
 
-	/**
-	 * Access method for StartTime.
-	 */
 	@JsonIgnore
 	public Long getStartTime() {
 		return startTime;
@@ -110,9 +69,6 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 			this.fromDateTime = null;
 	}
 
-	/**
-	 * Access method for EndTime.
-	 */
 	@JsonIgnore
 	public Long getEndTime() {
 		return endTime;
@@ -142,9 +98,6 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 
 	}
 
-	/**
-	 * Mutator for toDateTime
-	 */
 	@Override
 	public void setToDateTime(DateTime toDate) {
 
@@ -154,31 +107,19 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 
 	}
 
-	/**
-	 * Access method for TimeAccuracy.
-	 */
 	@JsonInclude(Include.NON_NULL)
 	public Integer getTimeAccuracy() {
 		return timeAccuracy;
 	}
 
-	/**
-	 * Mutator for TimeAccuracy.
-	 */
 	public void setTimeAccuracy(Integer timeAccuracy) {
 		this.timeAccuracy = timeAccuracy;
 	}
 
-	/**
-	 * Access method for QuantityUnit.
-	 */
 	public String getQuantityUnit() {
 		return quantityUnit;
 	}
 
-	/**
-	 * Mutator for QuantityUnit.
-	 */
 	public void setQuantityUnit(String quantityUnit) {
 		if (KWH_UNIT.equalsIgnoreCase(quantityUnit)) {
 			this.quantityUnit = KWH_UNIT;
@@ -189,33 +130,37 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 		}
 	}
 
-	/**
-	 * Access method for QuantityValue.
-	 */
 	public BigDecimal getQuantityValue() {
 		return quantityValue;
 	}
 
-	/**
-	 * Mutator for QuantityValue.
-	 */
 	public void setQuantityValue(BigDecimal quantityValue) {
 		this.quantityValue = quantityValue;
 	}
 
-	/**
-	 * Access method for QuantityAccuracy.
-	 */
 	@JsonInclude(Include.NON_NULL)
 	public BigDecimal getQuantityAccuracy() {
 		return accuracy;
 	}
 
-	/**
-	 * Mutator for QuantityAccuracy.
-	 */
 	public void setQuantityAccuracy(BigDecimal quantityAccuracy) {
 		this.accuracy = quantityAccuracy;
+	}
+
+	public BigDecimal getQuantityCost() {
+		return quantityCost;
+	}
+
+	public void setQuantityCost(BigDecimal quantityCost) {
+		this.quantityCost = quantityCost;
+	}
+
+	public BigDecimal getQuantityRate() {
+		return quantityRate;
+	}
+
+	public void setQuantityRate(BigDecimal quantityRate) {
+		this.quantityRate = quantityRate;
 	}
 
 	/**
@@ -235,7 +180,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 		
 		return keyName;
 	
-	} // end of getKeyName
+	}
 	
 	
 	/**
@@ -261,7 +206,5 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
     public String toString() {
         return "ReadingData [startTime=" + new DateTime(startTime) + ", endTime=" + new DateTime(endTime) + ", quantityUnit=" + quantityUnit + ", quantityValue=" + quantityValue + "]";
     }
-    
-
-} // end of class ReadingData
+}
 
