@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.api.request.GetLseRequest;
 import com.genability.client.api.request.GetLsesRequest;
 import com.genability.client.api.request.GetTerritoriesRequest;
-import com.genability.client.types.Lse;
+import com.genability.client.types.LoadServingEntity;
 import com.genability.client.types.Response;
 import com.genability.client.types.Territory;
 
@@ -12,7 +12,7 @@ import com.genability.client.types.Territory;
 public class LseService extends BaseService {
 	
     private static final TypeReference<Response<Territory>> TERRITORY_RESPONSE_TYPEREF = new TypeReference<Response<Territory>>() {};
-    private static final TypeReference<Response<Lse>> LSE_RESPONSE_TYPEREF = new TypeReference<Response<Lse>>() {};
+    private static final TypeReference<Response<LoadServingEntity>> LSE_RESPONSE_TYPEREF = new TypeReference<Response<LoadServingEntity>>() {};
 
 	/**
 	 * Calls the REST service to get a list of tariffs based on the arguments passed in.
@@ -39,7 +39,7 @@ public class LseService extends BaseService {
 	 * 
 	 * @return
 	 */
-	public Response<Lse> getLse(GetLseRequest request) {
+	public Response<LoadServingEntity> getLse(GetLseRequest request) {
 		
 		if(log.isDebugEnabled()) log.debug("getLse called");
 		
@@ -48,7 +48,7 @@ public class LseService extends BaseService {
 			uri += "/" + request.getLseId();
 		}
 
-		Response<Lse> response = this.callGet(
+		Response<LoadServingEntity> response = this.callGet(
 				uri, 
 				request.getQueryParams(),
 				LSE_RESPONSE_TYPEREF);
@@ -64,11 +64,11 @@ public class LseService extends BaseService {
 	 * 
 	 * @return
 	 */
-	public Response<Lse> getLses(GetLsesRequest request) {
+	public Response<LoadServingEntity> getLses(GetLsesRequest request) {
 		
 		if(log.isDebugEnabled()) log.debug("getLses called");
 		
-		Response<Lse> response = this.callGet(
+		Response<LoadServingEntity> response = this.callGet(
 				"public/lses", 
 				request.getQueryParams(),
 				LSE_RESPONSE_TYPEREF);

@@ -11,29 +11,30 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Price {
+public class TariffRateSummary {
 	
 	public static final String REST_TYPE = "TariffRateSummary";
 
-	
+	private String name;
 	private Long tariffId;
-
 	private ChargeType chargeType;
-
 	private String quantityKey;
-
-	private DateTime fromDateTime;
-	
-	private DateTime toDateTime;
-	
+	private DateTime fromDateTime;	
+	private DateTime toDateTime;	
 	private BigDecimal rateAmount;
-
-	private BigDecimal relativePriceIndex;
-	
+	private BigDecimal relativePriceIndex;	
 	private String currency;
-	
 	private List<PriceChange> priceChanges;
+	//private List<TariffRateChangePeriod> rateChangePeriods; // TODO: create this class
 
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Unique Genability ID (primary key) for this tariff
