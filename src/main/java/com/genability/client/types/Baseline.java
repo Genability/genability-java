@@ -18,7 +18,7 @@ public class Baseline {
 	private BuildingType buildingType;
 	private Territory climateZone;
 
-	// As of 2015-02-23, factors returned are:
+	// As of 2014/08/26, factors returned are:
 	//   annualConsumption
 	//   buildingArea
 	//   meanAnnualConsumption
@@ -26,6 +26,7 @@ public class Baseline {
 	//   meanIntensity
 	//   monthlyConsumption
 	//   peakDemand
+	//   uberAnnualConsumption
 	private Map<String, BigDecimal> factors = new HashMap<String, BigDecimal>();
 
 	private int measureDuration;
