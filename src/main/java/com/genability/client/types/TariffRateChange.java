@@ -1,7 +1,6 @@
 package com.genability.client.types;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.joda.time.DateTime;
 

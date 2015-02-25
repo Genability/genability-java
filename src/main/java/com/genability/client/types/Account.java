@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -15,32 +13,22 @@ import com.genability.client.types.Tariff;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 public class Account {
-
-	
 	public static final String REST_TYPE = "Account";
 	
 	private String accountId;
-
 	private String providerAccountId;
-
 	private String accountName;
 
 	private String customerOrgId;
-
-	private String customerOrgName;
-	
-	private CustomerClass customerClass;
-	
+	private String customerOrgName;	
+	private CustomerClass customerClass;	
 	private String owner;
 
 	private AccountStatus status;
-	
 	private AccountType type;
-
 	private Address address;
-	
-	private List<Tariff> tariffs;
-	
+
+	private List<Tariff> tariffs;	
 	private Map<String, PropertyData> properties;
 
 	/**

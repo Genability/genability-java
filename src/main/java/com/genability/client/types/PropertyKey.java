@@ -12,50 +12,37 @@ public class PropertyKey {
 
 	public static final String REST_TYPE = "PropertyKey";
 	
-	protected String keyName;
+	private String keyName;	
+	private String displayName;
+	private String description;
 	
-	protected String displayName;
+	private String family;
+	private String keyspace;	
+	private DataType dataType;
+	private String resourceType;
 
-	protected String family;
+	private String quantityUnit;
+	private String formulaDetail;
 
-	protected String keyspace;
-	
-	protected String description;
-	
-	protected DataType dataType;
+	private Integer lookbackIntervalQuantity;
+	private Integer lookbackQuantity;
+	private String lookbackPeriod;
+	private Long lookbackTimeOfUseId;
+	private Integer lookbackSeasonId;
 
-	protected String resourceType;
+	private Long entityId;
+	private String entityName;
+	private String entityType;
 
-	protected String quantityUnit;
-
-	protected String formulaDetail;
-
-	protected Integer lookbackIntervalQuantity;
-
-	protected Integer lookbackQuantity;
-
-	protected String lookbackPeriod;
-
-	protected Long lookbackTimeOfUseId;
-
-	protected Integer lookbackSeasonId;
-
-	protected Long entityId;
-
-	protected String entityName;
-	
-	protected Privacy privacy;
-	
-	protected List<PropertyChoice> choices;
-	
-	protected List<PropertyLookup> lookups;
-	
+	private Privacy privacy;	
+	private List<PropertyChoice> choices;	
+	private List<PropertyLookup> lookups;
 
 	public String getKeyName() {
 		return keyName;
 	}
 
-	public void setKeyName(String keyName) {
+	public void setKeyName(final String keyName) {
 		this.keyName = keyName;
 	}
 
@@ -63,7 +50,7 @@ public class PropertyKey {
 		return displayName;
 	}
 
-	public void setDisplayName(String displayName) {
+	public void setDisplayName(final String displayName) {
 		this.displayName = displayName;
 	}
 
@@ -71,7 +58,7 @@ public class PropertyKey {
 		return family;
 	}
 
-	public void setFamily(String family) {
+	public void setFamily(final String family) {
 		this.family = family;
 	}
 
@@ -79,7 +66,7 @@ public class PropertyKey {
 		return keyspace;
 	}
 
-	public void setKeyspace(String keyspace) {
+	public void setKeyspace(final String keyspace) {
 		this.keyspace = keyspace;
 	}
 
@@ -87,7 +74,7 @@ public class PropertyKey {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -95,7 +82,7 @@ public class PropertyKey {
 		return dataType;
 	}
 
-	public void setDataType(DataType dataType) {
+	public void setDataType(final DataType dataType) {
 		this.dataType = dataType;
 	}
 
@@ -103,7 +90,7 @@ public class PropertyKey {
 		return resourceType;
 	}
 
-	public void setResourceType(String resourceType) {
+	public void setResourceType(final String resourceType) {
 		this.resourceType = resourceType;
 	}
 
@@ -111,7 +98,7 @@ public class PropertyKey {
 		return quantityUnit;
 	}
 
-	public void setQuantityUnit(String quantityUnit) {
+	public void setQuantityUnit(final String quantityUnit) {
 		this.quantityUnit = quantityUnit;
 	}
 
@@ -119,7 +106,7 @@ public class PropertyKey {
 		return formulaDetail;
 	}
 
-	public void setFormulaDetail(String formulaDetail) {
+	public void setFormulaDetail(final String formulaDetail) {
 		this.formulaDetail = formulaDetail;
 	}
 
@@ -127,7 +114,7 @@ public class PropertyKey {
 		return lookbackIntervalQuantity;
 	}
 
-	public void setLookbackIntervalQuantity(Integer lookbackIntervalQuantity) {
+	public void setLookbackIntervalQuantity(final Integer lookbackIntervalQuantity) {
 		this.lookbackIntervalQuantity = lookbackIntervalQuantity;
 	}
 
@@ -135,7 +122,7 @@ public class PropertyKey {
 		return lookbackQuantity;
 	}
 
-	public void setLookbackQuantity(Integer lookbackQuantity) {
+	public void setLookbackQuantity(final Integer lookbackQuantity) {
 		this.lookbackQuantity = lookbackQuantity;
 	}
 
@@ -143,7 +130,7 @@ public class PropertyKey {
 		return lookbackPeriod;
 	}
 
-	public void setLookbackPeriod(String lookbackPeriod) {
+	public void setLookbackPeriod(final String lookbackPeriod) {
 		this.lookbackPeriod = lookbackPeriod;
 	}
 
@@ -151,7 +138,7 @@ public class PropertyKey {
 		return lookbackTimeOfUseId;
 	}
 
-	public void setLookbackTimeOfUseId(Long lookbackTimeOfUseId) {
+	public void setLookbackTimeOfUseId(final Long lookbackTimeOfUseId) {
 		this.lookbackTimeOfUseId = lookbackTimeOfUseId;
 	}
 
@@ -159,7 +146,7 @@ public class PropertyKey {
 		return lookbackSeasonId;
 	}
 
-	public void setLookbackSeasonId(Integer lookbackSeasonId) {
+	public void setLookbackSeasonId(final Integer lookbackSeasonId) {
 		this.lookbackSeasonId = lookbackSeasonId;
 	}
 
@@ -167,7 +154,7 @@ public class PropertyKey {
 		return entityId;
 	}
 
-	public void setEntityId(Long entityId) {
+	public void setEntityId(final Long entityId) {
 		this.entityId = entityId;
 	}
 
@@ -175,15 +162,23 @@ public class PropertyKey {
 		return entityName;
 	}
 
-	public void setEntityName(String entityName) {
+	public void setEntityName(final String entityName) {
 		this.entityName = entityName;
+	}
+
+	public String getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(final String entityType) {
+		this.entityType = entityType;
 	}
 
 	public Privacy getPrivacy() {
 		return privacy;
 	}
 
-	public void setPrivacy(Privacy privacy) {
+	public void setPrivacy(final Privacy privacy) {
 		this.privacy = privacy;
 	}
 
@@ -191,7 +186,7 @@ public class PropertyKey {
 		return choices;
 	}
 
-	public void setChoices(List<PropertyChoice> choices) {
+	public void setChoices(final List<PropertyChoice> choices) {
 		this.choices = choices;
 	}
 
@@ -199,7 +194,7 @@ public class PropertyKey {
 		return lookups;
 	}
 
-	public void setLookups(List<PropertyLookup> lookups) {
+	public void setLookups(final List<PropertyLookup> lookups) {
 		this.lookups = lookups;
 	}
 }
