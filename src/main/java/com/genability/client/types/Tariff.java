@@ -13,104 +13,27 @@ import com.genability.client.util.EnumUtil;
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(Include.NON_NULL)
 public class Tariff {
-
-
 	public static final String REST_TYPE = "Tariff";
 
-    
-	/**
-	 * private member variable for TariffId.
-	 */
 	private Long tariffId;
-
-	/**
-	 * private member variable for MasterTariffId.
-	 */
 	private Long masterTariffId;
-	
-	/**
-	 * private member variable for TariffCode.
-	 */
 	private String tariffCode;
-
-	/**
-	 * private member variable for TariffName.
-	 */
 	private String tariffName;
-
-	/**
-	 * private member variable for TariffBookName.
-	 */
 	private String tariffBookName;
-
-	/**
-	 * private member variable for LseId.
-	 */
 	private Long lseId;
-
-	/**
-	 * private member variable for LseName.
-	 */
 	private String lseName;
-
-	/**
-	 * private member variable for ServiceType.
-	 */
+	private String lseCode;
 	private ServiceType serviceType;
-
-	/**
-	 * private member variable for PriorTariffId.
-	 */
 	private Long priorTariffId;
-
-	/**
-	 * private member variable for DistributionLseId.
-	 */
 	private Long distributionLseId;
-
-	/**
-	 * private member variable for TariffType.
-	 */
 	private TariffType tariffType;
-
-	/**
-	 * private member variable for CustomerClass.
-	 */
 	private CustomerClass customerClass;
-
-	/**
-	 * private member variable for CustomerCount.
-	 */
 	private Integer customerCount;
-
-	/**
-	 * private member variable for CustomerLikelihood.
-	 */
 	private BigDecimal customerLikelihood;
-
-	/**
-	 * private member variable for CustomerCountSource.
-	 */
 	private String customerCountSource;
-
-	/**
-	 * private member variable for TerritoryId.
-	 */
 	private Long territoryId;
-
-	/**
-	 * private member variable for EffectiveDate.
-	 */
 	private String effectiveDate;
-
-	/**
-	 * private member variable for EndDate.
-	 */
 	private String endDate;
-
-	/**
-	 * private member variable for the time zone for this tariff.
-	 */
 	private String timeZone;
 
 	/**
@@ -118,14 +41,7 @@ public class Tariff {
 	 */
 	private Period billingPeriod;
 
-	/**
-	 * private member variable for Currency
-	 */
 	private String currency;
-	
-	/**
-	 * private member variable for ChargeTypes
-	 */
 	private ChargeType[] chargeTypes;
 
 	/**
@@ -156,23 +72,9 @@ public class Tariff {
 	 * required to be eligible for this tariff
 	 */
 	private BigDecimal maxMonthlyDemand;
-	
-	/**
-	 * private member variable for whether this tariff
-	 * has time of use rates or not
-	 */
+
 	private Boolean hasTimeOfUseRates;
-
-	/**
-	 * private member variable for whether this tariff
-	 * has tiered rates or not
-	 */
 	private Boolean hasTieredRates;
-
-	/**
-	 * private member variable for whether this tariff
-	 * has contracted rates or not
-	 */
 	private Boolean hasContractedRates;
 
 	/**
@@ -187,30 +89,10 @@ public class Tariff {
 	 */
 	private Boolean hasRateApplicability;
 
-	/**
-	 * private member variable for whether this tariff
-	 * has net metered tariff rates or not
-	 */
 	private Boolean hasNetMetering;
-
-	/**
-	 * private member variable for the isActive flag.
-	 */
 	private Boolean isActive;
-
-	/**
-	 * private member variable for Privacy.
-	 */
 	private String privacy;
-
-	/**
-	 * private member variable for Properties.
-	 */
 	private List<TariffProperty> properties;
-
-	/**
-	 * private member variable for Properties.
-	 */
 	private List<TariffRate> rates;
 	
 	/**
@@ -281,6 +163,14 @@ public class Tariff {
 	 */
 	public void setLseName(String lseName) {
 		this.lseName = lseName;
+	}
+
+	public String getLseCode() {
+		return lseCode;
+	}
+
+	public void setLseCode(final String lseCode) {
+		this.lseCode = lseCode;
 	}
 
 	/**
