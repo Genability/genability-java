@@ -39,6 +39,8 @@ public class CalculatedCostItem {
     
     private BigDecimal rateProration;
     
+    private int rateSequenceNumber;
+    
 	private String family;
 
 	private String formula;
@@ -50,6 +52,7 @@ public class CalculatedCostItem {
 	private ChargeType chargeType;
 
 	private String period;
+	private String chargeClass;
 
 	/**
 	 * @return the tariffRateId
@@ -234,6 +237,14 @@ public class CalculatedCostItem {
 		this.period = period;
 	}
 
+	public String getChargeClass() {
+		return chargeClass;
+	}
+
+	public void setChargeClass(final String chargeClass) {
+		this.chargeClass = chargeClass;
+	}
+
 	/**
 	 * @return the cost
 	 */
@@ -276,6 +287,14 @@ public class CalculatedCostItem {
 		this.rateProration = rateProration;
 	}
     
+	public int getRateSequenceNumber() {
+		return this.rateSequenceNumber;
+	}
+	
+	public void setRateSequenceNumber(final int rateSequenceNumber) {
+		this.rateSequenceNumber = rateSequenceNumber;
+	}
+	
 	/**
 	 * @return formula
 	 */

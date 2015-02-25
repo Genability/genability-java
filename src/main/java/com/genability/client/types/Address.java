@@ -13,12 +13,14 @@ public class Address {
 	private String addressName;
 	private String address1;
 	private String address2;
+	private String formattedAddress;
 	private String city;
 	private String state;
 	private String zipCode;
 	private String country;
 	private Double latitude;
 	private Double longitude;
+	private String timezone;
 
 	public String getAddressString() {
 		return addressString;
@@ -50,6 +52,14 @@ public class Address {
 
 	public void setAddress2(String address2) {
 		this.address2 = address2;
+	}
+	
+	public String getFormattedAddress() {
+		return this.formattedAddress;
+	}
+
+	public void setFormattedAddress(final String formattedAddress) {
+		this.formattedAddress = formattedAddress;
 	}
 
 	public String getCity() {
@@ -101,6 +111,14 @@ public class Address {
 
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+	
+	public String getTimezone() {
+		return this.timezone;
+	}
+	
+	public void setTimezone(final String timezone) {
+		this.timezone = timezone;
 	}
 
 }

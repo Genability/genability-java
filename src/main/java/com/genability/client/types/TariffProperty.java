@@ -22,7 +22,7 @@ public class TariffProperty {
 	private String quantityUnit;
 	private String minValue;
 	private String maxValue;
-	private List<Choice> choices;
+	private List<PropertyChoice> choices;
 	private String period;
 	private String formulaDetail;
 	private Boolean isDefault;
@@ -128,11 +128,11 @@ public class TariffProperty {
 		this.maxValue = maxValue;
 	}
 
-	public List<Choice> getChoices() {
+	public List<PropertyChoice> getChoices() {
 		return choices;
 	}
 
-	public void setChoices(List<Choice> choices) {
+	public void setChoices(List<PropertyChoice> choices) {
 		this.choices = choices;
 	}
 
