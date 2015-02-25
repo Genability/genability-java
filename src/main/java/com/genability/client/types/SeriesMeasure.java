@@ -12,6 +12,8 @@ public class SeriesMeasure {
     private BigDecimal rate;
     private BigDecimal qty;
     private BigDecimal cost;
+    private String period;
+    private Long duration;
 
     public Integer getSeriesId() {
         return seriesId;
@@ -60,4 +62,20 @@ public class SeriesMeasure {
     public void setCost(final BigDecimal cost) {
         this.cost = cost;
     }
+
+	public final String getPeriod() {
+		return period;
+	}
+
+	public final void setPeriod(final String period) {
+		this.period = period;
+	}
+
+	public Long getDuration() {
+		return duration;
+	}
+
+	public void setDuration(final Long duration) {
+		this.duration = duration;
+	}
 }
