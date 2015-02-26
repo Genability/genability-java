@@ -35,6 +35,7 @@ public class Tariff {
 	private String effectiveDate;
 	private String endDate;
 	private String timeZone;
+	private String effectiveOnRule;
 
 	/**
 	 * private member variable for BillingPeriod. the default value is MONTHLY
@@ -516,5 +517,13 @@ public class Tariff {
   public void setPrivacy(String privacy) {
     this.privacy = privacy;
   }
+
+public String getEffectiveOnRule() {
+	return effectiveOnRule;
+}
+
+public void setEffectiveOnRule(String effectiveOnRule) {
+	this.effectiveOnRule = effectiveOnRule;
+}
   
 }

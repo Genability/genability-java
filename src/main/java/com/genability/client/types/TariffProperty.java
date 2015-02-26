@@ -20,23 +20,33 @@ public class TariffProperty {
 	private String operator;
 	private String propertyValue;
 	private String quantityUnit;
+	private String quantityKey;
 	private String minValue;
 	private String maxValue;
 	private List<PropertyChoice> choices;
 	private String period;
 	private String formulaDetail;
 	private Boolean isDefault;
+
+	private List<PropertyLookup> lookups;
 	private Long lookbackintervalQuantity;
 	private String lookbackPeriod;
 	private Long lookbackQuantity;
 	private Long lookbackTimeOfUseId;
 	private Long lookbackSeasonId;
 
+	private String resourceType;
+	private Long entityId;
+	private String entityType;
+	private String entityName;
+	
+	private Privacy privacy;
+
 	public String getKeyName() {
 		return keyName;
 	}
 
-	public void setKeyName(String keyName) {
+	public void setKeyName(final String keyName) {
 		this.keyName = keyName;
 	}
 
@@ -44,7 +54,7 @@ public class TariffProperty {
 		return displayName;
 	}
 
-	public void setDisplayName(String displayName) {
+	public void setDisplayName(final String displayName) {
 		this.displayName = displayName;
 	}
 
@@ -52,7 +62,7 @@ public class TariffProperty {
 		return family;
 	}
 
-	public void setFamily(String family) {
+	public void setFamily(final String family) {
 		this.family = family;
 	}
 
@@ -60,7 +70,7 @@ public class TariffProperty {
 		return keyspace;
 	}
 
-	public void setKeyspace(String keyspace) {
+	public void setKeyspace(final String keyspace) {
 		this.keyspace = keyspace;
 	}
 
@@ -68,7 +78,7 @@ public class TariffProperty {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -76,7 +86,7 @@ public class TariffProperty {
 		return dataType;
 	}
 
-	public void setDataType(String dataType) {
+	public void setDataType(final String dataType) {
 		this.dataType = dataType;
 	}
 
@@ -84,7 +94,7 @@ public class TariffProperty {
 		return propertyTypes;
 	}
 
-	public void setPropertyTypes(TariffPropertyType propertyTypes) {
+	public void setPropertyTypes(final TariffPropertyType propertyTypes) {
 		this.propertyTypes = propertyTypes;
 	}
 
@@ -92,7 +102,7 @@ public class TariffProperty {
 		return operator;
 	}
 
-	public void setOperator(String operator) {
+	public void setOperator(final String operator) {
 		this.operator = operator;
 	}
 
@@ -100,7 +110,7 @@ public class TariffProperty {
 		return propertyValue;
 	}
 
-	public void setPropertyValue(String propertyValue) {
+	public void setPropertyValue(final String propertyValue) {
 		this.propertyValue = propertyValue;
 	}
 
@@ -108,7 +118,7 @@ public class TariffProperty {
 		return quantityUnit;
 	}
 
-	public void setQuantityUnit(String quantityUnit) {
+	public void setQuantityUnit(final String quantityUnit) {
 		this.quantityUnit = quantityUnit;
 	}
 
@@ -116,7 +126,7 @@ public class TariffProperty {
 		return minValue;
 	}
 
-	public void setMinValue(String minValue) {
+	public void setMinValue(final String minValue) {
 		this.minValue = minValue;
 	}
 
@@ -124,7 +134,7 @@ public class TariffProperty {
 		return maxValue;
 	}
 
-	public void setMaxValue(String maxValue) {
+	public void setMaxValue(final String maxValue) {
 		this.maxValue = maxValue;
 	}
 
@@ -132,7 +142,7 @@ public class TariffProperty {
 		return choices;
 	}
 
-	public void setChoices(List<PropertyChoice> choices) {
+	public void setChoices(final List<PropertyChoice> choices) {
 		this.choices = choices;
 	}
 
@@ -140,7 +150,7 @@ public class TariffProperty {
 		return period;
 	}
 
-	public void setPeriod(String period) {
+	public void setPeriod(final String period) {
 		this.period = period;
 	}
 
@@ -148,7 +158,7 @@ public class TariffProperty {
 		return formulaDetail;
 	}
 
-	public void setFormulaDetail(String formulaDetail) {
+	public void setFormulaDetail(final String formulaDetail) {
 		this.formulaDetail = formulaDetail;
 	}
 
@@ -156,7 +166,7 @@ public class TariffProperty {
 		return isDefault;
 	}
 
-	public void setIsDefault(Boolean isDefault) {
+	public void setIsDefault(final Boolean isDefault) {
 		this.isDefault = isDefault;
 	}
 
@@ -164,7 +174,7 @@ public class TariffProperty {
 		return lookbackintervalQuantity;
 	}
 
-	public void setLookbackIntervalQuantity(Long lookbackItemQuantity) {
+	public void setLookbackIntervalQuantity(final Long lookbackItemQuantity) {
 		this.lookbackintervalQuantity = lookbackItemQuantity;
 	}
 
@@ -172,7 +182,7 @@ public class TariffProperty {
 		return lookbackPeriod;
 	}
 
-	public void setLookbackPeriod(String lookbackPeriod) {
+	public void setLookbackPeriod(final String lookbackPeriod) {
 		this.lookbackPeriod = lookbackPeriod;
 	}
 
@@ -180,7 +190,7 @@ public class TariffProperty {
 		return lookbackQuantity;
 	}
 
-	public void setLookbackQuantity(Long lookbackQuantity) {
+	public void setLookbackQuantity(final Long lookbackQuantity) {
 		this.lookbackQuantity = lookbackQuantity;
 	}
 
@@ -188,7 +198,7 @@ public class TariffProperty {
 		return lookbackTimeOfUseId;
 	}
 
-	public void setLookbackTimeOfUseId(Long lookbackTimeOfUseId) {
+	public void setLookbackTimeOfUseId(final Long lookbackTimeOfUseId) {
 		this.lookbackTimeOfUseId = lookbackTimeOfUseId;
 	}
 
@@ -196,8 +206,72 @@ public class TariffProperty {
 		return lookbackSeasonId;
 	}
 
-	public void setLookbackSeasonId(Long lookbackSeasonId) {
+	public void setLookbackSeasonId(final Long lookbackSeasonId) {
 		this.lookbackSeasonId = lookbackSeasonId;
+	}
+
+	public String getQuantityKey() {
+		return quantityKey;
+	}
+
+	public void setQuantityKey(final String quantityKey) {
+		this.quantityKey = quantityKey;
+	}
+
+	public List<PropertyLookup> getLookups() {
+		return lookups;
+	}
+
+	public void setLookups(final List<PropertyLookup> lookups) {
+		this.lookups = lookups;
+	}
+
+	public Long getLookbackintervalQuantity() {
+		return lookbackintervalQuantity;
+	}
+
+	public void setLookbackintervalQuantity(final Long lookbackintervalQuantity) {
+		this.lookbackintervalQuantity = lookbackintervalQuantity;
+	}
+
+	public String getResourceType() {
+		return resourceType;
+	}
+
+	public void setResourceType(final String resourceType) {
+		this.resourceType = resourceType;
+	}
+
+	public Long getEntityId() {
+		return entityId;
+	}
+
+	public void setEntityId(final Long entityId) {
+		this.entityId = entityId;
+	}
+
+	public String getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(final String entityType) {
+		this.entityType = entityType;
+	}
+
+	public String getEntityName() {
+		return entityName;
+	}
+
+	public void setEntityName(final String entityName) {
+		this.entityName = entityName;
+	}
+
+	public Privacy getPrivacy() {
+		return privacy;
+	}
+
+	public void setPrivacy(final Privacy privacy) {
+		this.privacy = privacy;
 	}
 
 }
