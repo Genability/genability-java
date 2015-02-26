@@ -16,27 +16,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * 
  */
 public class GetAccountTariffsRequest extends AbstractGetNRequest implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	/**
-	 * private field accountId_
-	 */
 	private String accountId;
-
-	/**
-	 * Private member variable for masterTariffId.
-	 */
 	private Long masterTariffId;
-
-	/**
-	 * Private member variable for TariffTypes.
-	 */
 	private String[] tariffTypes;
 
 	/**
 	 * This is the integer flags value that the strings in tariffTypes_ are
 	 * converted to.
 	 */
-	private Integer tariffTypeFlags;
+	//private Integer tariffTypeFlags;
 
 	/**
 	 * Private member variable for SerivceTypes.
@@ -47,7 +37,7 @@ public class GetAccountTariffsRequest extends AbstractGetNRequest implements Ser
 	 * This is the integer flags value that the strings in serviceTypes_ are
 	 * converted to.
 	 */
-	private Integer serviceTypeFlags;
+	//private Integer serviceTypeFlags;
 
 	/**
 	 * Private member variable for Privacy.
@@ -58,46 +48,15 @@ public class GetAccountTariffsRequest extends AbstractGetNRequest implements Ser
 	 * This is the integer flags value that the strings in privacyFlags are
 	 * converted to.
 	 */
-	private Integer privacyFlags;
+	//private Integer privacyFlags;
 	
-	/**
-	 * Private member variable for effectiveOn.
-	 */
 	private DateTime effectiveOn;
-
-	/**
-	 * Private member variable for fromDateTime.
-	 */
 	private DateTime fromDateTime;
-
-	/**
-	 * Private member variable for toDateTime.
-	 */
 	private DateTime toDateTime;
-
-	/**
-	 * Private member variable for setIsActive
-	 */
 	private Boolean isActive;
-
-	/**
-	 * Private member variable for includeNotApplicable
-	 */
 	private Boolean includeNotApplicable;
-	
-	/**
-	 * Private member variable for PopulateRates.
-	 */
 	private Boolean populateRates;
-
-	/**
-	 * Private member variable for PopulateProperties.
-	 */
 	private Boolean populateProperties;
-
-	/**
-	 * private field providerAccountId
-	 */
 	private String providerAccountId;
 
 	/**

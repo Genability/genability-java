@@ -14,7 +14,6 @@ import com.genability.client.api.request.GetTariffsRequest;
 import com.genability.client.types.CustomerClass;
 import com.genability.client.types.Response;
 import com.genability.client.types.SortOrder;
-import com.genability.client.types.Fields;
 import com.genability.client.types.Tariff;
 import com.genability.client.types.TariffRate;
 import com.genability.client.types.TariffRateBand;

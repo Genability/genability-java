@@ -37,7 +37,7 @@ public class Baseline {
 	private ServiceType serviceType;
 	private String sourceId;
 	private int startDay;
-	//private GeoCoordinates location TODO: implement this
+	private Coordinates location;
 
 	public static class BuildingType {
 
@@ -107,6 +107,10 @@ public class Baseline {
 		return factors;
 	}
 
+	public void setFactors(final Map<String, BigDecimal> factors) {
+		this.factors = factors;
+	}
+	
 	public int getMeasureDuration() {
 		return measureDuration;
 	}
@@ -135,7 +139,7 @@ public class Baseline {
 		return measures;
 	}
 
-	public void setBaselineMeasures(final BaselineMeasure[] measures) {
+	public void setMeasures(final BaselineMeasure[] measures) {
 		this.measures = measures;
 	}
 
@@ -177,5 +181,13 @@ public class Baseline {
 
 	public void setStartDay(final int startDay) {
 		this.startDay = startDay;
+	}
+
+	public Coordinates getLocation() {
+		return location;
+	}
+
+	public void setLocation(Coordinates location) {
+		this.location = location;
 	}
 }

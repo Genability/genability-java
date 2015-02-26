@@ -89,7 +89,7 @@ public class ProfileServiceTests extends BaseServiceTests {
 			GetProfileRequest request2 = new GetProfileRequest();
 			request2.setProfileId(profileId);
 			try {
-				Response<Profile> secondGetResponse = profileService.getProfile(request2);
+				profileService.getProfile(request2);
 				fail("second get (after delete) should 404");
 			} catch (GenabilityException e) {
 				// XXX should handle HTTP codes cleanly in the exception

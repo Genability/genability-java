@@ -25,7 +25,7 @@ public class TariffRateSummary {
 	private BigDecimal relativePriceIndex;	
 	private String currency;
 	private List<TariffRateChange> priceChanges;
-	//private List<TariffRateChangePeriod> rateChangePeriods; // TODO: create this class
+	private List<TariffRateChangePeriod> rateChangePeriods;
 
 
 	public String getName() {
@@ -36,9 +36,6 @@ public class TariffRateSummary {
 		this.name = name;
 	}
 
-	/**
-	 * Unique Genability ID (primary key) for this tariff
-	 */
 	public Long getTariffId() {
 		return tariffId;
 	}
@@ -135,6 +132,14 @@ public class TariffRateSummary {
 
 	public void setPriceChanges(List<TariffRateChange> priceChanges) {
 		this.priceChanges = priceChanges;
+	}
+
+	public List<TariffRateChangePeriod> getRateChangePeriods() {
+		return rateChangePeriods;
+	}
+
+	public void setRateChangePeriods(List<TariffRateChangePeriod> rateChangePeriods) {
+		this.rateChangePeriods = rateChangePeriods;
 	}
 	
 }

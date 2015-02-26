@@ -3,7 +3,6 @@ package com.genability.client.api.request;
 import java.io.Serializable;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 
 import com.genability.client.types.PropertyData;
