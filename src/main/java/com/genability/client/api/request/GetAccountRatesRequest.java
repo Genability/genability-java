@@ -7,11 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
-//import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-//import com.genability.client.types.ServiceType;
-
 
 /**
  * @author ebaizel
