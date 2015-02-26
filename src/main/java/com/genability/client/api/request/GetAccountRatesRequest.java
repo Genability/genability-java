@@ -31,12 +31,6 @@ public class GetAccountRatesRequest extends AbstractGetNRequest implements Seria
 
 	private String providerAccountId;
 	
-	/*private ServiceType serviceType;
-	
-	private DateTime fromDateTime;
-	
-	private DateTime toDateTime;*/
-	
 
 	/**
 	 * @return the accountId

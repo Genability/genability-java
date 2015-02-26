@@ -23,33 +23,15 @@ public class GetAccountTariffsRequest extends AbstractGetNRequest implements Ser
 	private String[] tariffTypes;
 
 	/**
-	 * This is the integer flags value that the strings in tariffTypes_ are
-	 * converted to.
-	 */
-	//private Integer tariffTypeFlags;
-
-	/**
 	 * Private member variable for SerivceTypes.
 	 */
 	private String[] serviceTypes;
-
-	/**
-	 * This is the integer flags value that the strings in serviceTypes_ are
-	 * converted to.
-	 */
-	//private Integer serviceTypeFlags;
 
 	/**
 	 * Private member variable for Privacy.
 	 */
 	private String[] privacy;
 
-	/**
-	 * This is the integer flags value that the strings in privacyFlags are
-	 * converted to.
-	 */
-	//private Integer privacyFlags;
-	
 	private DateTime effectiveOn;
 	private DateTime fromDateTime;
 	private DateTime toDateTime;
