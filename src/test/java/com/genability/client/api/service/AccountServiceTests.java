@@ -111,6 +111,26 @@ public class AccountServiceTests  extends BaseServiceTests {
 		assertEquals("bad type",restResponse.getType(),Account.REST_TYPE);
 
 	}
+	
+	@Test
+	public void testPaginatedAccountList() {
+		GetAccountsRequest request = new GetAccountsRequest();
+		Response<Account> restResponse = accountService.getAccounts(request);
+		
+		int totalAccounts = restResponse.getCount();
+		int accountsVisited = 0;
+		
+		while(accountsVisited < totalAccounts) {
+			assertEquals("Didn't page through the account list correctly.", accountsVisited, restResponse.getPageStart().intValue());
+
+			for(Account a : restResponse.getResults()) {
+				accountsVisited++;
+			}
+			
+			request.setPageStart(restResponse.getPageStart() + restResponse.getPageCount());
+			restResponse = accountService.getAccounts(request);
+		}
+	}
 
 	@Test
 	public void testGetAccount() {

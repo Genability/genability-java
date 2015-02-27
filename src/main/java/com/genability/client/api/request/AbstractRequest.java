@@ -43,6 +43,7 @@ public abstract class AbstractRequest {
 	  if (fields != null) {
 	    addParam(qparams, "fields", fields.getValue());
 	  }
+	  
 	  return qparams;
 	}
 

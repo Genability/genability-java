@@ -9,7 +9,7 @@ import com.genability.client.types.DataType;
 import com.genability.client.types.Privacy;
 
 
-public class GetPropertyKeysRequest extends AbstractRequest{
+public class GetPropertyKeysRequest extends AbstractGetNRequest{
 
 
 	private String keySpace;

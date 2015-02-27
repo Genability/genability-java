@@ -33,6 +33,9 @@ public class Response<T> implements Serializable {
 	private Integer requestId;
 
 	private List<T> results;
+	
+	private Integer pageStart;
+	private Integer pageCount;
 
 
 	/**
@@ -109,6 +112,24 @@ public class Response<T> implements Serializable {
 
 	public void setResults(List<T> results) {
 		this.results = results;
+	}
+
+
+	public Integer getPageStart() {
+		return pageStart;
+	}
+
+
+	public void setPageStart(Integer pageStart) {
+		this.pageStart = pageStart;
+	}
+
+	public Integer getPageCount() {
+		return pageCount;
+	}
+
+	public void setPageCount(Integer pageCount) {
+		this.pageCount = pageCount;
 	}
 
 }
