@@ -44,6 +44,8 @@ public class Account {
 	private List<Tariff> tariffs;
 	
 	private Map<String, PropertyData> properties;
+	
+	private DateTime createdDate;
 
 	/**
 	 * @return the accountId
@@ -206,7 +208,23 @@ public class Account {
 	 */
 	public void setTariffs(List<Tariff> tariffs) {
 		this.tariffs = tariffs;
-	}	
+	}
+	
+	
+	/**
+	 * @return the createdDate
+	 */
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	/**
+	 * @param createdDate the createdDate to set
+	 */
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
 	
 	public CustomerClass getCustomerClass() {
       return customerClass;

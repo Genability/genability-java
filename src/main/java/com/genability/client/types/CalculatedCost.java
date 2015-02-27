@@ -8,23 +8,29 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CalculatedCost {
 
-	public static final String REST_TYPE = "CalculatedCost";	
+	public static final String REST_TYPE = "CalculatedCost";
+	
 	private Long masterTariffId;
-	private String tariffName;
-	private DateTime fromDateTime;
-	private DateTime toDateTime;
-	private BigDecimal totalCost;
-	private String isoCurrency;
-	private BigDecimal accuracy;
-	private List<CalculatedCostItem> items;	
-	private List<PropertyData> assumptions;
 
+	private String tariffName;
+
+	private DateTime fromDateTime;
+
+	private DateTime toDateTime;
+
+	private BigDecimal totalCost;
+
+	private BigDecimal accuracy;
+
+	private List<CalculatedCostItem> items;
+	
+	private List<PropertyData> assumptions;
+	
 	/**
 	 * Access method for MasterTariffId.
 	 */
@@ -99,14 +105,6 @@ public class CalculatedCost {
 		this.totalCost = totalCost;
 	}
 
-	public String getCurrency() {
-		return isoCurrency;
-	}
-
-	public void setCurrency(final String isoCurrency) {
-		this.isoCurrency = isoCurrency;
-	}
-
 	/**
 	 * Returns the overall accuracy score of this calculation.
 	 * @return
@@ -122,11 +120,7 @@ public class CalculatedCost {
 		this.accuracy = accuracy;
 	}
 
-	@JsonIgnore
-	public List<CalculatedCostItem> getCalculatedCostItems() {
-		return getItems();
-	}
-	
+
 	public List<CalculatedCostItem> getItems() {
 		return items;
 	}
