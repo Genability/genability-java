@@ -5,19 +5,45 @@ import java.math.BigDecimal;
 
 public class Measure {
 
-
+	/**
+	 * private member variable for QuantityUnit.
+	 */
 	private String quantityUnit;
+
+	/**
+	 * private member variable for QuantityAmount.
+	 */
 	private BigDecimal quantityAmount;
+
+	/**
+	 * private member variable for QuantitySum.
+	 */
 	private BigDecimal quantitySum;
+
+	/**
+	 * private member variable for QuantityAccuracy.
+	 */
 	private BigDecimal quantityAccuracy;
-	
+
+	/**
+	 * private member variable for RateAmount.
+	 */
 	private BigDecimal rateAmount;
+
+	/**
+	 * private member variable for RateAccuracy.
+	 */
 	private BigDecimal rateAccuracy;
-	
+
+	/**
+	 * private member variable for CostAmount.
+	 */
 	private BigDecimal costAmount;
+
+	/**
+	 * private member variable for CostAccuracy.
+	 */
 	private BigDecimal costAccuracy;
-	
-	private Integer numberOfReadings;
 
 	public Measure() {
 
@@ -114,11 +140,5 @@ public class Measure {
 		this.costAccuracy = costAccuracy;
 	}
 
-	public Integer getNumberOfReadings() {
-		return numberOfReadings;
-	}
 
-	public void setNumberOfReadings(Integer numberOfReadings) {
-		this.numberOfReadings = numberOfReadings;
-	}
 }
