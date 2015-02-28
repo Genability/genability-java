@@ -3,8 +3,8 @@ package com.genability.client.types;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Standard response payload that comes back from REST endpoints.
@@ -62,17 +62,26 @@ public class Response<T> implements Serializable {
 		this.results = results;
 	}
 	
-	@JsonProperty("pageCount")
+	@JsonIgnore
 	public Integer getPageLength() {
 		return pageLength;
 	}
 
-
-	@JsonProperty("pageCount")
-	public void setPageLength(Integer pageLength) {
+	@JsonIgnore
+	public void setPageLength(final Integer pageLength) {
 		this.pageLength = pageLength;
 	}
 
+	// legacy
+	public Integer getPageCount() {
+		return pageLength;
+	}
+	
+	// legacy
+	public void setPageCount(final Integer pageLength) {
+		this.pageLength = pageLength;
+	}
+	
 	public Integer getPageStart() {
 		return pageStart;
 	}
