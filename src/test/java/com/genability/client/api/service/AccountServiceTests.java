@@ -114,21 +114,45 @@ public class AccountServiceTests  extends BaseServiceTests {
 	
 	@Test
 	public void testPaginatedAccountList() {
-		GetAccountsRequest request = new GetAccountsRequest();
-		Response<Account> restResponse = accountService.getAccounts(request);
+		int numberOfAccountsToCreate = 10;
+		int pageCount = 5;
+		String[] createdAccountIds = new String[numberOfAccountsToCreate];
 		
-		int totalAccounts = restResponse.getCount();
-		int accountsVisited = 0;
+		for(int i = 0; i < numberOfAccountsToCreate; i++) {
+			Account newAccount = new Account();
+			newAccount.setAccountName(String.format("JAVA CLIENT TEST ACCOUNT #%d - CAN DELETE", i));
+			
+			Account addedAccount = addAccount(newAccount);
+			createdAccountIds[i] = addedAccount.getAccountId();
+		}
 		
-		while(accountsVisited < totalAccounts) {
-			assertEquals("Didn't page through the account list correctly.", accountsVisited, restResponse.getPageStart().intValue());
-
-			for(Account a : restResponse.getResults()) {
-				accountsVisited++;
+		try {
+			GetAccountsRequest request = new GetAccountsRequest();
+			request.setPageCount(pageCount);
+			request.setSearch("JAVA CLIENT TEST ACCOUNT");
+			request.setSearchOn("accountName");
+			Response<Account> restResponse = accountService.getAccounts(request);
+			
+			int totalAccounts = restResponse.getCount();
+			int accountsVisited = 0;
+			
+			while(accountsVisited < totalAccounts) {
+				assertEquals("Didn't page through the account list correctly.", accountsVisited, restResponse.getPageStart().intValue());
+	
+				for(Account a : restResponse.getResults()) {
+					accountsVisited++;
+				}
+				
+				request.setPageStart(restResponse.getPageStart() + restResponse.getPageCount());
+				restResponse = accountService.getAccounts(request);
 			}
 			
-			request.setPageStart(restResponse.getPageStart() + restResponse.getPageCount());
-			restResponse = accountService.getAccounts(request);
+			assertEquals("Visited too many accounts.", accountsVisited, totalAccounts);
+		} finally {
+			// make sure that these accounts get cleaned up
+			for(String accountId : createdAccountIds) {
+				deleteAccount(accountId);
+			}
 		}
 	}
 

@@ -45,6 +45,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 	@Test
 	public void testPaginatedPropertyKeysList() {
 		GetPropertyKeysRequest request = new GetPropertyKeysRequest();
+		// PG&E, since it has a lot of property keys
 		request.setEntityId(734L);
 		request.setEntityType("LSE");
 		Response<PropertyKey> restResponse = propertyService.getPropertyKeys(request);
@@ -62,6 +63,8 @@ public class PropertyServiceTests extends BaseServiceTests{
 			request.setPageStart(restResponse.getPageStart() + restResponse.getPageCount());
 			restResponse = propertyService.getPropertyKeys(request);
 		}
+		
+		assertEquals("Visited too many property keys", propertyKeysVisited, totalPropertyKeys);
 	}
 	
 	@Test
