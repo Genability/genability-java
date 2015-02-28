@@ -137,6 +137,7 @@ public class AccountServiceTests  extends BaseServiceTests {
 			int accountsVisited = 0;
 			
 			while(accountsVisited < totalAccounts) {
+				assertEquals("Didn't set pageCount correctly", pageCount, restResponse.getPageCount().intValue());
 				assertEquals("Didn't page through the account list correctly.", accountsVisited, restResponse.getPageStart().intValue());
 	
 				for(Account a : restResponse.getResults()) {
