@@ -9,30 +9,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class GetPropertyLookupsRequest extends AbstractRequest {
 
-
-	private String propertyKey;
-
-	private String subPropertyKey;
-
+	private String keyName;
+	private String subKeyName;
 	private DateTime fromDateTime;
-	
 	private DateTime toDateTime;
 
-
-	public String getPropertyKey() {
-		return propertyKey;
+	public String getKeyName() {
+		return keyName;
 	}
 
-	public void setPropertyKey(String propertyKey) {
-		this.propertyKey = propertyKey;
+	public void setKeyName(String keyName) {
+		this.keyName = keyName;
 	}
 
-	public String getSubPropertyKey() {
-		return subPropertyKey;
+	public String getSubKeyName() {
+		return subKeyName;
 	}
 
-	public void setSubPropertyKey(String subPropertyKey) {
-		this.subPropertyKey = subPropertyKey;
+	public void setSubKeyName(String subKeyName) {
+		this.subKeyName = subKeyName;
 	}
 
 	public DateTime getFromDateTime() {
@@ -57,8 +52,8 @@ public class GetPropertyLookupsRequest extends AbstractRequest {
 	public List<NameValuePair> getQueryParams() {
 
 		List<NameValuePair> qparams = super.getQueryParams();
-		addParam(qparams,"propertyKey", propertyKey);
-		addParam(qparams,"subPropertyKey", subPropertyKey);
+		addParam(qparams,"keyName", keyName);
+		addParam(qparams,"subKeyName", subKeyName);
 		addParam(qparams,"fromDateTime", fromDateTime);
 		addParam(qparams,"toDateTime", toDateTime);
 		return qparams;
