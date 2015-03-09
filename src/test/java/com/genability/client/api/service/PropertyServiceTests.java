@@ -2,6 +2,7 @@ package com.genability.client.api.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -98,9 +99,8 @@ public class PropertyServiceTests extends BaseServiceTests{
 		// Assign
 		//
 		GetPropertyLookupsRequest request = new GetPropertyLookupsRequest();
-		request.setPropertyKey("qosVariableRateKeyHourly");
-		request.setFromDateTime(new DateTime("2014-01-01T00:00:00.000-05:00"));
-		request.setToDateTime(new DateTime("2014-01-02T00:00:00.000-05:00"));
+		String targetPropertyKey = "hourlyPricingDayAheadPJM";
+		request.setKeyName(targetPropertyKey);
 		
 		//
 		// Act
@@ -113,7 +113,9 @@ public class PropertyServiceTests extends BaseServiceTests{
 		assertNotNull("restResponse null", restResponse);
 		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
 		assertEquals("bad type",restResponse.getType(),PropertyLookup.REST_TYPE);
-
+		assertTrue("Didn't get any results.", restResponse.getCount() > 0);
+		assertEquals("Got results for the wrong propertyKey",
+				targetPropertyKey, restResponse.getResults().get(0).getPropertyKey());
 	}
 	
 	@Test
@@ -123,10 +125,12 @@ public class PropertyServiceTests extends BaseServiceTests{
 		// Assign
 		//
 		GetPropertyLookupsRequest request = new GetPropertyLookupsRequest();
-		request.setPropertyKey("qosVariableRateKeyHourlyWithSubkey");
-		request.setSubPropertyKey("51291");
-		request.setFromDateTime(new DateTime("2014-01-01T00:00:00.000-05:00"));
-		request.setToDateTime(new DateTime("2014-01-02T00:00:00.000-05:00"));
+		String targetPropertyKey = "hourlyPricingDayAheadPJM";
+		String targetSubPropertyKey = "51291";
+		request.setKeyName(targetPropertyKey);
+		request.setSubKeyName(targetSubPropertyKey);
+		request.setFromDateTime(new DateTime("2014-01-01"));
+		request.setToDateTime(new DateTime("2014-01-02"));
 		
 		//
 		// Act
@@ -139,6 +143,11 @@ public class PropertyServiceTests extends BaseServiceTests{
 		assertNotNull("restResponse null", restResponse);
 		assertEquals("bad status",restResponse.getStatus(),Response.STATUS_SUCCESS);
 		assertEquals("bad type",restResponse.getType(),PropertyLookup.REST_TYPE);
+		assertEquals("Didn't get the correct number of results.", new Integer(24), restResponse.getCount());
+		assertEquals("Got results for the wrong propertyKey",
+				targetPropertyKey, restResponse.getResults().get(0).getPropertyKey());
+		assertEquals("Got results for the wrong subPropertyKey",
+				targetSubPropertyKey, restResponse.getResults().get(0).getSubPropertyKey());
 
 	}
 	

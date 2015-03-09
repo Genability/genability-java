@@ -296,12 +296,10 @@ public class Profile implements Serializable {
 		return dataStatus;
 	}
 
-	@JsonIgnore
-	public void setDataStatus(Integer dataStatus) {
+	public void setDataStatus(final Integer dataStatus) {
 		this.dataStatus = dataStatus;
 	}
 
-	@JsonIgnore
 	public Boolean getIsDefault() {
 		return isDefault;
 	}
@@ -310,7 +308,6 @@ public class Profile implements Serializable {
 		this.isDefault = isDefault;
 	}
 
-	@JsonIgnore
 	public String getServiceTypes() {
 		return serviceTypes;
 	}
