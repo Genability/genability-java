@@ -19,16 +19,17 @@ import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
 import com.genability.client.api.request.ReadingDataRequest;
 import com.genability.client.types.Account;
+import com.genability.client.types.Baseline;
 import com.genability.client.types.ClipBy;
 import com.genability.client.types.GroupBy;
 import com.genability.client.types.Profile;
 import com.genability.client.types.ReadingData;
 import com.genability.client.types.Response;
+import com.genability.client.types.Source;
 
 public class ProfileServiceTests extends BaseServiceTests {
 
 	private static ProfileService profileService = genabilityClient.getProfileService();
-	
 	
 	@Test
 	public void testGetProfile() {
@@ -55,6 +56,63 @@ public class ProfileServiceTests extends BaseServiceTests {
 		callGetProfiles("Test get all profiles",request);
 		
 		cleanup(newProfile.getAccountId());
+	}
+	
+	@Test
+	public void testAddProfileWithBaseline() {
+		Account account = createAccount();
+		try {
+			Baseline solarBaseline = getSolarBaseline();
+			Profile theProfile = new Profile();
+			
+			theProfile.setAccountId(account.getAccountId());
+			theProfile.setBaselineMeasures(solarBaseline.getMeasuresList());
+			theProfile.setServiceTypes("SOLAR_PV");
+			theProfile.setSourceString("BaselineModel");
+			
+			Response<Profile> response = profileService.addProfile(theProfile);
+			Profile returnedProfile = response.getResults().get(0);
+			
+			assertEquals("Did not successfully add the Baseline Profile",
+					Response.STATUS_SUCCESS, response.getStatus());
+			assertEquals("Source not set correctly", "BaselineModel", returnedProfile.getSource().getSourceId());
+			assertNotNull("BaselineMeasures was null", returnedProfile.getBaselineMeasures());
+			assertEquals("Didn't have the correct number of measures",
+					8760, returnedProfile.getBaselineMeasures().size());
+			
+		} finally {
+			cleanup(account.getAccountId());
+		}
+	}
+	
+	@Test
+	public void testPopulateBaselineParameter() {
+		Account account = createAccount();
+		try {
+			Baseline solarBaseline = getSolarBaseline();
+			Profile theProfile = new Profile();
+			
+			theProfile.setAccountId(account.getAccountId());
+			theProfile.setBaselineMeasures(solarBaseline.getMeasuresList());
+			theProfile.setSourceString("BaselineModel");
+			theProfile.setServiceTypes("SOLAR_PV");
+
+			Response<Profile> addProfileResponse = profileService.addProfile(theProfile);
+			Profile addedProfile = addProfileResponse.getResults().get(0);
+			
+			GetProfileRequest request = new GetProfileRequest();
+			request.setProfileId(addedProfile.getProfileId());
+			request.setPopulateBaseline(true);
+			Response<Profile> getProfileResponse = profileService.getProfile(request);
+			
+			Profile retrievedProfile = getProfileResponse.getResults().get(0);
+			
+			assertNotNull("No profile was returned", retrievedProfile);
+			assertNotNull("No baseline measures were returned", retrievedProfile.getBaselineMeasures());
+			assertEquals("Wrong number of baseline measures", 8760, retrievedProfile.getBaselineMeasures().size());
+		} finally {
+			cleanup(account.getAccountId());
+		}
 	}
 	
 	@Test

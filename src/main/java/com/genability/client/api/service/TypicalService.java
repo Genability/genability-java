@@ -10,8 +10,13 @@ public class TypicalService extends BaseService {
 	private static final TypeReference<Response<Baseline>> BASELINE_RESPONSE_TYPEREF = new TypeReference<Response<Baseline>>() {};
 
 	private static final String BEST_BASELINE_PATH = "v1/typicals/baselines/best";
+	private static final String BEST_SOLAR_BASELINE_PATH = "v1/typicals/solar/best";
 
 	public Response<Baseline> getBestBaseline(final BaselineRequest request) {
 		return this.callGet(BEST_BASELINE_PATH, request.getQueryParams(), BASELINE_RESPONSE_TYPEREF);
+	}
+	
+	public Response<Baseline> getSolarBaseline(final BaselineRequest request) {
+		return this.callGet(BEST_SOLAR_BASELINE_PATH, request.getQueryParams(), BASELINE_RESPONSE_TYPEREF);
 	}
 }

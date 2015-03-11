@@ -1,11 +1,14 @@
 package com.genability.client.types;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @JsonInclude(Include.NON_NULL)
@@ -138,6 +141,11 @@ public class Baseline {
 
 	public BaselineMeasure[] getMeasures() {
 		return measures;
+	}
+	
+	@JsonIgnore
+	public List<BaselineMeasure> getMeasuresList() {
+		return Arrays.asList(measures);
 	}
 
 	public void setMeasures(final BaselineMeasure[] measures) {
