@@ -5,9 +5,6 @@ package com.genability.client.api.request;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
 
 public class BulkUploadRequest extends AbstractRequest implements Serializable {
 

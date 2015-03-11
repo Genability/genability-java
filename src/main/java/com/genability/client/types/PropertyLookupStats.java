@@ -11,26 +11,17 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 public class PropertyLookupStats {
-
-
 	public static final String REST_TYPE = "PropertyLookupStats";
 
 	private String keyName;
-
-	private DateTime minFromDateTime;
-	
-	private DateTime maxToDateTime;
-	
-	private Integer lookupCount;
-	
+	private DateTime minFromDateTime;	
+	private DateTime maxToDateTime;	
+	private Integer lookupCount;	
 	private BigDecimal meanValue;
 
-	private Long totalDuration;
-	
-	private Long meanDuration;
-	
+	private Long totalDuration;	
+	private Long meanDuration;	
 	private Long missingDuration;
-
 	private DateTime lastUpdatedDate;
 
 	public String getKeyName() {

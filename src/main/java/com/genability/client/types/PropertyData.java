@@ -17,37 +17,40 @@ public class PropertyData {
 	public static final String REST_TYPE = "PropertyData";
 	
 	protected String keyName;
-	
-	protected DateTime fromDateTime;
-	
-	protected DateTime toDateTime;
-	
+	protected String source;
+
+	protected DateTime fromDateTime;	
+	protected DateTime toDateTime;	
 	protected String period;
-	
-	protected String unit;
-	
+
+	protected String unit;	
 	protected String dataValue;
 
-        /**
-         * A multiplier. This can be used, for instance, to see the effect of a 10% increase in electricity usage
-         * on costs - in that case, the propertyInput for the profileId would include a dataFactor of 1.1 (for 110%).
-         */
-        protected BigDecimal dataFactor;
+    /**
+     * A multiplier. This can be used, for instance, to see the effect of a 10% increase in electricity usage
+     * on costs - in that case, the propertyInput for the profileId would include a dataFactor of 1.1 (for 110%).
+     */
+    protected BigDecimal dataFactor;
 
-        /**
-         * How accurately known in percent this PropertyData is, from 0 (totally unknown) to 100 (totally accurate).
-         * For instance, we may guess a customer's tariff and assign it an accuracy of, eg, 80, but if the customer
-         * has specified their tariff or we know it from a bill, we assign it an accuracy of 100. (Optional)
-         */
+    /**
+     * How accurately known in percent this PropertyData is, from 0 (totally unknown) to 100 (totally accurate).
+     * For instance, we may guess a customer's tariff and assign it an accuracy of, eg, 80, but if the customer
+     * has specified their tariff or we know it from a bill, we assign it an accuracy of 100. (Optional)
+     */
 	protected BigDecimal accuracy;
 
-        /**
-         * For a Savings Analysis that compares two scenarios, which scenarios (cases) this PropertyData applies to.
-         * Possibilities are "before", "after", and "solar". If more than one, join with commas. Eg "after,solar".
-         */
+    /**
+     * For a Savings Analysis that compares two scenarios, which scenarios (cases) this PropertyData applies to.
+     * Possibilities are "before", "after", and "solar". If more than one, join with commas. Eg "after,solar".
+     */
 	protected String scenarios;
-
 	protected DataType dataType;
+
+	/**
+	 * private member variable for Duration.
+	 */
+	protected Long duration;
+	private String operator;
 	
 	public PropertyData() {
 		//constructor
@@ -195,5 +198,35 @@ public class PropertyData {
 
 	public DataType getDataType() {
 		return dataType;
+	}
+
+	/**
+	 * Access method for Duration.
+	 */
+	public Long getDuration() {
+		return duration;
+	}
+
+	/**
+	 * Mutator for Duration.
+	 */
+	public void setDuration(Long duration) {
+		this.duration = duration;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
 }

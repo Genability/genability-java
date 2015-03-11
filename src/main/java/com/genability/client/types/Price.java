@@ -15,29 +15,17 @@ public class Price {
 	
 	public static final String REST_TYPE = "TariffRateSummary";
 
-	
 	private Long tariffId;
-
 	private ChargeType chargeType;
-
 	private String quantityKey;
-
 	private DateTime fromDateTime;
-	
 	private DateTime toDateTime;
-	
 	private BigDecimal rateAmount;
-
 	private BigDecimal relativePriceIndex;
-	
 	private String currency;
-	
 	private List<PriceChange> priceChanges;
+	private List<TariffRateChangePeriod> rateChangePeriods;
 
-
-	/**
-	 * Unique Genability ID (primary key) for this tariff
-	 */
 	public Long getTariffId() {
 		return tariffId;
 	}
@@ -134,6 +122,14 @@ public class Price {
 
 	public void setPriceChanges(List<PriceChange> priceChanges) {
 		this.priceChanges = priceChanges;
+	}
+
+	public List<TariffRateChangePeriod> getRateChangePeriods() {
+		return rateChangePeriods;
+	}
+
+	public void setRateChangePeriods(List<TariffRateChangePeriod> rateChangePeriods) {
+		this.rateChangePeriods = rateChangePeriods;
 	}
 	
 }

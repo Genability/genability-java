@@ -264,8 +264,7 @@ public class CalculateServiceTests extends BaseServiceTests {
 		request.addTariffInput(profileProp2);
 
 		// run calc
-		CalculatedCost calcCost = callRunCalc("Test for calculateForAccount",
-				request);
+		callRunCalc("Test for calculateForAccount", request);
 
 		//
 		// Add tests

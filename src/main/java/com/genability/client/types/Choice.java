@@ -1,5 +1,7 @@
 package com.genability.client.types;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -8,23 +10,35 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Choice {
 
-  private String value;
-  private String displayValue;
-  
-  public String getValue() {
-    return value;
-  }
-  
-  public void setValue(String value) {
-    this.value = value;
-  }
-  
-  public String getDisplayValue() {
-    return displayValue;
-  }
-  
-  public void setDisplayValue(String displayValue) {
-    this.displayValue = displayValue;
-  }
- 
+	private String displayValue;
+	
+	private String dataValue;
+
+	private BigDecimal likelihood;
+
+	public String getDisplayValue() {
+		return displayValue;
+	}
+
+	public void setDisplayValue(String displayValue) {
+		this.displayValue = displayValue;
+	}
+
+	public String getDataValue() {
+		return dataValue;
+	}
+
+	public void setDataValue(String dataValue) {
+		this.dataValue = dataValue;
+	}
+
+	public BigDecimal getLikelihood() {
+		return likelihood;
+	}
+
+	public void setLikelihood(BigDecimal likelihood) {
+		this.likelihood = likelihood;
+	}
+	
+	
 }

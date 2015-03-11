@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -15,37 +13,23 @@ import com.genability.client.types.Tariff;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 public class Account {
-
-	
 	public static final String REST_TYPE = "Account";
 	
 	private String accountId;
-
 	private String providerAccountId;
-
-	private String providerOrgId;
-
 	private String accountName;
 
 	private String customerOrgId;
-
-	private String customerOrgName;
-	
-	private CustomerClass customerClass;
-	
+	private String customerOrgName;	
+	private CustomerClass customerClass;	
 	private String owner;
 
 	private AccountStatus status;
-	
 	private AccountType type;
-
 	private Address address;
-	
-	private List<Tariff> tariffs;
-	
+
+	private List<Tariff> tariffs;	
 	private Map<String, PropertyData> properties;
-	
-	private DateTime createdDate;
 
 	/**
 	 * @return the accountId
@@ -73,20 +57,6 @@ public class Account {
 	 */
 	public void setProviderAccountId(String providerAccountId) {
 		this.providerAccountId = providerAccountId;
-	}
-
-	/**
-	 * @return the providerOrgId
-	 */
-	public String getProviderOrgId() {
-		return providerOrgId;
-	}
-
-	/**
-	 * @param providerOrgId the providerOrgId to set
-	 */
-	public void setProviderOrgId(String providerOrgId) {
-		this.providerOrgId = providerOrgId;
 	}
 
 	/**
@@ -209,22 +179,6 @@ public class Account {
 	public void setTariffs(List<Tariff> tariffs) {
 		this.tariffs = tariffs;
 	}
-	
-	
-	/**
-	 * @return the createdDate
-	 */
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	/**
-	 * @param createdDate the createdDate to set
-	 */
-	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
 	
 	public CustomerClass getCustomerClass() {
       return customerClass;

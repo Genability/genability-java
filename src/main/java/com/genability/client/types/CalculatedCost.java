@@ -120,6 +120,9 @@ public class CalculatedCost {
 		this.accuracy = accuracy;
 	}
 
+	public List<CalculatedCostItem> getCalculatedCostItems() {
+		return getItems();
+	}
 
 	public List<CalculatedCostItem> getItems() {
 		return items;

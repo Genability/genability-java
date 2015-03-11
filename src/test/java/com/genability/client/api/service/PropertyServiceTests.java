@@ -67,7 +67,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 		
 		assertEquals("Visited too many property keys", propertyKeysVisited, totalPropertyKeys);
 	}
-	
+
 	@Test
 	public void testGetPropertyKeys() {
 		

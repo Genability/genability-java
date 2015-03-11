@@ -2,6 +2,7 @@ package com.genability.client.types;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,80 +11,31 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Profile implements Serializable {
 
 	public static final String REST_TYPE = "UsageProfile";
-
-	/**
-     * 
-     */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * private member variable for ProfileId.
-	 */
+
 	private String profileId;
-
-	/**
-	 * private member variable for providerProfileId.
-	 */
 	private String providerProfileId;
-
-	/**
-	 * private member variable for ProfileName.
-	 */
 	private String profileName;
-
-	/**
-	 * private member variable for providerAccountId.
-	 */
 	private String providerAccountId;
-
-	/**
-	 * Private member variable for accountId
-	 */
 	private String accountId;
-
-	/**
-	 * Private member variable for providerOrgId
-	 */
+	private String meterId;
 	private String providerOrgId;
-
-	/**
-	 * private member variable for Description.
-	 */
 	private String description;
-
-	/**
-	 * private member variable for SourceId.
-	 */
-	private String sourceId;
-
-	/**
-	 * private member to hold list of <code>ReadingDataSummary</code>
-	 */
+	private Source source;
 	private List<ReadingDataSummary> readingDataSummaries;
-
-	/**
-	 * private member to hold list of <code>ReadingData</code>
-	 */
 	private List<ReadingData> readingData;
-
 	private PagedList<IntervalInfo> intervals;
-
-	/**
-	 * private member to hold readings of <code>Readings</code>
-	 */
 	private PagedList<ReadingData> readings;
+	private Map<String, PropertyData> properties;
+	//private PagedList<Bill> bills; // TODO: implement this
 
 	/**
 	 * Private member indicating if this profiles interval and other
 	 * pre-calculated/cached data is current.
 	 */
 	private Integer dataStatus;
-
 	private Boolean isDefault;
-
-	/**
-	 * private member for type of service of this profile
-	 */
 	private String serviceTypes;
 
 	/**
@@ -98,7 +50,7 @@ public class Profile implements Serializable {
 	 * This is the constructor that sets the primary key information on
 	 * construction. In other words, it sets the property.
 	 */
-	public Profile(String profileId) {
+	public Profile(final String profileId) {
 		this.profileId = profileId;
 
 	} // end of constructor
@@ -113,7 +65,7 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for ProfileId.
 	 */
-	public void setProfileId(String profileId) {
+	public void setProfileId(final String profileId) {
 		this.profileId = profileId;
 	}
 
@@ -127,7 +79,7 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for ProviderProfileId.
 	 */
-	public void setProviderProfileId(String providerProfileId) {
+	public void setProviderProfileId(final String providerProfileId) {
 		this.providerProfileId = providerProfileId;
 	}
 
@@ -141,7 +93,7 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for ProfileName.
 	 */
-	public void setProfileName(String profileName) {
+	public void setProfileName(final String profileName) {
 		this.profileName = profileName;
 	}
 
@@ -155,22 +107,22 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator for Description.
 	 */
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
 	/**
 	 * Access method for SourceId.
 	 */
-	public String getSourceId() {
-		return sourceId;
+	public Source getSource() {
+		return source;
 	}
 
 	/**
-	 * Mutator for SourceId.
+	 * Mutator for Source.
 	 */
-	public void setSourceId(String sourceId) {
-		this.sourceId = sourceId;
+	public void setSource(final Source source) {
+		this.source = source;
 	}
 
 	/**
@@ -199,7 +151,7 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator method for ReadingData.
 	 */
-	public void setReadingData(List<ReadingData> readingData) {
+	public void setReadingData(final List<ReadingData> readingData) {
 		this.readingData = readingData;
 	}
 
@@ -215,7 +167,7 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator method for Readings.
 	 */
-	public void setReadings(PagedList<ReadingData> readings) {
+	public void setReadings(final PagedList<ReadingData> readings) {
 		this.readings = readings;
 	}
 
@@ -231,7 +183,7 @@ public class Profile implements Serializable {
 	/**
 	 * Mutator method for Intervals.
 	 */
-	public void setIntervals(PagedList<IntervalInfo> intervals) {
+	public void setIntervals(final PagedList<IntervalInfo> intervals) {
 		this.intervals = intervals;
 	}
 
@@ -246,7 +198,7 @@ public class Profile implements Serializable {
 	 * @param accountId
 	 *            the accountId to set
 	 */
-	public void setAccountId(String accountId) {
+	public void setAccountId(final String accountId) {
 		this.accountId = accountId;
 	}
 
@@ -261,7 +213,7 @@ public class Profile implements Serializable {
 	 * @param accountId
 	 *            the accountId to set
 	 */
-	public void setProviderAccountId(String providerAccountId) {
+	public void setProviderAccountId(final String providerAccountId) {
 		this.providerAccountId = providerAccountId;
 	}
 
@@ -282,7 +234,7 @@ public class Profile implements Serializable {
 	 * 
 	 * @param providerOrgId
 	 */
-	public void setProviderOrgId(String providerOrgId) {
+	public void setProviderOrgId(final String providerOrgId) {
 		this.providerOrgId = providerOrgId;
 	}
 
@@ -304,7 +256,7 @@ public class Profile implements Serializable {
 		return isDefault;
 	}
 
-	public void setIsDefault(Boolean isDefault) {
+	public void setIsDefault(final Boolean isDefault) {
 		this.isDefault = isDefault;
 	}
 
@@ -312,8 +264,24 @@ public class Profile implements Serializable {
 		return serviceTypes;
 	}
 
-	public void setServiceTypes(String serviceTypes) {
+	public void setServiceTypes(final String serviceTypes) {
 		this.serviceTypes = serviceTypes;
+	}
+
+	public String getMeterId() {
+		return meterId;
+	}
+
+	public void setMeterId(final String meterId) {
+		this.meterId = meterId;
+	}
+
+	public Map<String, PropertyData> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(final Map<String, PropertyData> properties) {
+		this.properties = properties;
 	}
 
 	/**
@@ -359,14 +327,13 @@ public class Profile implements Serializable {
 
 	/**
 	 * Helper method to make a copy of the profile. Note it doesn't make a copy
-	 * of the readings or reading summaries.
+	 * of the readings, reading summaries, or properties
 	 * 
 	 * @param anotherProfile
 	 *            to copy data into
 	 * @return void
 	 */
 	public void copy(Profile toCopyToProfile) {
-
 		toCopyToProfile.setProfileId(this.profileId);
 		toCopyToProfile.setProviderProfileId(this.providerProfileId);
 		toCopyToProfile.setProfileName(this.profileName);
@@ -374,8 +341,9 @@ public class Profile implements Serializable {
 		toCopyToProfile.setProviderAccountId(this.providerAccountId);
 		toCopyToProfile.setProviderOrgId(this.providerOrgId);
 		toCopyToProfile.setDescription(this.description);
-		toCopyToProfile.setSourceId(this.sourceId);
+		toCopyToProfile.setSource(this.source);
 		toCopyToProfile.setIsDefault(this.isDefault);
+		toCopyToProfile.setMeterId(this.meterId);
 	}
 
 } // end of class Profile

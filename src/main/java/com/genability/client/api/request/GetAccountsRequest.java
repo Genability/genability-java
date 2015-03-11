@@ -4,9 +4,6 @@
 package com.genability.client.api.request;
 
 import java.io.Serializable;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
 
 /**
  * @author ebaizel

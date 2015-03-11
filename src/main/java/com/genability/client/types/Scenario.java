@@ -5,17 +5,13 @@ import java.util.List;
 public class Scenario {
 
     private String id;
-
     private String name;
-
     private ServiceType serviceType;
-
     private List<PropertyData> inputs;
-
     private List<TariffRate> rates;
 
     /**
-     * If Genability had to make assumptions (eg what service territory the location is in),
+     * If Genability had to make an assumptions (eg what service territory the location is in),
      * they will be listed here. Often null.
      */
     private List<PropertyData> assumptions;
