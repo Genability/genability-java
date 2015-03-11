@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TariffRateChange {
+public class PriceChange {
 	private String changeName;	
 	private DateTime changeDateTime;
 	private BigDecimal rateAmount;	

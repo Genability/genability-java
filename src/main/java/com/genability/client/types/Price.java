@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TariffRateSummary {
+public class Price {
 	
 	public static final String REST_TYPE = "TariffRateSummary";
 
@@ -24,7 +24,7 @@ public class TariffRateSummary {
 	private BigDecimal rateAmount;
 	private BigDecimal relativePriceIndex;	
 	private String currency;
-	private List<TariffRateChange> priceChanges;
+	private List<PriceChange> priceChanges;
 	private List<TariffRateChangePeriod> rateChangePeriods;
 
 
@@ -126,11 +126,11 @@ public class TariffRateSummary {
 	/**
 	 * List of all the price changes within the specified time period
 	 */
-	public List<TariffRateChange> getPriceChanges() {
+	public List<PriceChange> getPriceChanges() {
 		return priceChanges;
 	}
 
-	public void setPriceChanges(List<TariffRateChange> priceChanges) {
+	public void setPriceChanges(List<PriceChange> priceChanges) {
 		this.priceChanges = priceChanges;
 	}
 

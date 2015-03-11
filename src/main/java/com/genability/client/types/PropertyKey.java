@@ -35,7 +35,7 @@ public class PropertyKey {
 	private String entityType;
 
 	private Privacy privacy;	
-	private List<PropertyChoice> choices;	
+	private List<Choice> choices;	
 	private List<PropertyLookup> lookups;
 
 	public String getKeyName() {
@@ -182,11 +182,11 @@ public class PropertyKey {
 		this.privacy = privacy;
 	}
 
-	public List<PropertyChoice> getChoices() {
+	public List<Choice> getChoices() {
 		return choices;
 	}
 
-	public void setChoices(final List<PropertyChoice> choices) {
+	public void setChoices(final List<Choice> choices) {
 		this.choices = choices;
 	}
 
