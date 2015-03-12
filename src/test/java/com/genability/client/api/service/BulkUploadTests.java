@@ -31,7 +31,9 @@ public class BulkUploadTests extends BaseServiceTests {
 	@After
 	public void tearDown() {
 		// clean up test data
-		this.cleanup(profile.getAccountId());
+		if (profile != null) {
+			this.cleanup(profile.getAccountId());
+		}
 	}
 
 	@Test
