@@ -12,20 +12,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountAnalysis {
-
     public static final String REST_TYPE = "AccountAnalysis";
 
     private String designId;
-
     private Integer dataStatus;
-
     private List<Scenario> scenarios;
-
     private List<Series> series;
-
     private List<SeriesMeasure> seriesData;
-
     private Map<String, BigDecimal> summary;
+    private Map<Integer, CalculatedCost> seriesCosts;
 
 
     /**
@@ -126,4 +121,12 @@ public class AccountAnalysis {
     public void setSummary(Map<String, BigDecimal> summary) {
         this.summary = summary;
     }
+
+	public Map<Integer, CalculatedCost> getSeriesCosts() {
+		return seriesCosts;
+	}
+
+	public void setSeriesCosts(Map<Integer, CalculatedCost> seriesCosts) {
+		this.seriesCosts = seriesCosts;
+	}
 }

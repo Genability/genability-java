@@ -14,6 +14,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 
         private String providerAccountId;
         private String accountId;
+        private Boolean populateCosts;
 
         private DateTime fromDateTime;
         private DateTime toDateTime;
@@ -38,6 +39,14 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
                 this.accountId = accountId;
         }
 
+        public Boolean getPopulateCosts() {
+        	return populateCosts;
+        }
+        
+        public void setPopulateCosts(final boolean populateCosts) {
+        	this.populateCosts = populateCosts;
+        }
+        
         public DateTime getFromDateTime() {
                 return fromDateTime;
         }
