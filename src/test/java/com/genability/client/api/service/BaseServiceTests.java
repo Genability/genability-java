@@ -19,8 +19,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.genability.client.api.GenabilityClient;
+import com.genability.client.api.request.BaselineRequest;
 import com.genability.client.api.request.DeleteAccountRequest;
 import com.genability.client.types.Account;
+import com.genability.client.types.Baseline;
 import com.genability.client.types.Profile;
 import com.genability.client.types.PropertyData;
 import com.genability.client.types.ReadingData;
@@ -188,5 +190,20 @@ public class BaseServiceTests {
 		deleteAccountRequest.setAccountId(accountId);
 		Response<Account> deleteResponse = accountService.deleteAccount(deleteAccountRequest);
 		assertEquals("bad status",deleteResponse.getStatus(),Response.STATUS_SUCCESS);
+	}
+	
+	// get a baseline. will be used to upload along with a profile
+	protected Baseline getSolarBaselineFor92704() {
+		TypicalService service = genabilityClient.getTypicalService();
+		BaselineRequest request = new BaselineRequest();
+		request.setZipCode("92704");
+		
+		Response<Baseline> response = service.getSolarBaseline(request);
+		
+		if (response.getStatus().equals(Response.STATUS_SUCCESS)) {
+			return response.getResults().get(0);
+		} else {
+			return null;
+		}
 	}
 }

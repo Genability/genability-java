@@ -29,7 +29,7 @@ public class ProfileService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getProfile called");
 
 		// Set uri based on if providerProfileId was used
-		String uri = "v1/usage/profiles";
+		String uri = "v1/profiles";
 		if (request.getProviderProfileId() != null
 				&& request.getProviderProfileId().length() != 0) {
 
@@ -60,7 +60,7 @@ public class ProfileService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("getProfiles called");
 		
-		String uri = "v1/usage/profiles";
+		String uri = "v1/profiles";
 		
 		Response<Profile> response = this.callGet(
 				uri,
@@ -93,7 +93,7 @@ public class ProfileService extends BaseService {
 		if (log.isDebugEnabled())
 			log.debug("updateProfile called");
 
-		String uri = "v1/usage/profiles";
+		String uri = "v1/profiles";
 
 		Response<Profile> response = this.callPut(uri, profile,
 				PROFILE_RESPONSE_TYPEREF);
@@ -119,7 +119,7 @@ public class ProfileService extends BaseService {
 			throw new GenabilityException("profileId must be set");
 		}
 
-		String uri = "v1/usage/profiles/" + profileId;
+		String uri = "v1/profiles/" + profileId;
 
 		Response<Profile> response = this.callDelete(uri, request.getQueryParams(), PROFILE_RESPONSE_TYPEREF);
 

@@ -49,7 +49,7 @@ public class BaseService {
 	/**
 	 * Protected member of URL of the server to call
 	 */
-	protected String restApiServer = "http://api.genability.com/rest/";
+	protected String restApiServer = "https://api.genability.com/rest/";
 	
 	/**
 	 * Protected member holding the App ID for authentication.

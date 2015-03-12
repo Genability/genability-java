@@ -11,58 +11,23 @@ import com.genability.client.types.ClipBy;
 import com.genability.client.types.GroupBy;
 
 public class GetProfileRequest extends AbstractGetNRequest implements Serializable {
-
-	/**
-	 * private member variable for serial version
-	 */
-	private static final long serialVersionUID = 1L;
 	
+	private static final long serialVersionUID = 1L;
 
 	private String profileId;
-
-	/**
-	 * private member variable for providerProfileId
-	 */
 	private String providerProfileId;
 
-	/**
-	 * private member variable for FromDate
-	 */
 	private DateTime fromDateTime;
-
-	/**
-	 * private member variable for ToDate
-	 */
 	private DateTime toDateTime;
 
-	/**
-	 * private member variable for PopulateReadingdata
-	 */
 	private Boolean populateReadings;
+	private Boolean populateBaseline;
 
-	/**
-	 * private member variable for deriveDemand
-	 */
 	private Boolean deriveDemand;
-
-	/**
-	 * private member variable for deriveConsumption
-	 */
 	private Boolean deriveConsumption;
-
-	/**
-	 * private member variable for demandInterval
-	 */
 	private Long demandInterval;
 
-	/**
-	 * Private member holding optional group-by argument.
-	 */
 	private GroupBy groupBy;
-
-	/**
-	 * Private member holding optional clip-by argument.
-	 */
 	private ClipBy clipBy;
 
 
@@ -119,6 +84,14 @@ public class GetProfileRequest extends AbstractGetNRequest implements Serializab
 		this.populateReadings = populateReadings;
 	}
 	
+	public Boolean getPopulateBaseline() {
+		return populateBaseline;
+	}
+
+	public void setPopulateBaseline(Boolean populateBaseline) {
+		this.populateBaseline = populateBaseline;
+	}
+
 	/**
 	 * @return the populateReadingData
 	 */
@@ -179,6 +152,7 @@ public class GetProfileRequest extends AbstractGetNRequest implements Serializab
 		addParam(qparams,"fromDateTime", fromDateTime);
 		addParam(qparams,"toDateTime",toDateTime);
 		addParam(qparams,"populateReadings",populateReadings);
+		addParam(qparams,"populateBaseline",populateBaseline);
 		addParam(qparams,"groupBy",groupBy);
 		addParam(qparams,"clipBy",clipBy);
 		return qparams;

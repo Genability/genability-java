@@ -13,7 +13,6 @@ public class Profile implements Serializable {
 	public static final String REST_TYPE = "UsageProfile";
 	private static final long serialVersionUID = 1L;
 
-
 	private String profileId;
 	private String providerProfileId;
 	private String profileName;
@@ -25,6 +24,7 @@ public class Profile implements Serializable {
 	private Source source;
 	private List<ReadingDataSummary> readingDataSummaries;
 	private List<ReadingData> readingData;
+	private List<BaselineMeasure> baselineMeasures;
 	private PagedList<IntervalInfo> intervals;
 	private PagedList<ReadingData> readings;
 	private Map<String, PropertyData> properties;
@@ -111,16 +111,23 @@ public class Profile implements Serializable {
 		this.description = description;
 	}
 
-	/**
-	 * Access method for SourceId.
-	 */
+	@JsonIgnore
+	public String getSourceString() {
+		return source.getSourceId();
+	}
+	
+	@JsonIgnore
+	public void setSourceString(final String sourceId) {
+		Source newSource = new Source();
+		newSource.setSourceId(sourceId);
+		
+		this.source = newSource;
+	}
+
 	public Source getSource() {
 		return source;
 	}
-
-	/**
-	 * Mutator for Source.
-	 */
+	
 	public void setSource(final Source source) {
 		this.source = source;
 	}
@@ -153,6 +160,14 @@ public class Profile implements Serializable {
 	 */
 	public void setReadingData(final List<ReadingData> readingData) {
 		this.readingData = readingData;
+	}
+
+	public List<BaselineMeasure> getBaselineMeasures() {
+		return baselineMeasures;
+	}
+
+	public void setBaselineMeasures(final List<BaselineMeasure> baselineMeasures) {
+		this.baselineMeasures = baselineMeasures;
 	}
 
 	/**
