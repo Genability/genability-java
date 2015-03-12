@@ -160,44 +160,43 @@ public class AccountAnalysisTests extends BaseServiceTests {
         String accountId = newAccount.getAccountId();
         assertNotNull("accountId null", accountId);
 
-
-        DateTime baseFromDateTime = new DateTime("2013-01-01");
-
-        Profile usageProfile = new Profile();
-        usageProfile.setAccountId(newAccount.getAccountId());
-        List<ReadingData> readingDataList = new ArrayList<ReadingData>();
-        for(int i = 0; i < 8760; i++) {
-            ReadingData readingData = new ReadingData();
-            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
-            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
-            readingData.setQuantityUnit("kWh");
-            readingData.setQuantityValue(new BigDecimal(250));
-            readingDataList.add(readingData);
-        }
-        usageProfile.setReadingData(readingDataList);
-        usageProfile.setProviderProfileId("USAGE_RESIDENTIAL_CA_V5" + UUID.randomUUID());
-        profileService.addProfile(usageProfile);
-
-        Profile productionProfile = new Profile();
-        productionProfile.setAccountId(newAccount.getAccountId());
-        List<ReadingData> production = new ArrayList<ReadingData>();
-        for(int i = 0; i < 8760; i++) {
-            ReadingData readingData = new ReadingData();
-            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
-            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
-            readingData.setQuantityUnit("kWh");
-            readingData.setQuantityValue(new BigDecimal(200));
-            production.add(readingData);
-        }
-        productionProfile.setReadingData(production);
-        productionProfile.setProviderProfileId("PRODUCTION_RESIDENTIAL_CA_V5" + UUID.randomUUID());
-        profileService.addProfile(productionProfile);
-
-        AccountAnalysisRequest request = createSavingsAnalysis(usageProfile, productionProfile);
-        request.setProviderAccountId(newAccount.getProviderAccountId());
-        request.setPopulateCosts(true);
-
         try {
+	        DateTime baseFromDateTime = new DateTime("2013-01-01");
+	
+	        Profile usageProfile = new Profile();
+	        usageProfile.setAccountId(newAccount.getAccountId());
+	        List<ReadingData> readingDataList = new ArrayList<ReadingData>();
+	        for(int i = 0; i < 8760; i++) {
+	            ReadingData readingData = new ReadingData();
+	            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
+	            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
+	            readingData.setQuantityUnit("kWh");
+	            readingData.setQuantityValue(new BigDecimal(250));
+	            readingDataList.add(readingData);
+	        }
+	        usageProfile.setReadingData(readingDataList);
+	        usageProfile.setProviderProfileId("USAGE_RESIDENTIAL_CA_V5_" + UUID.randomUUID());
+	        profileService.addProfile(usageProfile);
+	
+	        Profile productionProfile = new Profile();
+	        productionProfile.setAccountId(newAccount.getAccountId());
+	        List<ReadingData> production = new ArrayList<ReadingData>();
+	        for(int i = 0; i < 8760; i++) {
+	            ReadingData readingData = new ReadingData();
+	            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
+	            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
+	            readingData.setQuantityUnit("kWh");
+	            readingData.setQuantityValue(new BigDecimal(200));
+	            production.add(readingData);
+	        }
+	        productionProfile.setReadingData(production);
+	        productionProfile.setProviderProfileId("PRODUCTION_RESIDENTIAL_CA_V5_" + UUID.randomUUID());
+	        profileService.addProfile(productionProfile);
+	
+	        AccountAnalysisRequest request = createSavingsAnalysis(usageProfile, productionProfile);
+	        request.setProviderAccountId(newAccount.getProviderAccountId());
+	        request.setPopulateCosts(true);
+
             Response<AccountAnalysis> aaResponse = accountAnalysisService.calculateSavingsAnalysis(request);
 
             assertNotNull("restResponse null", aaResponse);
