@@ -62,7 +62,7 @@ public class ProfileServiceTests extends BaseServiceTests {
 	public void testAddProfileWithBaseline() {
 		Account account = createAccount();
 		try {
-			Baseline solarBaseline = getSolarBaseline();
+			Baseline solarBaseline = getSolarBaselineFor92704();
 			Profile theProfile = new Profile();
 			
 			theProfile.setAccountId(account.getAccountId());
@@ -89,7 +89,7 @@ public class ProfileServiceTests extends BaseServiceTests {
 	public void testPopulateBaselineParameter() {
 		Account account = createAccount();
 		try {
-			Baseline solarBaseline = getSolarBaseline();
+			Baseline solarBaseline = getSolarBaselineFor92704();
 			Profile theProfile = new Profile();
 			
 			theProfile.setAccountId(account.getAccountId());

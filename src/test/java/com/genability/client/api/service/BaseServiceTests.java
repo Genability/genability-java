@@ -193,14 +193,14 @@ public class BaseServiceTests {
 	}
 	
 	// get a baseline. will be used to upload along with a profile
-	protected Baseline getSolarBaseline() {
+	protected Baseline getSolarBaselineFor92704() {
 		TypicalService service = genabilityClient.getTypicalService();
 		BaselineRequest request = new BaselineRequest();
 		request.setZipCode("92704");
 		
 		Response<Baseline> response = service.getSolarBaseline(request);
 		
-		if(response.getStatus().equals(Response.STATUS_SUCCESS)) {
+		if (response.getStatus().equals(Response.STATUS_SUCCESS)) {
 			return response.getResults().get(0);
 		} else {
 			return null;
