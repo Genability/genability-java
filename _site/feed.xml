@@ -4,10 +4,10 @@
     <title>Genability Documentation</title>
     <description>This site contains documentation, how-tos, tutorials, client libraries, and sample code related to Genability&#39;s APIs.
 </description>
-    <link>http://yourdomain.com/</link>
-    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 14 Mar 2015 17:23:10 -0700</pubDate>
-    <lastBuildDate>Sat, 14 Mar 2015 17:23:10 -0700</lastBuildDate>
+    <link>https://genability.github.io/genability-java/</link>
+    <atom:link href="https://genability.github.io/genability-java/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 14 Mar 2015 17:27:57 -0700</pubDate>
+    <lastBuildDate>Sat, 14 Mar 2015 17:27:57 -0700</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -26,8 +26,8 @@
 &lt;p&gt;For now, just enjoy the scenery. You can still see our current documentation page &lt;a href=&quot;http://developer.genability.com/documentation/&quot;&gt;here&lt;/a&gt;. Links to existing libraries are located &lt;a href=&quot;libraries.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Fri, 13 Mar 2015 10:38:00 -0700</pubDate>
-        <link>http://yourdomain.com/genability/java/samples/howto/2015/03/13/welcome-to-the-howto-page.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/genability/java/samples/howto/2015/03/13/welcome-to-the-howto-page.html</guid>
+        <link>https://genability.github.io/genability-java/genability/java/samples/howto/2015/03/13/welcome-to-the-howto-page.html</link>
+        <guid isPermaLink="true">https://genability.github.io/genability-java/genability/java/samples/howto/2015/03/13/welcome-to-the-howto-page.html</guid>
         
         
         <category>genability</category>
