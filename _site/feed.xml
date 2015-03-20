@@ -6,21 +6,22 @@
 </description>
     <link>https://genability.github.io/genability-java/</link>
     <atom:link href="https://genability.github.io/genability-java/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 16 Mar 2015 16:23:58 -0700</pubDate>
-    <lastBuildDate>Mon, 16 Mar 2015 16:23:58 -0700</lastBuildDate>
+    <pubDate>Fri, 20 Mar 2015 16:54:44 -0700</pubDate>
+    <lastBuildDate>Fri, 20 Mar 2015 16:54:44 -0700</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
         <title>Welcome to the Genability How-To Page!</title>
-        <description>&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;GET https://api.genability.com/rest/echo/hello
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Welcome to the home page for the Java client library for Genability&amp;#39;s API. We&amp;#39;re just getting started but, in the future, this is where we&amp;#39;ll put everything having to do with our client libraries and APIs, including:&lt;/p&gt;
+        <description>&lt;pre&gt;&lt;code&gt;GET /rest/echo/hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Welcome to the home page for the Java client library for Genability’s API. We’re just getting started but, in the future, this is where we’ll put everything having to do with our client libraries and APIs, including:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Sample code&lt;/li&gt;
-&lt;li&gt;Javadocs / PyDocs / RubyDocs / *Docs&lt;/li&gt;
-&lt;li&gt;Tutorials and How-Tos&lt;/li&gt;
-&lt;li&gt;API specifications&lt;/li&gt;
+  &lt;li&gt;Sample code&lt;/li&gt;
+  &lt;li&gt;Javadocs / PyDocs / RubyDocs / *Docs&lt;/li&gt;
+  &lt;li&gt;Tutorials and How-Tos&lt;/li&gt;
+  &lt;li&gt;API specifications&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;For now, just enjoy the scenery. You can still see our current documentation page &lt;a href=&quot;http://developer.genability.com/documentation/&quot;&gt;here&lt;/a&gt;. Links to existing libraries are located &lt;a href=&quot;libraries.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;

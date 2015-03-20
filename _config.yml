@@ -10,4 +10,7 @@ twitter_username: genability
 github_username:  Genability
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
+kramdown:
+   input: GFM
+   syntax_highlighter: coderay

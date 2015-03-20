@@ -4,8 +4,8 @@ title: "Welcome to the Genability How-To Page!"
 date: 2015-03-13 17:38:00
 categories: genability java samples howto
 ---
-````html
-GET https://api.genability.com/rest/echo/hello
+````
+GET /rest/echo/hello
 ````
 
 Welcome to the home page for the Java client library for Genability's API. We're just getting started but, in the future, this is where we'll put everything having to do with our client libraries and APIs, including:
