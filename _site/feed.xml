@@ -6,9 +6,35 @@
 </description>
     <link>https://genability.github.io/genability-java/</link>
     <atom:link href="https://genability.github.io/genability-java/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Mar 2015 16:58:27 -0700</pubDate>
-    <lastBuildDate>Fri, 20 Mar 2015 16:58:27 -0700</lastBuildDate>
+    <pubDate>Fri, 20 Mar 2015 17:04:05 -0700</pubDate>
+    <lastBuildDate>Fri, 20 Mar 2015 17:04:05 -0700</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Java Client Library Tutorial Now Available</title>
+        <description>&lt;p&gt;There’s a new &lt;a href=&quot;/genability-java/tutorial.html&quot;&gt;tutorial&lt;/a&gt; available for our &lt;a href=&quot;/genability-java/libraries.html&quot;&gt;Java library&lt;/a&gt;. It goes through the basics of setting up an account and doing a savings analysis in Java. Check it out!&lt;/p&gt;
+
+&lt;p&gt;Make sure to download the &lt;a href=&quot;https://github.com/Genability/java-client-tutorial&quot;&gt;source code&lt;/a&gt; for the tutorial so that you can follow along.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 20 Mar 2015 00:00:00 -0700</pubDate>
+        <link>https://genability.github.io/genability-java/genability/java/library/tutorial/client/api/2015/03/20/java-client-library-tutorial.html</link>
+        <guid isPermaLink="true">https://genability.github.io/genability-java/genability/java/library/tutorial/client/api/2015/03/20/java-client-library-tutorial.html</guid>
+        
+        
+        <category>genability</category>
+        
+        <category>java</category>
+        
+        <category>library</category>
+        
+        <category>tutorial</category>
+        
+        <category>client</category>
+        
+        <category>api</category>
+        
+      </item>
     
       <item>
         <title>Welcome to the Genability How-To Page!</title>
