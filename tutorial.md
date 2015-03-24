@@ -247,6 +247,8 @@ Response<AccountAnalysis> result = service.calculateSavingsAnalysis(request);
 This API returns a lot of information, the details of which can be seen on the [Savings Analysis](http://developer.genability.com/documentation/api-reference/switch-api/savings-analysis/#put-it-all-together) page. To just see how much money the customer could save in the first year, we can use the `netAvoidedCost` property:
 
 {% highlight java %}
+AccountAnalysis analysisResults = result.getResults().get(0);
+Map<String, BigDecimal> summary = analysisResults.getSummary();
 BigDecimal netAvoidedCost = summary.get("netAvoidedCost");
 {% endhighlight %}
 
