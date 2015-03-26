@@ -28,31 +28,18 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
     
     protected SortOrder sortOrder;
 
-    
-	/**
-	 * @param pageStart
-	 *            to set
-	 */
+
 	public void setPageStart(Integer pageStart) {
 		this.pageStart = pageStart;
 	}
 
-	/**
-	 * @return the pageStart
-	 */
 	public Integer getPageStart() {
 		return pageStart;
 	}
 
-	/**
-	 * @param appKey
-	 *            the pageCount to set
-	 */
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
 	}
-
-	
 	
 	public String getSearch() {
 		return search;
@@ -94,9 +81,6 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 		this.isRegex = isRegex;
 	}
 	
-	/**
-	 * @return the pageCount
-	 */
 	public Integer getPageCount() {
 		return pageCount;
 	}

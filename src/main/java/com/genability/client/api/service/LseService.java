@@ -17,6 +17,7 @@ public class LseService extends BaseService {
 	/**
 	 * Calls the REST service to get a list of tariffs based on the arguments passed in.
 	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Territory> getTerritories(GetTerritoriesRequest request) {
@@ -37,6 +38,7 @@ public class LseService extends BaseService {
 	/**
 	 * Calls the REST service to get the LSE requested
 	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Lse> getLse(GetLseRequest request) {
@@ -62,6 +64,7 @@ public class LseService extends BaseService {
 	/**
 	 * Calls the REST service to get a list of LSEs based on the arguments passed in.
 	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Lse> getLses(GetLsesRequest request) {
@@ -76,7 +79,5 @@ public class LseService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getLses completed");
 		
 		return response;
-		
 	}
-
 }

@@ -57,62 +57,40 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 
 	private List<TariffRate> rateInputs;
 
-	/**
-	 * Constructor to initialize instance
-	 */
 	public GetCalculatedCostRequest() {
 
 
 	}
 
-	/**
-	 * Access method that retrieve fromDateTime
-	 * 
-	 * @return fromDateTime
-	 */
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
 
-	/**
-	 * Mutator used to set the value of fromDateTime
-	 * 
-	 * @param fromDate
-	 */
 	public void setFromDateTime(DateTime fromDate) {
 		fromDateTime = fromDate;
 	}
 
-	/**
-	 * Access method that retrieve toDateTime
-	 * 
-	 * @return toDateTime
-	 */
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
 
-	/**
-	 * Mutator used to set the value of toDateTime
-	 * 
-	 * @param toDate
-	 */
 	public void setToDateTime(DateTime toDate) {
 		toDateTime = toDate;
 	}
 
 	
-	/**
-	 * The ID of the tariff to calculate for. Only needs to be set when
-	 * not running against an account, or if you want to override the
-	 * accounts tariff.
-	 * @return
-	 */
 	@JsonInclude(Include.NON_NULL)
 	public Long getMasterTariffId() {
 		return masterTariffId;
 	}
 	
+	/**
+	 * The ID of the tariff to calculate for. Only needs to be set when
+	 * not running against an account, or if you want to override the
+	 * accounts tariff.
+	 * 
+	 * @param masterTariffId The masterTariffId to set
+	 */
 	public void setMasterTariffId(Long masterTariffId) {
 		this.masterTariffId = masterTariffId;
 	}
@@ -144,99 +122,51 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
     	this.providerAccountId = providerAccountId;
     }
 
-	
-	/**
-	 * Access method that retrieve profileId
-	 * 
-	 * @return profileId
-	 */
+
 	@JsonInclude(Include.NON_NULL)
 	public String getProfileId() {
 		return profileId;
 	}
 
-	/**
-	 * Mutator used to set the value of profileId
-	 * 
-	 * @param profileId
-	 */
 	public void setProfileId(String profileId) {
 		this.profileId = profileId;
 	}
 
-	/**
-	 * @return the detailLevel
-	 */
 	@JsonInclude(Include.NON_NULL)
 	public DetailLevel getDetailLevel() {
 		return detailLevel;
 	}
 
-	/**
-	 * @param detailLevel
-	 *            the detailLevel to set
-	 */
 	public void setDetailLevel(DetailLevel detailLevel) {
 		this.detailLevel = detailLevel;
 	}
 
-	/**
-	 * @return the groupBy
-	 */
 	@JsonInclude(Include.NON_NULL)
 	public GroupBy getGroupBy() {
 		return groupBy;
 	}
 
-	/**
-	 * @param groupBy
-	 *            the groupBy to set
-	 */
 	public void setGroupBy(GroupBy groupBy) {
 		this.groupBy = groupBy;
 	}
 
-	/**
-	 * @return the estimate
-	 */
 	@JsonInclude(Include.NON_NULL)
 	public String getAccuracy() {
 		return accuracy;
 	}
 
-	/**
-	 * @param estimate
-	 *            the estimate to set
-	 */
 	public void setAccuracy(String accuracy) {
 		this.accuracy = accuracy;
 	}
 
-
-	/**
-	 * Access method that retrieve tariffInputs
-	 * 
-	 * @return inputs
-	 */
 	public List<PropertyData> getTariffInputs() {
 		return tariffInputs;
 	}
 
-	/**
-	 * Mutator used to set the value of tariffInputs
-	 * 
-	 * @param tariffInputs
-	 */
 	public void setTariffInputs(List<PropertyData> tariffInputs) {
 		this.tariffInputs = tariffInputs;
 	}
 
-	/**
-	 * Helper method for adding a PropertyData entry into the collection
-	 * of inputs.
-	 * 
-	 * @param tariffInput
-	 */
 	public void addTariffInput(PropertyData tariffInput) {
 		if (tariffInputs == null) {
 			tariffInputs = new ArrayList<PropertyData>();

@@ -96,72 +96,42 @@ public class Tariff {
 	private List<TariffProperty> properties;
 	private List<TariffRate> rates;
 	
-	/**
-	 * @return the tariffId
-	 */
 	public Long getTariffId() {
 		return tariffId;
 	}
 
-	/**
-	 * @param tariffId the tariffId to set
-	 */
 	public void setTariffId(Long tariffId) {
 		this.tariffId = tariffId;
 	}
 
-	/**
-	 * @return the masterTariffId
-	 */
 	public Long getMasterTariffId() {
 		return masterTariffId;
 	}
 
-	/**
-	 * @param masterTariffId the masterTariffId to set
-	 */
 	public void setMasterTariffId(Long masterTariffId) {
 		this.masterTariffId = masterTariffId;
 	}
 
-	/**
-	 * @return the priorTariffId
-	 */
 	public Long getPriorTariffId() {
 		return priorTariffId;
 	}
 
-	/**
-	 * @param priorTariffId the priorTariffId to set
-	 */
 	public void setPriorTariffId(Long priorTariffId) {
 		this.priorTariffId = priorTariffId;
 	}
 
-	/**
-	 * @return the lseId
-	 */
 	public Long getLseId() {
 		return lseId;
 	}
 
-	/**
-	 * @param lseId the lseId to set
-	 */
 	public void setLseId(Long lseId) {
 		this.lseId = lseId;
 	}
 
-	/**
-	 * @return the lseName
-	 */
 	public String getLseName() {
 		return lseName;
 	}
 
-	/**
-	 * @param lseName the lseName to set
-	 */
 	public void setLseName(String lseName) {
 		this.lseName = lseName;
 	}
@@ -174,184 +144,106 @@ public class Tariff {
 		this.lseCode = lseCode;
 	}
 
-	/**
-	 * @return the distributionLseId
-	 */
 	public Long getDistributionLseId() {
 		return distributionLseId;
 	}
 
-	/**
-	 * @param distributionLseId the distributionLseId to set
-	 */
 	public void setDistributionLseId(Long distributionLseId) {
 		this.distributionLseId = distributionLseId;
 	}
 
-	/**
-	 * @return the tariffCode
-	 */
 	public String getTariffCode() {
 		return tariffCode;
 	}
 
-	/**
-	 * @param tariffCode the tariffCode to set
-	 */
 	public void setTariffCode(String tariffCode) {
 		this.tariffCode = tariffCode;
 	}
 
-	/**
-	 * @return the tariffName
-	 */
 	public String getTariffName() {
 		return tariffName;
 	}
 
-	/**
-	 * @param tariffName the tariffName to set
-	 */
 	public void setTariffName(String tariffName) {
 		this.tariffName = tariffName;
 	}
 
-	/**
-	 * @return the tariffBookName
-	 */
 	public String getTariffBookName() {
 		return tariffBookName;
 	}
 
-	/**
-	 * @param tariffBookName the tariffBookName to set
-	 */
 	public void setTariffBookName(String tariffBookName) {
 		this.tariffBookName = tariffBookName;
 	}
 
-	/**
-	 * @return the tariffType
-	 */
 	public TariffType getTariffType() {
 		return tariffType;
 	}
 
-	/**
-	 * @param tariffType the tariffType to set
-	 */
 	public void setTariffType(TariffType tariffType) {
 		this.tariffType = tariffType;
 	}
 
-	/**
-	 * @return the billingPeriod
-	 */
 	public Period getBillingPeriod() {
 		return billingPeriod;
 	}
 
-	/**
-	 * @param billingPeriod the billingPeriod to set
-	 */
 	public void setBillingPeriod(Period billingPeriod) {
 		this.billingPeriod = billingPeriod;
 	}
 
-	/**
-	 * @return the customerClass
-	 */
 	public CustomerClass getCustomerClass() {
 		return customerClass;
 	}
 
-	/**
-	 * @param customerClass the customerClass to set
-	 */
 	public void setCustomerClass(CustomerClass customerClass) {
 		this.customerClass = customerClass;
 	}
 
-	/**
-	 * @return the territoryId
-	 */
 	public Long getTerritoryId() {
 		return territoryId;
 	}
 
-	/**
-	 * @param territoryId the territoryId to set
-	 */
 	public void setTerritoryId(Long territoryId) {
 		this.territoryId = territoryId;
 	}
 
-	/**
-	 * @return the effectiveDate
-	 */
 	public String getEffectiveDate() {
 		return effectiveDate;
 	}
 
-	/**
-	 * @param effectiveDate the effectiveDate to set
-	 */
 	public void setEffectiveDate(String effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
 
-	/**
-	 * @return the endDate
-	 */
 	public String getEndDate() {
 		return endDate;
 	}
 
-	/**
-	 * @param endDate the endDate to set
-	 */
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-	/**
-	 * @return the timezone
-	 */
 	public String getTimeZone() {
 		return timeZone;
 	}
 
-	/**
-	 * @param timezone the timezone to set
-	 */
 	public void setTimeZone(String timeZone) {
 		this.timeZone = timeZone;
 	}
 
-	/**
-	 * @return the isActive
-	 */
 	public Boolean getIsActive() {
 		return isActive;
 	}
 
-	/**
-	 * @param isActive the isActive to set
-	 */
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
 
-	/**
-	 * @return the isoCurrency
-	 */
 	public String getCurrency() {
 		return currency;
 	}
 
-	/**
-	 * @param isoCurrency the isoCurrency to set
-	 */
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
@@ -396,134 +288,133 @@ public class Tariff {
     	this.hasNetMetering = hasNetMetering;
     }
 
-  public ServiceType getServiceType() {
-    return serviceType;
-  }
+	public ServiceType getServiceType() {
+		return serviceType;
+	}
 
-  public void setServiceType(ServiceType serviceType) {
-    this.serviceType = serviceType;
-  }
+	public void setServiceType(ServiceType serviceType) {
+		this.serviceType = serviceType;
+	}
 
-  public Integer getCustomerCount() {
-    return customerCount;
-  }
+	public Integer getCustomerCount() {
+		return customerCount;
+	}
 
-  public void setCustomerCount(Integer customerCount) {
-    this.customerCount = customerCount;
-  }
+	public void setCustomerCount(Integer customerCount) {
+		this.customerCount = customerCount;
+	}
 
-  public BigDecimal getCustomerLikelihood() {
-    return customerLikelihood;
-  }
+	public BigDecimal getCustomerLikelihood() {
+		return customerLikelihood;
+	}
 
-  public void setCustomerLikelihood(BigDecimal customerLikelihood) {
-    this.customerLikelihood = customerLikelihood;
-  }
+	public void setCustomerLikelihood(BigDecimal customerLikelihood) {
+		this.customerLikelihood = customerLikelihood;
+	}
 
-  public String getCustomerCountSource() {
-    return customerCountSource;
-  }
+	public String getCustomerCountSource() {
+		return customerCountSource;
+	}
 
-  public void setCustomerCountSource(String customerCountSource) {
-    this.customerCountSource = customerCountSource;
-  }
+	public void setCustomerCountSource(String customerCountSource) {
+		this.customerCountSource = customerCountSource;
+	}
 
-  @JsonIgnore
-  public ChargeType[] getChargeTypes() {
-    return chargeTypes;
-  }
+	@JsonIgnore
+	public ChargeType[] getChargeTypes() {
+		return chargeTypes;
+	}
 
-  public void setChargeTypes(ChargeType... chargeTypes) {
-    this.chargeTypes = chargeTypes;
-  }
+	public void setChargeTypes(ChargeType... chargeTypes) {
+		this.chargeTypes = chargeTypes;
+	}
 
-  @JsonProperty("chargeTypes")
-  public String getChargeTypesAsString() {
-    return EnumUtil.enumListString(chargeTypes);
-  }
+	@JsonProperty("chargeTypes")
+	public String getChargeTypesAsString() {
+		return EnumUtil.enumListString(chargeTypes);
+	}
 
-  public void setChargeTypesAsString(String chargeTypesStr) {
-    this.chargeTypes = EnumUtil.parseEnumList(chargeTypesStr, ChargeType.class);
-  }
+	public void setChargeTypesAsString(String chargeTypesStr) {
+		this.chargeTypes = EnumUtil.parseEnumList(chargeTypesStr, ChargeType.class);
+	}
 
-  public String getChargePeriod() {
-    return chargePeriod;
-  }
+	public String getChargePeriod() {
+		return chargePeriod;
+	}
 
-  public void setChargePeriod(String chargePeriod) {
-    this.chargePeriod = chargePeriod;
-  }
+	public void setChargePeriod(String chargePeriod) {
+		this.chargePeriod = chargePeriod;
+	}
 
-  public Boolean getHasTimeOfUseRates() {
-    return hasTimeOfUseRates;
-  }
+	public Boolean getHasTimeOfUseRates() {
+		return hasTimeOfUseRates;
+	}
 
-  public void setHasTimeOfUseRates(Boolean hasTimeOfUseRates) {
-    this.hasTimeOfUseRates = hasTimeOfUseRates;
-  }
+	public void setHasTimeOfUseRates(Boolean hasTimeOfUseRates) {
+		this.hasTimeOfUseRates = hasTimeOfUseRates;
+	}
 
-  public Boolean getHasTieredRates() {
-    return hasTieredRates;
-  }
+	public Boolean getHasTieredRates() {
+		return hasTieredRates;
+	}
 
-  public void setHasTieredRates(Boolean hasTieredRates) {
-    this.hasTieredRates = hasTieredRates;
-  }
+	public void setHasTieredRates(Boolean hasTieredRates) {
+		this.hasTieredRates = hasTieredRates;
+	}
 
-  public Boolean getHasContractedRates() {
-    return hasContractedRates;
-  }
+	public Boolean getHasContractedRates() {
+		return hasContractedRates;
+	}
 
-  public void setHasContractedRates(Boolean hasContractedRates) {
-    this.hasContractedRates = hasContractedRates;
-  }
+	public void setHasContractedRates(Boolean hasContractedRates) {
+		this.hasContractedRates = hasContractedRates;
+	}
 
-  public Boolean getHasTariffApplicability() {
-    return hasTariffApplicability;
-  }
+	public Boolean getHasTariffApplicability() {
+		return hasTariffApplicability;
+	}
 
-  public void setHasTariffApplicability(Boolean hasTariffApplicability) {
-    this.hasTariffApplicability = hasTariffApplicability;
-  }
+	public void setHasTariffApplicability(Boolean hasTariffApplicability) {
+		this.hasTariffApplicability = hasTariffApplicability;
+	}
 
-  public Boolean getHasRateApplicability() {
-    return hasRateApplicability;
-  }
+	public Boolean getHasRateApplicability() {
+		return hasRateApplicability;
+	}
 
-  public void setHasRateApplicability(Boolean hasRateApplicability) {
-    this.hasRateApplicability = hasRateApplicability;
-  }
+	public void setHasRateApplicability(Boolean hasRateApplicability) {
+		this.hasRateApplicability = hasRateApplicability;
+	}
 
-  public List<TariffProperty> getProperties() {
-    return properties;
-  }
+	public List<TariffProperty> getProperties() {
+		return properties;
+	}
 
-  public void setProperties(List<TariffProperty> properties) {
-    this.properties = properties;
-  }
+	public void setProperties(List<TariffProperty> properties) {
+		this.properties = properties;
+	}
 
-  public List<TariffRate> getRates() {
-    return rates;
-  }
+	public List<TariffRate> getRates() {
+		return rates;
+	}
 
-  public void setRates(List<TariffRate> rates) {
-    this.rates = rates;
-  }
-	
-  public String getPrivacy() {
-    return privacy;
-  }
-  
-  public void setPrivacy(String privacy) {
-    this.privacy = privacy;
-  }
+	public void setRates(List<TariffRate> rates) {
+		this.rates = rates;
+	}
 
-public String getEffectiveOnRule() {
-	return effectiveOnRule;
-}
+	public String getPrivacy() {
+		return privacy;
+	}
 
-public void setEffectiveOnRule(String effectiveOnRule) {
-	this.effectiveOnRule = effectiveOnRule;
-}
-  
+	public void setPrivacy(String privacy) {
+		this.privacy = privacy;
+	}
+
+	public String getEffectiveOnRule() {
+		return effectiveOnRule;
+	}
+
+	public void setEffectiveOnRule(String effectiveOnRule) {
+		this.effectiveOnRule = effectiveOnRule;
+	}
 }

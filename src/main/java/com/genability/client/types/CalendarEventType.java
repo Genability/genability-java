@@ -1,20 +1,9 @@
 package com.genability.client.types;
 
-
 public enum CalendarEventType {
-	/**
-	 * Indicates an HOLIDAY value.
-	 */
+
 	HOLIDAY(1),
-
-	/**
-	 * Indicates an BILLING value.
-	 */
 	BILLING(2),
-
-	/**
-	 * Indicates an PRICING_PERIOD value.
-	 */
 	PRICING_PERIOD(4);
 
 	private int id_;
@@ -22,6 +11,8 @@ public enum CalendarEventType {
 	/**
 	 * Constructor, which takes an int value so that this enum's values can be
 	 * flags (in other words support bit operations).
+	 * 
+	 * @param id
 	 */
 	CalendarEventType(int id) {
 		this.id_ = id;
@@ -29,6 +20,8 @@ public enum CalendarEventType {
 
 	/**
 	 * Accessor method for getting at the current bit number of this enum.
+	 * 
+	 * @return
 	 */
 	public int getId() {
 		return (this.id_);
@@ -50,6 +43,4 @@ public enum CalendarEventType {
 		}
 		return null;
 	}
-
-
 }

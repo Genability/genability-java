@@ -20,8 +20,8 @@ public class CalculateService extends BaseService {
 	
 	/**
 	 * Calls the REST service to run a calculation
-	 * 
-	 * @return CalculatedCost
+	 * @param request
+	 * @return
 	 */
 	public Response<CalculatedCost> getCalculatedCost(GetCalculatedCostRequest request) {
 		
@@ -39,7 +39,6 @@ public class CalculateService extends BaseService {
 			//Not currently doing this anywhere in the test suite.
 		}
 
-		
 		Response<CalculatedCost> response = this.callPost(
 				uri,
 				request,
@@ -56,8 +55,10 @@ public class CalculateService extends BaseService {
 	 * for a given tariffId.  The tariffId can be explicitly stated within the
 	 * GetCalculationInputsRequest object, or if it is null, the service will 
 	 * expect it to be in the Account that is passed in. 
+	 * @param request
+	 * @return
 	 */
-	 public Response<PropertyData> getCalculationInputs(GetCalculationInputsRequest request) {
+	public Response<PropertyData> getCalculationInputs(GetCalculationInputsRequest request) {
 	
 		 if(log.isDebugEnabled()) log.debug("getCalculationInputs called");
 			
@@ -82,10 +83,12 @@ public class CalculateService extends BaseService {
 	/**
 	 * Runs calculation on Account using a simplified method with passed in
 	 * parameters.
-	 * 
 	 * @param accountId
+	 * @param masterTariffId
 	 * @param fromDateTime
 	 * @param toDateTime
+	 * @param detailLevel
+	 * @param groupBy
 	 * @return
 	 */
 	public Response<CalculatedCost> runCalculationOnAccount(String accountId,

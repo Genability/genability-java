@@ -12,6 +12,7 @@ public class PriceService extends BaseService {
 	/**
 	 * Calls the REST service to get a Profile based on the arguments passed in.
 	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Price> getPrice(GetPriceRequest request) {
@@ -31,7 +32,5 @@ public class PriceService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("getPrice completed");
 		
 		return response;
-		
 	}
-	
 }

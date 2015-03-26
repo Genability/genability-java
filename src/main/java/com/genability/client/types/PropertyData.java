@@ -46,16 +46,10 @@ public class PropertyData {
 	protected String scenarios;
 	protected DataType dataType;
 
-	/**
-	 * private member variable for Duration.
-	 */
 	protected Long duration;
 	private String operator;
 	
-	public PropertyData() {
-		//constructor
-	}
-
+	public PropertyData() {}
 
 	public void setKeyName(String keyName) {
 		this.keyName = keyName;
@@ -65,64 +59,35 @@ public class PropertyData {
 		return keyName;
 	}
 	
-	/**
-	 * @return the fromDate
-	 */
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
-
-	/**
-	 * @param fromDate
-	 *            the fromDate to set
-	 */
 
 	public void setFromDateTime(DateTime fromDate) {
 		this.fromDateTime = fromDate;
 	}
 
-	/**
-	 * @return the toDate
-	 */
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
 
-	/**
-	 * @param toDate
-	 *            the toDate to set
-	 */
 	public void setToDateTime(DateTime toDate) {
 		this.toDateTime = toDate;
 	}
 
-	/**
-	 * @param unit
-	 *            the unit to set
-	 */
 	public void setPeriod(String period) {
 		this.period = period;
 	}
 
-	/**
-	 * @return the unit
-	 */
 	@JsonInclude(Include.NON_NULL)
 	public String getPeriod() {
 		return period;
 	}
 	
-	/**
-	 * @param unit
-	 *            the unit to set
-	 */
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
 
-	/**
-	 * @return the unit
-	 */
 	@JsonInclude(Include.NON_NULL)
 	public String getUnit() {
 		return unit;
@@ -152,9 +117,6 @@ public class PropertyData {
 		this.dataValue = dataValue != null ? Boolean.toString(dataValue) : null;
 	}
 
-	/**
-	 * @return the unit
-	 */
 	@JsonProperty("dataValue")
 	@JsonInclude(Include.NON_NULL)
 	public String getDataValue() {
@@ -174,9 +136,6 @@ public class PropertyData {
 		this.accuracy = accuracy;
 	}
 	
-	/**
-	 * @return the accuracy
-	 */
 	@JsonInclude(Include.NON_NULL)
 	public BigDecimal getAccuracy() {
 		return accuracy;
@@ -200,16 +159,10 @@ public class PropertyData {
 		return dataType;
 	}
 
-	/**
-	 * Access method for Duration.
-	 */
 	public Long getDuration() {
 		return duration;
 	}
 
-	/**
-	 * Mutator for Duration.
-	 */
 	public void setDuration(Long duration) {
 		this.duration = duration;
 	}

@@ -13,7 +13,8 @@ public class BulkUploadService extends BaseService {
 	/**
 	 * Calls the REST service to upload a load profile or other usage data file
 	 * 
-	 * @return String
+	 * @param request
+	 * @return
 	 */
 	public Response<ReadingData> uploadFile(BulkUploadRequest request) {
 		

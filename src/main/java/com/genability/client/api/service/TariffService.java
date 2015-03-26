@@ -15,6 +15,7 @@ public class TariffService extends BaseService {
 	/**
 	 * Calls the REST service to get a list of tariffs based on the arguments passed in.
 	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Tariff> getTariffs(GetTariffsRequest request) {
@@ -39,6 +40,7 @@ public class TariffService extends BaseService {
 	/**
 	 * Calls the REST service to get one tariff based on the arguments passed in.
 	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Tariff> getTariff(GetTariffRequest request) {
@@ -60,6 +62,7 @@ public class TariffService extends BaseService {
 	 * Calls the REST service to get one tariff based on the arguments passed
 	 * in.
 	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Tariff> getTariffProperties(GetTariffRequest request) {
@@ -130,14 +133,5 @@ public class TariffService extends BaseService {
 		if(log.isDebugEnabled()) log.debug("deleteTariff completed");
 
 		return response;
-
 	}
-
-	/******************************************************************************************
-	 * BELOW HERE ARE THE HELPER METHODS
-	 ******************************************************************************************/
-
-
-	
-	
 }

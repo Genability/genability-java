@@ -39,47 +39,26 @@ public class GetProfileRequest extends AbstractGetNRequest implements Serializab
 		this.profileId = profileId;
 	}
 
-	/**
-	 * @param date
-	 *            the fromDate to set
-	 */
 	public void setFromDateTime(DateTime fromDateTime) {
 		this.fromDateTime = fromDateTime;
 	}
 
-	/**
-	 * @return the fromDate
-	 */
 	public DateTime getFromDateTime() {
 		return fromDateTime;
 	}
 
-	/**
-	 * @param toDate
-	 *            the toDate to set
-	 */
 	public void setToDateTime(DateTime toDateTime) {
 		this.toDateTime = toDateTime;
 	}
 
-	/**
-	 * @return the toDate
-	 */
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
 
-	/**
-	 * @return the populateReadingData
-	 */
 	public Boolean getPopulateReadings() {
 		return populateReadings;
 	}
 
-	/**
-	 * @param populateReadingData
-	 *            the populateReadingData to set
-	 */
 	public void setPopulateReadings(Boolean populateReadings) {
 		this.populateReadings = populateReadings;
 	}
@@ -92,9 +71,6 @@ public class GetProfileRequest extends AbstractGetNRequest implements Serializab
 		this.populateBaseline = populateBaseline;
 	}
 
-	/**
-	 * @return the populateReadingData
-	 */
 	public Boolean getDeriveDemand() {
 		return deriveDemand;
 	}
@@ -146,7 +122,6 @@ public class GetProfileRequest extends AbstractGetNRequest implements Serializab
 	@Override
 	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
-		
 		List<NameValuePair> qparams = super.getQueryParams();
 		
 		addParam(qparams,"fromDateTime", fromDateTime);
@@ -156,7 +131,5 @@ public class GetProfileRequest extends AbstractGetNRequest implements Serializab
 		addParam(qparams,"groupBy",groupBy);
 		addParam(qparams,"clipBy",clipBy);
 		return qparams;
-		
 	}
-	
-} // end of class GetProfileRestRequest
+}

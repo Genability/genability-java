@@ -4,42 +4,14 @@ import java.util.EnumMap;
 
 public enum DataType {
 
-	/**
-	 * Indicates an STRING value.
-	 */
 	STRING(1),
-	/**
-	 * Indicates an CHOICE value.
-	 */
 	CHOICE(2),
-	/**
-	 * Indicates an BOOLEAN value.
-	 */
 	BOOLEAN(4),
-	/**
-	 * Indicates an DATE value.
-	 */
 	DATE(8),
-	/**
-	 * Indicates an DECIMAL value.
-	 */
 	DECIMAL(16),
-	/**
-	 * Indicates an INTEGER value.
-	 */
 	INTEGER(32),
-	/**
-	 * Indicates an FORMULA value.
-	 */
 	FORMULA(64),
-	/**
-	 * Indicates an LOOKUP value.
-	 */
 	LOOKUP(128),
-
-	/**
-	 * Indicates an DEMAND value.
-	 */
 	DEMAND(256);
 	
 	private int id;
@@ -47,6 +19,8 @@ public enum DataType {
 	/**
 	 * Constructor, which takes an int value so that this enum's values can be
 	 * flags (in other words support bit operations).
+	 * 
+	 * @param id
 	 */
 	DataType(int id) {
 		this.id = id;
@@ -54,6 +28,8 @@ public enum DataType {
 
 	/**
 	 * Accessor method for getting at the current bit number of this enum.
+	 * 
+	 * @return
 	 */
 	public int getId() {
 		return (this.id);

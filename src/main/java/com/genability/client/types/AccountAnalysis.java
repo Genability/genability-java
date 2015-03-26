@@ -28,6 +28,11 @@ public class AccountAnalysis {
      *
      *    Series monthlyPreSolarUtilitySeries = accountAnalysis.getSeriesByParameters("before", "MONTH", null);
      *    // check that monthlyPreSolarUtilitySeries != null, then proceed
+     * 
+     * @param scenario
+     * @param period
+     * @param key
+     * @return
      */
     @JsonIgnore
     public Series getSeriesByParameters(String scenario, String period, String key) {
@@ -55,8 +60,11 @@ public class AccountAnalysis {
      *    if (monthlyPreSolarUtilitySeries == null) throw SomeException();
      *
      *    Integer seriesId = monthlyPreSolarUtilitySeries.getSeriesId();
-     *    List<SeriesMeasure> monthlyPreSolarUtilitySeriesData = accountAnalysis.getSeriesDataBySeriesId(seriesId);
+     *    List&lt;SeriesMeasure&gt; monthlyPreSolarUtilitySeriesData = accountAnalysis.getSeriesDataBySeriesId(seriesId);
      *    // check that monthlyPreSolarUtilitySeriesData != null, then proceed
+     *    
+     * @param seriesId
+     * @return
      */
     @JsonIgnore
     public List<SeriesMeasure> getSeriesDataBySeriesId(Integer seriesId) {

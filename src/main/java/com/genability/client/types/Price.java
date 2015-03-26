@@ -57,6 +57,8 @@ public class Price {
 
 	/**
 	 * The starting date and time for this Price summary.
+	 * 
+	 * @return
 	 */
 	public DateTime getFromDateTime() {
 		return fromDateTime;
@@ -68,6 +70,8 @@ public class Price {
 
 	/**
 	 * The ending date and time for this Price summary.
+	 * 
+	 * @return
 	 */
 	public DateTime getToDateTime() {
 		return toDateTime;
@@ -79,6 +83,8 @@ public class Price {
 	
 	/**
 	 * Currently all prices are returned in USD.
+	 * 
+	 * @return
 	 */
 	public String getCurrency() {
 		return currency;
@@ -91,6 +97,8 @@ public class Price {
 	/**
 	 * The charge amount in dollars for
 	 * this Tariff at the time passed in.
+	 * 
+	 * @return
 	 */
 	public BigDecimal getRateAmount() {
         return rateAmount;
@@ -104,6 +112,8 @@ public class Price {
 	 * The relative price of this rateAmount compared to other rate
 	 * amounts in this summary. This is useful for change in price
 	 * notifications. The highest price will have an RPI of 1.0.
+	 * 
+	 * @return
 	 */
 	public BigDecimal getRelativePriceIndex() {
         return relativePriceIndex;
@@ -115,6 +125,8 @@ public class Price {
 
 	/**
 	 * List of all the price changes within the specified time period
+	 * 
+	 * @return
 	 */
 	public List<PriceChange> getPriceChanges() {
 		return priceChanges;

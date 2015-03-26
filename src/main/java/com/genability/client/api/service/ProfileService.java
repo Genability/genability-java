@@ -22,6 +22,7 @@ public class ProfileService extends BaseService {
 	/**
 	 * Calls the REST service to get a Profile based on the arguments passed in.
 	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Profile> getProfile(GetProfileRequest request) {
@@ -54,6 +55,7 @@ public class ProfileService extends BaseService {
 	/**
 	 * Calls the REST service to get Profiles based on the arguments passed in.
 	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Profile> getProfiles(GetProfilesRequest request) {
@@ -107,7 +109,8 @@ public class ProfileService extends BaseService {
 
 	/**
 	 * Calls the REST service to delete a Profile based on the arguments passed in.
-	 *
+	 * 
+	 * @param request
 	 * @return
 	 */
 	public Response<Profile> deleteProfile(DeleteProfileRequest request) {
@@ -167,7 +170,5 @@ public class ProfileService extends BaseService {
 			log.debug("addReadings completed");
 
 		return response;
-
 	}
-
 }

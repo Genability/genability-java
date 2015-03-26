@@ -10,23 +10,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IntervalInfo {
 
-
 	private String id;
-
 	private String profileId;
-
 	private Measure total;
-
 	private Measure kWh;
-
 	private Measure kW;
-
 	private Map<String, Measure> measures;
-
 	private DateTime fromDateTime;
-
 	private DateTime toDateTime;
-
 	private Long duration;
 
 	public IntervalInfo() {
@@ -41,7 +32,6 @@ public class IntervalInfo {
 		this.id = id;
 	}
 
-
 	public String getProfileId() {
 		return profileId;
 	}
@@ -49,9 +39,6 @@ public class IntervalInfo {
 	public void setProfileId(String profileId) {
 		this.profileId = profileId;
 	}
-
-
-
 
 	public DateTime getFromDateTime() {
 		return fromDateTime;
@@ -64,7 +51,6 @@ public class IntervalInfo {
 	public DateTime getToDateTime() {
 		return toDateTime;
 	}
-
 
 	public void setToDateTime(DateTime toDateTime) {
 		this.toDateTime = toDateTime;
@@ -142,6 +128,7 @@ public class IntervalInfo {
 	 * return null.
 	 * 
 	 * @param key
+	 * @return
 	 */
 	public Measure getMeasure(String key) {
 
@@ -158,7 +145,5 @@ public class IntervalInfo {
 			return this.measures.get(key);
 		}
 
-	} // end of helper getMeasure
-
-
+	}
 }

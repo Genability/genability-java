@@ -40,35 +40,14 @@ import com.genability.client.types.Response;
 
 public class BaseService {
 	
-	
-	/**
-	 * Protected member of logger
-	 */
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
-
-	/**
-	 * Protected member of URL of the server to call
-	 */
 	protected String restApiServer = "https://api.genability.com/rest/";
-	
-	/**
-	 * Protected member holding the App ID for authentication.
-	 */
-	protected String appId = null;
 
-	/**
-	 * Protected member holding the App Key for authentication.
-	 */
+	protected String appId = null;
 	protected String appKey = null;
 	
-	/**
-	 * Private member holding the Jackson Object Mapper (for JSON conversions).
-	 */
 	private ObjectMapper mapper;
-	
-	/**
-	 * Private member holding the Apache HttpClient
-	 */
+
 	private HttpClient httpClient;
 
 
@@ -81,7 +60,6 @@ public class BaseService {
 	    httpClient = HttpClientBuilder.create().build();
     }
 
-
 	/**
 	 * Mutator for IoC and configuration. If not called, this property defaults to 
 	 * the Genability Production servers URL.
@@ -91,28 +69,13 @@ public class BaseService {
 		this.restApiServer = restApiServer;
 	}
 
-
-	/**
-	 * Mutator for IoC and configuration. You need to call this as their
-	 * isn't a default.
-	 * 
-	 * @param appId the appId to set
-	 */
 	public void setAppId(String appId) {
 		this.appId = appId;
 	}
 
-
-	/**
-	 * Mutator for IoC and configuration. You need to call this as their
-	 * isn't a default.
-	 * 
-	 * @param appKey the appKey to set
-	 */
 	public void setAppKey(String appKey) {
 		this.appKey = appKey;
 	}
-
 
 	/**
 	 * Mutator for IoC and configuration. Typically you don't need to worry about this
@@ -124,22 +87,16 @@ public class BaseService {
 		this.mapper = mapper;
 	}
 
-
-	/**
-	 * Mutator for IoC and configuration. Typically you don't need to worry about this
-	 * as the default sets up a mapper for you.
-	 *
-	 * @param mapper the mapper to set
-	 */
 	public void setHttpClient(HttpClient httpClient) {
 		this.httpClient = httpClient;
 	}
 
-
 	/**
 	 * Helper method that makes a HTTP GET to the Genability APIs.
-	 * 
+	 * @param <T>
+	 * @param <R>
 	 * @param endpointPath
+	 * @param queryParams
 	 * @param resultTypeReference
 	 * @return
 	 */
@@ -156,13 +113,15 @@ public class BaseService {
 		if(log.isDebugEnabled()) log.debug(url);
 
 		return execute(getRequest, resultTypeReference);
-	} // end of callGet
+	}
 	
 	
 	/**
 	 * Helper method that makes a HTTP POST to the Genability APIs.
-	 * 
+	 * @param <T>
+	 * @param <R>
 	 * @param endpointPath
+	 * @param requestPayload
 	 * @param resultTypeReference
 	 * @return
 	 */
@@ -174,12 +133,14 @@ public class BaseService {
 		postRequest.setEntity(new JacksonHttpEntity(requestPayload));
 
 		return execute(postRequest, resultTypeReference);
-	} // end of callPost
+	}
 
 	/**
 	 * Helper method that makes a HTTP POST to the Genability APIs.
-	 * 
+	 * @param <T>
+	 * @param <R>
 	 * @param endpointPath
+	 * @param requestPayload
 	 * @param resultTypeReference
 	 * @return
 	 */
@@ -196,11 +157,17 @@ public class BaseService {
 		putRequest.setEntity(new JacksonHttpEntity(requestPayload));
 
 		return execute(putRequest, resultTypeReference);
-	} // end of callPut
+	}
 	
-	/*
+	/**
 	 * This method is used to upload large datasets, typically CSV or XML files.
 	 * The request object passed in contains the File to upload.
+	 * @param <T>
+	 * @param <R>
+	 * @param endpointPath
+	 * @param request
+	 * @param resultTypeReference
+	 * @return
 	 */
 	public <T extends Response<R>, R> T callFileUpload(String endpointPath, BulkUploadRequest request, TypeReference<T> resultTypeReference) {
 		String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
@@ -231,8 +198,10 @@ public class BaseService {
 	
 	/**
 	 * Helper method that makes a HTTP DELETE to the Genability APIs.
-	 * 
+	 * @param <T>
+	 * @param <R>
 	 * @param endpointPath
+	 * @param queryParams
 	 * @param resultTypeReference
 	 * @return
 	 */
@@ -325,7 +294,5 @@ public class BaseService {
 			}
 			mapper.writeValue(outstream, object);
 		}
-
 	}
-
 }

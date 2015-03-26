@@ -19,7 +19,6 @@ public class Profile implements Serializable {
 	private String providerAccountId;
 	private String accountId;
 	private String meterId;
-	private String providerOrgId;
 	private String description;
 	private Source source;
 	private List<ReadingDataSummary> readingDataSummaries;
@@ -132,32 +131,19 @@ public class Profile implements Serializable {
 		this.source = source;
 	}
 
-	/**
-	 * @return the readingDataSummaries
-	 */
 	public List<ReadingDataSummary> getReadingDataSummaries() {
 		return readingDataSummaries;
 	}
 
-	/**
-	 * @param readingDataSummaries
-	 *            the readingDataSummaries to set
-	 */
 	public void setReadingDataSummaries(
 			List<ReadingDataSummary> readingDataSummaries) {
 		this.readingDataSummaries = readingDataSummaries;
 	}
 
-	/**
-	 * Access method for ReadingData.
-	 */
 	public List<ReadingData> getReadingData() {
 		return readingData;
 	}
 
-	/**
-	 * Mutator method for ReadingData.
-	 */
 	public void setReadingData(final List<ReadingData> readingData) {
 		this.readingData = readingData;
 	}
@@ -170,94 +156,38 @@ public class Profile implements Serializable {
 		this.baselineMeasures = baselineMeasures;
 	}
 
-	/**
-	 * Access method for Readings.
-	 * 
-	 * @return
-	 */
 	public PagedList<ReadingData> getReadings() {
 		return readings;
 	}
 
-	/**
-	 * Mutator method for Readings.
-	 */
 	public void setReadings(final PagedList<ReadingData> readings) {
 		this.readings = readings;
 	}
 
-	/**
-	 * Access method for Intervals.
-	 * 
-	 * @return
-	 */
 	public PagedList<IntervalInfo> getIntervals() {
 		return intervals;
 	}
 
-	/**
-	 * Mutator method for Intervals.
-	 */
 	public void setIntervals(final PagedList<IntervalInfo> intervals) {
 		this.intervals = intervals;
 	}
 
-	/**
-	 * @return the accountId
-	 */
 	public String getAccountId() {
 		return accountId;
 	}
 
-	/**
-	 * @param accountId
-	 *            the accountId to set
-	 */
 	public void setAccountId(final String accountId) {
 		this.accountId = accountId;
 	}
 
-	/**
-	 * @return the accountId
-	 */
 	public String getProviderAccountId() {
 		return providerAccountId;
 	}
 
-	/**
-	 * @param accountId
-	 *            the accountId to set
-	 */
 	public void setProviderAccountId(final String providerAccountId) {
 		this.providerAccountId = providerAccountId;
 	}
 
-	/**
-	 * This is the Genability ID of the provider of this account.
-	 * 
-	 * @return
-	 */
-	@JsonIgnore
-	public String getProviderOrgId() {
-		return providerOrgId;
-	}
-
-	/**
-	 * Use this to set the Genability ID of the provider of this account. This
-	 * field is maintained (or at least validated) by server side code so that
-	 * it cannot be populated erroneously by a different provider.
-	 * 
-	 * @param providerOrgId
-	 */
-	public void setProviderOrgId(final String providerOrgId) {
-		this.providerOrgId = providerOrgId;
-	}
-
-	/**
-	 * This holds the status of the cached/pre-calculated interval data.
-	 * 
-	 * @return
-	 */
 	@JsonIgnore
 	public Integer getDataStatus() {
 		return dataStatus;
@@ -344,9 +274,8 @@ public class Profile implements Serializable {
 	 * Helper method to make a copy of the profile. Note it doesn't make a copy
 	 * of the readings, reading summaries, or properties
 	 * 
-	 * @param anotherProfile
+	 * @param toCopyToProfile
 	 *            to copy data into
-	 * @return void
 	 */
 	public void copy(Profile toCopyToProfile) {
 		toCopyToProfile.setProfileId(this.profileId);
@@ -354,12 +283,10 @@ public class Profile implements Serializable {
 		toCopyToProfile.setProfileName(this.profileName);
 		toCopyToProfile.setAccountId(this.accountId);
 		toCopyToProfile.setProviderAccountId(this.providerAccountId);
-		toCopyToProfile.setProviderOrgId(this.providerOrgId);
 		toCopyToProfile.setDescription(this.description);
 		toCopyToProfile.setSource(this.source);
 		toCopyToProfile.setIsDefault(this.isDefault);
 		toCopyToProfile.setMeterId(this.meterId);
 	}
-
-} // end of class Profile
+}
 

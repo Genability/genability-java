@@ -3,9 +3,7 @@ package com.genability.client.types;
 public class PaginationInfo {
 
 	private int totalCount;
-
 	private int pageCount;
-
 	private int pageStart;
 
 	public int getEndIndex() {
@@ -97,6 +95,7 @@ public class PaginationInfo {
 	 * if the query should return the first 10 records of
 	 * the total, this will be 10.
 	 * 
+	 * @return
 	 */
 	public int getPageCount() {
 		return pageCount;
