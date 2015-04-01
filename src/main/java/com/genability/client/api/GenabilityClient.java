@@ -3,13 +3,13 @@ package com.genability.client.api;
 import org.apache.http.client.HttpClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.genability.client.api.service.AccountAnalysisService;
 import com.genability.client.api.service.AccountService;
 import com.genability.client.api.service.BaseService;
 import com.genability.client.api.service.BulkUploadService;
 import com.genability.client.api.service.CalculateService;
 import com.genability.client.api.service.CalendarService;
+import com.genability.client.api.service.IncentiveService;
 import com.genability.client.api.service.LseService;
 import com.genability.client.api.service.PriceService;
 import com.genability.client.api.service.ProfileService;
@@ -25,8 +25,7 @@ public class GenabilityClient {
   private ObjectMapper mapper;
   private HttpClient httpClient;
 
-  public GenabilityClient() {
-  }
+  public GenabilityClient() {}
 
   public GenabilityClient(String appId, String appKey) {
     this.appId = appId;
@@ -137,5 +136,8 @@ public class GenabilityClient {
   public TypicalService getTypicalService() {
     return initializeService(new TypicalService());
   }
-
+  
+  public IncentiveService getIncentiveService() {
+	  return initializeService(new IncentiveService());
+  }
 }
