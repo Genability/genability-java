@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Incentive {
 
 	private Long tariffId;
