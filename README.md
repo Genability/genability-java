@@ -7,7 +7,7 @@ The Genability API Java client library is now available on the Maven Central Rep
 <dependency>
   <groupId>com.genability</groupId>
   <artifactId>genability-client</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
 </dependency>
 ```
 
