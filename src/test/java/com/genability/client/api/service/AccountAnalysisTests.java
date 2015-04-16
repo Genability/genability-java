@@ -21,6 +21,7 @@ import com.genability.client.types.Account;
 import com.genability.client.types.AccountAnalysis;
 import com.genability.client.types.Address;
 import com.genability.client.types.CalculatedCost;
+import com.genability.client.types.CalculatedCostItem;
 import com.genability.client.types.ChargeType;
 import com.genability.client.types.Profile;
 import com.genability.client.types.PropertyData;
@@ -230,6 +231,17 @@ public class AccountAnalysisTests extends BaseServiceTests {
             Map<Integer, CalculatedCost> seriesCosts = result.getSeriesCosts();
             assertNotNull("SeriesCosts was null", seriesCosts);
             assertEquals("Did not have the correct number of seriesCosts", 2, seriesCosts.size());
+            
+            boolean foundTierLimit = false;
+            CalculatedCost firstScenCosts = seriesCosts.get(1);
+            
+            for(CalculatedCostItem c : firstScenCosts.getItems()) {
+            	if (c.getTierUpperLimit() != null || c.getTierLowerLimit() != null) {
+            		foundTierLimit = true;
+            	}
+            }
+            
+            assertTrue("Didn't find a tierUpperLimit or tierLowerLimit", foundTierLimit);
             
 	    // Because it starts at 2014-10-10 (and therefore ends at 2015-10-10), we should see 13 months of data:
 	    // Oct 2014 through Nov 2015
