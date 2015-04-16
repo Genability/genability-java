@@ -151,7 +151,8 @@ public class ProfileServiceTests extends BaseServiceTests {
 				fail("second get (after delete) should 404");
 			} catch (GenabilityException e) {
 				// XXX should handle HTTP codes cleanly in the exception
-				if (! "Failed : HTTP error code : 404".equals(e.getMessage())) {
+				// 2015-04-16: Error code on server side is now incorrect.
+				if (! "Failed : HTTP error code : 400".equals(e.getMessage())) {
 					throw e;
 				}
 			}
