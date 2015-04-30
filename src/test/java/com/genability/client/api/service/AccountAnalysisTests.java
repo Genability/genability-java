@@ -1,9 +1,6 @@
 package com.genability.client.api.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,8 +10,10 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
+import org.junit.Before;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.genability.client.api.request.AccountAnalysisRequest;
 import com.genability.client.api.request.DeleteAccountRequest;
 import com.genability.client.types.Account;
@@ -36,7 +35,24 @@ import com.genability.client.types.TariffRateBand;
  * Created by nsingh on 11/20/14.
  */
 public class AccountAnalysisTests extends BaseServiceTests {
-
+	
+	private AccountAnalysis testAnalysisWithCosts;
+	private AccountAnalysis testAnalysisNoCosts;
+	private static final TypeReference<Response<AccountAnalysis>> ACCOUNT_ANALYSIS_RESPONSE_TYPEREF =
+            new TypeReference<Response<AccountAnalysis>>() {};
+	
+	@Before
+	public void setUp() {
+		Response<AccountAnalysis> responseWithCosts = loadJsonFixture("account_analysis_withcosts.json",
+				ACCOUNT_ANALYSIS_RESPONSE_TYPEREF);
+		
+		Response<AccountAnalysis> responseNoCosts = loadJsonFixture("account_analysis_nocosts.json",
+				ACCOUNT_ANALYSIS_RESPONSE_TYPEREF);
+		
+		testAnalysisWithCosts = responseWithCosts.getResults().get(0);
+		testAnalysisNoCosts = responseNoCosts.getResults().get(0);
+	}
+	
     @Test
     public void testSavingsAnalysis() {
 
@@ -252,6 +268,92 @@ public class AccountAnalysisTests extends BaseServiceTests {
         }
     }
     
+    @Test
+    public void testGetValidSeriesByParameters() {
+    	Series series = testAnalysisWithCosts.getSeriesByParameters("before", "MONTH", null);
+    	
+    	assertEquals("Got the wrong series scenario", "before", series.getScenario());
+    	assertEquals("Got the wrong series period", "MONTH", series.getSeriesPeriod());
+    }
+    
+    @Test
+    public void testGetSeriesByInvalidParameters() {
+    	Series series = testAnalysisWithCosts.getSeriesByParameters("before", "100", null);
+    	
+    	assertNull(series);
+    }
+    
+    @Test
+    public void testGetSeriesByOneNullParameter() {
+    	Series series = testAnalysisWithCosts.getSeriesByParameters("before", null, null);
+    	
+    	assertNull(series);
+    }
+    
+    @Test
+    public void testGetSeriesByTwoNullParameters() {
+    	Series series = testAnalysisWithCosts.getSeriesByParameters(null, null, null);
+    	
+    	assertNull(series);
+    }
+    
+    @Test
+    public void testGetSeriesDataByGoodId() {
+    	Integer seriesId = new Integer(1);
+    	List<SeriesMeasure> measures = testAnalysisWithCosts.getSeriesDataBySeriesId(seriesId);
+    	
+    	for (SeriesMeasure measure : measures) {
+    		assertEquals("Got data for the wrong series", seriesId, measure.getSeriesId());
+    	}
+    }
+    
+    @Test
+    public void testGetSeriesDataByBadId() {
+    	Integer seriesId = new Integer(150);
+    	List<SeriesMeasure> measures = testAnalysisWithCosts.getSeriesDataBySeriesId(seriesId);
+    	
+    	assertEquals("Got measures for an invalid seriesId", 0, measures.size());
+    }
+    
+    @Test
+    public void testGetCostsByGoodSeriesName() {
+    	Long beforeMtid = new Long(525);
+    	Long afterMtid = new Long(522);
+    	CalculatedCost before = testAnalysisWithCosts.getSeriesCostsByParameters("before", "MONTH", null);
+    	CalculatedCost after = testAnalysisWithCosts.getSeriesCostsByParameters("after", "MONTH", null);
+    	
+    	assertEquals("Got the wrong scenario for before", beforeMtid, before.getMasterTariffId());
+    	assertEquals("Got the wrong scenario for after", afterMtid, after.getMasterTariffId());
+    }
+    
+    @Test
+    public void testGetCostsByNonExistentSeriesName() {
+    	CalculatedCost costs = testAnalysisWithCosts.getSeriesCostsByParameters("invalid", "MONTH", null);
+    	
+    	assertNull(costs);
+    }
+    
+    @Test
+    public void testGetCostsForBeforeAnnual() {
+    	CalculatedCost costs = testAnalysisWithCosts.getSeriesCostsByParameters("before", "YEAR", null);
+    	
+    	assertNull(costs);
+    }
+    
+    @Test
+    public void testGetCostsByNameWithNoCosts() {
+    	CalculatedCost costs = testAnalysisWithCosts.getSeriesCostsByParameters("solar", "MONTH", null);
+    	
+    	assertNull(costs);
+    }
+    
+    @Test
+    public void testGetCostsWhenNoCosts() {
+    	CalculatedCost before = testAnalysisNoCosts.getSeriesCostsByParameters("before", "MONTH", null);
+    	
+    	assertNull(before);
+    }
+    
     private AccountAnalysisRequest createSavingsAnalysis(Profile usageProfile, Profile productionProfile) {
         AccountAnalysisRequest request = new AccountAnalysisRequest();
         request.setFromDateTime(new DateTime("2014-10-10"));
@@ -334,4 +436,5 @@ public class AccountAnalysisTests extends BaseServiceTests {
         assertEquals("bad type", deleteResponse.getType(), Account.REST_TYPE);
 
     }
+
 }

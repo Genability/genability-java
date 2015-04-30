@@ -79,6 +79,10 @@ public class CalculatedCost {
 		this.accuracy = accuracy;
 	}
 
+	/*
+	 * Use getItems() instead.
+	 */
+	@Deprecated
 	public List<CalculatedCostItem> getCalculatedCostItems() {
 		return getItems();
 	}

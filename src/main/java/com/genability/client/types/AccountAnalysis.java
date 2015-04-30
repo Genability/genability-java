@@ -29,6 +29,8 @@ public class AccountAnalysis {
      *    Series monthlyPreSolarUtilitySeries = accountAnalysis.getSeriesByParameters("before", "MONTH", null);
      *    // check that monthlyPreSolarUtilitySeries != null, then proceed
      * 
+     * Note that the key parameter is not used at this time.
+     * 
      * @param scenario
      * @param period
      * @param key
@@ -80,6 +82,31 @@ public class AccountAnalysis {
         }
 
         return filteredSeriesData;
+    }
+    
+    @JsonIgnore
+    public CalculatedCost getSeriesCostsByParameters(String scenario, String period, String key) {
+    	if (seriesCosts == null) {
+    		return null;
+    	}
+    	
+    	Series s = getSeriesByParameters(scenario, period, key);
+    	
+    	if (s == null) {
+    		return null;
+    	}
+    	
+    	return seriesCosts.get(s.getSeriesId());
+    }
+    
+    @JsonIgnore
+    public CalculatedCost getSeriesCostsBySeriesId(int seriesId) {
+    	if (seriesCosts == null) {
+    		// if the populateCosts parameter wasn't populated
+    		return null;
+    	} else {
+    		return seriesCosts.get(seriesId);
+    	}
     }
 
     public String getDesignId() {

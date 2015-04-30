@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,6 +19,13 @@ import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.genability.client.api.GenabilityClient;
 import com.genability.client.api.request.BaselineRequest;
 import com.genability.client.api.request.DeleteAccountRequest;
@@ -39,7 +47,16 @@ public class BaseServiceTests {
 	protected static final ProfileService profileService;
 	protected static final PropertyService propertyService;
 	protected static final CalendarService calendarService;
+
+	private static final ObjectMapper mapper;
 	static {
+		
+		// Mapper object for de-serializing canned tests
+		mapper = new ObjectMapper();
+	    mapper.registerModule(new JodaModule());
+	    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+	    mapper.setSerializationInclusion(Include.NON_NULL);
+		
 		//
 		// Very simple configuration of logging to console.
 		//
@@ -204,6 +221,22 @@ public class BaseServiceTests {
 			return response.getResults().get(0);
 		} else {
 			return null;
+		}
+	}
+	
+	protected <T> T loadJsonFixture(String fileName, TypeReference<T> resultTypeReference) {
+		try {
+			InputStream is = getClass().getClassLoader().getResourceAsStream(fileName);
+			return mapper.readValue(is, resultTypeReference);
+		} catch (JsonParseException e) {
+			log.error("JsonParseException in fixture " + fileName);
+			throw new GenabilityException(e);
+		} catch (JsonMappingException e) {
+			log.error("JsonMappingException in fixture " + fileName);
+			throw new GenabilityException(e);
+		} catch (IOException e) {
+			log.error("Couldn't open fixture " + fileName);
+			throw new GenabilityException(e);
 		}
 	}
 }
