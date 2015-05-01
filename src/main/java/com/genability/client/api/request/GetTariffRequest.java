@@ -34,6 +34,18 @@ public class GetTariffRequest extends AbstractRequest implements Serializable {
 
 	private DateTime fromDateTime;
 	private DateTime toDateTime;
+	
+	private Long territoryId;
+
+	public Long getTerritoryId() {
+		return territoryId;
+	}
+
+
+	public void setTerritoryId(Long territoryId) {
+		this.territoryId = territoryId;
+	}
+
 
 	public Long getMasterTariffId() {
 		return masterTariffId;
@@ -167,6 +179,7 @@ public class GetTariffRequest extends AbstractRequest implements Serializable {
 		addParam(qparams, "bundleRates", bundleRates);
 		addParam(qparams, "fromDateTime", fromDateTime);
 		addParam(qparams, "toDateTime", toDateTime);
+		addParam(qparams, "territoryId", territoryId);
 		
 		return qparams;
 		
