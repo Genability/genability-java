@@ -47,6 +47,7 @@ public class BaseServiceTests {
 	protected static final ProfileService profileService;
 	protected static final PropertyService propertyService;
 	protected static final CalendarService calendarService;
+	protected static final TerritoryService territoryService;
 
 	private static final ObjectMapper mapper;
 	static {
@@ -105,6 +106,7 @@ public class BaseServiceTests {
   		profileService = genabilityClient.getProfileService();
   		propertyService = genabilityClient.getPropertyService();
   		calendarService = genabilityClient.getCalendarService();
+  		territoryService = genabilityClient.getTerritoryService();
 	}
 	
 	// Helper method:  We create an account and specify a tariff as well as values

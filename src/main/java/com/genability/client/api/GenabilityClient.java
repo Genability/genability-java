@@ -3,7 +3,6 @@ package com.genability.client.api;
 import org.apache.http.client.HttpClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.genability.client.api.service.AccountAnalysisService;
 import com.genability.client.api.service.AccountService;
 import com.genability.client.api.service.BaseService;
@@ -15,6 +14,7 @@ import com.genability.client.api.service.PriceService;
 import com.genability.client.api.service.ProfileService;
 import com.genability.client.api.service.PropertyService;
 import com.genability.client.api.service.TariffService;
+import com.genability.client.api.service.TerritoryService;
 import com.genability.client.api.service.TypicalService;
 
 public class GenabilityClient {
@@ -136,6 +136,10 @@ public class GenabilityClient {
 
   public TypicalService getTypicalService() {
     return initializeService(new TypicalService());
+  }
+  
+  public TerritoryService getTerritoryService() {
+	  return initializeService(new TerritoryService());
   }
 
 }
