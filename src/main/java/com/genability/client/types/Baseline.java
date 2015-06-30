@@ -43,12 +43,14 @@ public class Baseline {
 	private int startDay;
 	private Coordinates location;
 
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static class BuildingType {
 
 		private CustomerClass customerClass;
 		private String description;
 		private String id;
 		private String name;
+		private String buildingClass;
 
 		public CustomerClass getCustomerClass() {
 			return customerClass;
@@ -80,6 +82,14 @@ public class Baseline {
 
 		public void setName(final String name) {
 			this.name = name;
+		}
+		
+		public String getBuildingClass() {
+			return buildingClass;
+		}
+
+		public void setBuildingClass(final String buildingClass) {
+			this.buildingClass = buildingClass;
 		}
 	}
 
