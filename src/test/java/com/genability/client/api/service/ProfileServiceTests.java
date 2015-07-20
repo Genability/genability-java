@@ -25,7 +25,6 @@ import com.genability.client.types.GroupBy;
 import com.genability.client.types.Profile;
 import com.genability.client.types.ReadingData;
 import com.genability.client.types.Response;
-import com.genability.client.types.Source;
 
 public class ProfileServiceTests extends BaseServiceTests {
 

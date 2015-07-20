@@ -57,9 +57,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 		while(propertyKeysVisited < totalPropertyKeys) {
 			assertEquals("Didn't page through the account list correctly.", propertyKeysVisited, restResponse.getPageStart().intValue());
 
-			for(PropertyKey p : restResponse.getResults()) {
-				propertyKeysVisited++;
-			}
+			propertyKeysVisited += restResponse.getResults().size();
 			
 			request.setPageStart(restResponse.getPageStart() + restResponse.getPageCount());
 			restResponse = propertyService.getPropertyKeys(request);
