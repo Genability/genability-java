@@ -13,22 +13,6 @@ public class TimeOfUseTypeTests {
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	@Test
-	public void testJsonValue() {
-		TimeOfUseType np = TimeOfUseType.ON_PEAK;
-		assertEquals("JsonValue method didn't return the right string", "ON_PEAK", np.getName());
-	}
-	
-	@Test
-	public void testValidJsonCreator() {
-		assertEquals("JsonValue method didn't return the right TimeOfUseType", TimeOfUseType.ON_PEAK, TimeOfUseType.getTouType("ON_PEAK"));
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testInvalidJsonCreator() {
-		TimeOfUseType.getTouType("Invalid");
-	}
-	
-	@Test
 	public void testTouTypeSerialize() throws JsonProcessingException {
 		TimeOfUseType np = TimeOfUseType.ON_PEAK;
 		assertEquals("Serialized TimeOfUseType to the wrong format", "\"ON_PEAK\"", mapper.writeValueAsString(np));
