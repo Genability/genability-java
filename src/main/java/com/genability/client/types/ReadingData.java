@@ -38,6 +38,7 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 	private BigDecimal quantityValue;
 	private BigDecimal quantityCost;
 	private BigDecimal quantityRate;
+	private TimeOfUseType touType;
 
 	public ReadingData() {		
 		this.dataType = DataType.DECIMAL;
@@ -161,6 +162,14 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 
 	public void setQuantityRate(BigDecimal quantityRate) {
 		this.quantityRate = quantityRate;
+	}
+
+	public TimeOfUseType getTouType() {
+		return touType;
+	}
+
+	public void setTouType(TimeOfUseType touType) {
+		this.touType = touType;
 	}
 
 	/**
