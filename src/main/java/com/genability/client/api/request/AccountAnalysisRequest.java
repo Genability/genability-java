@@ -1,5 +1,6 @@
 package com.genability.client.api.request;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,10 +10,13 @@ import org.joda.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.genability.client.types.PropertyData;
 import com.genability.client.types.TariffRate;
-import com.genability.client.util.DateTimeSerializer;
 
 public class AccountAnalysisRequest extends AbstractRequest implements Serializable {
 	
@@ -20,8 +24,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * This special timezone is used to indicate that a particular datetime should be
 	 * serialized as a date only (i.e. exclude the time portion of the DateTime)
 	 */
-	public static final DateTimeZone DATE_ONLY_TIMEZONE = DateTimeZone.forID("Etc/UCT");
-
+	private static final DateTimeZone DATE_ONLY_TIMEZONE = DateTimeZone.forID("Etc/UCT");
 	private static final long serialVersionUID = 1L;
 
 	private String providerAccountId;
@@ -134,5 +137,22 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 private DateTime convertLocalDate(LocalDate date) {
 		 DateTime dt = new DateTime(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth(), 0, 0, DATE_ONLY_TIMEZONE);
 		 return dt;
+	 }
+	 
+	 private static class DateTimeSerializer extends JsonSerializer<DateTime> {
+
+		 @Override
+		 public void serialize(DateTime value, JsonGenerator jgen,
+				 SerializerProvider provider) throws IOException,
+				 JsonProcessingException {
+
+			 if (AccountAnalysisRequest.DATE_ONLY_TIMEZONE.equals(value.getZone())) {
+				 LocalDate date = new LocalDate(value.getYear(), value.getMonthOfYear(), value.getDayOfMonth());
+				 jgen.writeObject(date);
+			 } else {
+				 jgen.writeObject(value);
+			 }
+
+		 }
 	 }
 }
