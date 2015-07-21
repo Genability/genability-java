@@ -24,7 +24,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * This special timezone is used to indicate that a particular datetime should be
 	 * serialized as a date only (i.e. exclude the time portion of the DateTime)
 	 */
-	private static final DateTimeZone DATE_ONLY_TIMEZONE = DateTimeZone.forID("Etc/UCT");
+	private static final DateTimeZone DATE_ONLY_TIMEZONE = DateTimeZone.forID("Antarctica/Casey");
 	private static final long serialVersionUID = 1L;
 
 	private String providerAccountId;
