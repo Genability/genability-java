@@ -15,6 +15,12 @@ import com.genability.client.types.TariffRate;
 import com.genability.client.util.DateTimeSerializer;
 
 public class AccountAnalysisRequest extends AbstractRequest implements Serializable {
+	
+	/*
+	 * This special timezone is used to indicate that a particular datetime should be
+	 * serialized as a date only (i.e. exclude the time portion of the DateTime)
+	 */
+	public static final DateTimeZone DATE_ONLY_TIMEZONE = DateTimeZone.forID("Etc/UCT");
 
 	private static final long serialVersionUID = 1L;
 
@@ -126,7 +132,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 }
 
 	 private DateTime convertLocalDate(LocalDate date) {
-		 DateTime dt = new DateTime(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth(), 0, 0, DateTimeZone.forID("Etc/UCT"));
+		 DateTime dt = new DateTime(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth(), 0, 0, DATE_ONLY_TIMEZONE);
 		 return dt;
 	 }
 }
