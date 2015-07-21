@@ -139,6 +139,10 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 		 return dt;
 	 }
 	 
+	 /*		
+	  * This class is used to serialize DateTime objects. In the special case where the timeZone is set to		
+	  * AccountAnalysisRequest.DATE_ONLY_TIMEZONE, the result will contain the date only		
+	  */
 	 private static class DateTimeSerializer extends JsonSerializer<DateTime> {
 
 		 @Override
@@ -146,7 +150,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 				 SerializerProvider provider) throws IOException,
 				 JsonProcessingException {
 
-			 if (AccountAnalysisRequest.DATE_ONLY_TIMEZONE.equals(value.getZone())) {
+			 if (DATE_ONLY_TIMEZONE.equals(value.getZone())) {
 				 LocalDate date = new LocalDate(value.getYear(), value.getMonthOfYear(), value.getDayOfMonth());
 				 jgen.writeObject(date);
 			 } else {
