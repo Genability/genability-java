@@ -34,7 +34,7 @@ import com.genability.client.types.TariffRateBand;
 /**
  * Created by nsingh on 11/20/14.
  */
-public class AccountAnalysisTests extends BaseServiceTests {
+public class AccountAnalysisServiceTests extends BaseServiceTests {
 	
 	private AccountAnalysis testAnalysisWithCosts;
 	private AccountAnalysis testAnalysisNoCosts;

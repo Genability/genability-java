@@ -4,78 +4,129 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.genability.client.types.PropertyData;
 import com.genability.client.types.TariffRate;
+import com.genability.client.util.DateTimeSerializer;
 
 public class AccountAnalysisRequest extends AbstractRequest implements Serializable {
 
-        private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-        private String providerAccountId;
-        private String accountId;
-        private Boolean populateCosts;
+	private String providerAccountId;
+	private String accountId;
+	private Boolean populateCosts;
 
-        private DateTime fromDateTime;
-        private DateTime toDateTime;
+	private DateTime fromDateTime;
+	private DateTime toDateTime;
 
-        private List<PropertyData> propertyInputs;
+	private List<PropertyData> propertyInputs;
 
-        private List<TariffRate> rateInputs;
+	private List<TariffRate> rateInputs;
 
-        public String getProviderAccountId() {
-                return providerAccountId;
-        }
+	public String getProviderAccountId() {
+		return providerAccountId;
+	}
 
-        public void setProviderAccountId(String providerAccountId) {
-                this.providerAccountId = providerAccountId;
-        }
+	public void setProviderAccountId(String providerAccountId) {
+		this.providerAccountId = providerAccountId;
+	}
 
-        public String getAccountId() {
-                return accountId;
-        }
+	public String getAccountId() {
+		return accountId;
+	}
 
-        public void setAccountId(String accountId) {
-                this.accountId = accountId;
-        }
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
 
-        public Boolean getPopulateCosts() {
-        	return populateCosts;
-        }
-        
-        public void setPopulateCosts(final boolean populateCosts) {
-        	this.populateCosts = populateCosts;
-        }
-        
-        public DateTime getFromDateTime() {
-                return fromDateTime;
-        }
+	public Boolean getPopulateCosts() {
+		return populateCosts;
+	}
 
-        public void setFromDateTime(DateTime fromDateTime) {
-                this.fromDateTime = fromDateTime;
-        }
+	public void setPopulateCosts(final boolean populateCosts) {
+		this.populateCosts = populateCosts;
+	}
 
-        public DateTime getToDateTime() {
-                return toDateTime;
-        }
+	@JsonSerialize(using=DateTimeSerializer.class)
+	public DateTime getFromDateTime() {
+		return fromDateTime;
+	}
 
-        public void setToDateTime(DateTime toDateTime) {
-                this.toDateTime = toDateTime;
-        }
+	/*
+	 * This method is used to set the fromDateTime as a date only. The resulting request will include the following:
+	 * "fromDateTime":"YYYY-MM-DD"
+	 */
+	 @JsonIgnore
+	 public void setFromDateTime(int year, int month, int day) {
+		setFromDateTime(new LocalDate(year, month, day));
+	 }
 
-        public List<TariffRate> getRateInputs() {
-                return rateInputs;
-        }
+	 /*
+	  * This method is used to set the fromDateTime as a date only. The resulting request will include the following:
+	  * "fromDateTime":"YYYY-MM-DD"
+	  */
+	 @JsonIgnore
+	 public void setFromDateTime(LocalDate date) {
+		 fromDateTime = convertLocalDate(date);
+	 }
 
-        public void setRateInputs(List<TariffRate> rateInputs) {
-                this.rateInputs = rateInputs;
-        }
+	 @JsonProperty
+	 public void setFromDateTime(DateTime fromDateTime) {
+		 this.fromDateTime = fromDateTime;
+	 }
 
-        public List<PropertyData> getPropertyInputs() {
-                return propertyInputs;
-        }
+	 @JsonSerialize(using=DateTimeSerializer.class)
+	 public DateTime getToDateTime() {
+		 return toDateTime;
+	 }
 
-        public void setPropertyInputs(List<PropertyData> propertyInputs) {
-                this.propertyInputs = propertyInputs;
-        }
+	 /*
+	  * This method is used to set the toDateTime as a date only. The resulting request will include the following:
+	  * "toDateTime":"YYYY-MM-DD"
+	  */
+	 @JsonIgnore
+	 public void setToDateTime(int year, int month, int day) {
+		 setToDateTime(new LocalDate(year, month, day));
+	 }
+
+	 /*
+	  * This method is used to set the toDateTime as a date only. The resulting request will include the following:
+	  * "toDateTime":"YYYY-MM-DD"
+	  */
+	 @JsonIgnore
+	 public void setToDateTime(LocalDate date) {
+		 toDateTime = convertLocalDate(date);
+	 }
+
+	 @JsonProperty
+	 public void setToDateTime(DateTime toDateTime) {
+		 this.toDateTime = toDateTime;
+	 }
+
+	 public List<TariffRate> getRateInputs() {
+		 return rateInputs;
+	 }
+
+	 public void setRateInputs(List<TariffRate> rateInputs) {
+		 this.rateInputs = rateInputs;
+	 }
+
+	 public List<PropertyData> getPropertyInputs() {
+		 return propertyInputs;
+	 }
+
+	 public void setPropertyInputs(List<PropertyData> propertyInputs) {
+		 this.propertyInputs = propertyInputs;
+	 }
+
+	 private DateTime convertLocalDate(LocalDate date) {
+		 DateTime dt = new DateTime(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth(), 0, 0, DateTimeZone.forID("Etc/UCT"));
+		 return dt;
+	 }
 }
