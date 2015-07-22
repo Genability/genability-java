@@ -2,6 +2,7 @@ package com.genability.client.api.service;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.genability.client.api.request.GetTerritoriesRequest;
@@ -12,10 +13,12 @@ import com.genability.client.types.Territory;
 
 public class TerritoryServiceTests extends BaseServiceTests {
 	
+	private String baseUrl = touService.getRestApiServer() + "public/territories/";
+
 	@Test
 	public void testGetOneTerritory() {
 		long territoryId = 1234;
-		String expectedUrl = "https://api.genability.com/rest/public/territories/" + territoryId;
+		String expectedUrl = String.format("%s%d", baseUrl, territoryId);
 		
 		GetTerritoryRequest request = new GetTerritoryRequest();
 		request.setTerritoryId(territoryId);
@@ -32,7 +35,7 @@ public class TerritoryServiceTests extends BaseServiceTests {
 	@Test
 	public void testGetOneTerritoryWithParameters() {
 		long territoryId = 1234;
-		String expectedUrl = "https://api.genability.com/rest/public/territories/" + territoryId;
+		String expectedUrl = String.format("%s%d", baseUrl, territoryId);
 		
 		GetTerritoryRequest request = new GetTerritoryRequest();
 		request.setTerritoryId(territoryId);
@@ -52,7 +55,7 @@ public class TerritoryServiceTests extends BaseServiceTests {
 	
 	@Test
 	public void testGetTerritories() {
-		String expectedUrl = "https://api.genability.com/rest/public/territories/";
+		String expectedUrl = baseUrl;
 		
 		GetTerritoriesRequest request = new GetTerritoriesRequest();
 		request.setPopulateItems(true);

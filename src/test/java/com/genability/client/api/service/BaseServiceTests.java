@@ -50,6 +50,7 @@ public class BaseServiceTests {
 	protected static final TimeOfUseService touService;
 
 	private static final ObjectMapper mapper;
+	
 	static {
 		
 		// Mapper object for de-serializing canned tests
@@ -101,6 +102,7 @@ public class BaseServiceTests {
   		if (restApiServer != null && !restApiServer.equals("")) {
 		    genabilityClient.setRestApiServer(restApiServer);
   		}
+  		
   		accountService = genabilityClient.getAccountService();
 		accountAnalysisService = genabilityClient.getAccountAnalysisService();
   		profileService = genabilityClient.getProfileService();

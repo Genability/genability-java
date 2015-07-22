@@ -48,8 +48,8 @@ public class TimeOfUseService extends BaseService {
 	}
 	
 	/*
-	 * Get a list of intervals for the specified timeOfUseGroup. If request is null, no query parameters are
-	 * added to the HTTP request.
+	 * Get a list of intervals for the specified timeOfUseGroup. If request is null, one week of intervals
+	 * is returned
 	 */
 	public Response<TimeOfUseInterval> getTimeOfUseIntervals(long lseId, long touGroupId, GetTimeOfUseIntervalsRequest request) {
 		if (log.isDebugEnabled()) {

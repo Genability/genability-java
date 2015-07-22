@@ -16,7 +16,7 @@ import com.genability.client.types.TimeOfUseInterval;
 public class TimeOfUseServiceTests extends BaseServiceTests {
 	
 	private TimeOfUseService localService;
-	private String baseUrl = "https://api.genability.com/rest/public/timeofuses";
+	private String baseUrl = touService.getRestApiServer() + "public/timeofuses";
 	
 	@Before
 	public void setUp() {

@@ -68,6 +68,10 @@ public class BaseService {
 	public void setRestApiServer(String restApiServer) {
 		this.restApiServer = restApiServer;
 	}
+	
+	public String getRestApiServer() {
+		return restApiServer;
+	}
 
 	public void setAppId(String appId) {
 		this.appId = appId;
