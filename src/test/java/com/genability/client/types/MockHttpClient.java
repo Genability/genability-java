@@ -1,6 +1,8 @@
 package com.genability.client.types;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,6 +16,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
@@ -103,7 +106,13 @@ public class MockHttpClient implements HttpClient {
 	}
 	
 	public void addExpectedParameter(String param, String value) {
-		expectedParameters.add(new BasicNameValuePair(param, value));
+		try {
+			String encodedParam = URLEncoder.encode(param, "UTF-8");
+			String encodedValue= URLEncoder.encode(value, "UTF-8");
+			expectedParameters.add(new BasicNameValuePair(encodedParam, encodedValue));
+		} catch(UnsupportedEncodingException e) {
+			// should be impossible
+		}
 	}
 	
 	@Override

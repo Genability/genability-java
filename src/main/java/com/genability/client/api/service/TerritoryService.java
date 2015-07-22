@@ -8,7 +8,7 @@ import com.genability.client.types.Territory;
 
 public class TerritoryService extends BaseService {
 	private static final TypeReference<Response<Territory>> TERRITORY_RESPONSE_TYPEREF = new TypeReference<Response<Territory>>() {};
-	private static String URL_BASE = "public/territories/"; 
+	private static final String URL_BASE = "public/territories/"; 
 
 	public Response<Territory> getTerritory(GetTerritoryRequest request) {
 		if (log.isDebugEnabled()) {

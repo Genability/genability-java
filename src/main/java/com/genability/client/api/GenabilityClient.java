@@ -15,6 +15,7 @@ import com.genability.client.api.service.ProfileService;
 import com.genability.client.api.service.PropertyService;
 import com.genability.client.api.service.TariffService;
 import com.genability.client.api.service.TerritoryService;
+import com.genability.client.api.service.TimeOfUseService;
 import com.genability.client.api.service.TypicalService;
 
 public class GenabilityClient {
@@ -140,6 +141,10 @@ public class GenabilityClient {
   
   public TerritoryService getTerritoryService() {
 	  return initializeService(new TerritoryService());
+  }
+  
+  public TimeOfUseService getTimeOfUseService() {
+	  return initializeService(new TimeOfUseService());
   }
 
 }
