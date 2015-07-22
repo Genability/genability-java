@@ -20,12 +20,12 @@ public class TimeOfUseGroup {
 	}
 
 	public Long getLseId() {
-    	return lseId;
-    }
+		return lseId;
+	}
 
-    public void setLseId(Long lseId) {
-    	this.lseId = lseId;
-    }
+	public void setLseId(Long lseId) {
+		this.lseId = lseId;
+	}
 
 	public List<TimeOfUse> getTimeOfUses() {
 		return timeOfUses;
