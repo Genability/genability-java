@@ -7,6 +7,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.tz.DateTimeZoneBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +25,8 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * This special timezone is used to indicate that a particular datetime should be
 	 * serialized as a date only (i.e. exclude the time portion of the DateTime)
 	 */
-	private static final DateTimeZone DATE_ONLY_TIMEZONE = DateTimeZone.forID("Antarctica/Casey");
+	private static final DateTimeZone DATE_ONLY_TIMEZONE = new DateTimeZoneBuilder()
+			.toDateTimeZone("Genability LocalDate Signal", true);
 	private static final long serialVersionUID = 1L;
 
 	private String providerAccountId;
