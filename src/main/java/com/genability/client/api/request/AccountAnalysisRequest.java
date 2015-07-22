@@ -69,20 +69,26 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 		return fromDateTime;
 	}
 
-	/*
+	 /**
 	 * This method is used to set the fromDateTime as a date only. The resulting request will include the following:
 	 * "fromDateTime":"YYYY-MM-DD"
+	 * 
+	 * @param year
+	 * @param month
+	 * @param day
 	 */
-	 @JsonIgnore
+	@JsonIgnore
 	 public void setFromDateTime(int year, int month, int day) {
 		setFromDateTime(new LocalDate(year, month, day));
 	 }
 
-	 /*
-	  * This method is used to set the fromDateTime as a date only. The resulting request will include the following:
-	  * "fromDateTime":"YYYY-MM-DD"
-	  */
-	 @JsonIgnore
+	 /**
+	 * This method is used to set the fromDateTime as a date only. The resulting request will include the following:
+	 * "fromDateTime":"YYYY-MM-DD"
+	 * 
+	 * @param date
+	 */
+	@JsonIgnore
 	 public void setFromDateTime(LocalDate date) {
 		 fromDateTime = convertLocalDate(date);
 	 }
@@ -97,20 +103,26 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 		 return toDateTime;
 	 }
 
-	 /*
-	  * This method is used to set the toDateTime as a date only. The resulting request will include the following:
-	  * "toDateTime":"YYYY-MM-DD"
-	  */
-	 @JsonIgnore
+	 /**
+	 * This method is used to set the toDateTime as a date only. The resulting request will include the following:
+	 * "toDateTime":"YYYY-MM-DD"
+	 * 
+	 * @param year
+	 * @param month
+	 * @param day
+	 */
+	@JsonIgnore
 	 public void setToDateTime(int year, int month, int day) {
 		 setToDateTime(new LocalDate(year, month, day));
 	 }
 
-	 /*
-	  * This method is used to set the toDateTime as a date only. The resulting request will include the following:
-	  * "toDateTime":"YYYY-MM-DD"
-	  */
-	 @JsonIgnore
+	 /**
+	 * This method is used to set the toDateTime as a date only. The resulting request will include the following:
+	 * "toDateTime":"YYYY-MM-DD"
+	 * 
+	 * @param date
+	 */
+	@JsonIgnore
 	 public void setToDateTime(LocalDate date) {
 		 toDateTime = convertLocalDate(date);
 	 }
