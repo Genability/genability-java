@@ -10,14 +10,15 @@ import com.genability.client.types.TimeOfUseInterval;
 public class TimeOfUseService extends BaseService {
 	private static final TypeReference<Response<TimeOfUseGroup>> TOU_GROUP_RESPONSE_TYPEREF = new TypeReference<Response<TimeOfUseGroup>>() {};
 	private static final TypeReference<Response<TimeOfUseInterval>> TOU_INTERVAL_RESPONSE_TYPEREF = new TypeReference<Response<TimeOfUseInterval>>() {};
-	private static final String URL_BASE = "public/timeofuses";
+	private static final String PUBLIC_URL_BASE = "public/timeofuses";
+	private static final String PRIVATE_URL_BASE = "timeofuses";
 	
 	public Response<TimeOfUseGroup> getTimeOfUseGroup(long lseId, long touGroupId) {
 		if (log.isDebugEnabled()) {
 			log.debug("getTimeOfUseGroup called");
 		}
 		
-		String url = String.format("%s/%d/%d", URL_BASE, lseId, touGroupId); 
+		String url = String.format("%s/%d/%d", PUBLIC_URL_BASE, lseId, touGroupId); 
 		Response<TimeOfUseGroup> response = this.callGet(url, null, TOU_GROUP_RESPONSE_TYPEREF);
 		
 		if (log.isDebugEnabled()) {
@@ -36,7 +37,7 @@ public class TimeOfUseService extends BaseService {
 			log.debug("getTimeOfUseGroups called");
 		}
 		
-		Response<TimeOfUseGroup> response = this.callGet(URL_BASE,
+		Response<TimeOfUseGroup> response = this.callGet(PUBLIC_URL_BASE,
 				request.getQueryParams(),
 				TOU_GROUP_RESPONSE_TYPEREF);
 		
@@ -56,7 +57,7 @@ public class TimeOfUseService extends BaseService {
 			log.debug("getTimeOfUseIntervals called");
 		}
 		
-		String url = String.format("%s/%d/%d/intervals", URL_BASE, lseId, touGroupId);
+		String url = String.format("%s/%d/%d/intervals", PUBLIC_URL_BASE, lseId, touGroupId);
 		Response<TimeOfUseInterval> response = this.callGet(url,
 				request.getQueryParams(),
 				TOU_INTERVAL_RESPONSE_TYPEREF);
@@ -66,5 +67,41 @@ public class TimeOfUseService extends BaseService {
 		}
 		
 		return response;
+	}
+	
+	/**
+	 * Creates a private TimeOfUseGroup out of the passed-in TOU group.
+	 * 
+	 * @param touGroup
+	 * @return The added TOU group that is sent back by the API.
+	 */
+	public Response<TimeOfUseGroup> addPrivateTimeOfUseGroup(TimeOfUseGroup touGroup) {
+		
+		return null;
+	}
+	
+	/**
+	 * Updates the passed-in private TimeOfUseGroup. You can only update a TOU group
+	 * that belongs to your organization.
+	 * 
+	 * @param touGroup
+	 * @return The added TOU group that is sent back by the API.
+	 */
+	public Response<TimeOfUseGroup> updatePrivateTimeOfUseGroup(TimeOfUseGroup touGroup) {
+		
+		return null;
+	}
+	
+	/**
+	 * Deletes a private TOU group. You can only delete a TOU group that belongs to your
+	 * organization.
+	 * 
+	 * @param lseId
+	 * @param touGropuId
+	 * @return The deleted TOU group, which is sent back by the API.
+	 */
+	public Response<TimeOfUseGroup> deletePrivateTimeOfUseGroup(long lseId, long touGropuId) {
+		
+		return null;
 	}
 }
