@@ -16,7 +16,8 @@ import com.genability.client.types.TimeOfUseInterval;
 public class TimeOfUseServiceTests extends BaseServiceTests {
 	
 	private TimeOfUseService localService;
-	private String baseUrl = touService.getRestApiServer() + "public/timeofuses";
+	private String publicBaseUrl = touService.getRestApiServer() + "public/timeofuses";
+	private String privateBaseUrl = touService.getRestApiServer() + "timeofuses";
 	
 	@Before
 	public void setUp() {
@@ -27,7 +28,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	public void testGetTouGroupUrl() {
 		long lseId = 734L;
 		long touGroupId = 1L;
-		String expectedUrl = String.format("%s/%d/%d", baseUrl, lseId, touGroupId);
+		String expectedUrl = String.format("%s/%d/%d", publicBaseUrl, lseId, touGroupId);
 		
 		MockHttpClient client = new MockHttpClient(expectedUrl);
 		localService.setHttpClient(client);
@@ -52,7 +53,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	@Test
 	public void testGetTouGroupsParameters() {
 		Long lseId = Long.valueOf(734);
-		String expectedUrl = baseUrl;
+		String expectedUrl = publicBaseUrl;
 		
 		GetTimeOfUseGroupsRequest request = new GetTimeOfUseGroupsRequest();
 		request.setLseId(lseId);
@@ -86,7 +87,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 		long touGroupId = 1L;
 		DateTime fromDateTime = new DateTime(2015, 1, 1, 0, 0);
 		DateTime toDateTime = new DateTime(2015, 2, 1, 0, 0);
-		String expectedUrl = String.format("%s/%d/%d/intervals", baseUrl, lseId, touGroupId);
+		String expectedUrl = String.format("%s/%d/%d/intervals", publicBaseUrl, lseId, touGroupId);
 		
 		GetTimeOfUseIntervalsRequest request = new GetTimeOfUseIntervalsRequest();
 		request.setFromDateTime(fromDateTime);
@@ -123,6 +124,37 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 			assertTrue("Interval is not in the correct time period", i.getFromDateTime().compareTo(fromDateTime) >= 0);
 			assertTrue("Interval is not in the correct time period", i.getToDateTime().compareTo(toDateTime) <= 0);
 		}
-
+	}
+	
+	@Test
+	public void addPrivateTouGroupUsesTheCorrectURL() {
+		MockHttpClient client = new MockHttpClient(privateBaseUrl);
+		localService.setHttpClient(client);
+		localService.addPrivateTimeOfUseGroup(null);
+		
+		client.validate();
+	}
+	
+	
+	@Test
+	public void updatePrivateTouGroupUsesTheCorrectUrl() {
+		MockHttpClient client = new MockHttpClient(privateBaseUrl);
+		localService.setHttpClient(client);
+		localService.updatePrivateTimeOfUseGroup(null);
+		
+		client.validate();
+	}
+	
+		@Test
+	public void deletePrivateTouGroupUsesTheCorrectUrl() {
+		long lseId = 734L;
+		long touGroupId = 1L;
+		
+		String url = String.format("%s/%d/%d", privateBaseUrl, lseId, touGroupId);
+		MockHttpClient client = new MockHttpClient(privateBaseUrl);
+		localService.setHttpClient(client);
+		localService.addPrivateTimeOfUseGroup(null);
+		
+		client.validate();
 	}
 }

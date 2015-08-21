@@ -76,8 +76,19 @@ public class TimeOfUseService extends BaseService {
 	 * @return The added TOU group that is sent back by the API.
 	 */
 	public Response<TimeOfUseGroup> addPrivateTimeOfUseGroup(TimeOfUseGroup touGroup) {
+		if (log.isDebugEnabled()) {
+			log.debug("addPrivateTouGroup called");
+		}
 		
-		return null;
+		Response<TimeOfUseGroup> response = this.callPost(PRIVATE_URL_BASE,
+				touGroup,
+				TOU_GROUP_RESPONSE_TYPEREF);
+		
+		if (log.isDebugEnabled()) {
+			log.debug("Done with addPrivateTouGroup");
+		}
+		
+		return response;
 	}
 	
 	/**
@@ -88,8 +99,19 @@ public class TimeOfUseService extends BaseService {
 	 * @return The added TOU group that is sent back by the API.
 	 */
 	public Response<TimeOfUseGroup> updatePrivateTimeOfUseGroup(TimeOfUseGroup touGroup) {
+		if (log.isDebugEnabled()) {
+			log.debug("updatePrivateTouGroup called");
+		}
 		
-		return null;
+		Response<TimeOfUseGroup> response = this.callPut(PRIVATE_URL_BASE,
+				touGroup,
+				TOU_GROUP_RESPONSE_TYPEREF);
+		
+		if (log.isDebugEnabled()) {
+			log.debug("Done with updatePrivateTouGroup");
+		}
+		
+		return response;
 	}
 	
 	/**
@@ -100,8 +122,20 @@ public class TimeOfUseService extends BaseService {
 	 * @param touGropuId
 	 * @return The deleted TOU group, which is sent back by the API.
 	 */
-	public Response<TimeOfUseGroup> deletePrivateTimeOfUseGroup(long lseId, long touGropuId) {
+	public Response<TimeOfUseGroup> deletePrivateTimeOfUseGroup(long lseId, long touGroupId) {
+		if (log.isDebugEnabled()) {
+			log.debug("deletePrivateTouGroup called");
+		}
 		
-		return null;
+		String url = String.format("%s/%d/%d", PRIVATE_URL_BASE, lseId, touGroupId);
+		Response<TimeOfUseGroup> response = this.callDelete(url,
+				null,
+				TOU_GROUP_RESPONSE_TYPEREF);
+		
+		if (log.isDebugEnabled()) {
+			log.debug("Done with deletePrivateTouGroup");
+		}
+		
+		return response;
 	}
 }
