@@ -13,50 +13,71 @@ import com.genability.client.types.Territory;
 
 public class TerritoryServiceTests extends BaseServiceTests {
 	
-	private String baseUrl = touService.getRestApiServer() + "public/territories/";
+	private String baseUrl = genabilityClient.getRestApiServer() + "public/territories/";
+	private TerritoryService localService;
 
+	@Before
+	public void initializeTerritoryService() {
+		localService = new TerritoryService();
+		localService.setRestApiServer(genabilityClient.getRestApiServer());
+	}
+	
 	@Test
 	public void testGetOneTerritory() {
+		// Arrange
 		long territoryId = 1234;
 		String expectedUrl = String.format("%s%d", baseUrl, territoryId);
 		
+		// Expect
+		MockHttpClient client = new MockHttpClient(expectedUrl); 
+		localService.setHttpClient(client);
+		
+		// Act
 		GetTerritoryRequest request = new GetTerritoryRequest();
 		request.setTerritoryId(territoryId);
 		
-		TerritoryService service = new TerritoryService();
-		
-		MockHttpClient client = new MockHttpClient(expectedUrl); 
-		service.setHttpClient(client);
-		
-		service.getTerritory(request);
+		localService.getTerritory(request);
 		client.validate();
 	}
 	
 	@Test
 	public void testGetOneTerritoryWithParameters() {
+		// Arrange
 		long territoryId = 1234;
 		String expectedUrl = String.format("%s%d", baseUrl, territoryId);
 		
+		// Expect
+		MockHttpClient client = new MockHttpClient(expectedUrl);
+		client.addExpectedParameter("populateItems", "true");
+		client.addExpectedParameter("populateLses", "true");
+		localService.setHttpClient(client);
+
+		// Act
 		GetTerritoryRequest request = new GetTerritoryRequest();
 		request.setTerritoryId(territoryId);
 		request.setPopulateItems(true);
 		request.setPopulateLses(true);
 		
-		TerritoryService service = new TerritoryService();
-		
-		MockHttpClient client = new MockHttpClient(expectedUrl);
-		client.addExpectedParameter("populateItems", "true");
-		client.addExpectedParameter("populateLses", "true");
-		service.setHttpClient(client);
-		
-		service.getTerritory(request);
+		localService.getTerritory(request);
 		client.validate();
 	}
 	
 	@Test
 	public void testGetTerritories() {
+		// Arrange
 		String expectedUrl = baseUrl;
 		
+		// Expect
+		MockHttpClient client = new MockHttpClient(expectedUrl);
+		client.addExpectedParameter("populateItems", "true");
+		client.addExpectedParameter("populateLses", "true");
+		client.addExpectedParameter("lseId", "1234");
+		client.addExpectedParameter("masterTariffId", "5");
+		client.addExpectedParameter("containsItemType", "itemType");
+		client.addExpectedParameter("containsItemValue", "itemValue");
+		localService.setHttpClient(client);
+		
+		// Act
 		GetTerritoriesRequest request = new GetTerritoriesRequest();
 		request.setPopulateItems(true);
 		request.setPopulateLses(true);
@@ -65,24 +86,13 @@ public class TerritoryServiceTests extends BaseServiceTests {
 		request.setContainsItemType("itemType");
 		request.setContainsItemValue("itemValue");
 		
-		TerritoryService service = new TerritoryService();
-		
-		MockHttpClient client = new MockHttpClient(expectedUrl);
-		client.addExpectedParameter("populateItems", "true");
-		client.addExpectedParameter("populateLses", "true");
-		client.addExpectedParameter("lseId", "1234");
-		client.addExpectedParameter("masterTariffId", "5");
-		client.addExpectedParameter("containsItemType", "itemType");
-		client.addExpectedParameter("containsItemValue", "itemValue");
-		service.setHttpClient(client);
-		
-		service.getTerritories(request);
+		localService.getTerritories(request);
 		client.validate();
 	}
 	
 	@Test
 	public void testGetOneTerritoryFromServer() {
-		Long territoryId = Long.valueOf(1234L);
+		Long territoryId = Long.valueOf(807L);
 		
 		GetTerritoryRequest request = new GetTerritoryRequest();
 		request.setTerritoryId(territoryId);
@@ -96,7 +106,7 @@ public class TerritoryServiceTests extends BaseServiceTests {
 	
 	@Test
 	public void testGetOneTerritoryFromServerWithParameters() {
-		Long territoryId = Long.valueOf(1234L);
+		Long territoryId = Long.valueOf(807L);
 		
 		GetTerritoryRequest request = new GetTerritoryRequest();
 		request.setTerritoryId(territoryId);
