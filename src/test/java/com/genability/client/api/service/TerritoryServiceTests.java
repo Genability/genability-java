@@ -13,13 +13,13 @@ import com.genability.client.types.Territory;
 
 public class TerritoryServiceTests extends BaseServiceTests {
 	
-	private String baseUrl = genabilityClient.getRestApiServer() + "public/territories/";
+	private String baseUrl = territoryService.getRestApiServer() + "public/territories/";
 	private TerritoryService localService;
 
 	@Before
 	public void initializeTerritoryService() {
 		localService = new TerritoryService();
-		localService.setRestApiServer(genabilityClient.getRestApiServer());
+		localService.setRestApiServer(territoryService.getRestApiServer());
 	}
 	
 	@Test

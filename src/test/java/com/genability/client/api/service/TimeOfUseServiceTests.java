@@ -22,8 +22,8 @@ import com.genability.client.types.TimeOfUseType;
 public class TimeOfUseServiceTests extends BaseServiceTests {
 	
 	private TimeOfUseService localService;
-	private String publicBaseUrl = genabilityClient.getRestApiServer() + "public/timeofuses";
-	private String privateBaseUrl = genabilityClient.getRestApiServer() + "timeofuses";
+	private String publicBaseUrl = touService.getRestApiServer() + "public/timeofuses";
+	private String privateBaseUrl = touService.getRestApiServer() + "timeofuses";
 	
 	@Before
 	public void setUp() {
@@ -134,6 +134,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	}
 	
 	@Test
+	@Ignore("This is not yet implemented in the API")
 	public void addPrivateTouGroupUsesTheCorrectURL() {
 		// Arrange
 		MockHttpClient client = new MockHttpClient(privateBaseUrl);
@@ -147,6 +148,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	}
 	
 	@Test
+	@Ignore("This is not yet implemented in the API")
 	public void addPrivateTouGroupWorksCorrectly() {
 		TimeOfUseGroup grp = getValidTouGroup();
 		
@@ -158,6 +160,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	
 	
 	@Test
+	@Ignore("This is not yet implemented in the API")
 	public void updatePrivateTouGroupUsesTheCorrectUrl() {
 		MockHttpClient client = new MockHttpClient(privateBaseUrl);
 		localService.setHttpClient(client);
@@ -177,6 +180,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	}
 	
 	@Test
+	@Ignore("This is not yet implemented in the API")
 	public void deletePrivateTouGroupUsesTheCorrectUrl() {
 		long lseId = 734L;
 		long touGroupId = 1L;
@@ -190,6 +194,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	}
 	
 	@Test
+	@Ignore("This is not yet implemented in the API")
 	public void deletePrivateTouGroupWorksCorrectly() {
 		// Arrange
 		TimeOfUseGroup grp = getValidTouGroup();
