@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Standard response payload that comes back from REST endpoints.
  *
- * @param <T>
+ * @param <T> The type parameter.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Response<T> implements Serializable {

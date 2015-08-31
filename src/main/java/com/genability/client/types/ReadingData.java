@@ -55,6 +55,8 @@ public class ReadingData extends PropertyData implements Serializable {
 
 	/**
 	 * Deprecated - use getFromDateTime() instead.
+	 * 
+	 * @return The return value.
 	 */
 	@Deprecated
 	@JsonIgnore
@@ -64,6 +66,8 @@ public class ReadingData extends PropertyData implements Serializable {
 
 	/**
 	 * Deprecated - use setFromDateTime() instead.
+	 * 
+	 * @param startTime The startTime.
 	 */
 	@Deprecated
 	public void setStartTime(Long startTime) {
@@ -76,6 +80,8 @@ public class ReadingData extends PropertyData implements Serializable {
 
 	/**
 	 * Deprecated - use getToDateTime() instead.
+	 * 
+	 * @return The return value.
 	 */
 	@Deprecated
 	@JsonIgnore
@@ -85,6 +91,8 @@ public class ReadingData extends PropertyData implements Serializable {
 
 	/**
 	 * Deprecated - use setToDateTime() instead.
+	 * 
+	 * @param endTime The endTime.
 	 */
 	@Deprecated
 	public void setEndTime(Long endTime) {

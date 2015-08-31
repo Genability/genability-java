@@ -222,9 +222,8 @@ public class Profile implements Serializable {
 	 * 
 	 * @param anotherClass The anotherClass.
 	 * @return The return value.
-	 * @throws ClassCastException
 	 */
-	public int compareTo(Object anotherClass) throws ClassCastException {
+	public int compareTo(Object anotherClass) {
 
 		if (!(anotherClass instanceof Profile)) {
 			throw new ClassCastException("Object is not Profile expected.");

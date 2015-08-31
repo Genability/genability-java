@@ -119,7 +119,7 @@ public class TimeOfUseService extends BaseService {
 	 * organization.
 	 * 
 	 * @param lseId The lseId.
-	 * @param touGropuId The touGropuId.
+	 * @param touGroupId The touGroupId.
 	 * @return The deleted TOU group, which is sent back by the API.
 	 */
 	public Response<TimeOfUseGroup> deletePrivateTimeOfUseGroup(long lseId, long touGroupId) {

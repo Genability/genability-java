@@ -97,8 +97,8 @@ public class BaseService {
 
 	/**
 	 * Helper method that makes a HTTP GET to the Genability APIs.
-	 * @param <T>
-	 * @param <R>
+	 * @param <T> The type parameter.
+	 * @param <R> The type parameter.
 	 * @param endpointPath The endpointPath.
 	 * @param queryParams The queryParams.
 	 * @param resultTypeReference The resultTypeReference.
@@ -122,8 +122,8 @@ public class BaseService {
 	
 	/**
 	 * Helper method that makes a HTTP POST to the Genability APIs.
-	 * @param <T>
-	 * @param <R>
+	 * @param <T> The type parameter.
+	 * @param <R> The type parameter.
 	 * @param endpointPath The endpointPath.
 	 * @param requestPayload The requestPayload.
 	 * @param resultTypeReference The resultTypeReference.
@@ -141,8 +141,8 @@ public class BaseService {
 
 	/**
 	 * Helper method that makes a HTTP POST to the Genability APIs.
-	 * @param <T>
-	 * @param <R>
+	 * @param <T> The type parameter.
+	 * @param <R> The type parameter.
 	 * @param endpointPath The endpointPath.
 	 * @param requestPayload The requestPayload.
 	 * @param resultTypeReference The resultTypeReference.
@@ -166,8 +166,8 @@ public class BaseService {
 	/**
 	 * This method is used to upload large datasets, typically CSV or XML files.
 	 * The request object passed in contains the File to upload.
-	 * @param <T>
-	 * @param <R>
+	 * @param <T> The type parameter.
+	 * @param <R> The type parameter.
 	 * @param endpointPath The endpointPath.
 	 * @param request The request.
 	 * @param resultTypeReference The resultTypeReference.
@@ -202,8 +202,8 @@ public class BaseService {
 	
 	/**
 	 * Helper method that makes a HTTP DELETE to the Genability APIs.
-	 * @param <T>
-	 * @param <R>
+	 * @param <T> The type parameter.
+	 * @param <R> The type parameter.
 	 * @param endpointPath The endpointPath.
 	 * @param queryParams The queryParams.
 	 * @param resultTypeReference The resultTypeReference.
