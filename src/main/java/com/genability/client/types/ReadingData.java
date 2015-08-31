@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ReadingData extends PropertyData implements Serializable, UsageData {
+public class ReadingData extends PropertyData implements Serializable {
 
 	public static final String REST_TYPE = "ReadingData";
 	public static final String KWH_UNIT = "kWh";
@@ -53,15 +53,19 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 		this.usageProfileId = usageProfileId;
 	}
 
+	/**
+	 * Deprecated - use getFromDateTime() instead.
+	 */
+	@Deprecated
 	@JsonIgnore
 	public Long getStartTime() {
 		return startTime;
 	}
 
 	/**
-	 * Mutator for StartTime. This will also set the fromDateTime member
-	 * variable without going through the mutator for the fromDateTime.
+	 * Deprecated - use setFromDateTime() instead.
 	 */
+	@Deprecated
 	public void setStartTime(Long startTime) {
 		this.startTime = startTime;
 		if (startTime != null)
@@ -70,15 +74,19 @@ public class ReadingData extends PropertyData implements Serializable, UsageData
 			this.fromDateTime = null;
 	}
 
+	/**
+	 * Deprecated - use getToDateTime() instead.
+	 */
+	@Deprecated
 	@JsonIgnore
 	public Long getEndTime() {
 		return endTime;
 	}
 
 	/**
-	 * Mutator for EndTime. This will also set the toDateTime member variable
-	 * without going through the mutator for the toDateTime.
+	 * Deprecated - use setToDateTime() instead.
 	 */
+	@Deprecated
 	public void setEndTime(Long endTime) {
 		this.endTime = endTime;
 		if (endTime != null)
