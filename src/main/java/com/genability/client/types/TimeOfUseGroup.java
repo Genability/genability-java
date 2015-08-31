@@ -18,7 +18,7 @@ public class TimeOfUseGroup {
 	public void setTouGroupId(Long timeOfUseGroupId) {
 		touGroupId = timeOfUseGroupId;
 	}
-
+	
 	public Long getLseId() {
 		return lseId;
 	}

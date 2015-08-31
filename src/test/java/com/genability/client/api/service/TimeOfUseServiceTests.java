@@ -134,7 +134,6 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	}
 	
 	@Test
-	@Ignore("This is not yet implemented in the API")
 	public void addPrivateTouGroupUsesTheCorrectURL() {
 		// Arrange
 		MockHttpClient client = new MockHttpClient(privateBaseUrl);
@@ -148,7 +147,6 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	}
 	
 	@Test
-	@Ignore("This is not yet implemented in the API")
 	public void addPrivateTouGroupWorksCorrectly() {
 		TimeOfUseGroup grp = getValidTouGroup();
 		
@@ -160,7 +158,6 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	
 	
 	@Test
-	@Ignore("This is not yet implemented in the API")
 	public void updatePrivateTouGroupUsesTheCorrectUrl() {
 		MockHttpClient client = new MockHttpClient(privateBaseUrl);
 		localService.setHttpClient(client);
@@ -170,17 +167,19 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	}
 	
 	@Test
-	@Ignore("This is not yet implemented in the API")
 	public void updatePrivateTouGroupWorksCorrectly() {
-		MockHttpClient client = new MockHttpClient(privateBaseUrl);
-		localService.setHttpClient(client);
-		localService.updatePrivateTimeOfUseGroup(null);
+		TimeOfUseGroup grp = getValidTouGroup();
 		
-		client.validate();
+		Response<TimeOfUseGroup> addResponse = touService.addPrivateTimeOfUseGroup(grp);
+		TimeOfUseGroup addedGrp = addResponse.getResults().get(0);
+		addedGrp.getTimeOfUses().get(0).setTouName("JAVA CLIENT LIB UPDATE");
+		Response<TimeOfUseGroup> updateResponse = touService.updatePrivateTimeOfUseGroup(addedGrp);
+		assertEquals("Didn't successfully add the private TOU", Response.STATUS_SUCCESS, updateResponse.getStatus());
+		
+		cleanUpPrivateTou(updateResponse.getResults().get(0));
 	}
 	
 	@Test
-	@Ignore("This is not yet implemented in the API")
 	public void deletePrivateTouGroupUsesTheCorrectUrl() {
 		long lseId = 734L;
 		long touGroupId = 1L;
@@ -194,7 +193,6 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	}
 	
 	@Test
-	@Ignore("This is not yet implemented in the API")
 	public void deletePrivateTouGroupWorksCorrectly() {
 		// Arrange
 		TimeOfUseGroup grp = getValidTouGroup();
@@ -226,7 +224,8 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 		group.setTimeOfUses(new ArrayList<TimeOfUse>());		
 		group.setLseId(734L);		
 
-		TimeOfUse tou = new TimeOfUse();		
+		TimeOfUse tou = new TimeOfUse();
+		tou.setTouName("JAVA CLIENT LIB TOU");
 		tou.setTouPeriods(new ArrayList<TimeOfUsePeriod>());		
 		tou.setTouType(String.valueOf(TimeOfUseType.OFF_PEAK));		
 		group.getTimeOfUses().add(tou);		
