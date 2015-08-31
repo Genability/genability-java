@@ -45,7 +45,7 @@ public class Price {
 	/**
 	 * When not null, the Property that defines
 	 * the type of quantity this rate applies to.
-	 * @return
+	 * @return The return value.
 	 */
 	public String getQuantityKey() {
         return quantityKey;
@@ -58,7 +58,7 @@ public class Price {
 	/**
 	 * The starting date and time for this Price summary.
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	public DateTime getFromDateTime() {
 		return fromDateTime;
@@ -71,7 +71,7 @@ public class Price {
 	/**
 	 * The ending date and time for this Price summary.
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	public DateTime getToDateTime() {
 		return toDateTime;
@@ -84,7 +84,7 @@ public class Price {
 	/**
 	 * Currently all prices are returned in USD.
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	public String getCurrency() {
 		return currency;
@@ -98,7 +98,7 @@ public class Price {
 	 * The charge amount in dollars for
 	 * this Tariff at the time passed in.
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	public BigDecimal getRateAmount() {
         return rateAmount;
@@ -113,7 +113,7 @@ public class Price {
 	 * amounts in this summary. This is useful for change in price
 	 * notifications. The highest price will have an RPI of 1.0.
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	public BigDecimal getRelativePriceIndex() {
         return relativePriceIndex;
@@ -126,7 +126,7 @@ public class Price {
 	/**
 	 * List of all the price changes within the specified time period
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	public List<PriceChange> getPriceChanges() {
 		return priceChanges;

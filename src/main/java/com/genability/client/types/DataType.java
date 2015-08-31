@@ -20,7 +20,7 @@ public enum DataType {
 	 * Constructor, which takes an int value so that this enum's values can be
 	 * flags (in other words support bit operations).
 	 * 
-	 * @param id
+	 * @param id The id.
 	 */
 	DataType(int id) {
 		this.id = id;
@@ -29,7 +29,7 @@ public enum DataType {
 	/**
 	 * Accessor method for getting at the current bit number of this enum.
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	public int getId() {
 		return (this.id);
@@ -39,7 +39,7 @@ public enum DataType {
 	 * Converts the int value passed in into a valid Enum value, or returns null
 	 * if the int value passed in doesn't yield a match.
 	 * 
-	 * @param id
+	 * @param id The id.
 	 *            to convert
 	 * @return Enum value converted
 	 */

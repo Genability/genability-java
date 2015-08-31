@@ -49,7 +49,7 @@ public class GetAccountRequest extends AbstractRequest implements Serializable {
 
 
 	/**
-	 * @param accountId
+	 * @param accountId The accountId.
 	 *            the accountId to set
 	 */
 	public void setAccountId(String accountId) {
@@ -57,7 +57,7 @@ public class GetAccountRequest extends AbstractRequest implements Serializable {
 	}
 
 	/**
-	 * @param providerAccountId
+	 * @param providerAccountId The providerAccountId.
 	 *            the providerAccountId to set
 	 */
 	public void setProviderAccountId(String providerAccountId) {

@@ -20,8 +20,8 @@ public class CalculateService extends BaseService {
 	
 	/**
 	 * Calls the REST service to run a calculation
-	 * @param request
-	 * @return
+	 * @param request The request.
+	 * @return The return value.
 	 */
 	public Response<CalculatedCost> getCalculatedCost(GetCalculatedCostRequest request) {
 		
@@ -55,8 +55,8 @@ public class CalculateService extends BaseService {
 	 * for a given tariffId.  The tariffId can be explicitly stated within the
 	 * GetCalculationInputsRequest object, or if it is null, the service will 
 	 * expect it to be in the Account that is passed in. 
-	 * @param request
-	 * @return
+	 * @param request The request.
+	 * @return The return value.
 	 */
 	public Response<PropertyData> getCalculationInputs(GetCalculationInputsRequest request) {
 	
@@ -83,13 +83,13 @@ public class CalculateService extends BaseService {
 	/**
 	 * Runs calculation on Account using a simplified method with passed in
 	 * parameters.
-	 * @param accountId
-	 * @param masterTariffId
-	 * @param fromDateTime
-	 * @param toDateTime
-	 * @param detailLevel
-	 * @param groupBy
-	 * @return
+	 * @param accountId The accountId.
+	 * @param masterTariffId The masterTariffId.
+	 * @param fromDateTime The fromDateTime.
+	 * @param toDateTime The toDateTime.
+	 * @param detailLevel The detailLevel.
+	 * @param groupBy The groupBy.
+	 * @return The return value.
 	 */
 	public Response<CalculatedCost> runCalculationOnAccount(String accountId,
 			Long masterTariffId, DateTime fromDateTime, DateTime toDateTime,

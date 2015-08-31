@@ -32,7 +32,7 @@ public class GetProfilesRequest extends AbstractGetNRequest implements Serializa
 	}
 
 	/**
-	 * @param accountId
+	 * @param accountId The accountId.
 	 *            the accountId to set
 	 */
 	public void setAccountId(String accountId) {
@@ -47,7 +47,7 @@ public class GetProfilesRequest extends AbstractGetNRequest implements Serializa
 	}
 
 	/**
-	 * @param providerAccountId
+	 * @param providerAccountId The providerAccountId.
 	 *            the providerAccountId to set
 	 */
 	public void setProviderAccountId(String providerAccountId) {

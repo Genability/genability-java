@@ -102,8 +102,8 @@ public class IntervalInfo {
 	 * in. If you pass in a kWh, kW or total measure, it will set those specific
 	 * fields instead.
 	 * 
-	 * @param key
-	 * @param value
+	 * @param key The key.
+	 * @param value The value.
 	 */
 	public void putMeasure(String key, Measure value) {
 
@@ -127,8 +127,8 @@ public class IntervalInfo {
 	 * including if the key is 'kWh", "kW" or "total". If not found it will
 	 * return null.
 	 * 
-	 * @param key
-	 * @return
+	 * @param key The key.
+	 * @return The return value.
 	 */
 	public Measure getMeasure(String key) {
 

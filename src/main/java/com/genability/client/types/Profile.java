@@ -29,83 +29,47 @@ public class Profile implements Serializable {
 	private Map<String, PropertyData> properties;
 	//private PagedList<Bill> bills; // TODO: implement this
 
-	/**
-	 * Private member indicating if this profiles interval and other
-	 * pre-calculated/cached data is current.
-	 */
 	private Integer dataStatus;
 	private Boolean isDefault;
 	private String serviceTypes;
 
-	/**
-	 * This is the default constructor.
-	 */
 	public Profile() {
 		// no-op
+	}
 
-	} // end of constructor
-
-	/**
-	 * This is the constructor that sets the primary key information on
-	 * construction. In other words, it sets the property.
-	 */
 	public Profile(final String profileId) {
 		this.profileId = profileId;
 
-	} // end of constructor
+	}
 
-	/**
-	 * Access method for ProfileId.
-	 */
 	public String getProfileId() {
 		return profileId;
 	}
 
-	/**
-	 * Mutator for ProfileId.
-	 */
 	public void setProfileId(final String profileId) {
 		this.profileId = profileId;
 	}
 
-	/**
-	 * Access method for ProviderProfileId.
-	 */
 	public String getProviderProfileId() {
 		return providerProfileId;
 	}
 
-	/**
-	 * Mutator for ProviderProfileId.
-	 */
 	public void setProviderProfileId(final String providerProfileId) {
 		this.providerProfileId = providerProfileId;
 	}
 
-	/**
-	 * Access method for ProfileName.
-	 */
 	public String getProfileName() {
 		return profileName;
 	}
 
-	/**
-	 * Mutator for ProfileName.
-	 */
 	public void setProfileName(final String profileName) {
 		this.profileName = profileName;
 	}
 
-	/**
-	 * Access method for Description.
-	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/**
-	 * Mutator for Description.
-	 */
 	public void setDescription(final String description) {
 		this.description = description;
 	}
@@ -233,7 +197,7 @@ public class Profile implements Serializable {
 	 * Pass in a quantityUnit value and this will tell you whether there is 1 or
 	 * more readings for it.
 	 * 
-	 * @param quantityUnit
+	 * @param quantityUnit The quantityUnit.
 	 * @return true if has readings, false otherwise
 	 */
 	public boolean hasReadingsFor(String quantityUnit) {
@@ -256,8 +220,8 @@ public class Profile implements Serializable {
 	/**
 	 * Implementation of the compareTo.
 	 * 
-	 * @param anotherClass
-	 * @return
+	 * @param anotherClass The anotherClass.
+	 * @return The return value.
 	 * @throws ClassCastException
 	 */
 	public int compareTo(Object anotherClass) throws ClassCastException {
@@ -274,7 +238,7 @@ public class Profile implements Serializable {
 	 * Helper method to make a copy of the profile. Note it doesn't make a copy
 	 * of the readings, reading summaries, or properties
 	 * 
-	 * @param toCopyToProfile
+	 * @param toCopyToProfile The toCopyToProfile.
 	 *            to copy data into
 	 */
 	public void copy(Profile toCopyToProfile) {

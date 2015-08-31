@@ -31,10 +31,10 @@ public class AccountAnalysis {
      * 
      * Note that the key parameter is not used at this time.
      * 
-     * @param scenario
-     * @param period
-     * @param key
-     * @return
+     * @param scenario The scenario.
+     * @param period The period.
+     * @param key The key.
+     * @return The return value.
      */
     @JsonIgnore
     public Series getSeriesByParameters(String scenario, String period, String key) {
@@ -65,8 +65,8 @@ public class AccountAnalysis {
      *    List&lt;SeriesMeasure&gt; monthlyPreSolarUtilitySeriesData = accountAnalysis.getSeriesDataBySeriesId(seriesId);
      *    // check that monthlyPreSolarUtilitySeriesData != null, then proceed
      *    
-     * @param seriesId
-     * @return
+     * @param seriesId The seriesId.
+     * @return The return value.
      */
     @JsonIgnore
     public List<SeriesMeasure> getSeriesDataBySeriesId(Integer seriesId) {

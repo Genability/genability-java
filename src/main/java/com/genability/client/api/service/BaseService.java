@@ -99,10 +99,10 @@ public class BaseService {
 	 * Helper method that makes a HTTP GET to the Genability APIs.
 	 * @param <T>
 	 * @param <R>
-	 * @param endpointPath
-	 * @param queryParams
-	 * @param resultTypeReference
-	 * @return
+	 * @param endpointPath The endpointPath.
+	 * @param queryParams The queryParams.
+	 * @param resultTypeReference The resultTypeReference.
+	 * @return The return value.
 	 */
 	protected <T extends Response<R>, R> T callGet(String endpointPath, List<NameValuePair> queryParams, TypeReference<T> resultTypeReference) {
 		String qs = null;
@@ -124,10 +124,10 @@ public class BaseService {
 	 * Helper method that makes a HTTP POST to the Genability APIs.
 	 * @param <T>
 	 * @param <R>
-	 * @param endpointPath
-	 * @param requestPayload
-	 * @param resultTypeReference
-	 * @return
+	 * @param endpointPath The endpointPath.
+	 * @param requestPayload The requestPayload.
+	 * @param resultTypeReference The resultTypeReference.
+	 * @return The return value.
 	 */
 	protected <T extends Response<R>, R> T callPost(String endpointPath, final Object requestPayload, TypeReference<T> resultTypeReference) {
 		String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
@@ -143,10 +143,10 @@ public class BaseService {
 	 * Helper method that makes a HTTP POST to the Genability APIs.
 	 * @param <T>
 	 * @param <R>
-	 * @param endpointPath
-	 * @param requestPayload
-	 * @param resultTypeReference
-	 * @return
+	 * @param endpointPath The endpointPath.
+	 * @param requestPayload The requestPayload.
+	 * @param resultTypeReference The resultTypeReference.
+	 * @return The return value.
 	 */
 	protected <T extends Response<R>, R> T callPut(String endpointPath, final Object requestPayload, TypeReference<T> resultTypeReference) {
 		String url = restApiServer + endpointPath; // + "?" +
@@ -168,10 +168,10 @@ public class BaseService {
 	 * The request object passed in contains the File to upload.
 	 * @param <T>
 	 * @param <R>
-	 * @param endpointPath
-	 * @param request
-	 * @param resultTypeReference
-	 * @return
+	 * @param endpointPath The endpointPath.
+	 * @param request The request.
+	 * @param resultTypeReference The resultTypeReference.
+	 * @return The return value.
 	 */
 	public <T extends Response<R>, R> T callFileUpload(String endpointPath, BulkUploadRequest request, TypeReference<T> resultTypeReference) {
 		String url = restApiServer + endpointPath;  // + "?" + this.getQueryStringCredentials();  // if you prefer to pass creds on query string
@@ -204,10 +204,10 @@ public class BaseService {
 	 * Helper method that makes a HTTP DELETE to the Genability APIs.
 	 * @param <T>
 	 * @param <R>
-	 * @param endpointPath
-	 * @param queryParams
-	 * @param resultTypeReference
-	 * @return
+	 * @param endpointPath The endpointPath.
+	 * @param queryParams The queryParams.
+	 * @param resultTypeReference The resultTypeReference.
+	 * @return The return value.
 	 */
 	protected <T extends Response<R>, R> T callDelete(String endpointPath, List<NameValuePair> queryParams, TypeReference<T> resultTypeReference) {
 		String qs = null;

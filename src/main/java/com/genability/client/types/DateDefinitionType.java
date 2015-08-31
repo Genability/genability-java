@@ -13,7 +13,7 @@ public enum DateDefinitionType {
 	 * Constructor, which takes an int value so that this enum's values can be
 	 * flags (in other words support bit operations).
 	 * 
-	 * @param id
+	 * @param id The id.
 	 */
 	DateDefinitionType(int id) {
 		this.id_ = id;
@@ -22,7 +22,7 @@ public enum DateDefinitionType {
 	/**
 	 * Accessor method for getting at the current bit number of this enum.
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	public int getId() {
 		return (this.id_);

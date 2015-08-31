@@ -98,7 +98,7 @@ public class CalculatedCost {
 	/**
 	 * This is not currently used but is included for mapping to work.
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	@JsonInclude(Include.NON_NULL)
 	public List<PropertyData> getAssumptions() {

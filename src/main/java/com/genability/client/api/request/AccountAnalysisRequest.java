@@ -73,9 +73,9 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * This method is used to set the fromDateTime as a date only. The resulting request will include the following:
 	 * "fromDateTime":"YYYY-MM-DD"
 	 * 
-	 * @param year
-	 * @param month
-	 * @param day
+	 * @param year The year.
+	 * @param month The month.
+	 * @param day The day.
 	 */
 	@JsonIgnore
 	 public void setFromDateTime(int year, int month, int day) {
@@ -86,7 +86,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * This method is used to set the fromDateTime as a date only. The resulting request will include the following:
 	 * "fromDateTime":"YYYY-MM-DD"
 	 * 
-	 * @param date
+	 * @param date The date.
 	 */
 	@JsonIgnore
 	 public void setFromDateTime(LocalDate date) {
@@ -107,9 +107,9 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * This method is used to set the toDateTime as a date only. The resulting request will include the following:
 	 * "toDateTime":"YYYY-MM-DD"
 	 * 
-	 * @param year
-	 * @param month
-	 * @param day
+	 * @param year The year.
+	 * @param month The month.
+	 * @param day The day.
 	 */
 	@JsonIgnore
 	 public void setToDateTime(int year, int month, int day) {
@@ -120,7 +120,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * This method is used to set the toDateTime as a date only. The resulting request will include the following:
 	 * "toDateTime":"YYYY-MM-DD"
 	 * 
-	 * @param date
+	 * @param date The date.
 	 */
 	@JsonIgnore
 	 public void setToDateTime(LocalDate date) {

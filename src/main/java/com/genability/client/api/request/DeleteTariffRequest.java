@@ -44,7 +44,7 @@ public class DeleteTariffRequest extends AbstractRequest implements Serializable
 	}
 
 	/**
-	 * @param tariffId
+	 * @param tariffId The tariffId.
 	 *            the tariffId to set
 	 */
 	public void setTariffId(Long tariffId) {
@@ -52,7 +52,7 @@ public class DeleteTariffRequest extends AbstractRequest implements Serializable
 	}
 
 	/**
-	 * @param hardDelete
+	 * @param hardDelete The hardDelete.
 	 *
 	 * If true, fully delete the account,
 	 * otherwise the account just has its

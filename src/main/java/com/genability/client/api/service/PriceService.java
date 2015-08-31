@@ -12,8 +12,8 @@ public class PriceService extends BaseService {
 	/**
 	 * Calls the REST service to get a Profile based on the arguments passed in.
 	 * 
-	 * @param request
-	 * @return
+	 * @param request The request.
+	 * @return The return value.
 	 */
 	public Response<Price> getPrice(GetPriceRequest request) {
 		

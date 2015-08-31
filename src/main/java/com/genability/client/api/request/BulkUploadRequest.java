@@ -62,7 +62,7 @@ public class BulkUploadRequest extends AbstractRequest implements Serializable {
 	}
 
 	/**
-	 * @param usageProfileId
+	 * @param usageProfileId The usageProfileId.
 	 *            the usageProfileId to set
 	 */
 	public void setUsageProfileId(String usageProfileId) {

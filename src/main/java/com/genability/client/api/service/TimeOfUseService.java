@@ -72,7 +72,7 @@ public class TimeOfUseService extends BaseService {
 	/**
 	 * Creates a private TimeOfUseGroup out of the passed-in TOU group.
 	 * 
-	 * @param touGroup
+	 * @param touGroup The touGroup.
 	 * @return The added TOU group that is sent back by the API.
 	 */
 	public Response<TimeOfUseGroup> addPrivateTimeOfUseGroup(TimeOfUseGroup touGroup) {
@@ -95,7 +95,7 @@ public class TimeOfUseService extends BaseService {
 	 * Updates the passed-in private TimeOfUseGroup. You can only update a TOU group
 	 * that belongs to your organization.
 	 * 
-	 * @param touGroup
+	 * @param touGroup The touGroup.
 	 * @return The added TOU group that is sent back by the API.
 	 */
 	public Response<TimeOfUseGroup> updatePrivateTimeOfUseGroup(TimeOfUseGroup touGroup) {
@@ -118,8 +118,8 @@ public class TimeOfUseService extends BaseService {
 	 * Deletes a private TOU group. You can only delete a TOU group that belongs to your
 	 * organization.
 	 * 
-	 * @param lseId
-	 * @param touGropuId
+	 * @param lseId The lseId.
+	 * @param touGropuId The touGropuId.
 	 * @return The deleted TOU group, which is sent back by the API.
 	 */
 	public Response<TimeOfUseGroup> deletePrivateTimeOfUseGroup(long lseId, long touGroupId) {

@@ -36,7 +36,7 @@ public class PaginationInfo {
 	/**
 	 * Set the totalCount.
 	 *
-	 * @param totalCount
+	 * @param totalCount The totalCount.
 	 */
 	public PaginationInfo(int totalCount) {
 		super();
@@ -46,8 +46,8 @@ public class PaginationInfo {
 	/**
 	 * Set the pageCount and pageStart.
 	 * 
-	 * @param pageCount
-	 * @param pageStart
+	 * @param pageCount The pageCount.
+	 * @param pageStart The pageStart.
 	 */
 	public PaginationInfo(int pageCount, int pageStart) {
 		super();
@@ -58,9 +58,9 @@ public class PaginationInfo {
 	/**
 	 * Set the totalCount, pageCount and pageStart.
 	 *
-	 * @param totalCount
-	 * @param pageCount
-	 * @param pageStart
+	 * @param totalCount The totalCount.
+	 * @param pageCount The pageCount.
+	 * @param pageStart The pageStart.
 	 */
 	public PaginationInfo(int totalCount, int pageCount, int pageStart) {
 		super();
@@ -74,6 +74,7 @@ public class PaginationInfo {
 	 * search (query) criteria. If the results were paginated, this
 	 * will likely be greater that the count of actual results
 	 * returned.
+	 * 
 	 * @return total records matching the criteria
 	 */
 	public int getTotalCount() {
@@ -95,7 +96,7 @@ public class PaginationInfo {
 	 * if the query should return the first 10 records of
 	 * the total, this will be 10.
 	 * 
-	 * @return
+	 * @return The return value.
 	 */
 	public int getPageCount() {
 		return pageCount;

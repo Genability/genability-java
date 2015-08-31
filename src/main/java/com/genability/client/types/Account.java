@@ -173,7 +173,7 @@ public class Account {
 	}
 
 	/**
-	 * @param tariffs
+	 * @param tariffs The tariffs.
 	 *            the tariffs to set
 	 */
 	public void setTariffs(List<Tariff> tariffs) {

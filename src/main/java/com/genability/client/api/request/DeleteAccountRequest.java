@@ -56,7 +56,7 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 	}
 
 	/**
-	 * @param accountId
+	 * @param accountId The accountId.
 	 *            the accountId to set
 	 */
 	public void setAccountId(String accountId) {
@@ -64,7 +64,7 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 	}
 
 	/**
-	 * @param providerAccountId
+	 * @param providerAccountId The providerAccountId.
 	 *            the providerAccountId to set
 	 */
 	public void setProviderAccountId(String providerAccountId) {
@@ -73,7 +73,7 @@ public class DeleteAccountRequest extends AbstractRequest implements Serializabl
 
 
 	/**
-	 * @param hardDelete
+	 * @param hardDelete The hardDelete.
 	 * 
 	 * If true, fully delete the account,
 	 * otherwise the account just has its
