@@ -46,11 +46,12 @@ public class BaseServiceTests {
 	protected static final ProfileService profileService;
 	protected static final PropertyService propertyService;
 	protected static final CalendarService calendarService;
+	protected static final IncentiveService incentiveService;
 	protected static final TerritoryService territoryService;
 	protected static final TimeOfUseService touService;
 
 	private static final ObjectMapper mapper;
-	
+
 	static {
 		
 		// Mapper object for de-serializing canned tests
@@ -108,8 +109,12 @@ public class BaseServiceTests {
   		profileService = genabilityClient.getProfileService();
   		propertyService = genabilityClient.getPropertyService();
   		calendarService = genabilityClient.getCalendarService();
+<<<<<<< HEAD
   		territoryService = genabilityClient.getTerritoryService();
   		touService = genabilityClient.getTimeOfUseService();
+=======
+  		incentiveService = genabilityClient.getIncentiveService();
+>>>>>>> parent of c7fe0c5... Revert 0b58d63..c4a86b1
 	}
 	
 	// Helper method:  We create an account and specify a tariff as well as values
