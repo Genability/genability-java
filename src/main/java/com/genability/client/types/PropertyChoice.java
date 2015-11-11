@@ -2,6 +2,9 @@ package com.genability.client.types;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public final class PropertyChoice {
 	
 	private String displayValue;

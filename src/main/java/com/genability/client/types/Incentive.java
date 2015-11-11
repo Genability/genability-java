@@ -1,5 +1,6 @@
 package com.genability.client.types;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -7,231 +8,268 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Incentive {
+public final class Incentive {
 
-	private Long tariffId;
-	private Long masterTariffId;
+	private Long incentiveId;
+	private Long masterIncentiveId;
 	private String tariffCode;
-	private String tariffName;
+	private String incentiveName;
 	private Long lseId;
 	private String lseName;
-	private String lseCode;
-	private String serviceType;
-	private String customerClass;
-	private DateTime effectiveDate;
+	private ServiceType serviceType;
+	private CustomerClass customerClass;
+	private DateTime startDate;
 	private DateTime endDate;
-	private Boolean exhausted;
-	private String timezone;
-	private String isoCurrency;
+	private Boolean isExhausted;
 	
 	private String projectType;
 	private String incentiveType;
-	private String endUse;
 	private String summary;
 	private String requirements;
 	
-	private List<TariffProperty> properties;
-	private List<IncentiveRate> rates;
-
-	private DateTime createdDate;
-	private DateTime lastUpdatedDate;
-
-	public Incentive() {
-
+	private String jurisdiction;
+	private PropertyKey quantityKey;
+	private String quantityKeyCap;
+	private long paymentCap;
+	private PropertyKey percentCostCapKey;
+	private BigDecimal percentCostCap;
+	private long paymentDuration;
+	private String incentivePaidTo;
+	private List<IncentiveApplicability> applicabilities;
+	private Boolean projectTypeExclusive;
+	private String state;
+	private Long territoryId;
+	private BigDecimal rate;
+	private RateUnit rateUnit;
+	
+	public Long getIncentiveId() {
+		return incentiveId;
 	}
 	
-	public String toString() {
-		try {
-			return String.format("<%s %s %s; mtid %s id; lse %s $s>",
-					getClass().getSimpleName(), tariffCode, tariffName, masterTariffId, tariffId, lseId, lseCode);
-		} catch (Exception e) {
-			return super.toString();
-		}
+	public void setIncentiveId(Long incentiveId) {
+		this.incentiveId = incentiveId;
 	}
-
-	public Long getMasterTariffId() {
-		return masterTariffId;
+	
+	public Long getMasterIncentiveId() {
+		return masterIncentiveId;
 	}
-
-	public void setMasterTariffId(Long masterTariffId) {
-		this.masterTariffId = masterTariffId;
+	
+	public void setMasterIncentiveId(Long masterIncentiveId) {
+		this.masterIncentiveId = masterIncentiveId;
 	}
-
-	public Long getTariffId() {
-		return tariffId;
-	}
-
-	public void setTariffId(Long tariffId) {
-		this.tariffId = tariffId;
-	}
-
+	
 	public String getTariffCode() {
 		return tariffCode;
 	}
-
+	
 	public void setTariffCode(String tariffCode) {
 		this.tariffCode = tariffCode;
 	}
-
-	public String getTariffName() {
-		return tariffName;
+	
+	public String getIncentiveName() {
+		return incentiveName;
 	}
-
-	public void setTariffName(String tariffName) {
-		this.tariffName = tariffName;
+	
+	public void setIncentiveName(String incentiveName) {
+		this.incentiveName = incentiveName;
 	}
-
+	
 	public Long getLseId() {
 		return lseId;
 	}
-
+	
 	public void setLseId(Long lseId) {
 		this.lseId = lseId;
-	}
-
-	public String getLseCode() {
-		return lseCode;
-	}
-
-	public void setLseCode(String lseCode) {
-		this.lseCode = lseCode;
 	}
 	
 	public String getLseName() {
 		return lseName;
 	}
-
+	
 	public void setLseName(String lseName) {
 		this.lseName = lseName;
 	}
-
-	public String getServiceType() {
+	
+	public ServiceType getServiceType() {
 		return serviceType;
 	}
-
-	public void setServiceType(String serviceType) {
+	
+	public void setServiceType(ServiceType serviceType) {
 		this.serviceType = serviceType;
 	}
-
-	public String getCustomerClass() {
+	
+	public CustomerClass getCustomerClass() {
 		return customerClass;
 	}
-
-	public void setCustomerClass(String customerClass) {
+	
+	public void setCustomerClass(CustomerClass customerClass) {
 		this.customerClass = customerClass;
 	}
-
-	public DateTime getEffectiveDate() {
-		return effectiveDate;
+	
+	public DateTime getStartDate() {
+		return startDate;
 	}
-
-	public void setEffectiveDate(DateTime effectiveDate) {
-		this.effectiveDate = effectiveDate;
+	
+	public void setStartDate(DateTime startDate) {
+		this.startDate = startDate;
 	}
-
+	
 	public DateTime getEndDate() {
 		return endDate;
 	}
-
+	
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
-
-	public Boolean getExhausted() {
-		return exhausted;
+	
+	public Boolean getIsExhausted() {
+		return isExhausted;
 	}
-
-	public void setExhausted(Boolean exhausted) {
-		this.exhausted = exhausted;
+	
+	public void setIsExhausted(Boolean isExhausted) {
+		this.isExhausted = isExhausted;
 	}
-
-	public String getTimeZone() {
-		return timezone;
-	}
-
-	public void setTimeZone(String timezone) {
-		this.timezone = timezone;
-	}
-
-	public String getCurrency() {
-		return isoCurrency;
-	}
-
-	public void setCurrency(String currency) {
-		this.isoCurrency = currency;
-	}
-
-
+	
 	public String getProjectType() {
 		return projectType;
 	}
-
+	
 	public void setProjectType(String projectType) {
 		this.projectType = projectType;
 	}
-
+	
 	public String getIncentiveType() {
 		return incentiveType;
 	}
-
+	
 	public void setIncentiveType(String incentiveType) {
 		this.incentiveType = incentiveType;
-	}
-
-	public String getEndUse() {
-		return endUse;
-	}
-
-	public void setEndUse(String endUse) {
-		this.endUse = endUse;
 	}
 	
 	public String getSummary() {
 		return summary;
 	}
-
-
+	
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
-
+	
 	public String getRequirements() {
 		return requirements;
 	}
-
+	
 	public void setRequirements(String requirements) {
 		this.requirements = requirements;
 	}
-	public List<TariffProperty> getProperties() {
-		return properties;
+	
+	public String getJurisdiction() {
+		return jurisdiction;
 	}
-
-	public void setProperties(List<TariffProperty> properties) {
-		this.properties = properties;
+	
+	public void setJurisdiction(String jurisdiction) {
+		this.jurisdiction = jurisdiction;
 	}
-
-	public List<IncentiveRate> getRates() {
-		return rates;
+	
+	public PropertyKey getQuantityKey() {
+		return quantityKey;
 	}
-
-	public void setRates(List<IncentiveRate> rates) {
-		this.rates = rates;
+	
+	public void setQuantityKey(PropertyKey quantityKey) {
+		this.quantityKey = quantityKey;
 	}
-
-	public DateTime getCreatedDate() {
-		return createdDate;
+	
+	public String getQuantityKeyCap() {
+		return quantityKeyCap;
 	}
-
-	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
+	
+	public void setQuantityKeyCap(String quantityKeyCap) {
+		this.quantityKeyCap = quantityKeyCap;
 	}
-
-
-	public DateTime getLastUpdatedDate() {
-		return lastUpdatedDate;
+	
+	public long getPaymentCap() {
+		return paymentCap;
 	}
-
-	public void setLastUpdatedDate(DateTime lastUpdatedDate) {
-		this.lastUpdatedDate = lastUpdatedDate;
+	
+	public void setPaymentCap(long paymentCap) {
+		this.paymentCap = paymentCap;
+	}
+	
+	public PropertyKey getPercentCostCapKey() {
+		return percentCostCapKey;
+	}
+	public void setPercentCostCapKey(PropertyKey percentCostCapKey) {
+		this.percentCostCapKey = percentCostCapKey;
+	}
+	
+	public BigDecimal getPercentCostCap() {
+		return percentCostCap;
+	}
+	
+	public void setPercentCostCap(BigDecimal percentCostCap) {
+		this.percentCostCap = percentCostCap;
+	}
+	
+	public long getPaymentDuration() {
+		return paymentDuration;
+	}
+	
+	public void setPaymentDuration(long paymentDuration) {
+		this.paymentDuration = paymentDuration;
+	}
+	
+	public String getIncentivePaidTo() {
+		return incentivePaidTo;
+	}
+	
+	public void setIncentivePaidTo(String incentivePaidTo) {
+		this.incentivePaidTo = incentivePaidTo;
+	}
+	
+	public List<IncentiveApplicability> getApplicabilities() {
+		return applicabilities;
+	}
+	
+	public void setApplicabilities(List<IncentiveApplicability> applicabilities) {
+		this.applicabilities = applicabilities;
+	}
+	
+	public Boolean getProjectTypeExclusive() {
+		return projectTypeExclusive;
+	}
+	
+	public void setProjectTypeExclusive(Boolean projectTypeExclusive) {
+		this.projectTypeExclusive = projectTypeExclusive;
+	}
+	
+	public String getState() {
+		return state;
+	}
+	
+	public void setState(String state) {
+		this.state = state;
+	}
+	
+	public Long getTerritoryId() {
+		return territoryId;
+	}
+	
+	public void setTerritoryId(Long territoryId) {
+		this.territoryId = territoryId;
+	}
+	
+	public BigDecimal getRate() {
+		return rate;
+	}
+	
+	public void setRate(BigDecimal rate) {
+		this.rate = rate;
+	}
+	
+	public RateUnit getRateUnit() {
+		return rateUnit;
+	}
+	
+	public void setRateUnit(RateUnit rateUnit) {
+		this.rateUnit = rateUnit;
 	}
 }
