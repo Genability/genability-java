@@ -26,14 +26,13 @@ public class IncentiveService extends BaseService {
 		return response;
 	}
 	
-	public Response<Incentive> getIncentive(GetIncentiveRequest request) {
+	public Response<Incentive> getIncentive(long masterIncentiveId) {
 		if(log.isDebugEnabled()) {
 			log.debug("getIncentive called");
 		}
 		
-		String url = String.format("v1/incentives/%s", request.getMasterTariffId());
-		Response<Incentive> response = this.callGet(url,
-				request.getQueryParams(),
+		String url = String.format("v1/incentives/%s", masterIncentiveId);
+		Response<Incentive> response = this.callGet(url, null,
 				INCENTIVE_RESPONSE_TYPEREF);
 		
 		if(log.isDebugEnabled()){
