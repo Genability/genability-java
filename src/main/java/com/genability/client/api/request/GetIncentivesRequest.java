@@ -134,7 +134,6 @@ public class GetIncentivesRequest extends AbstractGetNRequest {
 		addParam(qparams, "state", state);
 		addParam(qparams, "isExhausted", isExhausted);
 		addParam(qparams, "lseId", lseId);
-		addParam(qparams, "customerClass", customerClass);
 		addParam(qparams, "projectType", projectType);
 		addParam(qparams, "incentiveType", incentiveType);
 		addParam(qparams, "addressString", addressString);

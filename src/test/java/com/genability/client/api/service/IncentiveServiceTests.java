@@ -31,7 +31,7 @@ public class IncentiveServiceTests extends BaseServiceTests {
 	public void testGetOneIncentiveUrl() {
 		// Arrange
 		long incentiveId = 1234;
-		String expectedUrl = String.format("%s%d", baseUrl, incentiveId);
+		String expectedUrl = String.format("%s/%d", baseUrl, incentiveId);
 		
 		// Expect
 		MockHttpClient client = new MockHttpClient(expectedUrl); 
@@ -73,7 +73,7 @@ public class IncentiveServiceTests extends BaseServiceTests {
 	@Test
 	public void testGetIncentiveApplicabilitiesUrl() {
 		// Arrange
-		String expectedUrl = baseUrl;
+		String expectedUrl = baseUrl + "/applicabilities";
 
 		GetIncentiveApplicabilitiesRequest request = new GetIncentiveApplicabilitiesRequest();
 		request.setLseId(1234L);
@@ -134,7 +134,8 @@ public class IncentiveServiceTests extends BaseServiceTests {
 	public void testGetIncentives() {
 		// Arrange
 		GetIncentivesRequest request = new GetIncentivesRequest();
-		request.setEffectiveOn(DateTime.now());
+		DateTime effectiveOn = DateTime.now();
+		request.setEffectiveOn(effectiveOn);
 		request.setState("NY");
 		
 		// Act
@@ -147,10 +148,9 @@ public class IncentiveServiceTests extends BaseServiceTests {
 		assertEquals("Wrong result type", response.getType(), "Incentive");
 		
 		for (Incentive result : results) {
-			assertNull("Only incentives that haven't ended should be returned", result.getEndDate());
 			assertEquals("State should match the requested state", result.getState(), "NY");
 			if (result.getEndDate() != null) {
-				assertTrue("Only incentives that haven't ended should be returned", result.getEndDate().compareTo(DateTime.now()) > 0 );
+				assertTrue("Only incentives that haven't ended should be returned", result.getEndDate().isAfter(effectiveOn));
 			}
 			
 			assertFalse("Only non-exhausted incentives should be returned", result.getIsExhausted());
