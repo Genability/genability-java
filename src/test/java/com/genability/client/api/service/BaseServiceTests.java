@@ -109,12 +109,9 @@ public class BaseServiceTests {
   		profileService = genabilityClient.getProfileService();
   		propertyService = genabilityClient.getPropertyService();
   		calendarService = genabilityClient.getCalendarService();
-<<<<<<< HEAD
   		territoryService = genabilityClient.getTerritoryService();
   		touService = genabilityClient.getTimeOfUseService();
-=======
   		incentiveService = genabilityClient.getIncentiveService();
->>>>>>> parent of c7fe0c5... Revert 0b58d63..c4a86b1
 	}
 	
 	// Helper method:  We create an account and specify a tariff as well as values

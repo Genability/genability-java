@@ -26,8 +26,6 @@ public class GetIncentivesRequest extends AbstractGetNRequest {
 	private Boolean isExhausted;
 	
 	private Map<String, String> applicabilityParameters = new HashMap<String, String>();
-	
-	public GetIncentivesRequest() {}
 
 	public Long getLseId() {
 		return lseId;
