@@ -6,12 +6,16 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.genability.mother.tariff.types.Incentive.Eligibility;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class Incentive {
 
 	private Long incentiveId;
 	private Long masterIncentiveId;
+	private Eligibility eligibility;
+	private List<IncentiveApplicability> requiredData;
+	
 	private String tariffCode;
 	private String incentiveName;
 	private Long lseId;
@@ -42,6 +46,12 @@ public final class Incentive {
 	private BigDecimal rate;
 	private RateUnit rateUnit;
 	
+	public static enum Eligibility {
+		ELIGIBLE,
+		INELIGIBLE,
+		MISSING_FORMULA_VARS;
+	}
+	
 	public Long getIncentiveId() {
 		return incentiveId;
 	}
@@ -58,6 +68,22 @@ public final class Incentive {
 		this.masterIncentiveId = masterIncentiveId;
 	}
 	
+	public Eligibility getEligibility() {
+		return eligibility;
+	}
+
+	public void setEligibility(Eligibility eligibility) {
+		this.eligibility = eligibility;
+	}
+
+	public List<IncentiveApplicability> getRequiredData() {
+		return requiredData;
+	}
+
+	public void setRequiredData(List<IncentiveApplicability> requiredData) {
+		this.requiredData = requiredData;
+	}
+
 	public String getTariffCode() {
 		return tariffCode;
 	}
