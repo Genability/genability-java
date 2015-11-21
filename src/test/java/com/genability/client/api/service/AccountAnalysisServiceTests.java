@@ -89,7 +89,7 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
             readingData.setFromDateTime(baseFromDateTime.plusHours(i));
             readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
             readingData.setQuantityUnit("kWh");
-            readingData.setQuantityValue(new BigDecimal(250));
+            readingData.setQuantityValue(BigDecimal.valueOf(250));
             readingDataList.add(readingData);
         }
         usageProfile.setReadingData(readingDataList);
@@ -104,7 +104,7 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
             readingData.setFromDateTime(baseFromDateTime.plusHours(i));
             readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
             readingData.setQuantityUnit("kWh");
-            readingData.setQuantityValue(new BigDecimal(200));
+            readingData.setQuantityValue(BigDecimal.valueOf(200));
             production.add(readingData);
         }
         productionProfile.setReadingData(production);
@@ -188,7 +188,7 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
 	            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
 	            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
 	            readingData.setQuantityUnit("kWh");
-	            readingData.setQuantityValue(new BigDecimal(250));
+	            readingData.setQuantityValue(BigDecimal.valueOf(250));
 	            readingDataList.add(readingData);
 	        }
 	        usageProfile.setReadingData(readingDataList);
@@ -203,7 +203,7 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
 	            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
 	            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
 	            readingData.setQuantityUnit("kWh");
-	            readingData.setQuantityValue(new BigDecimal(200));
+	            readingData.setQuantityValue(BigDecimal.valueOf(200));
 	            production.add(readingData);
 	        }
 	        productionProfile.setReadingData(production);
@@ -410,7 +410,7 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
         tariffRate.setChargeType(ChargeType.FIXED_PRICE);
         tariffRate.setScenarios("solar");
         TariffRateBand rateBand = new TariffRateBand();
-        rateBand.setRateAmount(new BigDecimal(137.05));
+        rateBand.setRateAmount(BigDecimal.valueOf(137.05));
         List<TariffRateBand> rateBands = new ArrayList<TariffRateBand>();
         rateBands.add(rateBand);
         tariffRate.setRateBands(rateBands);
