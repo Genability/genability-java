@@ -6,7 +6,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.genability.mother.tariff.types.Incentive.Eligibility;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class Incentive {
@@ -48,8 +47,8 @@ public final class Incentive {
 	
 	public static enum Eligibility {
 		ELIGIBLE,
-		INELIGIBLE,
-		MISSING_FORMULA_VARS;
+		COULD_BE_ELIGIBLE,
+		INELIGIBLE;
 	}
 	
 	public Long getIncentiveId() {
