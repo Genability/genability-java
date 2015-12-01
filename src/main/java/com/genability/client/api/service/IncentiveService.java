@@ -12,7 +12,7 @@ public class IncentiveService extends BaseService {
 			new TypeReference<Response<Incentive>>() {};
 	private static final TypeReference<Response<IncentiveApplicability>> INCENTIVE_APPLICABILITY_RESPONSE_TYPEREF = 
 			new TypeReference<Response<IncentiveApplicability>>() {};
-	private static final String baseUrl = "v1/incentives";
+	private static final String baseUrl = "beta/incentives";
 	
 	public Response<Incentive> getIncentives(GetIncentivesRequest request) {
 		if(log.isDebugEnabled()) {

@@ -18,7 +18,7 @@ import com.genability.client.types.Response;
 
 public class IncentiveServiceTests extends BaseServiceTests {
 
-	private String baseUrl = incentiveService.getRestApiServer() + "v1/incentives";
+	private String baseUrl = incentiveService.getRestApiServer() + "beta/incentives";
 	private IncentiveService localService;
 
 	@Before
