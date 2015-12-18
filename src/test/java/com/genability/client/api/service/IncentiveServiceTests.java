@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -155,5 +156,27 @@ public class IncentiveServiceTests extends BaseServiceTests {
 			
 			assertFalse("Only non-exhausted incentives should be returned", result.getIsExhausted());
 		}
+	}
+	
+	@Test
+	public void dontDoubleUpOnParameters() {
+		// Arrange
+		String expectedUrl = baseUrl;
+
+		GetIncentivesRequest request = new GetIncentivesRequest();
+		
+		DateTime dt = new DateTime(2015, 12, 1, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles"));
+		request.setEffectiveOn(dt);
+		request.setApplicabilityValue("effectiveOn", "2015-12-01");
+		
+
+		// Expect
+		MockHttpClient client = new MockHttpClient(expectedUrl);
+		client.addExpectedParameter("effectiveOn", "2015-12-01T00:00:00.000-08:00");
+		localService.setHttpClient(client);
+
+		// Act
+		localService.getIncentives(request);
+		client.validate();
 	}
 }

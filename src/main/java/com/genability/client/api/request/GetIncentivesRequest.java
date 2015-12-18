@@ -122,26 +122,41 @@ public class GetIncentivesRequest extends AbstractGetNRequest {
 	public void setApplicabilityValue(String applicabilityName, String value) {
 		applicabilityParameters.put(applicabilityName, value);
 	}
-	
+
+	/**
+	 * Return a list of query parameters for the request. Named parameters (e.g. zipCode) will take
+	 * precedence over values set via setApplicabilityValue
+	 * 
+	 * @return The query parameters
+	 */
 	@Override
 	public List<NameValuePair> getQueryParams() {
 		
-		List<NameValuePair> qparams = super.getQueryParams();
-
-		addParam(qparams, "customerClasses", customerClass);
-		addParam(qparams, "fromDate", fromDate);
-		addParam(qparams, "toDate", toDate);
-		addParam(qparams, "state", state);
-		addParam(qparams, "isExhausted", isExhausted);
-		addParam(qparams, "lseId", lseId);
-		addParam(qparams, "projectType", projectType);
-		addParam(qparams, "incentiveType", incentiveType);
-		addParam(qparams, "addressString", addressString);
-		addParam(qparams, "zipCode", zipCode);
-		addParam(qparams, "effectiveOn", effectiveOn);
-		
+		Map<String, Object> uniqueParameters = new HashMap<String, Object>();
 		for (Map.Entry<String, String> ap : applicabilityParameters.entrySet()) {
-			addParam(qparams, ap.getKey(), ap.getValue());
+			uniqueParameters.put(ap.getKey(), ap.getValue());
+		}
+		
+		// Called out parameters are preferred over applicability values, to prevent
+		// setting values twice.
+		uniqueParameters.put("customerClasses", customerClass);
+		uniqueParameters.put("fromDate", fromDate);
+		uniqueParameters.put("toDate", toDate);
+		uniqueParameters.put("state", state);
+		uniqueParameters.put("isExhausted", isExhausted);
+		uniqueParameters.put("lseId", lseId);
+		uniqueParameters.put("projectType", projectType);
+		uniqueParameters.put("incentiveType", incentiveType);
+		uniqueParameters.put("addressString", addressString);
+		uniqueParameters.put("zipCode", zipCode);
+		uniqueParameters.put("effectiveOn", effectiveOn);
+		
+		List<NameValuePair> qparams = super.getQueryParams();
+		
+		for (Map.Entry<String, Object> parameter : uniqueParameters.entrySet()) {
+			if (parameter.getValue() != null) {
+				addParam(qparams, parameter.getKey(), String.valueOf(parameter.getValue()));
+			}
 		}
 
 		return qparams;
