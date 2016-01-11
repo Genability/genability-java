@@ -2,6 +2,7 @@ package com.genability.client.types;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 
@@ -30,6 +31,8 @@ public class CalculatedCost {
 	private List<CalculatedCostItem> items;
 	
 	private List<PropertyData> assumptions;
+	
+	private Map<String, BigDecimal> summary;
 
 	public Long getMasterTariffId() {
 		return masterTariffId;
@@ -69,6 +72,14 @@ public class CalculatedCost {
 	
 	public void setTotalCost(BigDecimal totalCost) {
 		this.totalCost = totalCost;
+	}
+
+	public Map<String, BigDecimal> getSummary() {
+		return summary;
+	}
+
+	public void setSummary(Map<String, BigDecimal> summary) {
+		this.summary = summary;
 	}
 
 	public BigDecimal getAccuracy() {
