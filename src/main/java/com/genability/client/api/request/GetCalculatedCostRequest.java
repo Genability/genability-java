@@ -39,6 +39,8 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	private Boolean includeDefaultProfile;
 	private Boolean minimums;
 	private BigDecimal dataFactor;
+	private String zipCode;
+	private Long territoryId;
 
 	/**
 	 * Private member variable detailLevel
@@ -246,6 +248,22 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 
 	public void setDataFactor(BigDecimal dataFactor) {
 		this.dataFactor = dataFactor;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public Long getTerritoryId() {
+		return territoryId;
+	}
+
+	public void setTerritoryId(Long territoryId) {
+		this.territoryId = territoryId;
 	}
 
 	@Override
