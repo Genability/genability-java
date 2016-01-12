@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -28,6 +29,33 @@ public class CalculateServiceTests extends BaseServiceTests {
 
 	private static CalculateService calculateService = genabilityClient.getCalculateService();
 
+	@Test
+	public void testZipCode() {
+		DateTimeZone tz = DateTimeZone.forID("America/Los_Angeles");
+		DateTime fromDateTime = new DateTime(2015, 3, 1, 0, 0, 0, tz);
+		DateTime toDateTime = new DateTime(2015, 4, 1, 0, 0, 0, tz);
+		
+		GetCalculatedCostRequest request = new GetCalculatedCostRequest();
+		request.setFromDateTime(fromDateTime);
+		request.setToDateTime(toDateTime);
+		request.setGroupBy(GroupBy.ALL);
+		request.setDetailLevel(DetailLevel.TOTAL);
+		request.setZipCode("94105");
+		request.setMasterTariffId(522L);
+		
+		PropertyData ti = new PropertyData();
+		ti.setKeyName("baselineType");
+		ti.setDataValue("typicalElectricity");
+		List<PropertyData> tariffInputs = new LinkedList<PropertyData>();
+		tariffInputs.add(ti);
+		request.setTariffInputs(tariffInputs);
+		
+		Response<CalculatedCost> resp = calculateService.getCalculatedCost(request);
+		if (resp.getStatus().equals("SUCCESS")) {
+			System.out.println("Hello, world!");
+		}
+	}
+	
 	@Test
 	public void testCalculateTariff512() {
 		

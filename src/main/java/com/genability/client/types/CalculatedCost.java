@@ -32,7 +32,7 @@ public class CalculatedCost {
 	
 	private List<PropertyData> assumptions;
 	
-	private Map<String, BigDecimal> summary;
+	private Map<String, Object> summary;
 
 	public Long getMasterTariffId() {
 		return masterTariffId;
@@ -74,11 +74,44 @@ public class CalculatedCost {
 		this.totalCost = totalCost;
 	}
 
-	public Map<String, BigDecimal> getSummary() {
+	/**
+	 * The summary property of a calculated cost contains a summary of the calculation. This object can have
+	 * up to three parts:
+	 * 
+	 * <ol>
+	 * 	<li>Top level values: <code>totalCost</code>, <code>kWh</code>, and <code>kW</code>, all of which are of
+	 * 	type BigDecimal.</li>
+	 * 	<li>A map of values relating to the <code>ELECTRICITY</code> service type: <code>kWh</code>,
+	 *  	and <code>kW</code></li>
+	 * 	<li>A map of values relating to the <code>SOLAR_PV</code> service type: <code>kWh</code>, <code>kW</code>,
+	 * 		and <code>systemSize</code></li>
+	 * </ol>
+	 * 
+	 * Each value must be cast from type {@link java.lang.Object} to its appropriate type. An example of the summary
+	 * is:
+	 * 
+	 * <pre>
+	 * "summary": {
+     *  "ELECTRICITY": {
+     *    "kWh": 16189,
+     *    "kW": 3.74
+     *  },
+     *  "SOLAR_PV": {
+     *    "kWh": 3966.46,
+     *    "kW": 0,
+     *    "systemSize": 2.65
+     *  },
+     *  "totalCost": 3534.24,
+     *  "kWh": 12222.54,
+     *  "kW": 1.92
+     * }
+     * </pre>
+	 */
+	public Map<String, Object> getSummary() {
 		return summary;
 	}
 
-	public void setSummary(Map<String, BigDecimal> summary) {
+	public void setSummary(Map<String, Object> summary) {
 		this.summary = summary;
 	}
 
