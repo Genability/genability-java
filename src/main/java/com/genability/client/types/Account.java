@@ -101,10 +101,12 @@ public class Account {
 		this.customerOrgName = customerOrgName;
 	}
 
+	@Deprecated
 	public String getOwner() {
       return owner;
     }
 	
+	@Deprecated
 	public void setOwner(String owner) {
       this.owner = owner;
     }
