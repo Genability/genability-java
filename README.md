@@ -7,7 +7,7 @@ The Genability API Java client library is now available on the Maven Central Rep
 <dependency>
   <groupId>com.genability</groupId>
   <artifactId>genability-client</artifactId>
-  <version>1.3.1</version>
+  <version>1.4.0</version>
 </dependency>
 ```
 
@@ -17,7 +17,7 @@ Be sure to check out the [tutorial](http://genability.github.io/genability-java/
 
 # How to Run the Tests
 1. Get an appId and appKey.
-2. Put the appId and appKey in the `src/main/resources/genability.properties` file.
+2. Put the appId and appKey in the `src/test/resources/genability.properties` file.
 3. Compile the library and run JUnit tests with `mvn test`.
 4. Develop your own app. Read the API documentation at http://developer.genability.com.
 
