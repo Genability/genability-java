@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -122,6 +123,17 @@ public abstract class AbstractRequest {
 
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, DateTime paramValue) {
+		
+		if(paramValue != null) {
+			
+			//TODO - update this with correct formatting
+			qparams.add(new BasicNameValuePair(paramName, paramValue.toString()));
+			
+		}
+
+	} // end of addParam for DateTime
+	
+	protected void addParam(List<NameValuePair> qparams, String paramName, LocalDate paramValue) {
 		
 		if(paramValue != null) {
 			

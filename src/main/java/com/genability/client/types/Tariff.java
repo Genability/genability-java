@@ -34,6 +34,7 @@ public class Tariff {
 	private Long territoryId;
 	private String effectiveDate;
 	private String endDate;
+	private String closedDate;
 	private String timeZone;
 	private String effectiveOnRule;
 
@@ -222,6 +223,14 @@ public class Tariff {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+	
+	public String getClosedDate() {
+		return closedDate;
+	}
+
+	public void setClosedDate(String closedDate) {
+		this.closedDate = closedDate;
 	}
 
 	public String getTimeZone() {

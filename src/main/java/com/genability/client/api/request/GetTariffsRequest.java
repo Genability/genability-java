@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.genability.client.types.ChargeType;
@@ -19,6 +20,7 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	private Long lseId;
 	private Long masterTariffId;
 	private DateTime effectiveOn;
+	private LocalDate openOn;
 	private DateTime fromDateTime;
 	private DateTime toDateTime;
 	private Boolean isActive;
@@ -99,6 +101,14 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 
 	public void setEffectiveOn(DateTime effectiveOn) {
 		this.effectiveOn = effectiveOn;
+	}
+	
+	public LocalDate getOpenOn() {
+		return openOn;
+	}
+
+	public void setOpenOn(LocalDate openOn) {
+		this.openOn = openOn;
 	}
 
 	public DateTime getFromDateTime() {
@@ -222,6 +232,7 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		addParam(qparams,"hasTieredRates",hasTieredRates);
 		addParam(qparams,"hasContractedRates",hasContractedRates);
 		addParam(qparams,"hasTimeOfUseRates",hasTimeOfUseRates);
+		addParam(qparams,"openOn", openOn);
 
 		return qparams;
 	}
