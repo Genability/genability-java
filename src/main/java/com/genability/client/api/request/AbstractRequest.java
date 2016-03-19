@@ -49,38 +49,28 @@ public abstract class AbstractRequest {
 	}
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, Long paramValue) {
-		
-		if(paramValue != null) 
+		if(paramValue != null) {
 			qparams.add(new BasicNameValuePair(paramName, paramValue.toString()));
-
-	} // end of addParam for Long
+		}
+	}
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, Integer paramValue) {
-		
-		if(paramValue != null) 
+		if(paramValue != null) {
 			qparams.add(new BasicNameValuePair(paramName, paramValue.toString()));
-
-	} // end of addParam for Integer
+		}
+	}
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, String paramValue) {
-		
 		if(paramValue != null) {
-			
 			qparams.add(new BasicNameValuePair(paramName, paramValue));
-			
 		}
-
-	} // end of addParam for String
+	}
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, BigDecimal paramValue) {
-		
 		if(paramValue != null) {
-			
 			qparams.add(new BasicNameValuePair(paramName, paramValue.toPlainString()));
-			
 		}
-
-	} // end of addParam for BigDecimal
+	}
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, Double paramValue) {
 		if(paramValue != null) {
@@ -89,91 +79,55 @@ public abstract class AbstractRequest {
 	}
 	
 	protected void addParam(List<NameValuePair> qparams, String paramName, String[] paramValues) {
-		
 		if(paramValues != null) {
-			
 			for(String paramValue : paramValues)
 			    qparams.add(new BasicNameValuePair(paramName, paramValue));
-			
 		}
-
-	} // end of addParam for String[]
-
+	}
 
 	protected <E extends Enum<E>> void addParam(List<NameValuePair> qparams, String paramName, E[] paramValues) {
-		
 		if(paramValues != null) {
-			
 			qparams.add(new BasicNameValuePair(paramName, EnumUtil.enumListString(paramValues)));
-			
 		}
-
-	} // end of addParam for Enum[]
-
+	}
 
 	protected <E extends Enum<E>> void addParam(List<NameValuePair> qparams, String paramName, E paramValue) {
-		
 		if(paramValue != null) {
-			
 			qparams.add(new BasicNameValuePair(paramName,  paramValue.name()));
-			
 		}
-
-	} // end of addParam for Enum
-
+	}
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, DateTime paramValue) {
-		
 		if(paramValue != null) {
-			
 			//TODO - update this with correct formatting
 			qparams.add(new BasicNameValuePair(paramName, paramValue.toString()));
-			
 		}
-
-	} // end of addParam for DateTime
+	}
 	
 	protected void addParam(List<NameValuePair> qparams, String paramName, LocalDate paramValue) {
-		
 		if(paramValue != null) {
-			
 			//TODO - update this with correct formatting
 			qparams.add(new BasicNameValuePair(paramName, paramValue.toString()));
-			
 		}
-
-	} // end of addParam for DateTime
+	}
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, DateTime paramValue, String format) {
-		
 		if(paramValue != null) {
-
 			qparams.add(new BasicNameValuePair(paramName, paramValue
 					.toString(DateTimeFormat.forPattern(format))));
-			
 		}
-
-	} // end of addParam for DateTime
+	}
 
 	protected void addParam(List<NameValuePair> qparams, String paramName, DateTime paramValue, DateTimeFormatter formatter) {
-		
 		if(paramValue != null) {
-
 			qparams.add(new BasicNameValuePair(paramName, paramValue.toString(formatter)));
-			
 		}
-
-	} // end of addParam for DateTime
+	}
 	
 	protected void addParam(List<NameValuePair> qparams, String paramName, Boolean paramValue) {
-		
 		if(paramValue != null) {
-			
 			qparams.add(new BasicNameValuePair(paramName, 
 					(Boolean.FALSE.equals(paramValue) ? "false" : "true")));
-			
 		}
-
-	} // end of addParam for Boolean
-	
+	}
 }
