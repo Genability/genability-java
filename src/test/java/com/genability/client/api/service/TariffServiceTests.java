@@ -98,7 +98,16 @@ public class TariffServiceTests extends BaseServiceTests {
 		
 	}
 	
-
+	@Test
+	public void getTariffsWithAfterTax() {
+		String testCase = "Get tariffs with AFTER_TAX charge class";
+		
+		GetTariffsRequest request = new GetTariffsRequest();
+		request.setPopulateRates(true);
+		request.setZipCode("95818");
+		
+		callGetTariffs(testCase, request);
+	}
 
 	public void callGetTariffs(String testCase, GetTariffsRequest request) {
 		
