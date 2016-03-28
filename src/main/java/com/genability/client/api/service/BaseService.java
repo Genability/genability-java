@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -55,6 +56,7 @@ public class BaseService {
 	    mapper = new ObjectMapper();
 	    mapper.registerModule(new JodaModule());
 	    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+	    mapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
 	    mapper.setSerializationInclusion(Include.NON_NULL);
 
 	    httpClient = HttpClientBuilder.create().build();
@@ -91,6 +93,10 @@ public class BaseService {
 		this.mapper = mapper;
 	}
 
+	public ObjectMapper getMapper() {
+		return mapper;
+	}
+	
 	public void setHttpClient(HttpClient httpClient) {
 		this.httpClient = httpClient;
 	}
