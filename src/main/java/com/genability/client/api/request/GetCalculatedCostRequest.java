@@ -41,6 +41,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 	private BigDecimal dataFactor;
 	private String zipCode;
 	private Long territoryId;
+	private DateTime tariffEffectiveOn;
 
 	/**
 	 * Private member variable detailLevel
@@ -264,6 +265,14 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 
 	public void setTerritoryId(Long territoryId) {
 		this.territoryId = territoryId;
+	}
+
+	public DateTime getTariffEffectiveOn() {
+		return tariffEffectiveOn;
+	}
+
+	public void setTariffEffectiveOn(DateTime tariffEffectiveOn) {
+		this.tariffEffectiveOn = tariffEffectiveOn;
 	}
 
 	@Override
