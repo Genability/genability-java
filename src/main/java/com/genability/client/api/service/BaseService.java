@@ -235,6 +235,7 @@ public class BaseService {
 
 			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
 			request.addHeader("Authorization", "Basic " + basic_auth);
+			request.addHeader("Accept-Encoding", "gzip");
 
 			return httpClient.execute(request, new ResponseHandler<T>() {
 				@Override
