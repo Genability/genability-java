@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -14,6 +15,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.config.RequestConfig.Builder;
+import org.apache.http.client.entity.GzipCompressingEntity;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -50,13 +52,13 @@ public class BaseService {
 	private ObjectMapper mapper;
 
 	private HttpClient httpClient;
-
-
+	private boolean requestCompression = false;
+	
 	public BaseService() {
 	    mapper = new ObjectMapper();
 	    mapper.registerModule(new JodaModule());
 	    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-	    mapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
+	    mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
 	    mapper.setSerializationInclusion(Include.NON_NULL);
 
 	    httpClient = HttpClientBuilder.create().build();
@@ -101,6 +103,14 @@ public class BaseService {
 		this.httpClient = httpClient;
 	}
 
+	public boolean getRequestCompression() {
+		return requestCompression;
+	}
+	
+	public void setRequestCompression(boolean requestCompression) {
+		this.requestCompression = requestCompression;
+	}
+	
 	/**
 	 * Helper method that makes a HTTP GET to the Genability APIs.
 	 * @param <T> The type parameter.
@@ -140,7 +150,7 @@ public class BaseService {
 		if(log.isDebugEnabled()) log.debug(url);
 
 		HttpPost postRequest = new HttpPost(url);
-		postRequest.setEntity(new JacksonHttpEntity(requestPayload));
+		postRequest.setEntity(getEntity(requestPayload));
 
 		return execute(postRequest, resultTypeReference);
 	}
@@ -164,7 +174,7 @@ public class BaseService {
 			log.debug(url);
 
 		HttpPut putRequest = new HttpPut(url);
-		putRequest.setEntity(new JacksonHttpEntity(requestPayload));
+		putRequest.setEntity(getEntity(requestPayload));
 
 		return execute(putRequest, resultTypeReference);
 	}
@@ -201,7 +211,7 @@ public class BaseService {
 		builder.addPart("fileData", fileBody);
 		builder.addTextBody("fileFormat", request.getFileFormat(),
 				ContentType.TEXT_XML);
-		postRequest.setEntity(builder.build());
+		postRequest.setEntity(getEntity(builder.build()));
 
 		return execute(postRequest, resultTypeReference);
 	}
@@ -268,6 +278,18 @@ public class BaseService {
 		}
 	}
 
+	private HttpEntity getEntity(Object obj) {
+		return getEntity(new JacksonHttpEntity(obj));
+	}
+	
+	private HttpEntity getEntity(HttpEntity ent) {
+		if (requestCompression) {
+			return new GzipCompressingEntity(ent);
+		} else {
+			return ent;
+		}
+	}
+	
 	private class JacksonHttpEntity extends AbstractHttpEntity {
 
 		private final Object object;
