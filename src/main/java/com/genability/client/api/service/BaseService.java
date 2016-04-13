@@ -59,6 +59,7 @@ public class BaseService {
 	    mapper.registerModule(new JodaModule());
 	    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 	    mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
+	    mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 	    mapper.setSerializationInclusion(Include.NON_NULL);
 
 	    httpClient = HttpClientBuilder.create().build();
