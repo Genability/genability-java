@@ -51,7 +51,7 @@ public class BaseService {
 	
 	private ObjectMapper mapper;
 
-	private HttpClient httpClient;
+	private HttpClient httpClient = HttpClientBuilder.create().build();
 	private boolean requestCompression = false;
 	
 	public BaseService() {
@@ -61,8 +61,6 @@ public class BaseService {
 	    mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
 	    mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 	    mapper.setSerializationInclusion(Include.NON_NULL);
-
-	    httpClient = HttpClientBuilder.create().build();
     }
 
 	/**
@@ -247,6 +245,7 @@ public class BaseService {
 			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
 			request.addHeader("Authorization", "Basic " + basic_auth);
 			request.addHeader("Accept-Encoding", "gzip");
+			request.addHeader("Connection", "close"); //close connections after we receive a response
 
 			return httpClient.execute(request, new ResponseHandler<T>() {
 				@Override
