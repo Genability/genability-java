@@ -4,7 +4,7 @@
 
 	<groupId>com.genability</groupId>
 	<artifactId>genability-client</artifactId>
-	<version>1.5.0-SNAPSHOT</version>
+	<version>1.5.1</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Genability API Java Client</description>
 	<url>http://github.com/Genability/genability-java/</url>
@@ -24,8 +24,8 @@
       		<organizationUrl>http://genability.com</organizationUrl>
     	</developer>
     	<developer>
-      		<name>Scott Harris</name>
-      		<email>sharris@genability.com</email>
+      		<name>Patrick Sheehan</name>
+      		<email>psheehan@genability.com</email>
       		<organization>Genability</organization>
       		<organizationUrl>http://genability.com</organizationUrl>
     	</developer>
