@@ -32,6 +32,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	private String providerAccountId;
 	private String accountId;
 	private Boolean populateCosts;
+	private Boolean useIntelligentBaselining;
 
 	private DateTime fromDateTime;
 	private DateTime toDateTime;
@@ -63,6 +64,10 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	public void setPopulateCosts(final boolean populateCosts) {
 		this.populateCosts = populateCosts;
 	}
+
+	public Boolean getUseIntelligentBaselining() { return useIntelligentBaselining; }
+
+	public void setUseIntelligentBaselining(final boolean useIb) { this.useIntelligentBaselining = useIb; }
 
 	@JsonSerialize(using=DateTimeSerializer.class)
 	public DateTime getFromDateTime() {
