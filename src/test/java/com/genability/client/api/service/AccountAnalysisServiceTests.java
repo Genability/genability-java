@@ -111,8 +111,8 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
         productionProfile.setProviderProfileId("PRODUCTION_RESIDENTIAL_CA_V5" + UUID.randomUUID());
         profileService.addProfile(productionProfile);
 
-        AccountAnalysisRequest request = createSavingsAnalysis(usageProfile, productionProfile);
-        request.setProviderAccountId(newAccount.getProviderAccountId());
+        AccountAnalysisRequest request = createSavingsAnalysis(usageProfile, productionProfile)
+        		.setProviderAccountId(newAccount.getProviderAccountId());
 
         try {
             Response<AccountAnalysis> aaResponse = accountAnalysisService.calculateSavingsAnalysis(request);

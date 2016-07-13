@@ -45,29 +45,37 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 		return providerAccountId;
 	}
 
-	public void setProviderAccountId(String providerAccountId) {
+	public AccountAnalysisRequest setProviderAccountId(String providerAccountId) {
 		this.providerAccountId = providerAccountId;
+		return this;
 	}
 
 	public String getAccountId() {
 		return accountId;
 	}
 
-	public void setAccountId(String accountId) {
+	public AccountAnalysisRequest setAccountId(String accountId) {
 		this.accountId = accountId;
+		return this;
 	}
 
 	public Boolean getPopulateCosts() {
 		return populateCosts;
 	}
 
-	public void setPopulateCosts(final boolean populateCosts) {
+	public AccountAnalysisRequest setPopulateCosts(final boolean populateCosts) {
 		this.populateCosts = populateCosts;
+		return this;
 	}
 
-	public Boolean getUseIntelligentBaselining() { return useIntelligentBaselining; }
+	public Boolean getUseIntelligentBaselining() {
+		return useIntelligentBaselining;
+	}
 
-	public void setUseIntelligentBaselining(final boolean useIb) { this.useIntelligentBaselining = useIb; }
+	public AccountAnalysisRequest setUseIntelligentBaselining(final boolean useIb) {
+		this.useIntelligentBaselining = useIb;
+		return this;
+	}
 
 	@JsonSerialize(using=DateTimeSerializer.class)
 	public DateTime getFromDateTime() {
@@ -83,32 +91,35 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * @param day The day.
 	 */
 	@JsonIgnore
-	 public void setFromDateTime(int year, int month, int day) {
+	public AccountAnalysisRequest setFromDateTime(int year, int month, int day) {
 		setFromDateTime(new LocalDate(year, month, day));
-	 }
+		return this;
+	}
 
-	 /**
+	/**
 	 * This method is used to set the fromDateTime as a date only. The resulting request will include the following:
 	 * "fromDateTime":"YYYY-MM-DD"
 	 * 
 	 * @param date The date.
 	 */
 	@JsonIgnore
-	 public void setFromDateTime(LocalDate date) {
-		 fromDateTime = convertLocalDate(date);
-	 }
+	public AccountAnalysisRequest setFromDateTime(LocalDate date) {
+		fromDateTime = convertLocalDate(date);
+		return this;
+	}
 
-	 @JsonProperty
-	 public void setFromDateTime(DateTime fromDateTime) {
-		 this.fromDateTime = fromDateTime;
-	 }
+	@JsonProperty
+	public AccountAnalysisRequest setFromDateTime(DateTime fromDateTime) {
+		this.fromDateTime = fromDateTime;
+		return this;
+	}
 
-	 @JsonSerialize(using=DateTimeSerializer.class)
-	 public DateTime getToDateTime() {
-		 return toDateTime;
-	 }
+	@JsonSerialize(using=DateTimeSerializer.class)
+	public DateTime getToDateTime() {
+		return toDateTime;
+	}
 
-	 /**
+	/**
 	 * This method is used to set the toDateTime as a date only. The resulting request will include the following:
 	 * "toDateTime":"YYYY-MM-DD"
 	 * 
@@ -117,65 +128,70 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * @param day The day.
 	 */
 	@JsonIgnore
-	 public void setToDateTime(int year, int month, int day) {
-		 setToDateTime(new LocalDate(year, month, day));
-	 }
+	public AccountAnalysisRequest setToDateTime(int year, int month, int day) {
+		setToDateTime(new LocalDate(year, month, day));
+		return this;
+	}
 
-	 /**
+	/**
 	 * This method is used to set the toDateTime as a date only. The resulting request will include the following:
 	 * "toDateTime":"YYYY-MM-DD"
 	 * 
 	 * @param date The date.
 	 */
 	@JsonIgnore
-	 public void setToDateTime(LocalDate date) {
-		 toDateTime = convertLocalDate(date);
-	 }
+	public AccountAnalysisRequest setToDateTime(LocalDate date) {
+		toDateTime = convertLocalDate(date);
+		return this;
+	}
 
-	 @JsonProperty
-	 public void setToDateTime(DateTime toDateTime) {
-		 this.toDateTime = toDateTime;
-	 }
+	@JsonProperty
+	public AccountAnalysisRequest setToDateTime(DateTime toDateTime) {
+		this.toDateTime = toDateTime;
+		return this;
+	}
 
-	 public List<TariffRate> getRateInputs() {
-		 return rateInputs;
-	 }
+	public List<TariffRate> getRateInputs() {
+		return rateInputs;
+	}
 
-	 public void setRateInputs(List<TariffRate> rateInputs) {
-		 this.rateInputs = rateInputs;
-	 }
+	public AccountAnalysisRequest setRateInputs(List<TariffRate> rateInputs) {
+		this.rateInputs = rateInputs;
+		return this;
+	}
 
-	 public List<PropertyData> getPropertyInputs() {
-		 return propertyInputs;
-	 }
+	public List<PropertyData> getPropertyInputs() {
+		return propertyInputs;
+	}
 
-	 public void setPropertyInputs(List<PropertyData> propertyInputs) {
-		 this.propertyInputs = propertyInputs;
-	 }
+	public AccountAnalysisRequest setPropertyInputs(List<PropertyData> propertyInputs) {
+		this.propertyInputs = propertyInputs;
+		return this;
+	}
 
-	 private DateTime convertLocalDate(LocalDate date) {
-		 DateTime dt = new DateTime(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth(), 0, 0, DATE_ONLY_TIMEZONE);
-		 return dt;
-	 }
-	 
-	 /*		
-	  * This class is used to serialize DateTime objects. In the special case where the timeZone is set to		
-	  * AccountAnalysisRequest.DATE_ONLY_TIMEZONE, the result will contain the date only		
-	  */
-	 private static class DateTimeSerializer extends JsonSerializer<DateTime> {
+	private DateTime convertLocalDate(LocalDate date) {
+		DateTime dt = new DateTime(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth(), 0, 0, DATE_ONLY_TIMEZONE);
+		return dt;
+	}
 
-		 @Override
-		 public void serialize(DateTime value, JsonGenerator jgen,
-				 SerializerProvider provider) throws IOException,
-				 JsonProcessingException {
+	/*		
+	 * This class is used to serialize DateTime objects. In the special case where the timeZone is set to		
+	 * AccountAnalysisRequest.DATE_ONLY_TIMEZONE, the result will contain the date only		
+	 */
+	private static class DateTimeSerializer extends JsonSerializer<DateTime> {
 
-			 if (DATE_ONLY_TIMEZONE.equals(value.getZone())) {
-				 LocalDate date = new LocalDate(value.getYear(), value.getMonthOfYear(), value.getDayOfMonth());
-				 jgen.writeObject(date);
-			 } else {
-				 jgen.writeObject(value);
-			 }
+		@Override
+		public void serialize(DateTime value, JsonGenerator jgen,
+				SerializerProvider provider) throws IOException,
+		JsonProcessingException {
 
-		 }
-	 }
+			if (DATE_ONLY_TIMEZONE.equals(value.getZone())) {
+				LocalDate date = new LocalDate(value.getYear(), value.getMonthOfYear(), value.getDayOfMonth());
+				jgen.writeObject(date);
+			} else {
+				jgen.writeObject(value);
+			}
+
+		}
+	}
 }

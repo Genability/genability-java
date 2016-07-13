@@ -1,6 +1,6 @@
 package com.genability.client.api.request;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -27,8 +27,7 @@ public class AccountAnalysisRequestTests {
 	
 	@Test
 	public void testFromDateNoTimezone() throws JsonProcessingException {
-		AccountAnalysisRequest request = new AccountAnalysisRequest();
-		request.setFromDateTime(2015, 1, 1);
+		AccountAnalysisRequest request = new AccountAnalysisRequest().setFromDateTime(2015, 1, 1);
 		String target = "{\"fields\":\"ext\",\"fromDateTime\":\"2015-01-01\"}";
 		
 		assertEquals("Didn't serialize fromDateTime correctly with just a date", target, mapper.writeValueAsString(request));
@@ -36,8 +35,7 @@ public class AccountAnalysisRequestTests {
 	
 	@Test
 	public void testToDateNoTimezone() throws JsonProcessingException {
-		AccountAnalysisRequest request = new AccountAnalysisRequest();
-		request.setToDateTime(2015, 1, 1);
+		AccountAnalysisRequest request = new AccountAnalysisRequest().setToDateTime(2015, 1, 1);
 		String target = "{\"fields\":\"ext\",\"toDateTime\":\"2015-01-01\"}";
 		
 		assertEquals("Didn't serialize toDateTime correctly with just a date", target, mapper.writeValueAsString(request));
@@ -45,8 +43,7 @@ public class AccountAnalysisRequestTests {
 	
 	@Test
 	public void testFromLocalDate() throws JsonProcessingException {
-		AccountAnalysisRequest request = new AccountAnalysisRequest();
-		request.setFromDateTime(new LocalDate(2015, 1, 1));
+		AccountAnalysisRequest request = new AccountAnalysisRequest().setFromDateTime(new LocalDate(2015, 1, 1));
 		String target = "{\"fields\":\"ext\",\"fromDateTime\":\"2015-01-01\"}";
 		
 		assertEquals("Didn't serialize fromDateTime correctly with just a date", target, mapper.writeValueAsString(request));
@@ -54,8 +51,7 @@ public class AccountAnalysisRequestTests {
 	
 	@Test
 	public void testToLocalDate() throws JsonProcessingException {
-		AccountAnalysisRequest request = new AccountAnalysisRequest();
-		request.setToDateTime(new LocalDate(2015, 1, 1));
+		AccountAnalysisRequest request = new AccountAnalysisRequest().setToDateTime(new LocalDate(2015, 1, 1));
 		String target = "{\"fields\":\"ext\",\"toDateTime\":\"2015-01-01\"}";
 		
 		assertEquals("Didn't serialize toDateTime correctly with just a date", target, mapper.writeValueAsString(request));
@@ -63,8 +59,8 @@ public class AccountAnalysisRequestTests {
 	
 	@Test
 	public void testFromDateWithTimezone() throws JsonProcessingException {
-		AccountAnalysisRequest request = new AccountAnalysisRequest();
-		request.setFromDateTime(new DateTime(2015, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific")));
+		AccountAnalysisRequest request = new AccountAnalysisRequest()
+				.setFromDateTime(new DateTime(2015, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific")));
 		String target = "{\"fields\":\"ext\",\"fromDateTime\":\"2015-01-01T00:00:00.000-08:00\"}";
 		
 		assertEquals("Didn't serialize fromDateTime correctly with a datetime", target, mapper.writeValueAsString(request));
@@ -72,8 +68,8 @@ public class AccountAnalysisRequestTests {
 	
 	@Test
 	public void testToDateWithTimezone() throws JsonProcessingException {
-		AccountAnalysisRequest request = new AccountAnalysisRequest();
-		request.setToDateTime(new DateTime(2015, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific")));
+		AccountAnalysisRequest request = new AccountAnalysisRequest()
+				.setToDateTime(new DateTime(2015, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific")));
 		String target = "{\"fields\":\"ext\",\"toDateTime\":\"2015-01-01T00:00:00.000-08:00\"}";
 		
 		assertEquals("Didn't serialize toDateTime correctly with a datetime", target, mapper.writeValueAsString(request));
