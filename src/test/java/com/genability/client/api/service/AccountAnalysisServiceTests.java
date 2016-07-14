@@ -66,12 +66,14 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
         usageProfile.setAccountId(newAccount.getAccountId());
         List<ReadingData> readingDataList = new ArrayList<ReadingData>();
         for(int i = 0; i < 8760; i++) {
-            ReadingData readingData = new ReadingData();
-            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
-            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
-            readingData.setQuantityUnit("kWh");
-            readingData.setQuantityValue(BigDecimal.valueOf(250));
-            readingDataList.add(readingData);
+        	ReadingData readingData = ReadingData.newBuilder()
+        			.setFromDateTime(baseFromDateTime.plusHours(i))
+        			.setToDateTime(baseFromDateTime.plusHours(i + 1))
+        			.setQuantityUnit("kWh")
+        			.setQuantityValue(BigDecimal.valueOf(250))
+        			.build();
+        	
+        	readingDataList.add(readingData);
         }
         usageProfile.setReadingData(readingDataList);
         usageProfile.setProviderProfileId("USAGE_RESIDENTIAL_CA_V5" + UUID.randomUUID());
@@ -81,12 +83,14 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
         productionProfile.setAccountId(newAccount.getAccountId());
         List<ReadingData> production = new ArrayList<ReadingData>();
         for(int i = 0; i < 8760; i++) {
-            ReadingData readingData = new ReadingData();
-            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
-            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
-            readingData.setQuantityUnit("kWh");
-            readingData.setQuantityValue(BigDecimal.valueOf(200));
-            production.add(readingData);
+        	ReadingData readingData = ReadingData.newBuilder()
+        			.setFromDateTime(baseFromDateTime.plusHours(i))
+        			.setToDateTime(baseFromDateTime.plusHours(i + 1))
+        			.setQuantityUnit("kWh")
+        			.setQuantityValue(BigDecimal.valueOf(200))
+        			.build();
+
+        	production.add(readingData);
         }
         productionProfile.setReadingData(production);
         productionProfile.setProviderProfileId("PRODUCTION_RESIDENTIAL_CA_V5" + UUID.randomUUID());
@@ -165,11 +169,13 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
 	        usageProfile.setAccountId(newAccount.getAccountId());
 	        List<ReadingData> readingDataList = new ArrayList<ReadingData>();
 	        for(int i = 0; i < 8760; i++) {
-	            ReadingData readingData = new ReadingData();
-	            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
-	            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
-	            readingData.setQuantityUnit("kWh");
-	            readingData.setQuantityValue(BigDecimal.valueOf(250));
+	            ReadingData readingData = ReadingData.newBuilder()
+	            		.setFromDateTime(baseFromDateTime.plusHours(i))
+	            		.setToDateTime(baseFromDateTime.plusHours(i + 1))
+	            		.setQuantityUnit("kWh")
+	            		.setQuantityValue(BigDecimal.valueOf(250))
+	            		.build();
+	            
 	            readingDataList.add(readingData);
 	        }
 	        usageProfile.setReadingData(readingDataList);
@@ -180,11 +186,13 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
 	        productionProfile.setAccountId(newAccount.getAccountId());
 	        List<ReadingData> production = new ArrayList<ReadingData>();
 	        for(int i = 0; i < 8760; i++) {
-	            ReadingData readingData = new ReadingData();
-	            readingData.setFromDateTime(baseFromDateTime.plusHours(i));
-	            readingData.setToDateTime(baseFromDateTime.plusHours(i + 1));
-	            readingData.setQuantityUnit("kWh");
-	            readingData.setQuantityValue(BigDecimal.valueOf(200));
+	            ReadingData readingData = ReadingData.newBuilder()
+	            		.setFromDateTime(baseFromDateTime.plusHours(i))
+	            		.setToDateTime(baseFromDateTime.plusHours(i + 1))
+	            		.setQuantityUnit("kWh")
+	            		.setQuantityValue(BigDecimal.valueOf(200))
+	            		.build();
+	            
 	            production.add(readingData);
 	        }
 	        productionProfile.setReadingData(production);

@@ -53,21 +53,21 @@ public class PropertyData {
 		return new Builder();
 	}
 	
-	public static final class Builder {
+	public static class Builder {
 		
-		private String keyName;
-		private String source;
-		private DateTime fromDateTime;	
-		private DateTime toDateTime;	
-		private String period;
-		private String unit;	
-		private String dataValue;
-		private BigDecimal dataFactor;
-		private BigDecimal accuracy;
-		private String scenarios;
-		private DataType dataType;
-		private Long duration;
-		private String operator;
+		protected String keyName;
+		protected String source;
+		protected DateTime fromDateTime;	
+		protected DateTime toDateTime;	
+		protected String period;
+		protected String unit;	
+		protected String dataValue;
+		protected BigDecimal dataFactor;
+		protected BigDecimal accuracy;
+		protected String scenarios;
+		protected DataType dataType;
+		protected Long duration;
+		protected String operator;
 		
 		public Builder setKeyName(String keyName) {
 			this.keyName = keyName;
