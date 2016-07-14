@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -37,18 +36,15 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
     @Test
     public void testSavingsAnalysis() {
 
-        Account account = new Account();
-        account.setAccountName("test-api");
-        account.setProviderAccountId("test-api" + UUID.randomUUID());
-        Address address = new Address();
-        address.setAddressString("221 Main Street, San Francisco, CA 94105");
-        account.setAddress(address);
-        Map<String, PropertyData> propertyDataMap = new HashMap<String, PropertyData>();
-        PropertyData propertyData = new PropertyData();
-        propertyData.setKeyName("customerClass");
-        propertyData.setDataValue("1");
-        propertyDataMap.put(propertyData.getKeyName(), propertyData);
-        account.setProperties(propertyDataMap);
+        Account account = Account.newBuilder()
+        		.setAccountName("test-api")
+        		.setProviderAccountId("test-api" + UUID.randomUUID())
+        		.setAddress(Address.newBuilder()
+        				.setAddressString("221 Main Street, San Francisco, CA 94105")
+        				.build())
+        		.addProperty("customerClass", "1")
+        		.build();
+        
         Response<Account> restResponse = accountService.addAccount(account);
         assertNotNull("new account response is null", restResponse);
         assertEquals("bad status", restResponse.getStatus(), Response.STATUS_SUCCESS);
@@ -138,18 +134,15 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
 
     @Test
     public void testPopulateCosts() {
-        Account account = new Account();
-        account.setAccountName("test-api");
-        account.setProviderAccountId("test-api" + UUID.randomUUID());
-        Address address = new Address();
-        address.setAddressString("221 Main Street, San Francisco, CA 94105");
-        account.setAddress(address);
-        Map<String, PropertyData> propertyDataMap = new HashMap<String, PropertyData>();
-        PropertyData propertyData = new PropertyData();
-        propertyData.setKeyName("customerClass");
-        propertyData.setDataValue("1");
-        propertyDataMap.put(propertyData.getKeyName(), propertyData);
-        account.setProperties(propertyDataMap);
+        Account account = Account.newBuilder()
+        		.setAccountName("test-api")
+        		.setProviderAccountId("test-api" + UUID.randomUUID())
+        		.setAddress(Address.newBuilder()
+        				.setAddressString("221 Main Street, San Francisco, CA 94105")
+        				.build())
+        		.addProperty("customerClass", "1")
+        		.build();
+
         Response<Account> restResponse = accountService.addAccount(account);
         assertNotNull("new account response is null", restResponse);
         assertEquals("bad status", restResponse.getStatus(), Response.STATUS_SUCCESS);

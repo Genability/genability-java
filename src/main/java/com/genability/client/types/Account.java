@@ -31,72 +31,170 @@ public class Account {
 	private List<Tariff> tariffs;	
 	private Map<String, PropertyData> properties;
 
-	/**
-	 * @return the accountId
-	 */
+	public static Builder newBuilder() {
+		return new Builder();
+	}
+	
+	public static final class Builder {
+
+		private String accountId;
+		private String providerAccountId;
+		private String accountName;
+
+		private String customerOrgId;
+		private String customerOrgName;	
+		private CustomerClass customerClass;	
+
+		private AccountStatus status;
+		private AccountType type;
+		private Address address;
+
+		private List<Tariff> tariffs;	
+		private Map<String, PropertyData> properties;
+		
+		public Builder setAccountId(String accountId) {
+			this.accountId = accountId;
+			return this;
+		}
+		
+		public Builder setProviderAccountId(String providerAccountId) {
+			this.providerAccountId = providerAccountId;
+			return this;
+		}
+		
+		public Builder setAccountName(String accountName) {
+			this.accountName = accountName;
+			return this;
+		}
+		
+		public Builder setCustomerOrgId(String customerOrgId) {
+			this.customerOrgId = customerOrgId;
+			return this;
+		}
+		
+		public Builder setCustomerOrgName(String customerOrgName) {
+			this.customerOrgName = customerOrgName;
+			return this;
+		}
+		
+		public Builder setCustomerClass(CustomerClass customerClass) {
+			this.customerClass = customerClass;
+			return this;
+		}
+		
+		public Builder setStatus(AccountStatus status) {
+			this.status = status;
+			return this;
+		}
+		
+		public Builder setType(AccountType type) {
+			this.type = type;
+			return this;
+		}
+		
+		public Builder setAddress(Address address) {
+			this.address = address;
+			return this;
+		}
+		
+		public Builder setTariffs(List<Tariff> tariffs) {
+			this.tariffs = tariffs;
+			return this;
+		}
+		
+		public Builder setProperties(Map<String, PropertyData> properties) {
+			this.properties = properties;
+			return this;
+		}
+		
+		public Builder addProperty(String keyName, PropertyData data) {
+			if (properties == null) {
+				properties = new HashMap<String, PropertyData>();
+			}
+			
+			properties.put(keyName, data);
+			return this;
+		}
+		
+		/**
+		 * Add a new property to the profile. This property will be of the form:
+		 * <pre>
+		 * "properties": {
+		 *   "keyName": {
+		 *     "keyName": "keyName",
+		 *     "dataValue": "dataValue"
+		 *   }
+		 * }
+		 * </pre>
+		 */
+		public Builder addProperty(String keyName, String dataValue) {
+			if (properties == null) {
+				properties = new HashMap<String, PropertyData>();
+			}
+			
+			properties.put(keyName, PropertyData.newBuilder()
+					.setKeyName(keyName)
+					.setDataValue(dataValue)
+					.build());
+			
+			return this;
+		}
+		
+		public Account build() {
+			Account a = new Account();
+			
+			a.setAccountId(accountId);
+			a.setProviderAccountId(providerAccountId);
+			a.setAccountName(accountName);
+			a.setCustomerOrgId(customerOrgId);
+			a.setCustomerOrgName(customerOrgName);
+			a.setCustomerClass(customerClass);
+			a.setStatus(status);
+			a.setType(type);
+			a.setAddress(address);
+			a.setTariffs(tariffs);
+			a.setProperties(properties);
+			
+			return a;
+		}
+	}
+	
 	public String getAccountId() {
 		return accountId;
 	}
 
-	/**
-	 * @param accountId the accountId to set
-	 */
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
 
-	/**
-	 * @return the providerAccountId
-	 */
 	public String getProviderAccountId() {
 		return providerAccountId;
 	}
 
-	/**
-	 * @param providerAccountId the providerAccountId to set
-	 */
 	public void setProviderAccountId(String providerAccountId) {
 		this.providerAccountId = providerAccountId;
 	}
 
-	/**
-	 * @return the accountName
-	 */
 	public String getAccountName() {
 		return accountName;
 	}
 
-	/**
-	 * @param accountName the accountName to set
-	 */
 	public void setAccountName(String accountName) {
 		this.accountName = accountName;
 	}
 
-	/**
-	 * @return the customerOrgId
-	 */
 	public String getCustomerOrgId() {
 		return customerOrgId;
 	}
 
-	/**
-	 * @param customerOrgId the customerOrgId to set
-	 */
 	public void setCustomerOrgId(String customerOrgId) {
 		this.customerOrgId = customerOrgId;
 	}
 
-	/**
-	 * @return the customerOrgName
-	 */
 	public String getCustomerOrgName() {
 		return customerOrgName;
 	}
 
-	/**
-	 * @param customerOrgName the customerOrgName to set
-	 */
 	public void setCustomerOrgName(String customerOrgName) {
 		this.customerOrgName = customerOrgName;
 	}
@@ -111,16 +209,10 @@ public class Account {
       this.owner = owner;
     }
 	
-	/**
-	 * @return the status
-	 */
 	public AccountStatus getStatus() {
 		return status;
 	}
 
-	/**
-	 * @param status the status to set
-	 */
 	public void setStatus(AccountStatus status) {
 		this.status = status;
 	}
@@ -167,17 +259,10 @@ public class Account {
 	    this.properties.put(key, value);
 	}
 
-	/**
-	 * @return the tariffs
-	 */
 	public List<Tariff> getTariffs() {
 		return tariffs;
 	}
 
-	/**
-	 * @param tariffs The tariffs.
-	 *            the tariffs to set
-	 */
 	public void setTariffs(List<Tariff> tariffs) {
 		this.tariffs = tariffs;
 	}

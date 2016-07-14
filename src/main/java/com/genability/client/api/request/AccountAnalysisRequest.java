@@ -209,7 +209,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 		return populateCosts;
 	}
 
-	public void setPopulateCosts(final boolean populateCosts) {
+	public void setPopulateCosts(Boolean populateCosts) {
 		this.populateCosts = populateCosts;
 	}
 
@@ -217,7 +217,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 		return useIntelligentBaselining;
 	}
 
-	public void setUseIntelligentBaselining(final boolean useIb) {
+	public void setUseIntelligentBaselining(Boolean useIb) {
 		this.useIntelligentBaselining = useIb;
 	}
 

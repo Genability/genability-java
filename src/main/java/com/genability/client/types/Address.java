@@ -19,7 +19,92 @@ public class Address {
 	private String country;
 	private Double latitude;
 	private Double longitude;
-
+	
+	public static Builder newBuilder() {
+		return new Builder();
+	}
+	
+	public static final class Builder {
+		
+		private String addressString;
+		private String addressName;
+		private String address1;
+		private String address2;
+		private String city;
+		private String state;
+		private String zipCode;
+		private String country;
+		private Double latitude;
+		private Double longitude;
+		
+		public Builder setAddressString(String addressString) {
+			this.addressString = addressString;
+			return this;
+		}
+		
+		public Builder setAddressName(String addressName) {
+			this.addressName = addressName;
+			return this;
+		}
+		
+		public Builder setAddress1(String address1) {
+			this.address1 = address1;
+			return this;
+		}
+		
+		public Builder setAddress2(String address2) {
+			this.address2 = address2;
+			return this;
+		}
+		
+		public Builder setCity(String city) {
+			this.city = city;
+			return this;
+		}
+		
+		public Builder setState(String state) {
+			this.state = state;
+			return this;
+		}
+		
+		public Builder setZipCode(String zipCode) {
+			this.zipCode = zipCode;
+			return this;
+		}
+		
+		public Builder setCountry(String country) {
+			this.country = country;
+			return this;
+		}
+		
+		public Builder setLatitude(Double latitude) {
+			this.latitude = latitude;
+			return this;
+		}
+		
+		public Builder setLongitude(Double longitude) {
+			this.longitude = longitude;
+			return this;
+		}
+		
+		public Address build() {
+			Address a = new Address();
+			
+			a.setAddressString(addressString);
+			a.setAddressName(addressName);
+			a.setAddress1(address1);
+			a.setAddress2(address2);
+			a.setCity(city);
+			a.setState(state);
+			a.setZipCode(zipCode);
+			a.setCountry(country);
+			a.setLatitude(latitude);
+			a.setLongitude(longitude);
+			
+			return a;
+		}
+	}
+	
 	public String getAddressString() {
 		return addressString;
 	}

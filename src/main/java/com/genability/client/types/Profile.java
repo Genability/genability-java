@@ -168,9 +168,11 @@ public class Profile implements Serializable {
 		/**
 		 * Add a new property to the profile. This property will be of the form:
 		 * <pre>
-		 * {
-		 *   "keyName": "keyName",
-		 *   "dataValue": "dataValue"
+		 * "properties": {
+		 *   "keyName": {
+		 *     "keyName": "keyName",
+		 *     "dataValue": "dataValue"
+		 *   }
 		 * }
 		 * </pre>
 		 */
