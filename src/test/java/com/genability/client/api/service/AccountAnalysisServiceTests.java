@@ -250,55 +250,44 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
     }
     
     private AccountAnalysisRequest createSavingsAnalysis(Profile usageProfile, Profile productionProfile) {
-        AccountAnalysisRequest request = new AccountAnalysisRequest();
-        request.setFromDateTime(new DateTime("2014-10-10"));
-
-        List<PropertyData> properties = new ArrayList<PropertyData>();
-        PropertyData propertyData = new PropertyData();
-        propertyData.setScenarios("before");
-        propertyData.setKeyName("masterTariffId");
-        propertyData.setDataValue("522");
-        properties.add(propertyData);
-
-        propertyData = new PropertyData();
-        propertyData.setScenarios("after");
-        propertyData.setKeyName("masterTariffId");
-        propertyData.setDataValue("522");
-        properties.add(propertyData);
-
-        propertyData = new PropertyData();
-        propertyData.setScenarios("before,after");
-        propertyData.setKeyName("rateInflation");
-        propertyData.setDataValue("3.5");
-        properties.add(propertyData);
-
-
-        propertyData = new PropertyData();
-        propertyData.setScenarios("solar");
-        propertyData.setKeyName("rateInflation");
-        propertyData.setDataValue("1.9");
-        properties.add(propertyData);
-
-
-        propertyData = new PropertyData();
-        propertyData.setScenarios("after,solar");
-        propertyData.setKeyName("solarDegradation");
-        propertyData.setDataValue("1.5");
-        properties.add(propertyData);
-
-        propertyData = new PropertyData();
-        propertyData.setScenarios("before");
-        propertyData.setKeyName("providerProfileId");
-        propertyData.setDataValue(usageProfile.getProviderProfileId());
-        properties.add(propertyData);
-
-        propertyData = new PropertyData();
-        propertyData.setScenarios("after,solar");
-        propertyData.setKeyName("providerProfileId");
-        propertyData.setDataValue(productionProfile.getProviderProfileId());
-        properties.add(propertyData);
-
-        request.setPropertyInputs(properties);
+        AccountAnalysisRequest request = AccountAnalysisRequest.newBuilder()
+        		.setFromDateTime(new DateTime("2014-10-10"))
+        		.addPropertyInput(PropertyData.newBuilder()
+        			.setScenarios("before")
+        			.setKeyName("masterTariffId")
+        			.setDataValue("522")
+        			.build())
+        		.addPropertyInput(PropertyData.newBuilder()
+        			.setScenarios("after")
+        			.setKeyName("masterTariffId")
+        			.setDataValue("522")
+        			.build())
+        		.addPropertyInput(PropertyData.newBuilder()
+        			.setScenarios("before,after")
+        			.setKeyName("rateInflation")
+        			.setDataValue("3.5")
+        			.build())
+        		.addPropertyInput(PropertyData.newBuilder()
+        			.setScenarios("solar")
+        			.setKeyName("rateInflation")
+        			.setDataValue("1.9")
+        			.build())
+        		.addPropertyInput(PropertyData.newBuilder()
+        			.setScenarios("solar")
+        			.setKeyName("solarDegradation")
+        			.setDataValue("1.5")
+        			.build())
+        		.addPropertyInput(PropertyData.newBuilder()
+        			.setScenarios("before")
+        			.setKeyName("providerProfileId")
+        			.setDataValue(usageProfile.getProviderProfileId())
+        			.build())
+        		.addPropertyInput(PropertyData.newBuilder()
+        			.setScenarios("after,solar")
+        			.setKeyName("providerProfileId")
+        			.setDataValue(productionProfile.getProviderProfileId())
+        			.build())
+        		.build();
 
         List<TariffRate> tariffRates = new ArrayList<TariffRate>();
         TariffRate tariffRate = new TariffRate();
