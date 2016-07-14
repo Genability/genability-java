@@ -174,7 +174,7 @@ public class Profile implements Serializable {
 		 * }
 		 * </pre>
 		 */
-		public Builder addProprety(String keyName, String dataValue) {
+		public Builder addProperty(String keyName, String dataValue) {
 			if (properties == null) {
 				properties = new HashMap<String, PropertyData>();
 			}
