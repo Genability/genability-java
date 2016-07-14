@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.genability.client.types.Fields;
 import com.genability.client.types.SortOrder;
 
 public abstract class AbstractGetNRequest extends AbstractRequest {
@@ -78,7 +77,7 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 			return getThis();
 		}
 
-		public void setRequestFields(AbstractGetNRequest request) {
+		protected void setRequestFields(AbstractGetNRequest request) {
 			super.setRequestFields(request);
 			request.setPageStart(pageStart);
 			request.setPageCount(pageCount);

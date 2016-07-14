@@ -39,6 +39,174 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 	private Boolean hasContractedRates;
 	private Boolean hasTimeOfUseRates;
 
+	public static Builder newBuilder() {
+		return new Builder();
+	}
+	
+	public static final class Builder extends AbstractGetNRequest.Builder<Builder> {
+
+		private Long lseId;
+		private Long masterTariffId;
+		private DateTime effectiveOn;
+		private LocalDate openOn;
+		private DateTime fromDateTime;
+		private DateTime toDateTime;
+		private Boolean isActive;
+		private CustomerClass[] customerClasses;
+		private TariffType[] tariffTypes;
+		private ServiceType[] serviceTypes;
+		private ChargeType[] chargeTypes;
+		private String zipCode;
+		private Boolean populateRates;
+		private Boolean populateProperties;
+		private String accountId;
+		private BigDecimal consumption;
+		private BigDecimal demand;
+		private Boolean hasNetMetering;
+		private Boolean hasTieredRates;
+		private Boolean hasContractedRates;
+		private Boolean hasTimeOfUseRates;
+		
+		public Builder setLseId(Long lseId) {
+			this.lseId = lseId;
+			return getThis();
+		}
+
+		public Builder setMasterTariffId(Long masterTariffId) {
+			this.masterTariffId = masterTariffId;
+			return getThis();
+		}
+
+		public Builder setEffectiveOn(DateTime effectiveOn) {
+			this.effectiveOn = effectiveOn;
+			return getThis();
+		}
+
+		public Builder setOpenOn(LocalDate openOn) {
+			this.openOn = openOn;
+			return getThis();
+		}
+
+		public Builder setFromDateTime(DateTime fromDateTime) {
+			this.fromDateTime = fromDateTime;
+			return getThis();
+		}
+
+		public Builder setToDateTime(DateTime toDateTime) {
+			this.toDateTime = toDateTime;
+			return getThis();
+		}
+
+		public Builder setIsActive(Boolean isActive) {
+			this.isActive = isActive;
+			return getThis();
+		}
+
+		public Builder setCustomerClasses(CustomerClass[] customerClasses) {
+			this.customerClasses = customerClasses;
+			return getThis();
+		}
+
+		public Builder setTariffTypes(TariffType[] tariffTypes) {
+			this.tariffTypes = tariffTypes;
+			return getThis();
+		}
+
+		public Builder setServiceTypes(ServiceType[] serviceTypes) {
+			this.serviceTypes = serviceTypes;
+			return getThis();
+		}
+
+		public Builder setChargeTypes(ChargeType[] chargeTypes) {
+			this.chargeTypes = chargeTypes;
+			return getThis();
+		}
+
+		public Builder setZipCode(String zipCode) {
+			this.zipCode = zipCode;
+			return getThis();
+		}
+
+		public Builder setPopulateRates(Boolean populateRates) {
+			this.populateRates = populateRates;
+			return getThis();
+		}
+
+		public Builder setPopulateProperties(Boolean populateProperties) {
+			this.populateProperties = populateProperties;
+			return getThis();
+		}
+
+		public Builder setAccountId(String accountId) {
+			this.accountId = accountId;
+			return getThis();
+		}
+
+		public Builder setConsumption(BigDecimal consumption) {
+			this.consumption = consumption;
+			return getThis();
+		}
+
+		public Builder setDemand(BigDecimal demand) {
+			this.demand = demand;
+			return getThis();
+		}
+
+		public Builder setHasNetMetering(Boolean hasNetMetering) {
+			this.hasNetMetering = hasNetMetering;
+			return getThis();
+		}
+
+		public Builder setHasTieredRates(Boolean hasTieredRates) {
+			this.hasTieredRates = hasTieredRates;
+			return getThis();
+		}
+
+		public Builder setHasContractedRates(Boolean hasContractedRates) {
+			this.hasContractedRates = hasContractedRates;
+			return getThis();
+		}
+
+		public Builder setHasTimeOfUseRates(Boolean hasTimeOfUseRates) {
+			this.hasTimeOfUseRates = hasTimeOfUseRates;
+			return getThis();
+		}
+
+		public GetTariffsRequest build() {
+			GetTariffsRequest request = new GetTariffsRequest();
+			
+			setRequestFields(request);
+			request.setLseId(lseId);
+			request.setMasterTariffId(masterTariffId);
+			request.setEffectiveOn(effectiveOn);
+			request.setOpenOn(openOn);
+			request.setFromDateTime(fromDateTime);
+			request.setToDateTime(toDateTime);
+			request.setIsActive(isActive);
+			request.setCustomerClasses(customerClasses);
+			request.setTariffTypes(tariffTypes);
+			request.setServiceTypes(serviceTypes);
+			request.setChargeTypes(chargeTypes);
+			request.setZipCode(zipCode);
+			request.setPopulateRates(populateRates);
+			request.setPopulateProperties(populateProperties);
+			request.setAccountId(accountId);
+			request.setConsumption(consumption);
+			request.setDemand(demand);
+			request.setHasNetMetering(hasNetMetering);
+			request.setHasTieredRates(hasTieredRates);
+			request.setHasContractedRates(hasContractedRates);
+			request.setHasTimeOfUseRates(hasTimeOfUseRates);
+			
+			return request;
+		}
+		
+		@Override
+		protected Builder getThis() {
+			return this;
+		}
+	}
+	
 	public Long getLseId() {
 		return lseId;
 	}
