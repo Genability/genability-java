@@ -117,7 +117,7 @@ public class Account {
 		}
 		
 		/**
-		 * Add a new property to the profile. This property will be of the form:
+		 * Add a new property to the account. This property will be of the form:
 		 * <pre>
 		 * "properties": {
 		 *   "keyName": {
