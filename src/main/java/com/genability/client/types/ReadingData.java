@@ -14,9 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 /**
  * This class represents a reading of a measurement. It has a start time and an
  * end time, plus a value and a field that denotes what the value is measuring.
- * 
  */
-
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReadingData extends PropertyData implements Serializable {
@@ -103,25 +101,16 @@ public class ReadingData extends PropertyData implements Serializable {
 			this.toDateTime = null;
 	}
 
-	/**
-	 * Mutator for fromDateTime
-	 */
-	// Overriding so we can set ReadData startTime derived from fromDateTime
 	@Override
 	public void setFromDateTime(DateTime fromDate) {
-
 		this.fromDateTime = fromDate;
 		this.startTime = fromDateTime.getMillis();
-
 	}
 
 	@Override
 	public void setToDateTime(DateTime toDate) {
-
-		// set milliseconds to corresponding UTC without offsetting
 		this.toDateTime = toDate;
 		this.endTime = toDateTime.getMillis();
-
 	}
 
 	@JsonInclude(Include.NON_NULL)
@@ -206,25 +195,20 @@ public class ReadingData extends PropertyData implements Serializable {
 		return keyName;
 	
 	}
-	
-	
+
 	/**
-	 * DataType for ReadingData and BillingData is always a Decimal.
+	 * Deprecated - The {@link DataType} for ReadingData is always <code>DECIMAL</code>. This method has
+	 * no effect.
 	 */
 	@Override 
 	@JsonIgnore
-	public void setDataType(DataType dataType) {
-	}
+	@Deprecated
+	public void setDataType(DataType dataType) {}
 
-	/**
-	 * DataType for ReadingData and BillingData is always a Decimal.
-	 */
 	@Override 
 	@JsonIgnore
 	public DataType getDataType() {
-		
 		return dataType;
-		
 	}
 
     @Override
