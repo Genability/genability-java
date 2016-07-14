@@ -2,6 +2,7 @@ package com.genability.client.api.request;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -95,13 +96,75 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 			return getThis();
 		}
 		
+		/**
+		 * Replace all existing <code>propertyInputs</code> with the contents of the list.  
+		 */
 		public Builder setPropertyInputs(List<PropertyData> propertyInputs) {
 			this.propertyInputs = propertyInputs;
 			return getThis();
 		}
+		
+		/**
+		 * Add the given {@link PropertyData} to the <code>propertyInput</code> list, creating the list if
+		 * necessary.
+		 */
+		public Builder addPropertyInput(PropertyData propertyInput) {
+			if (propertyInputs == null) {
+				propertyInputs = new ArrayList<PropertyData>();
+			}
+			
+			propertyInputs.add(propertyInput);
+			
+			return getThis();
+		}
+		
+		/**
+		 * Add the given list of {@link PropertyData} objects to the <code>propertyInput</code> list, creating the
+		 * list if necessary.
+		 */
+		public Builder addPropertyInputs(List<PropertyData> propertyInputs) {
+			if (propertyInputs == null) {
+				propertyInputs = new ArrayList<PropertyData>();
+			}
+			
+			propertyInputs.addAll(propertyInputs);
+			
+			return getThis();
+		}
 
+		/**
+		 * Replace all existing <code>rateInputs</code> with the contents of the list.  
+		 */
 		public Builder setRateInputs(List<TariffRate> rateInputs) {
 			this.rateInputs = rateInputs;
+			return getThis();
+		}
+		
+		/**
+		 * Add the given {@link TariffRate} to the <code>rateInput</code> list, creating the list if
+		 * necessary.
+		 */
+		public Builder addRateInput(TariffRate rateInput) {
+			if (rateInputs == null) {
+				rateInputs = new ArrayList<TariffRate>();
+			}
+			
+			rateInputs.add(rateInput);
+			
+			return getThis();
+		}
+		
+		/**
+		 * Add the given list of {@link TariffRate} objects to the <code>rateInput</code> list, creating the
+		 * list if necessary.
+		 */
+		public Builder addRateInputs(List<TariffRate> rateInputs) {
+			if (rateInputs == null) {
+				rateInputs = new ArrayList<TariffRate>();
+			}
+			
+			rateInputs.addAll(rateInputs);
+			
 			return getThis();
 		}
 
