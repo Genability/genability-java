@@ -49,8 +49,8 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 		
 		private String providerAccountId;
 		private String accountId;
-		private Boolean populateCosts;
-		private Boolean useIntelligentBaselining;
+		private boolean populateCosts = false;
+		private boolean useIntelligentBaselining = true;
 
 		// Only allow fromDateTime here since toDateTime is never what you want
 		private DateTime fromDateTime;
@@ -85,12 +85,14 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 			return getThis();
 		}
 
-		public void setFromDateTime(int year, int month, int day) {
+		public Builder setFromDateTime(int year, int month, int day) {
 			setFromDateTime(new LocalDate(year, month, day));
+			return getThis();
 		}
 		
-		public void setFromDateTime(LocalDate date) {
+		public Builder setFromDateTime(LocalDate date) {
 			fromDateTime = convertLocalDate(date);
+			return getThis();
 		}
 		
 		public Builder setPropertyInputs(List<PropertyData> propertyInputs) {

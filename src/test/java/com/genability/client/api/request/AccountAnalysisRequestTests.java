@@ -24,7 +24,6 @@ public class AccountAnalysisRequestTests {
 	    mapper.setSerializationInclusion(Include.NON_NULL);
 	}
 	
-	
 	@Test
 	public void testFromDateNoTimezone() throws JsonProcessingException {
 		AccountAnalysisRequest request = new AccountAnalysisRequest();
