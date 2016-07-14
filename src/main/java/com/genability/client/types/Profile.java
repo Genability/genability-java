@@ -1,6 +1,8 @@
 package com.genability.client.types;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,15 +35,190 @@ public class Profile implements Serializable {
 	private Boolean isDefault;
 	private String serviceTypes;
 
-	public Profile() {
-		// no-op
-	}
+	public Profile() {}
 
 	public Profile(final String profileId) {
 		this.profileId = profileId;
 
 	}
 
+	public static Builder newBuilder() {
+		return new Builder();
+	}
+	
+	public static final class Builder {
+		private String profileId;
+		private String providerProfileId;
+		private String profileName;
+		private String providerAccountId;
+		private String accountId;
+		private String meterId;
+		private String description;
+		private Source source;
+		private List<ReadingData> readingData;
+		private List<BaselineMeasure> baselineMeasures;
+		private Map<String, PropertyData> properties;
+		private Boolean isDefault;
+		private String serviceTypes;
+
+		public Builder setProfileId(String profileId) {
+			this.profileId = profileId;
+			return this;
+		}
+		
+		public Builder setProviderProfileId(String providerProfileId) {
+			this.providerProfileId = providerProfileId;
+			return this;
+		}
+		
+		public Builder setProfileName(String profileName) {
+			this.profileName = profileName;
+			return this;
+		}
+		
+		public Builder setProviderAccountId(String providerAccountId) {
+			this.providerAccountId = providerAccountId;
+			return this;
+		}
+		
+		public Builder setAccountId(String accountId) {
+			this.accountId = accountId;
+			return this;
+		}
+		
+		public Builder setMeterId(String meterId) {
+			this.meterId = meterId;
+			return this;
+		}
+		
+		public Builder setDescription(String description) {
+			this.description = description;
+			return this;
+		}
+		
+		public Builder setSource(Source source) {
+			this.source = source;
+			return this;
+		}
+		
+		public Builder setReadingData(List<ReadingData> readingData) {
+			this.readingData = readingData;
+			return this;
+		}
+		
+		public Builder addReading(ReadingData readingData) {
+			if (this.readingData == null) {
+				this.readingData = new ArrayList<ReadingData>();
+			}
+			
+			this.readingData.add(readingData);
+			
+			return this;
+		}
+		
+		public Builder addReadingData(List<ReadingData> readingData) {
+			if (this.readingData == null) {
+				this.readingData = new ArrayList<ReadingData>();
+			}
+			
+			this.readingData.addAll(readingData);
+			
+			return this;
+		}
+		
+		public Builder setBaselineMeasures(List<BaselineMeasure> baselineMeasures) {
+			this.baselineMeasures = baselineMeasures;
+			return this;
+		}
+		
+		public Builder addBaselineMeasure(BaselineMeasure baselineMeasure) {
+			if (this.baselineMeasures == null) {
+				this.baselineMeasures = new ArrayList<BaselineMeasure>();
+			}
+			
+			this.baselineMeasures.add(baselineMeasure);
+			
+			return this;
+		}
+		
+		public Builder addBaselineMeasures(List<BaselineMeasure> baselineMeasures) {
+			if (this.baselineMeasures == null) {
+				this.baselineMeasures = new ArrayList<BaselineMeasure>();
+			}
+			
+			this.baselineMeasures.addAll(baselineMeasures);
+			
+			return this;
+		}
+		
+		public Builder setProperties(Map<String, PropertyData> properties) {
+			this.properties = properties;
+			return this;
+		}
+		
+		public Builder addProperty(String keyName, PropertyData data) {
+			if (properties == null) {
+				properties = new HashMap<String, PropertyData>();
+			}
+			
+			properties.put(keyName, data);
+			return this;
+		}
+		
+		/**
+		 * Add a new property to the profile. This property will be of the form:
+		 * <pre>
+		 * {
+		 *   "keyName": "keyName",
+		 *   "dataValue": "dataValue"
+		 * }
+		 * </pre>
+		 */
+		public Builder addProprety(String keyName, String dataValue) {
+			if (properties == null) {
+				properties = new HashMap<String, PropertyData>();
+			}
+			
+			properties.put(keyName, PropertyData.newBuilder()
+					.setKeyName(keyName)
+					.setDataValue(dataValue)
+					.build());
+			
+			return this;
+		}
+		
+		public Builder setIsDefault(Boolean isDefault) {
+			this.isDefault = isDefault;
+			return this;
+		}
+		
+		public Builder setServiceTypes(String serviceTypes) {
+			this.serviceTypes = serviceTypes;
+			return this;
+		}
+		
+		public Profile build() {
+			Profile p = new Profile();
+			
+			p.setProfileId(profileId);
+			p.setProfileId(profileId);
+			p.setProviderProfileId(providerProfileId);
+			p.setProfileName(profileName);
+			p.setProviderAccountId(providerAccountId);
+			p.setAccountId(accountId);
+			p.setMeterId(meterId);
+			p.setDescription(description);
+			p.setSource(source);
+			p.setReadingData(readingData);
+			p.setBaselineMeasures(baselineMeasures);
+			p.setProperties(properties);
+			p.setIsDefault(isDefault);
+			p.setServiceTypes(serviceTypes);
+			
+			return p;
+		}
+	}
+	
 	public String getProfileId() {
 		return profileId;
 	}

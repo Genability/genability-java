@@ -62,38 +62,36 @@ public class AccountAnalysisServiceTests extends BaseServiceTests {
 
         DateTime baseFromDateTime = new DateTime("2013-01-01");
 
-        Profile usageProfile = new Profile();
-        usageProfile.setAccountId(newAccount.getAccountId());
-        List<ReadingData> readingDataList = new ArrayList<ReadingData>();
+        Profile.Builder usageProfileBuilder = Profile.newBuilder()
+        		.setAccountId(newAccount.getAccountId())
+        		.setProviderProfileId("USAGE_RESIDENTIAL_CA_V5" + UUID.randomUUID());
+        
         for(int i = 0; i < 8760; i++) {
-        	ReadingData readingData = ReadingData.newBuilder()
+        	usageProfileBuilder.addReading(ReadingData.newBuilder()
         			.setFromDateTime(baseFromDateTime.plusHours(i))
         			.setToDateTime(baseFromDateTime.plusHours(i + 1))
         			.setQuantityUnit("kWh")
         			.setQuantityValue(BigDecimal.valueOf(250))
-        			.build();
-        	
-        	readingDataList.add(readingData);
+        			.build());
         }
-        usageProfile.setReadingData(readingDataList);
-        usageProfile.setProviderProfileId("USAGE_RESIDENTIAL_CA_V5" + UUID.randomUUID());
+
+        Profile usageProfile = usageProfileBuilder.build();
         profileService.addProfile(usageProfile);
 
-        Profile productionProfile = new Profile();
-        productionProfile.setAccountId(newAccount.getAccountId());
-        List<ReadingData> production = new ArrayList<ReadingData>();
+        Profile.Builder productionProfileBuilder = Profile.newBuilder()
+        		.setAccountId(newAccount.getAccountId())
+        		.setProviderProfileId("PRODUCTION_RESIDENTIAL_CA_V5" + UUID.randomUUID());
+
         for(int i = 0; i < 8760; i++) {
-        	ReadingData readingData = ReadingData.newBuilder()
+        	productionProfileBuilder.addReading(ReadingData.newBuilder()
         			.setFromDateTime(baseFromDateTime.plusHours(i))
         			.setToDateTime(baseFromDateTime.plusHours(i + 1))
         			.setQuantityUnit("kWh")
         			.setQuantityValue(BigDecimal.valueOf(200))
-        			.build();
-
-        	production.add(readingData);
+        			.build());
         }
-        productionProfile.setReadingData(production);
-        productionProfile.setProviderProfileId("PRODUCTION_RESIDENTIAL_CA_V5" + UUID.randomUUID());
+        
+        Profile productionProfile = productionProfileBuilder.build();
         profileService.addProfile(productionProfile);
 
         AccountAnalysisRequest request = createSavingsAnalysis(usageProfile, productionProfile);
