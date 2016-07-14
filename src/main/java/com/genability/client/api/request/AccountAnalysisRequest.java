@@ -41,6 +41,10 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 
 	private List<TariffRate> rateInputs;
 
+	public Builder newBuilder() {
+		return new Builder();
+	}
+	
 	public static final class Builder extends AbstractGetNRequest.Builder<Builder> {
 		
 		private String providerAccountId;
@@ -48,12 +52,14 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 		private Boolean populateCosts;
 		private Boolean useIntelligentBaselining;
 
+		// Only allow fromDateTime here since toDateTime is never what you want
 		private DateTime fromDateTime;
 
 		private List<PropertyData> propertyInputs;
-
 		private List<TariffRate> rateInputs;
 
+		private Builder() {}
+		
 		public Builder setProviderAccountId(String providerAccountId) {
 			this.providerAccountId = providerAccountId;
 			return getThis();
@@ -99,8 +105,9 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 
 		public AccountAnalysisRequest build() {
 			AccountAnalysisRequest request = new AccountAnalysisRequest();
+			
+			setRequestFields(request);
 			request.setAccountId(accountId);
-			request.setFields(fields);
 			request.setFromDateTime(fromDateTime);
 			request.setPopulateCosts(populateCosts);
 			request.setPropertyInputs(propertyInputs);

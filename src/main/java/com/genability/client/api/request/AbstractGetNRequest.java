@@ -10,23 +10,14 @@ import com.genability.client.types.SortOrder;
 
 public abstract class AbstractGetNRequest extends AbstractRequest {
 	
-	
 	private Integer pageStart;
-
 	private Integer pageCount;
-
 	protected String search;
-	
 	protected String searchOn;
-
 	protected Boolean startsWith;
-
 	protected Boolean endsWith;
-	
 	protected Boolean isRegex;
-	
     protected String sortOn;
-    
     protected SortOrder sortOrder;
 
     protected abstract static class Builder<T extends AbstractGetNRequest.Builder<T>>
@@ -41,12 +32,6 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
     	protected Boolean isRegex;
     	protected String sortOn;
     	protected SortOrder sortOrder;
-    	
-    	@Override
-		public T setFields(Fields fields) {
-			this.fields = fields;
-			return getThis();
-		}
 		
 		public T setPageStart(Integer pageStart) {
 			this.pageStart = pageStart;
@@ -93,6 +78,19 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 			return getThis();
 		}
 
+		public void setRequestFields(AbstractGetNRequest request) {
+			super.setRequestFields(request);
+			request.setPageStart(pageStart);
+			request.setPageCount(pageCount);
+			request.setSearch(search);
+			request.setSearchOn(searchOn);
+			request.setStartsWith(startsWith);
+			request.setEndsWith(endsWith);
+			request.setIsRegex(isRegex);
+			request.setSortOn(sortOn);
+			request.setSortOrder(sortOrder);
+		}
+		
 		@Override
 		protected abstract T getThis();
 	}
@@ -185,7 +183,6 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 		addParam(qparams, "sortOrder", sortOrder == null ? null : sortOrder.getValue());
 
 		return qparams;
-		
 	}
 
 }

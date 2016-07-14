@@ -34,6 +34,10 @@ public abstract class AbstractRequest {
 			return getThis();
 		}
 		
+		protected void setRequestFields(AbstractRequest request) {
+			request.setFields(fields);
+		}
+		
 		protected abstract T getThis();
 	}
 	
