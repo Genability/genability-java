@@ -26,6 +26,17 @@ public abstract class AbstractRequest {
 	public static final String ISO_8601_SHORT_DATE_FORMAT = "yyyy-MM-dd";
 	public static final DateTimeFormatter ISO_8601_SHORT_DATE_FORMATTER = DateTimeFormat.forPattern(ISO_8601_SHORT_DATE_FORMAT);
 	
+	protected abstract static class Builder<T extends Builder<T>> {
+		protected Fields fields;
+		
+		public T setFields(Fields fields) {
+			this.fields = fields;
+			return getThis();
+		}
+		
+		protected abstract T getThis();
+	}
+	
 	// To avoid confusion with fields null/versus not returning - we will
 	// default to extended fields.
 	protected Fields fields = Fields.EXT;

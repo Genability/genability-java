@@ -41,40 +41,112 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 
 	private List<TariffRate> rateInputs;
 
+	public static final class Builder extends AbstractGetNRequest.Builder<Builder> {
+		
+		private String providerAccountId;
+		private String accountId;
+		private Boolean populateCosts;
+		private Boolean useIntelligentBaselining;
+
+		private DateTime fromDateTime;
+
+		private List<PropertyData> propertyInputs;
+
+		private List<TariffRate> rateInputs;
+
+		public Builder setProviderAccountId(String providerAccountId) {
+			this.providerAccountId = providerAccountId;
+			return getThis();
+		}
+
+		public Builder setAccountId(String accountId) {
+			this.accountId = accountId;
+			return getThis();
+		}
+
+		public Builder setPopulateCosts(Boolean populateCosts) {
+			this.populateCosts = populateCosts;
+			return getThis();
+		}
+
+		public Builder setUseIntelligentBaselining(Boolean useIntelligentBaselining) {
+			this.useIntelligentBaselining = useIntelligentBaselining;
+			return getThis();
+		}
+
+		public Builder setFromDateTime(DateTime fromDateTime) {
+			this.fromDateTime = fromDateTime;
+			return getThis();
+		}
+
+		public void setFromDateTime(int year, int month, int day) {
+			setFromDateTime(new LocalDate(year, month, day));
+		}
+		
+		public void setFromDateTime(LocalDate date) {
+			fromDateTime = convertLocalDate(date);
+		}
+		
+		public Builder setPropertyInputs(List<PropertyData> propertyInputs) {
+			this.propertyInputs = propertyInputs;
+			return getThis();
+		}
+
+		public Builder setRateInputs(List<TariffRate> rateInputs) {
+			this.rateInputs = rateInputs;
+			return getThis();
+		}
+
+		public AccountAnalysisRequest build() {
+			AccountAnalysisRequest request = new AccountAnalysisRequest();
+			request.setAccountId(accountId);
+			request.setFields(fields);
+			request.setFromDateTime(fromDateTime);
+			request.setPopulateCosts(populateCosts);
+			request.setPropertyInputs(propertyInputs);
+			request.setProviderAccountId(providerAccountId);
+			request.setRateInputs(rateInputs);
+			request.setUseIntelligentBaselining(useIntelligentBaselining);
+			
+			return request;
+		}
+		
+		@Override
+		protected Builder getThis() {
+			return this;
+		}
+	}
+	
 	public String getProviderAccountId() {
 		return providerAccountId;
 	}
 
-	public AccountAnalysisRequest setProviderAccountId(String providerAccountId) {
+	public void setProviderAccountId(String providerAccountId) {
 		this.providerAccountId = providerAccountId;
-		return this;
 	}
 
 	public String getAccountId() {
 		return accountId;
 	}
 
-	public AccountAnalysisRequest setAccountId(String accountId) {
+	public void setAccountId(String accountId) {
 		this.accountId = accountId;
-		return this;
 	}
 
 	public Boolean getPopulateCosts() {
 		return populateCosts;
 	}
 
-	public AccountAnalysisRequest setPopulateCosts(final boolean populateCosts) {
+	public void setPopulateCosts(final boolean populateCosts) {
 		this.populateCosts = populateCosts;
-		return this;
 	}
 
 	public Boolean getUseIntelligentBaselining() {
 		return useIntelligentBaselining;
 	}
 
-	public AccountAnalysisRequest setUseIntelligentBaselining(final boolean useIb) {
+	public void setUseIntelligentBaselining(final boolean useIb) {
 		this.useIntelligentBaselining = useIb;
-		return this;
 	}
 
 	@JsonSerialize(using=DateTimeSerializer.class)
@@ -91,9 +163,8 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * @param day The day.
 	 */
 	@JsonIgnore
-	public AccountAnalysisRequest setFromDateTime(int year, int month, int day) {
+	public void setFromDateTime(int year, int month, int day) {
 		setFromDateTime(new LocalDate(year, month, day));
-		return this;
 	}
 
 	/**
@@ -103,15 +174,13 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * @param date The date.
 	 */
 	@JsonIgnore
-	public AccountAnalysisRequest setFromDateTime(LocalDate date) {
+	public void setFromDateTime(LocalDate date) {
 		fromDateTime = convertLocalDate(date);
-		return this;
 	}
 
 	@JsonProperty
-	public AccountAnalysisRequest setFromDateTime(DateTime fromDateTime) {
+	public void setFromDateTime(DateTime fromDateTime) {
 		this.fromDateTime = fromDateTime;
-		return this;
 	}
 
 	@JsonSerialize(using=DateTimeSerializer.class)
@@ -128,9 +197,8 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * @param day The day.
 	 */
 	@JsonIgnore
-	public AccountAnalysisRequest setToDateTime(int year, int month, int day) {
+	public void setToDateTime(int year, int month, int day) {
 		setToDateTime(new LocalDate(year, month, day));
-		return this;
 	}
 
 	/**
@@ -140,40 +208,36 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 	 * @param date The date.
 	 */
 	@JsonIgnore
-	public AccountAnalysisRequest setToDateTime(LocalDate date) {
+	public void setToDateTime(LocalDate date) {
 		toDateTime = convertLocalDate(date);
-		return this;
 	}
 
 	@JsonProperty
-	public AccountAnalysisRequest setToDateTime(DateTime toDateTime) {
+	public void setToDateTime(DateTime toDateTime) {
 		this.toDateTime = toDateTime;
-		return this;
 	}
 
 	public List<TariffRate> getRateInputs() {
 		return rateInputs;
 	}
 
-	public AccountAnalysisRequest setRateInputs(List<TariffRate> rateInputs) {
+	public void setRateInputs(List<TariffRate> rateInputs) {
 		this.rateInputs = rateInputs;
-		return this;
 	}
 
 	public List<PropertyData> getPropertyInputs() {
 		return propertyInputs;
 	}
 
-	public AccountAnalysisRequest setPropertyInputs(List<PropertyData> propertyInputs) {
+	public void setPropertyInputs(List<PropertyData> propertyInputs) {
 		this.propertyInputs = propertyInputs;
-		return this;
 	}
 
-	private DateTime convertLocalDate(LocalDate date) {
+	private static DateTime convertLocalDate(LocalDate date) {
 		DateTime dt = new DateTime(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth(), 0, 0, DATE_ONLY_TIMEZONE);
 		return dt;
 	}
-
+	
 	/*		
 	 * This class is used to serialize DateTime objects. In the special case where the timeZone is set to		
 	 * AccountAnalysisRequest.DATE_ONLY_TIMEZONE, the result will contain the date only		
