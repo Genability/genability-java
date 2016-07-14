@@ -41,7 +41,7 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 
 	private List<TariffRate> rateInputs;
 
-	public Builder newBuilder() {
+	public static Builder newBuilder() {
 		return new Builder();
 	}
 	
