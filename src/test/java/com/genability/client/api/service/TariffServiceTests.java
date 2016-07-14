@@ -22,14 +22,14 @@ import com.genability.client.types.TariffType;
 public class TariffServiceTests extends BaseServiceTests {
 
 	private static TariffService tariffService = genabilityClient.getTariffService();
-
 	
 	@Test
 	public void testGetTariff() {
 
 		String testCase = "Case 1 - call to get SCE's D Domestic tariff";
-		GetTariffRequest request = new GetTariffRequest();
-		request.setMasterTariffId(447L);
+		GetTariffRequest request = GetTariffRequest.newBuilder()
+				.setMasterTariffId(447L)
+				.build();
 		callGetTariff(testCase, request);
 
 	}
@@ -39,12 +39,13 @@ public class TariffServiceTests extends BaseServiceTests {
 
 		String testCase = "Check that variable rates are returned";
 		String variableRateKey = "peakShavingVASchedule1";
-		GetTariffRequest request = new GetTariffRequest();
-		request.setPopulateRates(true);
-		request.setLookupVariableRates(true);
-		request.setFromDateTime(new DateTime("2014-12-10"));
-		request.setToDateTime(new DateTime("2014-12-15"));
-		request.setMasterTariffId(122L);
+		GetTariffRequest request = GetTariffRequest.newBuilder()
+				.setPopulateRates(true)
+				.setLookupVariableRates(true)
+				.setFromDateTime(new DateTime("2014-12-10"))
+				.setToDateTime(new DateTime("2014-12-15"))
+				.setMasterTariffId(122L)
+				.build();
 
 		Tariff tariff = callGetTariff(testCase, request);
 
@@ -102,9 +103,10 @@ public class TariffServiceTests extends BaseServiceTests {
 	public void getTariffsWithAfterTax() {
 		String testCase = "Get tariffs with AFTER_TAX charge class";
 		
-		GetTariffsRequest request = new GetTariffsRequest();
-		request.setPopulateRates(true);
-		request.setZipCode("95818");
+		GetTariffsRequest request = GetTariffsRequest.newBuilder()
+				.setPopulateRates(true)
+				.setZipCode("95818")
+				.build();
 		
 		callGetTariffs(testCase, request);
 	}

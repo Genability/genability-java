@@ -49,7 +49,110 @@ public class PropertyData {
 	protected Long duration;
 	private String operator;
 	
-	public PropertyData() {}
+	public static Builder newBuilder() {
+		return new Builder();
+	}
+	
+	public static class Builder {
+		
+		protected String keyName;
+		protected String source;
+		protected DateTime fromDateTime;	
+		protected DateTime toDateTime;	
+		protected String period;
+		protected String unit;	
+		protected String dataValue;
+		protected BigDecimal dataFactor;
+		protected BigDecimal accuracy;
+		protected String scenarios;
+		protected DataType dataType;
+		protected Long duration;
+		protected String operator;
+		
+		public Builder setKeyName(String keyName) {
+			this.keyName = keyName;
+			return this;
+		}
+		
+		public Builder setSource(String source) {
+			this.source = source;
+			return this;
+		}
+		
+		public Builder setFromDateTime(DateTime fromDateTime) {
+			this.fromDateTime = fromDateTime;
+			return this;
+		}
+		
+		public Builder setToDateTime(DateTime toDateTime) {
+			this.toDateTime = toDateTime;
+			return this;
+		}
+		
+		public Builder setPeriod(String period) {
+			this.period = period;
+			return this;
+		}
+		
+		public Builder setUnit(String unit) {
+			this.unit = unit;
+			return this;
+		}
+		
+		public Builder setDataValue(String dataValue) {
+			this.dataValue = dataValue;
+			return this;
+		}
+		
+		public Builder setDataFactor(BigDecimal dataFactor) {
+			this.dataFactor = dataFactor;
+			return this;
+		}
+		
+		public Builder setAccuracy(BigDecimal accuracy) {
+			this.accuracy = accuracy;
+			return this;
+		}
+		
+		public Builder setScenarios(String scenarios) {
+			this.scenarios = scenarios;
+			return this;
+		}
+		
+		public Builder setDataType(DataType dataType) {
+			this.dataType = dataType;
+			return this;
+		}
+		
+		public Builder setDuration(Long duration) {
+			this.duration = duration;
+			return this;
+		}
+		
+		public Builder setOperator(String operator) {
+			this.operator = operator;
+			return this;
+		}
+		
+		public PropertyData build() {
+			PropertyData pd = new PropertyData();
+			pd.setKeyName(keyName);
+			pd.setSource(source);
+			pd.setFromDateTime(fromDateTime);
+			pd.setToDateTime(toDateTime);
+			pd.setPeriod(period);
+			pd.setUnit(unit);
+			pd.setDataValue(dataValue);
+			pd.setDataFactor(dataFactor);
+			pd.setAccuracy(accuracy);
+			pd.setScenarios(scenarios);
+			pd.setDataType(dataType);
+			pd.setDuration(duration);
+			pd.setOperator(operator);
+			
+			return pd;
+		}
+	}
 
 	public void setKeyName(String keyName) {
 		this.keyName = keyName;

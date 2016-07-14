@@ -14,9 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 /**
  * This class represents a reading of a measurement. It has a start time and an
  * end time, plus a value and a field that denotes what the value is measuring.
- * 
  */
-
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReadingData extends PropertyData implements Serializable {
@@ -42,6 +40,158 @@ public class ReadingData extends PropertyData implements Serializable {
 
 	public ReadingData() {		
 		this.dataType = DataType.DECIMAL;
+	}
+	
+	public static Builder newBuilder() {
+		return new Builder();
+	}
+	
+	public static final class Builder extends PropertyData.Builder {
+		private Integer timeAccuracy;
+
+		private String quantityUnit;
+		private BigDecimal quantityValue;
+		private BigDecimal quantityCost;
+		private BigDecimal quantityRate;
+
+		private TimeOfUseType touType;
+
+		// These methods are overridden here so that they return the proper builder.
+		@Override
+		public Builder setKeyName(String keyName) {
+			this.keyName = keyName;
+			return this;
+		}
+		
+		@Override
+		public Builder setSource(String source) {
+			this.source = source;
+			return this;
+		}
+		
+		@Override
+		public Builder setFromDateTime(DateTime fromDateTime) {
+			this.fromDateTime = fromDateTime;
+			return this;
+		}
+		
+		@Override
+		public Builder setToDateTime(DateTime toDateTime) {
+			this.toDateTime = toDateTime;
+			return this;
+		}
+		
+		@Override
+		public Builder setPeriod(String period) {
+			this.period = period;
+			return this;
+		}
+		
+		@Override
+		public Builder setUnit(String unit) {
+			this.unit = unit;
+			return this;
+		}
+		
+		@Override
+		public Builder setDataValue(String dataValue) {
+			this.dataValue = dataValue;
+			return this;
+		}
+		
+		@Override
+		public Builder setDataFactor(BigDecimal dataFactor) {
+			this.dataFactor = dataFactor;
+			return this;
+		}
+		
+		@Override
+		public Builder setAccuracy(BigDecimal accuracy) {
+			this.accuracy = accuracy;
+			return this;
+		}
+		
+		@Override
+		public Builder setScenarios(String scenarios) {
+			this.scenarios = scenarios;
+			return this;
+		}
+		
+		@Override
+		public Builder setDataType(DataType dataType) {
+			this.dataType = dataType;
+			return this;
+		}
+		
+		@Override
+		public Builder setDuration(Long duration) {
+			this.duration = duration;
+			return this;
+		}
+		
+		@Override
+		public Builder setOperator(String operator) {
+			this.operator = operator;
+			return this;
+		}
+		
+		public Builder setTimeAccuracy(Integer timeAccuracy) {
+			this.timeAccuracy = timeAccuracy;
+			return this;
+		}
+
+		public Builder setQuantityUnit(String quantityUnit) {
+			this.quantityUnit = quantityUnit;
+			return this;
+		}
+
+		public Builder setQuantityValue(BigDecimal quantityValue) {
+			this.quantityValue = quantityValue;
+			return this;
+		}
+
+		public Builder setQuantityCost(BigDecimal quantityCost) {
+			this.quantityCost = quantityCost;
+			return this;
+		}
+
+		public Builder setQuantityRate(BigDecimal quantityRate) {
+			this.quantityRate = quantityRate;
+			return this;
+		}
+
+		public Builder setTouType(TimeOfUseType touType) {
+			this.touType = touType;
+			return this;
+		}
+		
+		public ReadingData build() {
+			ReadingData rd = new ReadingData();
+			
+			// Inherited from PropretyData.Builder
+			rd.setKeyName(keyName);
+			rd.setSource(source);
+			rd.setFromDateTime(fromDateTime);
+			rd.setToDateTime(toDateTime);
+			rd.setPeriod(period);
+			rd.setUnit(unit);
+			rd.setDataValue(dataValue);
+			rd.setDataFactor(dataFactor);
+			rd.setAccuracy(accuracy);
+			rd.setScenarios(scenarios);
+			rd.setDuration(duration);
+			rd.setOperator(operator);
+			
+			// ReadingData.Builder
+			rd.setTimeAccuracy(timeAccuracy);
+			rd.setQuantityUnit(quantityUnit);
+			rd.setQuantityValue(quantityValue);
+			rd.setQuantityCost(quantityCost);
+			rd.setQuantityRate(quantityRate);
+			rd.setTouType(touType);
+			
+			return rd;
+		}
 	}
 
 	@JsonIgnore
@@ -103,25 +253,16 @@ public class ReadingData extends PropertyData implements Serializable {
 			this.toDateTime = null;
 	}
 
-	/**
-	 * Mutator for fromDateTime
-	 */
-	// Overriding so we can set ReadData startTime derived from fromDateTime
 	@Override
 	public void setFromDateTime(DateTime fromDate) {
-
 		this.fromDateTime = fromDate;
 		this.startTime = fromDateTime.getMillis();
-
 	}
 
 	@Override
 	public void setToDateTime(DateTime toDate) {
-
-		// set milliseconds to corresponding UTC without offsetting
 		this.toDateTime = toDate;
 		this.endTime = toDateTime.getMillis();
-
 	}
 
 	@JsonInclude(Include.NON_NULL)
@@ -206,25 +347,20 @@ public class ReadingData extends PropertyData implements Serializable {
 		return keyName;
 	
 	}
-	
-	
+
 	/**
-	 * DataType for ReadingData and BillingData is always a Decimal.
+	 * Deprecated - The {@link DataType} for ReadingData is always <code>DECIMAL</code>. This method has
+	 * no effect.
 	 */
 	@Override 
 	@JsonIgnore
-	public void setDataType(DataType dataType) {
-	}
+	@Deprecated
+	public void setDataType(DataType dataType) {}
 
-	/**
-	 * DataType for ReadingData and BillingData is always a Decimal.
-	 */
 	@Override 
 	@JsonIgnore
 	public DataType getDataType() {
-		
-		return dataType;
-		
+		return dataType; 
 	}
 
     @Override

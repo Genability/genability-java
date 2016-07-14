@@ -9,25 +9,90 @@ import com.genability.client.types.SortOrder;
 
 public abstract class AbstractGetNRequest extends AbstractRequest {
 	
-	
 	private Integer pageStart;
-
 	private Integer pageCount;
-
 	protected String search;
-	
 	protected String searchOn;
-
 	protected Boolean startsWith;
-
 	protected Boolean endsWith;
-	
 	protected Boolean isRegex;
-	
     protected String sortOn;
-    
     protected SortOrder sortOrder;
 
+    protected abstract static class Builder<T extends AbstractGetNRequest.Builder<T>>
+    extends AbstractRequest.Builder<Builder<T>> {
+
+    	protected Integer pageStart;
+    	protected Integer pageCount;
+    	protected String search;
+    	protected String searchOn;
+    	protected Boolean startsWith;
+    	protected Boolean endsWith;
+    	protected Boolean isRegex;
+    	protected String sortOn;
+    	protected SortOrder sortOrder;
+		
+		public T setPageStart(Integer pageStart) {
+			this.pageStart = pageStart;
+			return getThis();
+		}
+
+		public T setPageCount(Integer pageCount) {
+			this.pageCount = pageCount;
+			return getThis();
+		}
+
+		public T setSearch(String search) {
+			this.search = search;
+			return getThis();
+		}
+
+		public T setSearchOn(String searchOn) {
+			this.searchOn = searchOn;
+			return getThis();
+		}
+
+		public T setStartsWith(Boolean startsWith) {
+			this.startsWith = startsWith;
+			return getThis();
+		}
+
+		public T setEndsWith(Boolean endsWith) {
+			this.endsWith = endsWith;
+			return getThis();
+		}
+
+		public T setIsRegex(Boolean isRegex) {
+			this.isRegex = isRegex;
+			return getThis();
+		}
+
+		public T setSortOn(String sortOn) {
+			this.sortOn = sortOn;
+			return getThis();
+		}
+
+		public T setSortOrder(SortOrder sortOrder) {
+			this.sortOrder = sortOrder;
+			return getThis();
+		}
+
+		protected void setRequestFields(AbstractGetNRequest request) {
+			super.setRequestFields(request);
+			request.setPageStart(pageStart);
+			request.setPageCount(pageCount);
+			request.setSearch(search);
+			request.setSearchOn(searchOn);
+			request.setStartsWith(startsWith);
+			request.setEndsWith(endsWith);
+			request.setIsRegex(isRegex);
+			request.setSortOn(sortOn);
+			request.setSortOrder(sortOrder);
+		}
+		
+		@Override
+		protected abstract T getThis();
+	}
 
 	public void setPageStart(Integer pageStart) {
 		this.pageStart = pageStart;
@@ -117,7 +182,6 @@ public abstract class AbstractGetNRequest extends AbstractRequest {
 		addParam(qparams, "sortOrder", sortOrder == null ? null : sortOrder.getValue());
 
 		return qparams;
-		
 	}
 
 }

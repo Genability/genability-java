@@ -19,9 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -228,22 +225,6 @@ public class BaseServiceTests {
 			return response.getResults().get(0);
 		} else {
 			return null;
-		}
-	}
-	
-	protected <T> T loadJsonFixture(String fileName, TypeReference<T> resultTypeReference) {
-		try {
-			InputStream is = getClass().getClassLoader().getResourceAsStream(fileName);
-			return mapper.readValue(is, resultTypeReference);
-		} catch (JsonParseException e) {
-			log.error("JsonParseException in fixture " + fileName);
-			throw new GenabilityException(e);
-		} catch (JsonMappingException e) {
-			log.error("JsonMappingException in fixture " + fileName);
-			throw new GenabilityException(e);
-		} catch (IOException e) {
-			log.error("Couldn't open fixture " + fileName);
-			throw new GenabilityException(e);
 		}
 	}
 }
