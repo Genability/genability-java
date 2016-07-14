@@ -50,8 +50,8 @@ public class AccountAnalysisRequest extends AbstractRequest implements Serializa
 		
 		private String providerAccountId;
 		private String accountId;
-		private boolean populateCosts = false;
-		private boolean useIntelligentBaselining = true;
+		private Boolean populateCosts;
+		private Boolean useIntelligentBaselining;
 
 		// Only allow fromDateTime here since toDateTime is never what you want
 		private DateTime fromDateTime;

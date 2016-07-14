@@ -27,7 +27,7 @@ public abstract class AbstractRequest {
 	public static final DateTimeFormatter ISO_8601_SHORT_DATE_FORMATTER = DateTimeFormat.forPattern(ISO_8601_SHORT_DATE_FORMAT);
 	
 	protected abstract static class Builder<T extends Builder<T>> {
-		protected Fields fields;
+		protected Fields fields = Fields.EXT;
 		
 		public T setFields(Fields fields) {
 			this.fields = fields;
