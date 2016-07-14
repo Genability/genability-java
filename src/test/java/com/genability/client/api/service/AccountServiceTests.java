@@ -195,9 +195,11 @@ public class AccountServiceTests  extends BaseServiceTests {
 		addAccount
 				.setAccountName("Java Client Lib Test Account Get Properties - CAN DELETE");
 
-		PropertyData property1 = new PropertyData();
-		property1.setKeyName("territoryId");
-		property1.setDataValue("123");
+		PropertyData property1 = PropertyData.newBuilder()
+				.setKeyName("territoryId")
+				.setDataValue("123")
+				.build();
+
 		addAccount.setProperty("territoryId", property1);
 
 		addAccount = addAccount(addAccount);
