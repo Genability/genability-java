@@ -26,6 +26,8 @@ public class Response<T> implements Serializable {
 	private Integer pageCount;
 	private Integer count;
 
+	private String requestId;
+
 	public Response() {
 	}
 
@@ -75,5 +77,13 @@ public class Response<T> implements Serializable {
 	
 	public void setPageStart(Integer pageStart) {
 		this.pageStart = pageStart;
+	}
+
+	public String getRequestId() {
+		return requestId;
+	}
+
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
 	}
 }

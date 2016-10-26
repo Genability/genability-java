@@ -12,3 +12,19 @@ target
 
 
 /bin/*
+workspace.xml
+.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_3_0.xml
+.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_3_0.xml
+.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_3_0.xml
+.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_joda_2_3_0.xml
+.idea/libraries/Maven__commons_codec_commons_codec_1_6.xml
+.idea/libraries/Maven__joda_time_joda_time_2_3.xml
+.idea/libraries/Maven__junit_junit_4_11.xml
+.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_3_1.xml
+.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_3.xml
+.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_3_1.xml
+.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml
+.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_5.xml
+.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_5.xml
+.idea/libraries/Maven__org_slf4j_slf4j_simple_1_7_5.xml
+Maven__org_hamcrest_hamcrest_all_1_3.xml

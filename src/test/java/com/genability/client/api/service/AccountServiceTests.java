@@ -1,24 +1,29 @@
 package com.genability.client.api.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.Map;
+import java.util.HashMap;
 
+import com.genability.client.api.request.signal.GetAccountCalculatedCostRequest;
+import com.genability.client.types.*;
+import com.genability.client.types.signal.CalculatedCost;
+import org.joda.time.DateTime;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.genability.client.api.request.DeleteAccountRequest;
 import com.genability.client.api.request.GetAccountRatesRequest;
 import com.genability.client.api.request.GetAccountRequest;
 import com.genability.client.api.request.GetAccountsRequest;
-import com.genability.client.types.Account;
-import com.genability.client.types.Address;
-import com.genability.client.types.PropertyData;
-import com.genability.client.types.Response;
-import com.genability.client.types.Tariff;
-import com.genability.client.types.TariffRate;
+import org.junit.rules.ExpectedException;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+
 
 public class AccountServiceTests  extends BaseServiceTests {
 
@@ -326,7 +331,107 @@ public class AccountServiceTests  extends BaseServiceTests {
 		deleteAccount(account.getAccountId());
 
 	}
-	
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
+	@Test
+	public void testGetAccountCalculatedCostNoIds() {
+		GetAccountCalculatedCostRequest request = new GetAccountCalculatedCostRequest();
+		request.setFromDateTime(new DateTime("2016-10-01T00:00:00.000-07:00"));
+		request.setToDateTime(new DateTime("2016-11-01T00:00:00.000-07:00"));
+		request.setBillingPeriod(true);
+		request.setMinimums(true);
+		request.setDetailLevel(DetailLevel.RATE);
+		request.setGroupBy(GroupBy.MONTH);
+
+		// accountId or providerAccountId required
+		thrown.expect(GenabilityException.class);
+		thrown.expectMessage(containsString("providerAccountId"));
+		thrown.expectMessage(containsString("accountId"));
+		Response<CalculatedCost> response =
+				accountService.getCalculatedCost(request);
+	}
+
+	@Test
+	public void testGetAccountCalculatedCostAccountId() {
+		Account account = createAccountForCalc();
+
+		GetAccountCalculatedCostRequest request = new GetAccountCalculatedCostRequest();
+		request.setFromDateTime(new DateTime("2016-10-01T00:00:00.000-07:00"));
+		request.setToDateTime(new DateTime("2016-11-01T00:00:00.000-07:00"));
+		request.setBillingPeriod(true);
+		request.setMinimums(true);
+		request.setDetailLevel(DetailLevel.RATE);
+		request.setGroupBy(GroupBy.MONTH);
+		request.setAccountId(account.getAccountId());
+
+		Response<CalculatedCost> response =
+				accountService.getCalculatedCost(request);
+
+		assertThat(response.getStatus(), equalTo(Response.STATUS_SUCCESS));
+		assertThat(response.getType(), equalTo(CalculatedCost.REST_TYPE));
+	}
+
+	@Test
+	public void testGetAccountCalculatedCostProviderAccountId() {
+		Account account = createAccountForCalc();
+
+		GetAccountCalculatedCostRequest request = new GetAccountCalculatedCostRequest();
+		request.setFromDateTime(new DateTime("2016-10-01T00:00:00.000-07:00"));
+		request.setToDateTime(new DateTime("2016-11-01T00:00:00.000-07:00"));
+		request.setBillingPeriod(true);
+		request.setMinimums(true);
+		request.setDetailLevel(DetailLevel.RATE);
+		request.setGroupBy(GroupBy.MONTH);
+		request.setProviderAccountId(account.getProviderAccountId());
+
+		Response<CalculatedCost> response =
+				accountService.getCalculatedCost(request);
+
+		assertThat(response.getStatus(), equalTo(Response.STATUS_SUCCESS));
+		assertThat(response.getType(), equalTo(CalculatedCost.REST_TYPE));
+	}
+
+	private Account createAccountForCalc() {
+		Account account = new Account();
+
+		account.setAccountName("Java Client Lib Test Get Account Calculated Cost - CAN DELETE");
+		String providerAccountId = "test-api" + UUID.randomUUID();
+		account.setProviderAccountId(providerAccountId);
+
+		Address address = new Address();
+		address.setAddressString("221 Main Street, San Francisco, CA 94105");
+		account.setAddress(address);
+
+		Map<String, PropertyData> properties = new HashMap<String, PropertyData>();
+		PropertyData propertyData = new PropertyData();
+		propertyData.setKeyName("customerClass");
+		propertyData.setDataValue("1");
+		properties.put(propertyData.getKeyName(), propertyData);
+		account.setProperties(properties);
+
+		account = addAccount(account);
+
+		DateTime baseDateTime = new DateTime("2016-10-01T00:00:00.000-07:00");
+
+		Profile usageProfile = new Profile();
+		usageProfile.setAccountId(account.getAccountId());
+		List<ReadingData> readingData = new ArrayList<ReadingData>();
+		for (int i = 0 ; i < 8760; i++) {
+			ReadingData readingDatum = new ReadingData();
+			readingDatum.setFromDateTime(baseDateTime.plusHours(i));
+			readingDatum.setToDateTime(baseDateTime.plusHours(i + 1));
+			readingDatum.setQuantityUnit("kWh");
+			readingDatum.setQuantityValue(BigDecimal.valueOf(250.0));
+			readingData.add(readingDatum);
+		}
+		usageProfile.setReadingData(readingData);
+		usageProfile.setProviderProfileId("USAGE_RESIDENTIAL_CA_V5" + UUID.randomUUID());
+		profileService.addProfile(usageProfile);
+		return account;
+	}
+
 	//
 	// TODO - switch to use helper methods on baseServiceTests
 	//
