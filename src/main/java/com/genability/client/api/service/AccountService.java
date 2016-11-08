@@ -8,11 +8,14 @@ import com.genability.client.api.request.GetAccountRatesRequest;
 import com.genability.client.api.request.GetAccountRequest;
 import com.genability.client.api.request.GetAccountTariffsRequest;
 import com.genability.client.api.request.GetAccountsRequest;
+import com.genability.client.api.request.signal.GetAccountCalculatedCostRequest;
+import com.genability.client.api.request.signal.GetCalculatedCostRequest;
 import com.genability.client.types.Account;
 import com.genability.client.types.PropertyData;
 import com.genability.client.types.Response;
 import com.genability.client.types.Tariff;
 import com.genability.client.types.TariffRate;
+import com.genability.client.types.signal.CalculatedCost;
 
 public class AccountService extends BaseService {
 
@@ -26,6 +29,10 @@ public class AccountService extends BaseService {
 
 	private static final TypeReference<Response<Tariff>> TARIFF_RESPONSE_TYPEREF = new TypeReference<Response<Tariff>>() {
 	};
+
+	private static final TypeReference<Response<CalculatedCost>> CALCULATEDCOST_RESPONSE_TYPEREF =
+			new TypeReference<Response<CalculatedCost>>() { };
+
 
 	public Response<Account> getAccounts(GetAccountsRequest request)
 	{
@@ -213,6 +220,33 @@ public class AccountService extends BaseService {
 
 		return response;
 
+	}
+
+	public Response<CalculatedCost> getCalculatedCost(GetAccountCalculatedCostRequest request)
+	{
+		if (log.isDebugEnabled()) {
+			log.debug("getCalculatedCost called");
+		}
+
+		String uri = "v1/accounts/";
+
+		if (request.getAccountId() != null && request.getAccountId().length() != 0) {
+			uri += "{0}/calculate";
+			uri = MessageFormat.format(uri, request.getAccountId());
+		} else if (request.getProviderAccountId() != null && request.getProviderAccountId().length() != 0) {
+			uri += "pid/{0}/calculate";
+			uri = MessageFormat.format(uri, request.getProviderAccountId());
+		} else {
+			throw new GenabilityException("Either accountId or providerAccountId must be set");
+		}
+
+		Response<CalculatedCost> response = this.callPost(
+				uri,
+				request,
+				CALCULATEDCOST_RESPONSE_TYPEREF
+		);
+
+		return response;
 	}
 
 

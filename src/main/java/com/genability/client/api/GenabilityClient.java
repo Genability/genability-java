@@ -161,4 +161,8 @@ public class GenabilityClient {
 	public IncentiveService getIncentiveService() {
 		return initializeService(new IncentiveService());
 	}
+
+	public com.genability.client.api.service.signal.CalculateService getSignalCalculateService() {
+		return initializeService(new com.genability.client.api.service.signal.CalculateService());
+	}
 }

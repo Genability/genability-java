@@ -1,6 +1,9 @@
 package com.genability.client.types;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
@@ -48,6 +51,8 @@ public class PropertyData {
 
 	protected Long duration;
 	private String operator;
+
+	private List<BigDecimal> dataSeries;
 	
 	public PropertyData() {}
 
@@ -181,5 +186,29 @@ public class PropertyData {
 
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+
+	public List<BigDecimal> getDataSeries() {
+		return dataSeries;
+	}
+
+	public void setDataSeries(List<BigDecimal> dataSeries) {
+		this.dataSeries = dataSeries;
+	}
+
+	public void addData(BigDecimal data) {
+		if (dataSeries == null) {
+			dataSeries = new ArrayList<BigDecimal>();
+		}
+
+		dataSeries.add(data);
+	}
+
+	public void addDataSeries(Collection<BigDecimal> dataSeries) {
+		if (this.dataSeries == null) {
+			this.dataSeries = new ArrayList<BigDecimal>();
+		}
+
+		this.dataSeries.addAll(dataSeries);
 	}
 }
