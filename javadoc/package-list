@@ -1,5 +1,9 @@
 com.genability.client.api
 com.genability.client.api.request
+com.genability.client.api.request.signal
+com.genability.client.api.request.signal.util
 com.genability.client.api.service
+com.genability.client.api.service.signal
 com.genability.client.types
+com.genability.client.types.signal
 com.genability.client.util
