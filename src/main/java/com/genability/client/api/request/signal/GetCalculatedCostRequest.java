@@ -32,6 +32,8 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
     private String excludeChargeClass;
     private Boolean applyUtilityTax;
     private Address address;
+    private Boolean autoBaseline;
+    private Boolean useIntelligentBaselining;
     private Boolean calcNetExcessGeneration;
     private DateTime tariffEffectiveOn;
     private List<TariffRate> rateInputs;
@@ -170,6 +172,22 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Boolean getAutoBaseline() {
+        return autoBaseline;
+    }
+
+    public void setAutoBaseline(Boolean useMostRecentUsageData) {
+        this.autoBaseline = useMostRecentUsageData;
+    }
+
+    public Boolean getUseIntelligentBaselining() {
+        return useIntelligentBaselining;
+    }
+
+    public void setUseIntelligentBaselining(Boolean useIntelligentBaselining) {
+        this.useIntelligentBaselining = useIntelligentBaselining;
     }
 
     @JsonInclude(Include.NON_NULL)
