@@ -178,8 +178,8 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
         return autoBaseline;
     }
 
-    public void setAutoBaseline(Boolean useMostRecentUsageData) {
-        this.autoBaseline = useMostRecentUsageData;
+    public void setAutoBaseline(Boolean autoBaseline) {
+        this.autoBaseline = autoBaseline;
     }
 
     public Boolean getUseIntelligentBaselining() {
