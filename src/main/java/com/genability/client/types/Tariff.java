@@ -419,10 +419,20 @@ public class Tariff {
 		this.privacy = privacy;
 	}
 
+	/**
+	 *
+	 * @deprecated Will be removed in version 1.7.0
+	 */
+	@Deprecated
 	public String getEffectiveOnRule() {
 		return effectiveOnRule;
 	}
 
+	/**
+	 *
+	 * @deprecated Will be removed in version 1.7.0
+	 */
+	@Deprecated
 	public void setEffectiveOnRule(String effectiveOnRule) {
 		this.effectiveOnRule = effectiveOnRule;
 	}
