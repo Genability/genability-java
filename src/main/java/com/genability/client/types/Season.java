@@ -16,6 +16,8 @@ public class Season {
   private Integer seasonFromDay;
   private Integer seasonToMonth;
   private Integer seasonToDay;
+  private PredominanceRule fromEdgePredominance;
+  private PredominanceRule toEdgePredominance;
   
   public Long getSeasonId() {
     return seasonId;
@@ -81,5 +83,20 @@ public class Season {
     this.seasonToDay = seasonToDay;
   }
 
+  public PredominanceRule getFromEdgePredominance() {
+    return fromEdgePredominance;
+  }
+
+  public void setFromEdgePredominance(PredominanceRule fromEdgePredominance) {
+    this.fromEdgePredominance = fromEdgePredominance;
+  }
+
+  public PredominanceRule getToEdgePredominance() {
+    return toEdgePredominance;
+  }
+
+  public void setToEdgePredominance(PredominanceRule toEdgePredominance) {
+    this.toEdgePredominance = toEdgePredominance;
+  }
   
 }

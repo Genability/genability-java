@@ -6,6 +6,11 @@ import com.genability.client.api.request.GetTimeOfUseIntervalsRequest;
 import com.genability.client.types.Response;
 import com.genability.client.types.TimeOfUseGroup;
 import com.genability.client.types.TimeOfUseInterval;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TimeOfUseService extends BaseService {
 	private static final TypeReference<Response<TimeOfUseGroup>> TOU_GROUP_RESPONSE_TYPEREF = new TypeReference<Response<TimeOfUseGroup>>() {};
@@ -17,9 +22,12 @@ public class TimeOfUseService extends BaseService {
 		if (log.isDebugEnabled()) {
 			log.debug("getTimeOfUseGroup called");
 		}
-		
+
+		List<NameValuePair> queryParams = new ArrayList<NameValuePair>();
+		queryParams.add(new BasicNameValuePair("fields", "ext"));
+
 		String url = String.format("%s/%d/%d", PUBLIC_URL_BASE, lseId, touGroupId); 
-		Response<TimeOfUseGroup> response = this.callGet(url, null, TOU_GROUP_RESPONSE_TYPEREF);
+		Response<TimeOfUseGroup> response = this.callGet(url, queryParams, TOU_GROUP_RESPONSE_TYPEREF);
 		
 		if (log.isDebugEnabled()) {
 			log.debug("Done with getTimeOfUseGroup");
