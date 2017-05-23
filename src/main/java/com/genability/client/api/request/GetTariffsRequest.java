@@ -4,40 +4,51 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.genability.client.types.*;
 import org.apache.http.NameValuePair;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.genability.client.types.ChargeType;
-import com.genability.client.types.CustomerClass;
-import com.genability.client.types.ServiceType;
-import com.genability.client.types.TariffType;
 
 public class GetTariffsRequest extends AbstractGetNRequest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long lseId;
 	private Long masterTariffId;
+
 	private DateTime effectiveOn;
 	private LocalDate openOn;
 	private DateTime fromDateTime;
 	private DateTime toDateTime;
 	private Boolean isActive;
+
 	private CustomerClass[] customerClasses;
+	private ChargeType[] chargeTypes;
 	private TariffType[] tariffTypes;
 	private ServiceType[] serviceTypes;
-	private ChargeType[] chargeTypes;
+	private Privacy[] privacyFlags;
+
+	private String addressString;
 	private String zipCode;
-	private Boolean populateRates;
+	private String postCode;
+	private String country;
+
 	private Boolean populateProperties;
+	private Boolean populateRates;
+	private Boolean populateDocuments;
+
+	private String serviceTerms;
+
 	private String accountId;
+
 	private BigDecimal consumption;
 	private BigDecimal demand;
 	private Boolean hasNetMetering;
 	private Boolean hasTieredRates;
 	private Boolean hasContractedRates;
 	private Boolean hasTimeOfUseRates;
+
 
 	public Long getLseId() {
 		return lseId;
@@ -127,18 +138,26 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		this.toDateTime = toDateTime;
 	}
 
-	public Boolean getIsActive() {
-      return isActive;
-    }
-
-	public void setIsActive(Boolean isActive) {
-      this.isActive = isActive;
-    }
-
+	/**
+	 * @deprecated Use
+	 * <a href="http://developer.genability.com/documentation/api-reference/account-api/account-tariff/#get-an-accounts-active-tariffs">
+	 * account tariffs
+	 * </a>
+	 * endpoint instead.
+	 */
+	@Deprecated
 	public String getAccountId() {
 		return accountId;
 	}
 
+	/**
+	 * @deprecated Use
+	 * <a href="http://developer.genability.com/documentation/api-reference/account-api/account-tariff/#get-an-accounts-active-tariffs">
+	 * account tariffs
+	 * </a>
+	 * endpoint instead.
+	 */
+	@Deprecated
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
@@ -207,6 +226,62 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
       this.hasTimeOfUseRates = hasTimeOfUseRates;
     }
 
+	public Privacy[] getPrivacyFlags() {
+		return privacyFlags;
+	}
+
+	public void setPrivacyFlags(Privacy[] privacyFlags) {
+		this.privacyFlags = privacyFlags;
+	}
+
+	public String getAddressString() {
+		return addressString;
+	}
+
+	public void setAddressString(String addressString) {
+		this.addressString = addressString;
+	}
+
+	public String getPostCode() {
+		return postCode;
+	}
+
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getServiceTerms() {
+		return serviceTerms;
+	}
+
+	public void setServiceTerms(String serviceTerms) {
+		this.serviceTerms = serviceTerms;
+	}
+
+	public Boolean getActive() {
+		return isActive;
+	}
+
+	public void setActive(Boolean active) {
+		isActive = active;
+	}
+
+	public Boolean getPopulateDocuments() {
+		return populateDocuments;
+	}
+
+	public void setPopulateDocuments(Boolean populateDocuments) {
+		this.populateDocuments = populateDocuments;
+	}
+
 	@Override
 	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
@@ -215,16 +290,23 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		addParam(qparams,"lseId",lseId);
 		addParam(qparams,"masterTariffId",masterTariffId);
 		addParam(qparams,"effectiveOn",effectiveOn);
+		addParam(qparams,"openOn", openOn);
 		addParam(qparams,"fromDateTime",fromDateTime);
 		addParam(qparams,"toDateTime",toDateTime);
-		addParam(qparams,"isActive",isActive);
+		addParam(qparams,"isActive", isActive);
 		addParam(qparams,"customerClasses",customerClasses);
+		addParam(qparams,"chargeTypes", chargeTypes);
 		addParam(qparams,"tariffTypes",tariffTypes);
 		addParam(qparams,"serviceTypes",serviceTypes);
-		addParam(qparams,"chargeTypes",chargeTypes);
+		addParam(qparams,"privacyFlags", privacyFlags);
+		addParam(qparams,"addressString", addressString);
 		addParam(qparams,"zipCode",zipCode);
+		addParam(qparams,"postCode", postCode);
+		addParam(qparams,"country", country);
 		addParam(qparams,"populateProperties",populateProperties);
 		addParam(qparams,"populateRates",populateRates);
+		addParam(qparams,"populateDocuments", populateDocuments);
+		addParam(qparams,"serviceTerms", serviceTerms);
 		addParam(qparams,"accountId",accountId);
 		addParam(qparams,"consumption",consumption);
 		addParam(qparams,"demand",demand);
@@ -232,7 +314,6 @@ public class GetTariffsRequest extends AbstractGetNRequest implements Serializab
 		addParam(qparams,"hasTieredRates",hasTieredRates);
 		addParam(qparams,"hasContractedRates",hasContractedRates);
 		addParam(qparams,"hasTimeOfUseRates",hasTimeOfUseRates);
-		addParam(qparams,"openOn", openOn);
 
 		return qparams;
 	}
