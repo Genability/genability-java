@@ -109,6 +109,17 @@ public class TariffServiceTests extends BaseServiceTests {
 		callGetTariffs(testCase, request);
 	}
 
+	@Test
+	public void testGetTariffsWithCountry() {
+		GetTariffsRequest request = new GetTariffsRequest();
+		request.setCountry("FR");
+		request.setPostCode("75001");
+
+
+		callGetTariffs("Get tariffs with country code", request);
+	}
+
+
 	public void callGetTariffs(String testCase, GetTariffsRequest request) {
 		
 		Response<Tariff> restResponse = tariffService.getTariffs(request);
