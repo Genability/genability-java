@@ -28,3 +28,5 @@ workspace.xml
 .idea/libraries/Maven__org_slf4j_slf4j_api_1_7_5.xml
 .idea/libraries/Maven__org_slf4j_slf4j_simple_1_7_5.xml
 Maven__org_hamcrest_hamcrest_all_1_3.xml
+.idea
+genability-client.iml
