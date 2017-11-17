@@ -34,6 +34,7 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
     private Address address;
     private Boolean autoBaseline;
     private Boolean useIntelligentBaselining;
+    private Boolean includeDefaultProfile;
     private Boolean calcNetExcessGeneration;
     private DateTime tariffEffectiveOn;
     private List<TariffRate> rateInputs;
@@ -188,6 +189,15 @@ public class GetCalculatedCostRequest extends AbstractRequest implements Seriali
 
     public void setUseIntelligentBaselining(Boolean useIntelligentBaselining) {
         this.useIntelligentBaselining = useIntelligentBaselining;
+    }
+
+    @JsonInclude(Include.NON_NULL)
+    public Boolean getIncludeDefaultProfile() {
+        return includeDefaultProfile;
+    }
+
+    public void setIncludeDefaultProfile(Boolean includeDefaultProfile) {
+        this.includeDefaultProfile = includeDefaultProfile;
     }
 
     @JsonInclude(Include.NON_NULL)

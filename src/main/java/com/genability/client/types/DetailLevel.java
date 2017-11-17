@@ -2,6 +2,6 @@ package com.genability.client.types;
 
 public enum DetailLevel {
 
-	TOTAL, CHARGE_TYPE, QUANTITY_KEY, RATE, ALL
+	TOTAL, CHARGE_TYPE, QUANTITY_KEY, RATE, ALL, CHARGE_TYPE_AND_TOU
 
 }
