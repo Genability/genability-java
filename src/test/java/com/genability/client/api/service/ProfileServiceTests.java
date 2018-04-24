@@ -5,11 +5,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotEquals;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.genability.client.types.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Test;
@@ -18,13 +20,6 @@ import com.genability.client.api.request.DeleteProfileRequest;
 import com.genability.client.api.request.GetProfileRequest;
 import com.genability.client.api.request.GetProfilesRequest;
 import com.genability.client.api.request.ReadingDataRequest;
-import com.genability.client.types.Account;
-import com.genability.client.types.Baseline;
-import com.genability.client.types.ClipBy;
-import com.genability.client.types.GroupBy;
-import com.genability.client.types.Profile;
-import com.genability.client.types.ReadingData;
-import com.genability.client.types.Response;
 
 public class ProfileServiceTests extends BaseServiceTests {
 
@@ -411,6 +406,82 @@ public class ProfileServiceTests extends BaseServiceTests {
 		// assertTrue("reading1 is not equal",
 		// profile.getReadings().getList().get(0).getQuantityValue().equals(new
 		// BigDecimal("1000")));
+
+		cleanup(account.getAccountId());
+	}
+
+	@Test
+	public void testIBProfile() {
+		Account account = createAccount();
+		Profile profile = new Profile();
+		profile.setAccountId(account.getAccountId());
+		Response<Profile> results = profileService.addProfile(profile);
+
+		assertNotNull("New profile is null", results);
+		assertEquals("Bad status", results.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("Bad type", results.getType(), Profile.REST_TYPE);
+		assertTrue("Bad count", results.getCount() > 0);
+
+		profile = results.getResults().get(0);
+
+		List<ReadingData> readings = new ArrayList<ReadingData>();
+		// Create one year of readings
+		ReadingData readingData1 = new ReadingData();
+		readingData1.setQuantityUnit("kWh");
+		DateTime fromDateTime1 = new DateTime(2014, 1, 1, 0, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles"));
+		DateTime toDateTime1 = new DateTime(2015, 1, 1, 0, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles"));
+		readingData1.setFromDateTime(fromDateTime1);
+		readingData1.setToDateTime(toDateTime1);
+		readingData1.setQuantityValue(new BigDecimal("12000"));
+		readings.add(readingData1);
+
+		ReadingDataRequest request = new ReadingDataRequest();
+		request.setUsageProfileId(profile.getProfileId());
+		request.setReadings(readings);
+
+		Response<ReadingData> addReadingResults = profileService.addReadings(request);
+		assertNotNull("Reading data response is null", addReadingResults);
+		assertEquals("Bad status", addReadingResults.getStatus(), Response.STATUS_SUCCESS);
+		assertEquals("Bad type", addReadingResults.getType(), ReadingData.REST_TYPE);
+		assertEquals("Bad count", (long)addReadingResults.getCount(), (long)0);
+
+		// Get Profile w/o Intelligent Baselining
+		GetProfileRequest profileRequest = new GetProfileRequest();
+		profileRequest.setProfileId(profile.getProfileId());
+		profileRequest.setFromDateTime(new DateTime(2014, 4, 1, 0, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles")));
+		profileRequest.setToDateTime(new DateTime(2014, 5, 1, 0, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles")));
+		profileRequest.setPopulateReadings(Boolean.TRUE);
+		profileRequest.setGroupBy(GroupBy.ALL);
+
+		profile = callGetProfile("Test IB Profile / no IB enabled", profileRequest);
+
+		assertNotNull("New profile intervals are null", profile.getIntervals());
+		assertEquals(
+				profile.getIntervals().getList().get(0).getkWh().getQuantityAmount().doubleValue(),
+				(12000.0 / 365.0) * 30.0,
+				0.0001);
+
+		// Get Profile w/ Intelligent Baselining enabled
+		profileRequest = new GetProfileRequest();
+		profileRequest.setProfileId(profile.getProfileId());
+		profileRequest.setFromDateTime(new DateTime(2014, 4, 1, 0, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles")));
+		profileRequest.setToDateTime(new DateTime(2014, 5, 1, 0, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles")));
+		profileRequest.setPopulateReadings(Boolean.TRUE);
+		profileRequest.setGroupBy(GroupBy.HOUR);
+		profileRequest.setAutoBaseline(Boolean.TRUE);
+		profileRequest.setUseIntelligentBaselining(Boolean.TRUE);
+
+		profile = callGetProfile("Test IB Profile / IB enabled", profileRequest);
+
+		assertNotNull("New profile intervals are null", profile.getIntervals());
+
+		// Manually roll-up the IB'd values
+		double totalKWh = 0.0;
+		for (IntervalInfo interval : profile.getIntervals().getList()) {
+			totalKWh += interval.getkWh().getQuantityAmount().doubleValue();
+		}
+
+ 		assertNotEquals(totalKWh, (12000.0 / 365.0) * 30.0, 0.0001);
 
 		cleanup(account.getAccountId());
 	}

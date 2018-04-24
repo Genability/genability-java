@@ -30,6 +30,9 @@ public class GetProfileRequest extends AbstractGetNRequest implements Serializab
 	private GroupBy groupBy;
 	private ClipBy clipBy;
 
+	private Boolean autoBaseline;
+	private Boolean useIntelligentBaselining;
+
 
 	public String getProfileId() {
 		return profileId;
@@ -119,6 +122,22 @@ public class GetProfileRequest extends AbstractGetNRequest implements Serializab
 		this.providerProfileId = providerProfileId;
 	}
 
+	public Boolean getAutoBaseline() {
+		return autoBaseline;
+	}
+
+	public void setAutoBaseline(Boolean autoBaseline) {
+		this.autoBaseline = autoBaseline;
+	}
+
+	public Boolean getUseIntelligentBaselining() {
+		return useIntelligentBaselining;
+	}
+
+	public void setUseIntelligentBaselining(Boolean useIntelligentBaselining) {
+		this.useIntelligentBaselining = useIntelligentBaselining;
+	}
+
 	@Override
 	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
@@ -130,6 +149,8 @@ public class GetProfileRequest extends AbstractGetNRequest implements Serializab
 		addParam(qparams,"populateBaseline",populateBaseline);
 		addParam(qparams,"groupBy",groupBy);
 		addParam(qparams,"clipBy",clipBy);
+		addParam(qparams, "autoBaseline", autoBaseline);
+		addParam(qparams, "useIntelligentBaselining", useIntelligentBaselining);
 		return qparams;
 	}
 }
