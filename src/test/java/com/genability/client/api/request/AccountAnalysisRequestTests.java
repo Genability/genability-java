@@ -2,6 +2,10 @@ package com.genability.client.api.request;
 
 import static org.junit.Assert.*;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.genability.client.util.JodaDateJsonSerializer;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -21,7 +25,12 @@ public class AccountAnalysisRequestTests {
 	public void registerJodaModule() {
 		mapper.registerModule(new JodaModule());
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-	    mapper.setSerializationInclusion(Include.NON_NULL);
+		mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
+		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(DateTime.class, new JodaDateJsonSerializer());
+		mapper.registerModule(module);
 	}
 	
 	
@@ -65,7 +74,7 @@ public class AccountAnalysisRequestTests {
 	public void testFromDateWithTimezone() throws JsonProcessingException {
 		AccountAnalysisRequest request = new AccountAnalysisRequest();
 		request.setFromDateTime(new DateTime(2015, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific")));
-		String target = "{\"fields\":\"ext\",\"fromDateTime\":\"2015-01-01T00:00:00.000-08:00\"}";
+		String target = "{\"fields\":\"ext\",\"fromDateTime\":\"2015-01-01T00:00:00-08:00\"}";
 		
 		assertEquals("Didn't serialize fromDateTime correctly with a datetime", target, mapper.writeValueAsString(request));
 	}
@@ -74,8 +83,7 @@ public class AccountAnalysisRequestTests {
 	public void testToDateWithTimezone() throws JsonProcessingException {
 		AccountAnalysisRequest request = new AccountAnalysisRequest();
 		request.setToDateTime(new DateTime(2015, 1, 1, 0, 0, 0, DateTimeZone.forID("US/Pacific")));
-		String target = "{\"fields\":\"ext\",\"toDateTime\":\"2015-01-01T00:00:00.000-08:00\"}";
-		
+		String target = "{\"fields\":\"ext\",\"toDateTime\":\"2015-01-01T00:00:00-08:00\"}";
 		assertEquals("Didn't serialize toDateTime correctly with a datetime", target, mapper.writeValueAsString(request));
 	}
 }
