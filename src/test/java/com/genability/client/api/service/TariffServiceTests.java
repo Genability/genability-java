@@ -119,6 +119,15 @@ public class TariffServiceTests extends BaseServiceTests {
 		callGetTariffs("Get tariffs with country code", request);
 	}
 
+	@Test
+	public void testGetTariffWithNonBypassableRates() {
+		GetTariffRequest request = new GetTariffRequest();
+		request.setPopulateRates(true);
+		request.setMasterTariffId(3250148L);
+
+		callGetTariff("Get tariff with non-bypassable rates", request);
+	}
+
 
 	public void callGetTariffs(String testCase, GetTariffsRequest request) {
 		
