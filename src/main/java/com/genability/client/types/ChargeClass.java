@@ -8,5 +8,6 @@ public enum ChargeClass {
   OTHER,
   CONTRACTED,
   USER_ADJUSTED,
-  AFTER_TAX
+  AFTER_TAX,
+  NON_BYPASSABLE
 }
