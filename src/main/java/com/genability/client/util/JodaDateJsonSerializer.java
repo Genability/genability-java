@@ -12,11 +12,11 @@ import java.io.IOException;
 /**
  * This is a custom serializer for serializing java.sql.DateTime into JSON.
  * This is used by all requests containing DateTimes.
- * 
+ *
  * {code}
- * 
- * @JsonSerialize(using=SqlDateJsonSerializer.class) {code}
- * 
+ * {@literal @}JsonSerialize(using=SqlDateJsonSerializer.class)
+ * {code}
+ *
  */
 public class JodaDateJsonSerializer extends JsonSerializer<DateTime> {
 	
