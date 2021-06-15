@@ -19,7 +19,7 @@ import com.genability.client.types.Response;
 
 public class IncentiveServiceTests extends BaseServiceTests {
 
-	private String baseUrl = incentiveService.getRestApiServer() + "beta/incentives";
+	private final String baseUrl = incentiveService.getRestApiServer() + "beta/incentives";
 	private IncentiveService localService;
 
 	@Before
@@ -27,27 +27,25 @@ public class IncentiveServiceTests extends BaseServiceTests {
 		localService = new IncentiveService();
 		localService.setRestApiServer(territoryService.getRestApiServer());
 	}
-	
+
 	@Test
 	public void testGetOneIncentiveUrl() {
 		// Arrange
 		long incentiveId = 1234;
 		String expectedUrl = String.format("%s/%d", baseUrl, incentiveId);
-		
+
 		// Expect
-		MockHttpClient client = new MockHttpClient(expectedUrl); 
+		MockHttpClient client = new MockHttpClient(expectedUrl);
 		localService.setHttpClient(client);
-		
+
 		// Act
 		localService.getIncentive(incentiveId);
 		client.validate();
 	}
-	
+
 	@Test
 	public void testGetIncentivesUrl() {
 		// Arrange
-		String expectedUrl = baseUrl;
-
 		GetIncentivesRequest request = new GetIncentivesRequest();
 		request.setLseId(1234L);
 		request.setState("CA");
@@ -55,9 +53,9 @@ public class IncentiveServiceTests extends BaseServiceTests {
 		request.setIncentiveType("rebate");
 		request.setProjectType("solarPv");
 		request.setApplicabilityValue("systemSizeDcW", "100");
-		
+
 		// Expect
-		MockHttpClient client = new MockHttpClient(expectedUrl);
+		MockHttpClient client = new MockHttpClient(baseUrl);
 		client.addExpectedParameter("lseId", "1234");
 		client.addExpectedParameter("state", "CA");
 		client.addExpectedParameter("customerClasses", "RESIDENTIAL");
@@ -65,12 +63,12 @@ public class IncentiveServiceTests extends BaseServiceTests {
 		client.addExpectedParameter("projectType", "solarPv");
 		client.addExpectedParameter("systemSizeDcW", "100");
 		localService.setHttpClient(client);
-		
+
 		// Act
 		localService.getIncentives(request);
 		client.validate();
 	}
-	
+
 	@Test
 	public void testGetIncentiveApplicabilitiesUrl() {
 		// Arrange
@@ -91,21 +89,21 @@ public class IncentiveServiceTests extends BaseServiceTests {
 		client.addExpectedParameter("incentiveType", "rebate");
 		client.addExpectedParameter("projectType", "solarPv");
 		localService.setHttpClient(client);
-		
+
 		// Act
 		localService.getIncentiveApplicabilities(request);
 		client.validate();
 	}
-	
+
 	@Test
 	public void testGetIncentive() {
 		// Arrange
-		Long mtid = new Long(3158838L);
+		Long mtid = 3302404L;
 		Response<Incentive> response = incentiveService.getIncentive(mtid);
-		
+
 		// Act
 		List<Incentive> results = response.getResults();
-		
+
 		// Assert
 		Incentive incentive = results.get(0);
 		assertEquals("Request failed.", Response.STATUS_SUCCESS, response.getStatus());
@@ -113,24 +111,24 @@ public class IncentiveServiceTests extends BaseServiceTests {
 		assertEquals("Wrong result type", response.getType(), "Incentive");
 		assertEquals("Wrong mtid", mtid, incentive.getMasterIncentiveId());
 	}
-	
+
 	@Test
 	public void testGetIncentiveApplicabilities() {
 		// Arrange
 		GetIncentiveApplicabilitiesRequest request = new GetIncentiveApplicabilitiesRequest();
 		request.setState("NY");
 		request.setProjectType("solarPv");
-		
+
 		// Act
 		Response<IncentiveApplicability> response = incentiveService.getIncentiveApplicabilities(request);
-		
+
 		// Assert
 		assertEquals("Request failed.", Response.STATUS_SUCCESS, response.getStatus());
-		assertTrue("Should have lots of results.", response.getCount() > new Integer(0));
+		assertTrue("Should have lots of results.", response.getCount() > 0);
 		assertEquals("Wrong result type", response.getType(), "IncentiveApplicability");
 	}
-	
-	
+
+
 	@Test
 	public void testGetIncentives() {
 		// Arrange
@@ -138,37 +136,37 @@ public class IncentiveServiceTests extends BaseServiceTests {
 		DateTime effectiveOn = DateTime.now();
 		request.setEffectiveOn(effectiveOn);
 		request.setState("NY");
-		
+
 		// Act
 		Response<Incentive> response = incentiveService.getIncentives(request);
-		
+
 		// Assert
 		List<Incentive> results = response.getResults();
 		assertEquals("Request failed.", Response.STATUS_SUCCESS, response.getStatus());
-		assertTrue("Should have lots of results.", response.getCount() > new Integer(0));
+		assertTrue("Should have lots of results.", response.getCount() > 0);
 		assertEquals("Wrong result type", response.getType(), "Incentive");
-		
+
 		for (Incentive result : results) {
 			assertEquals("State should match the requested state", result.getState(), "NY");
 			if (result.getEndDate() != null) {
 				assertTrue("Only incentives that haven't ended should be returned", result.getEndDate().isAfter(effectiveOn));
 			}
-			
+
 			assertFalse("Only non-exhausted incentives should be returned", result.getIsExhausted());
 		}
 	}
-	
+
 	@Test
 	public void dontDoubleUpOnParameters() {
 		// Arrange
 		String expectedUrl = baseUrl;
 
 		GetIncentivesRequest request = new GetIncentivesRequest();
-		
+
 		DateTime dt = new DateTime(2015, 12, 1, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles"));
 		request.setEffectiveOn(dt);
 		request.setApplicabilityValue("effectiveOn", "2015-12-01");
-		
+
 
 		// Expect
 		MockHttpClient client = new MockHttpClient(expectedUrl);
