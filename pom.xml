@@ -8,7 +8,7 @@
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Genability API Java Client</description>
 	<url>http://github.com/Genability/genability-java/</url>
-	
+
 	<licenses>
 		<license>
 			<name>MIT License</name>
@@ -24,13 +24,13 @@
       		<organizationUrl>http://genability.com</organizationUrl>
     	</developer>
   	</developers>
-  	
+
   	<scm>
   		<connection>scm:git:git@github.com:Genability/genability-java.git</connection>
   		<developerConnection>scm:git:git@github.com:Genability/genability-java.git</developerConnection>
   		<url>git@github.com:Genability/genability-java.git</url>
 	</scm>
-	
+
 	<distributionManagement>
   		<snapshotRepository>
     		<id>ossrh</id>
@@ -41,13 +41,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<httpclient.version>4.5.3</httpclient.version>
-		<jackson.version>2.10.1</jackson.version>
+		<httpclient.version>4.5.13</httpclient.version>
+		<jackson.version>2.12.1</jackson.version>
 		<jodatime.version>2.9.9</jodatime.version>
 		<slf4j.version>1.7.5</slf4j.version>
-		<junit.version>4.11</junit.version>
+		<junit.version>4.13.1</junit.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -208,7 +208,7 @@
 			<configuration>
 				<serverId>ossrh</serverId>
 				<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-				<!-- set this to false so that we can check if something went wrong before 
+				<!-- set this to false so that we can check if something went wrong before
 					deploying to the universe -->
 				<autoReleaseAfterClose>false</autoReleaseAfterClose>
 			</configuration>
