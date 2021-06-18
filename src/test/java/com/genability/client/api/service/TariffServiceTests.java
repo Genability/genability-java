@@ -5,7 +5,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
+import com.genability.client.types.ChargeType;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -23,7 +25,7 @@ public class TariffServiceTests extends BaseServiceTests {
 
 	private static TariffService tariffService = genabilityClient.getTariffService();
 
-	
+
 	@Test
 	public void testGetTariff() {
 
@@ -66,25 +68,36 @@ public class TariffServiceTests extends BaseServiceTests {
 	}
 
 	@Test
+	public void testGetTariffWithChargeTypeMaximum() {
+		GetTariffRequest request = new GetTariffRequest();
+		request.setMasterTariffId(3311025L);
+		request.setEffectiveOn(new DateTime("2021-06-02"));
+
+		Tariff tariff = callGetTariff("Tariff with ChargeType MAXIMUM", request);
+
+		assertTrue("The Tariff should have ChargeType MAXIMUM", Arrays.asList(tariff.getChargeTypes()).contains(ChargeType.MAXIMUM));
+	}
+
+	@Test
 	public void testGetTariffs() {
-		
+
 		GetTariffsRequest request = new GetTariffsRequest();
-		
+
 		String testCase = "Case 1 - simple unparameterized call";
 		callGetTariffs(testCase, request);
-		
+
 		testCase = "Case 2 - find by zipcode";
 		request.setZipCode("94105");
 		callGetTariffs(testCase, request);
-		
+
 		testCase = "Case 3 - include the properties populated";
 		request.setPopulateProperties(Boolean.TRUE);
 		callGetTariffs(testCase, request);
-		
+
 		testCase = "Case 4 - explicit effective on";
 		request.setEffectiveOn(new DateTime(DateTime.now().getYear()-1,11,11,1,0,0,0));
 		callGetTariffs(testCase, request);
-		
+
 		testCase = "Case 5 - common scenario, active residential tariffs for a zipcode";
 		request = new GetTariffsRequest();
 		request.setCustomerClasses(CustomerClass.RESIDENTIAL);
@@ -95,17 +108,17 @@ public class TariffServiceTests extends BaseServiceTests {
 		request.setSortOrder(SortOrder.DESCENDING); // so default tariffs come before alternative
 		request.setPopulateProperties(true);// so you know what properties it will take to run a calc
 		callGetTariffs(testCase, request);
-		
+
 	}
-	
+
 	@Test
 	public void getTariffsWithAfterTax() {
 		String testCase = "Get tariffs with AFTER_TAX charge class";
-		
+
 		GetTariffsRequest request = new GetTariffsRequest();
 		request.setPopulateRates(true);
 		request.setZipCode("95818");
-		
+
 		callGetTariffs(testCase, request);
 	}
 
@@ -130,24 +143,24 @@ public class TariffServiceTests extends BaseServiceTests {
 
 
 	public void callGetTariffs(String testCase, GetTariffsRequest request) {
-		
+
 		Response<Tariff> restResponse = tariffService.getTariffs(request);
-		
+
 		assertNotNull("restResponse null", restResponse);
 		assertEquals("bad status", Response.STATUS_SUCCESS, restResponse.getStatus());
 		assertEquals("bad type", Tariff.REST_TYPE, restResponse.getType());
 		assertTrue("bad count", restResponse.getCount() > 0);
-		
+
 		for(Tariff tariff : restResponse.getResults()) {
-			
+
 			assertNotNull("tariffId null",tariff.getTariffId());
 			assertNotNull("effectiveDate", tariff.getEffectiveDate());
 			assertNotNull("currency", tariff.getCurrency());
-			
+
 		}
-		
+
 	}
-	
+
 	public Tariff callGetTariff(String testCase, GetTariffRequest request) {
 
 		Response<Tariff> restResponse = tariffService.getTariff(request);
