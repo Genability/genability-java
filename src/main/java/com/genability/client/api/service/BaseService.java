@@ -245,7 +245,7 @@ public class BaseService {
 		return execute(deleteRequest, resultTypeReference);
 	} // end of callGet
 
-	protected <T extends Response<R>, R> T execute(HttpRequestBase request, final TypeReference<T> resultTypeReference) {
+	protected <T extends Response<R>, R> T execute(final HttpRequestBase request, final TypeReference<T> resultTypeReference) {
 		try {
 			request.addHeader("accept", "application/json");
 
@@ -264,7 +264,8 @@ public class BaseService {
 						}
 						catch (IOException ex) {}
 
-						throw new GenabilityException("Failed : HTTP error code : " + httpResponse.getStatusLine().getStatusCode(), responseBody);
+						throw new GenabilityException("Failed " + request.getMethod() + " " + request.getURI() +
+								": HTTP error code : " + httpResponse.getStatusLine().getStatusCode(), responseBody);
 					}
 
 					//

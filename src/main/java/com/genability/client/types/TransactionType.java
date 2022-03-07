@@ -5,5 +5,5 @@ public enum TransactionType {
   SELL,
   NET,
   BUY_IMPORT,
-  SELL_IMPORT
+  SELL_EXPORT
 }
