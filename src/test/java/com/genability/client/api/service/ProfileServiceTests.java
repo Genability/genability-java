@@ -146,9 +146,10 @@ public class ProfileServiceTests extends BaseServiceTests {
 			} catch (GenabilityException e) {
 				// XXX should handle HTTP codes cleanly in the exception
 				// 2015-04-16: Error code on server side is now incorrect.
-				if (! "Failed : HTTP error code : 400".equals(e.getMessage())) {
-					throw e;
-				}
+				assertTrue(
+						"Wrong exception message: " + e.getMessage(),
+						e.getMessage().contains("Failed GET") && e.getMessage().contains("HTTP error code : 400")
+				);
 			}
 		} finally {
 			cleanup(newProfile.getAccountId());
