@@ -6,20 +6,16 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Stream;
 
-import com.genability.client.types.ChargeType;
+import com.genability.client.types.*;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
 import com.genability.client.api.request.GetTariffRequest;
 import com.genability.client.api.request.GetTariffsRequest;
-import com.genability.client.types.CustomerClass;
-import com.genability.client.types.Response;
-import com.genability.client.types.SortOrder;
-import com.genability.client.types.Tariff;
-import com.genability.client.types.TariffRate;
-import com.genability.client.types.TariffRateBand;
-import com.genability.client.types.TariffType;
 
 public class TariffServiceTests extends BaseServiceTests {
 
@@ -139,6 +135,41 @@ public class TariffServiceTests extends BaseServiceTests {
 		request.setMasterTariffId(3250148L);
 
 		callGetTariff("Get tariff with non-bypassable rates", request);
+	}
+
+	/**
+	 * Test to make sure all TransactionTypes are marked and marshalled correctly.
+	 */
+	@Test
+	public void testRateTransactionTypes() {
+		Set<TransactionType> allTransactionTypes = new HashSet<TransactionType>(
+				Arrays.asList(TransactionType.values()));
+
+
+		GetTariffRequest request = new GetTariffRequest();
+		request.setPopulateRates(true);
+
+		// No single tariff has all transactionTypes. Here we picked two that collectively have all types.
+
+		// RMP - Residential: has BUY, BUY_IMPORT, SELL_IMPORT
+		request.setMasterTariffId(3292088L);
+		Tariff tariff1 = callGetTariff("tariff 1", request);
+
+		// Shasta Lake - Residential: has BUY, SELL, NET
+		request.setMasterTariffId(3327795L);
+		Tariff tariff2 = callGetTariff("tariff2", request);
+
+		Set<TransactionType> tariffTransactionTypes = new HashSet<TransactionType>();
+		for (TariffRate rate : tariff1.getRates()) {
+			assertNotNull("Rate missing transactionType or not marshalled properly", rate.getTransactionType());
+			tariffTransactionTypes.add(rate.getTransactionType());
+		}
+		for (TariffRate rate : tariff2.getRates()) {
+			assertNotNull("Rate missing transactionType or not marshalled properly", rate.getTransactionType());
+			tariffTransactionTypes.add(rate.getTransactionType());
+		}
+
+		assertEquals("Tariffs missing some expected transaction types", tariffTransactionTypes, allTransactionTypes);
 	}
 
 
