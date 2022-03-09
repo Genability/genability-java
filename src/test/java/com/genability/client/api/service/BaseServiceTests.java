@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.SequenceInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,10 +76,17 @@ public class BaseServiceTests {
     		//load the properties file from in the classpath
     		//
     		InputStream inputStream = BaseServiceTests.class.getClassLoader().getResourceAsStream("genability.properties");
-                if (inputStream == null) {
-                        logger.error("Can't find genability.properties");
-                        throw new RuntimeException("Can't find genability.properties");
-                }
+			if (inputStream == null) {
+				logger.error("Can't find genability.properties");
+				throw new RuntimeException("Can't find genability.properties");
+			}
+
+			// Also try loading the (gitignore'd) local overrides
+			InputStream localProps = BaseServiceTests.class.getClassLoader().getResourceAsStream("genability.local.properties");
+			if (localProps != null) {
+				inputStream = new SequenceInputStream(inputStream, localProps);
+			}
+
     		prop.load(inputStream);
     	} catch (IOException ex) {
     		logger.error("Unable to process genability.properties", ex);

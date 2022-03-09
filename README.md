@@ -19,7 +19,8 @@ You'll still need an appId and appKey to make any requests. Get an appId at http
 Be sure to check out the [tutorial](http://genability.github.io/genability-java/tutorial.html) and the [tutorial app](https://github.com/Genability/java-client-tutorial) for some examples to get you started.
 
 # How to Run the Tests
-1. Get an appId and appKey.
-2. Put the appId and appKey in the `src/test/resources/genability.properties` file.
-3. Compile the library and run JUnit tests with `mvn test`.
-4. Develop your own app. Read the API documentation at http://developer.genability.com.
+1. Get a Genability appId and appKey.
+2. Copy the `src/test/resources/genability.properties` file into a new `src/test/resources/genability.local.properties`. This copy is gitignored.
+3. Fill in your appId and appKey into the `.local.properties`.
+4. Run `mvn test`: compiles the library and runs JUnit tests.
+5. Develop your own app. Read the API documentation at http://developer.genability.com.
