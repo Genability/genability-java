@@ -33,3 +33,5 @@ genability-client.iml
 *.iml
 
 
+# Ignore local properties override to avoid accidentally comitting creds
+src/test/resources/genability.local.properties
