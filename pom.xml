@@ -4,7 +4,7 @@
 
 	<groupId>com.genability</groupId>
 	<artifactId>genability-client</artifactId>
-	<version>1.12.0</version>
+	<version>1.12.1</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Genability API Java Client</description>
 	<url>http://github.com/Genability/genability-java/</url>
@@ -19,10 +19,16 @@
 	<developers>
     	<developer>
       		<name>Andrew Fister</name>
-      		<email>afister@genability.com</email>
-      		<organization>Genability</organization>
-      		<organizationUrl>http://genability.com</organizationUrl>
+			<email>andrew.fister@arcadia.com</email>
+			<organization>Genability, by Arcadia</organization>
+			<organizationUrl>https://www.genability.com</organizationUrl>
     	</developer>
+		<developer>
+			<name>Dan Lopuch</name>
+			<email>dan.lopuch@arcadia.com</email>
+			<organization>Genability, by Arcadia</organization>
+			<organizationUrl>https://www.arcadia.com</organizationUrl>
+		</developer>
   	</developers>
 
   	<scm>
