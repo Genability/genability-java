@@ -130,6 +130,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 			assertEquals("Didn't get the correct TOU group", Long.valueOf(touGroupId), i.getTouGroupId());
 			assertTrue("Interval is not in the correct time period", i.getFromDateTime().compareTo(fromDateTime) >= 0);
 			assertTrue("Interval is not in the correct time period", i.getToDateTime().compareTo(toDateTime) <= 0);
+			assertNotNull("Time of Use Type mapped incorrectly", i.getTouType());
 		}
 	}
 	
