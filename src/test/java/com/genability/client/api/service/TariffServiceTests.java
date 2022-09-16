@@ -66,8 +66,8 @@ public class TariffServiceTests extends BaseServiceTests {
 	@Test
 	public void testGetTariffWithChargeTypeMaximum() {
 		GetTariffRequest request = new GetTariffRequest();
-		request.setMasterTariffId(3311025L);
-		request.setEffectiveOn(new DateTime("2021-06-02"));
+		request.setMasterTariffId(3342081L);
+		request.setEffectiveOn(new DateTime("2020-03-01"));
 
 		Tariff tariff = callGetTariff("Tariff with ChargeType MAXIMUM", request);
 
