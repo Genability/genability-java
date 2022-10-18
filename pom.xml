@@ -48,7 +48,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<httpclient.version>4.5.13</httpclient.version>
-		<jackson.version>2.12.1</jackson.version>
+		<jackson.version>2.13.4.1</jackson.version>
 		<jodatime.version>2.9.9</jodatime.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<junit.version>4.13.1</junit.version>
