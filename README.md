@@ -14,7 +14,7 @@ The Genability API Java client library is now available on the Maven Central Rep
 </dependency>
 ```
 
-You'll still need an appId and appKey to make any requests. Get an appId at https://apps.genability.com/profile/organizations/current or [sign up](https://apps.genability.com/explorer/signup) if you are new to Genability.
+You'll still need an appId and appKey to make any requests. Get an appId at https://dash.genability.com/org/applications or [sign up](https://dash.genability.com/signup) if you are new to Genability.
 
 Be sure to check out the [tutorial](http://genability.github.io/genability-java/tutorial.html) and the [tutorial app](https://github.com/Genability/java-client-tutorial) for some examples to get you started.
 
