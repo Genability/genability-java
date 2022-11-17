@@ -208,7 +208,7 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 			touService.getTimeOfUseGroup(added.getLseId(), added.getTouGroupId());
 		} catch (GenabilityException e) {
 			String message = "Trying to get a deleted TOU group should result in a 404";
-			assertEquals(message, "Failed : HTTP error code : 404", e.getMessage());
+			assertEquals(message, "Failed GET " + publicBaseUrl + "/" + added.getLseId() + "/" + added.getTouGroupId() + "?fields=ext: HTTP error code : 404", e.getMessage());
 		}
 	}
 
