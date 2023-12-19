@@ -53,7 +53,9 @@ public class PropertyData {
 	private String operator;
 
 	private List<BigDecimal> dataSeries;
-	
+
+	private List<BigDecimal> exportDataSeries;
+
 	public PropertyData() {}
 
 	public void setKeyName(String keyName) {
@@ -194,6 +196,14 @@ public class PropertyData {
 
 	public void setDataSeries(List<BigDecimal> dataSeries) {
 		this.dataSeries = dataSeries;
+	}
+
+	public List<BigDecimal> getExportDataSeries() {
+		return exportDataSeries;
+	}
+
+	public void setExportDataSeries(List<BigDecimal> exportDataSeries) {
+		this.exportDataSeries = exportDataSeries;
 	}
 
 	public void addData(BigDecimal data) {
