@@ -7,5 +7,5 @@ public enum TimeOfUseType {
 	CRITICAL_PEAK,
 	SUPER_OFF_PEAK,
 	SUPER_ON_PEAK,
-	ALL,
+	ALL
 }
