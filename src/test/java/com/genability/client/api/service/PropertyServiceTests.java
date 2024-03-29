@@ -127,7 +127,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 	}
 
 	@Test
-	public void testGetPropertyLookups_null_keyName_nonNull_Properties() {
+	public void testGetPropertyLookups_null_keyName_nonNull_additionalParams() {
 		GetPropertyLookupsRequest request = new GetPropertyLookupsRequest();
 		request.setSubKeyName("51291");
 		request.setFromDateTime(new DateTime("2014-01-01"));
