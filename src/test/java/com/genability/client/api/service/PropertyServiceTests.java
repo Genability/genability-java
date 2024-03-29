@@ -1,9 +1,5 @@
 package com.genability.client.api.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -15,6 +11,8 @@ import com.genability.client.types.PropertyKey;
 import com.genability.client.types.PropertyLookup;
 import com.genability.client.types.PropertyLookupStats;
 import com.genability.client.types.Response;
+
+import static org.junit.Assert.*;
 
 public class PropertyServiceTests extends BaseServiceTests{
 	
@@ -121,6 +119,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 		GetPropertyLookupsRequest request = new GetPropertyLookupsRequest();
 		try {
 			propertyService.getPropertyLookups(request);
+			fail("Expected an exception to be thrown due to missing keyName");
 		} catch (GenabilityException e) {
 			assertEquals("Missing required field keyName", e.getMessage());
 		}
@@ -135,6 +134,7 @@ public class PropertyServiceTests extends BaseServiceTests{
 
 		try {
 			propertyService.getPropertyLookups(request);
+			fail("Expected an exception to be thrown due to missing keyName");
 		} catch (GenabilityException e) {
 			assertEquals("Missing required field keyName", e.getMessage());
 		}
