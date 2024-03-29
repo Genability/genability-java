@@ -115,6 +115,30 @@ public class PropertyServiceTests extends BaseServiceTests{
 		assertEquals("Got results for the wrong propertyKey",
 				targetPropertyKey, restResponse.getResults().get(0).getPropertyKey());
 	}
+
+	@Test
+	public void testGetPropertyLookups_null_keyName() {
+		GetPropertyLookupsRequest request = new GetPropertyLookupsRequest();
+		try {
+			propertyService.getPropertyLookups(request);
+		} catch (GenabilityException e) {
+			assertEquals("Missing required field keyName", e.getMessage());
+		}
+	}
+
+	@Test
+	public void testGetPropertyLookups_null_keyName_nonNull_Properties() {
+		GetPropertyLookupsRequest request = new GetPropertyLookupsRequest();
+		request.setSubKeyName("51291");
+		request.setFromDateTime(new DateTime("2014-01-01"));
+		request.setToDateTime(new DateTime("2014-01-02"));
+
+		try {
+			propertyService.getPropertyLookups(request);
+		} catch (GenabilityException e) {
+			assertEquals("Missing required field keyName", e.getMessage());
+		}
+	}
 	
 	@Test
 	public void testGetPropertyLookupsWithSubkey() {
