@@ -51,11 +51,15 @@ public class PropertyService extends BaseService {
 		
 		if(log.isDebugEnabled()) log.debug("getPropertyLookups called");
 
-		String uri = "public/properties/lookups";
+		if (request.getKeyName() == null || request.getKeyName().isEmpty()) {
+			throw new GenabilityException("Missing required field keyName");
+		}
+
+		String uri = "public/properties/" + request.getKeyName() + "/lookups";
 
 		Response<PropertyLookup> response = this.callGet(uri,request.getQueryParams(),PROPERTY_LOOKUP_RESPONSE_TYPEREF);
 		
-		if(log.isDebugEnabled()) log.debug("getPropertyLookups completed");
+		if(log.isDebugEnabled()) log.debug("getPropertyLookups completed with keyName: " + request.getKeyName());
 		
 		return response;
 	}

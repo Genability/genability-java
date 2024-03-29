@@ -1,9 +1,5 @@
 package com.genability.client.api.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.joda.time.DateTime;
 import org.junit.Test;
 
@@ -15,6 +11,8 @@ import com.genability.client.types.PropertyKey;
 import com.genability.client.types.PropertyLookup;
 import com.genability.client.types.PropertyLookupStats;
 import com.genability.client.types.Response;
+
+import static org.junit.Assert.*;
 
 public class PropertyServiceTests extends BaseServiceTests{
 	
@@ -114,6 +112,32 @@ public class PropertyServiceTests extends BaseServiceTests{
 		assertTrue("Didn't get any results.", restResponse.getCount() > 0);
 		assertEquals("Got results for the wrong propertyKey",
 				targetPropertyKey, restResponse.getResults().get(0).getPropertyKey());
+	}
+
+	@Test
+	public void testGetPropertyLookups_null_keyName() {
+		GetPropertyLookupsRequest request = new GetPropertyLookupsRequest();
+		try {
+			propertyService.getPropertyLookups(request);
+			fail("Expected an exception to be thrown due to missing keyName");
+		} catch (GenabilityException e) {
+			assertEquals("Missing required field keyName", e.getMessage());
+		}
+	}
+
+	@Test
+	public void testGetPropertyLookups_null_keyName_nonNull_additionalParams() {
+		GetPropertyLookupsRequest request = new GetPropertyLookupsRequest();
+		request.setSubKeyName("51291");
+		request.setFromDateTime(new DateTime("2014-01-01"));
+		request.setToDateTime(new DateTime("2014-01-02"));
+
+		try {
+			propertyService.getPropertyLookups(request);
+			fail("Expected an exception to be thrown due to missing keyName");
+		} catch (GenabilityException e) {
+			assertEquals("Missing required field keyName", e.getMessage());
+		}
 	}
 	
 	@Test
