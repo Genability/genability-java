@@ -97,6 +97,8 @@ public class PropertyServiceTests extends BaseServiceTests{
 		GetPropertyLookupsRequest request = new GetPropertyLookupsRequest();
 		String targetPropertyKey = "hourlyPricingDayAheadPJM";
 		request.setKeyName(targetPropertyKey);
+		request.setFromDateTime(new DateTime("2024-01-21"));
+		request.setToDateTime(new DateTime("2024-04-22"));
 		
 		//
 		// Act
