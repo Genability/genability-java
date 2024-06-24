@@ -10,6 +10,6 @@ permissions:
 jobs:
   scan:
     name: gitleaks
-    uses: ArcadiaPower/security/.github/workflows/gitleaks.yaml@6aa1dcb98f556d9b902340fe5b6a231c310363c5
+    uses: ArcadiaPower/gitleaks-workflow/.github/workflows/gitleaks.yaml@5ae02b51d3614e5227a7d618e9e9d457cadae74a
     secrets: inherit
 
