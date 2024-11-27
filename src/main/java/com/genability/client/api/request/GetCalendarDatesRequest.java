@@ -2,21 +2,21 @@ package com.genability.client.api.request;
 
 import org.joda.time.DateTime;
 
-public class GetCalendarDatesRequest extends AbstractRequest{
-private DateTime fromDateTime;
-	
+public class GetCalendarDatesRequest extends AbstractGetNRequest {
+	private DateTime fromDateTime;
+
 	private DateTime toDateTime;
 
 	/**
 	 * Private member variable for Locale.
 	 */
 	private String locale;
-	
+
 	/**
 	 * Private member variable for CalendarEventTypeFlags.
 	 */
 	private String[] calendarEventTypes;
-	
+
 	/**
 	 * Private member variable for DateDefinitionTypeFlags.
 	 */
@@ -26,7 +26,7 @@ private DateTime fromDateTime;
 	 * Private member variable for calendarId.
 	 */
 	private Long calendarId;
-	
+
 	/**
 	 * Private member variable for LseId.
 	 */
@@ -87,6 +87,6 @@ private DateTime fromDateTime;
 	public void setLseId(Long lseId) {
 		this.lseId = lseId;
 	}
-	
+
 
 }

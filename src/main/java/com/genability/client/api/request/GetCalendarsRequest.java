@@ -6,7 +6,7 @@ import org.apache.http.NameValuePair;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class GetCalendarsRequest extends AbstractRequest{
+public class GetCalendarsRequest extends AbstractGetNRequest {
 
 	/**
 	 * Private member variable for LseId.
@@ -21,17 +21,17 @@ public class GetCalendarsRequest extends AbstractRequest{
 		this.lseId = lseId;
 	}
 
-	
-	
+
+
 	@Override
 	@JsonIgnore
 	public List<NameValuePair> getQueryParams() {
 
 		List<NameValuePair> qparams = super.getQueryParams();
 		addParam(qparams,"lseId",lseId);
-		
+
 		return qparams;
-		
-	}	
+
+	}
 
 }
