@@ -6,18 +6,21 @@ import com.genability.client.api.request.GetCalendarRequest;
 import com.genability.client.api.request.GetCalendarsRequest;
 import com.genability.client.types.Calendar;
 import com.genability.client.types.CalendarEventDate;
+import com.genability.client.types.PagedList;
 import com.genability.client.types.Response;
+
+import java.util.List;
 
 public class CalendarService extends BaseService {
 
-	private static final TypeReference<Response<Calendar>> CALENDAR_RESPONSE_TYPEREF = new TypeReference<Response<Calendar>>() {
+	private static final TypeReference<Response<PagedList<Calendar>>> CALENDAR_RESPONSE_TYPEREF = new TypeReference<Response<PagedList<Calendar>>>() {
 	};
-	private static final TypeReference<Response<CalendarEventDate>> CALENDAR_DATES_RESPONSE_TYPEREF = new TypeReference<Response<CalendarEventDate>>() {
+	private static final TypeReference<Response<PagedList<CalendarEventDate>>> CALENDAR_DATES_RESPONSE_TYPEREF = new TypeReference<Response<PagedList<CalendarEventDate>>>() {
 	};
 
 	private static final String CALENDAR_URI = "/public/calendars";
 
-	public Response<Calendar> getCalendar(GetCalendarRequest request) {
+	public Response<PagedList<Calendar>> getCalendar(GetCalendarRequest request) {
 		if (log.isDebugEnabled())
 			log.debug("getCalendar called");
 
@@ -25,7 +28,7 @@ public class CalendarService extends BaseService {
 		if (request.getCalendarId() != null) {
 			uri += "/" + request.getCalendarId();
 		}
-		Response<Calendar> response = this.callGet(uri, request.getQueryParams(), CALENDAR_RESPONSE_TYPEREF);
+		Response<PagedList<Calendar>> response = this.callGet(uri, request.getQueryParams(), CALENDAR_RESPONSE_TYPEREF);
 
 		if (log.isDebugEnabled())
 			log.debug("getCalendar completed");
@@ -33,11 +36,11 @@ public class CalendarService extends BaseService {
 		return response;
 	}
 
-	public Response<Calendar> getCalendars(GetCalendarsRequest request) {
+	public Response<PagedList<Calendar>> getCalendars(GetCalendarsRequest request) {
 		if (log.isDebugEnabled())
 			log.debug("getCalendars called");
 
-		Response<Calendar> response = this.callGet(CALENDAR_URI, request.getQueryParams(), CALENDAR_RESPONSE_TYPEREF);
+		Response<PagedList<Calendar>> response = this.callGet(CALENDAR_URI, request.getQueryParams(), CALENDAR_RESPONSE_TYPEREF);
 
 		if (log.isDebugEnabled())
 			log.debug("getCalendars completed");
@@ -45,12 +48,12 @@ public class CalendarService extends BaseService {
 		return response;
 	}
 
-	public Response<CalendarEventDate> getCalendarEventDates(GetCalendarDatesRequest request) {
-		
+	public Response<PagedList<CalendarEventDate>> getCalendarEventDates(GetCalendarDatesRequest request) {
+
 		if (log.isDebugEnabled())
 			log.debug("getCalendarEventDates called");
-	
-		Response<CalendarEventDate> response = this.callGet(CALENDAR_URI + "/dates", request.getQueryParams(), CALENDAR_DATES_RESPONSE_TYPEREF);
+
+		Response<PagedList<CalendarEventDate>> response = this.callGet(CALENDAR_URI + "/dates", request.getQueryParams(), CALENDAR_DATES_RESPONSE_TYPEREF);
 
 		if (log.isDebugEnabled())
 			log.debug("getCalendarEventDates completed");

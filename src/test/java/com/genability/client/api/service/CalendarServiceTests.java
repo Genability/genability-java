@@ -3,6 +3,7 @@ package com.genability.client.api.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import com.genability.client.types.PagedList;
 import org.junit.Test;
 
 import com.genability.client.api.request.GetCalendarDatesRequest;
@@ -13,14 +14,14 @@ import com.genability.client.types.CalendarEventDate;
 import com.genability.client.types.Response;
 
 public class CalendarServiceTests extends BaseServiceTests {
-	
-	
+
+
 	private static CalendarService calendarService = genabilityClient.getCalendarService();
-	
-	
+
+
 	@Test
 	public void testGetCalendar() {
-		
+
 		//
 		// Assign
 		//
@@ -30,8 +31,8 @@ public class CalendarServiceTests extends BaseServiceTests {
 		//
 		// Act
 		//
-		Response<Calendar> restResponse = calendarService.getCalendar(request);
-		
+		Response<PagedList<Calendar>> restResponse = calendarService.getCalendar(request);
+
 		//
 		// Assert
 		//
@@ -40,21 +41,21 @@ public class CalendarServiceTests extends BaseServiceTests {
 		assertEquals("bad type",restResponse.getType(),Calendar.REST_TYPE);
 
 	}
-	
+
 	@Test
 	public void testGetCalendars() {
-		
+
 		//
 		// Assign
 		//
 		GetCalendarsRequest request = new GetCalendarsRequest();
 		request.setLseId(new Long(734));//Pacific Gas & Electric
-		
+
 		//
 		// Act
 		//
-		Response<Calendar> restResponse = calendarService.getCalendars(request);
-		
+		Response<PagedList<Calendar>> restResponse = calendarService.getCalendars(request);
+
 		//
 		// Assert
 		//
@@ -66,7 +67,7 @@ public class CalendarServiceTests extends BaseServiceTests {
 
 	@Test
 	public void testGetCalendarDates() {
-		
+
 		//
 		// Assign
 		//
@@ -77,7 +78,7 @@ public class CalendarServiceTests extends BaseServiceTests {
 		// Act
 		//
 		Response<CalendarEventDate> restResponse = calendarService.getCalendarEventDates(request);
-		
+
 		//
 		// Assert
 		//
