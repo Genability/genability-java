@@ -132,7 +132,9 @@ public class AccountServiceTests  extends BaseServiceTests {
 		}
 		
 		try {
-			// Add a delay to allow for indexing
+			// Delay to mitigate potential race condition where newly created accounts aren't immediately searchable
+			// Could be due to indexing delay or read-replica sync delay.
+			// 2000ms is a best-guess based on some testing; if this test continues to fail, consider increasing this delay.
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
