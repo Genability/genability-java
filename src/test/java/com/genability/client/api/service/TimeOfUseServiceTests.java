@@ -212,14 +212,29 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 		}
 	}
 
+	/** 
+	 * Attempts to delete a private TOU group if it exists.
+	 * 
+	 * This is used for test cleanup. The TOU group may have already been deleted, so we check for that first.
+	 * If the group was deleted between checking and deleting, a 404 is expected and can be safely ignored.
+	 */
 	private void cleanUpPrivateTou(TimeOfUseGroup grp) {
 		try {
-			// Check if the TOU group has been deleted
+			// Check if TOU group still exists
 			Response<TimeOfUseGroup> verifyResponse = touService.getTimeOfUseGroup(grp.getLseId(), grp.getTouGroupId());
 			if (verifyResponse.getStatus() == Response.STATUS_SUCCESS) {
-				touService.deletePrivateTimeOfUseGroup(grp.getLseId(), grp.getTouGroupId());
+				try {
+					touService.deletePrivateTimeOfUseGroup(grp.getLseId(), grp.getTouGroupId());
+				} catch (GenabilityException e) {
+					// It's possible the TOU group was deleted after the check but before the delete call.
+					// In that case, a 404 is expected and can be safely ignored.
+					if (!e.getMessage().contains("404")) {
+						throw e;
+					}
+				}
 			}
 		} catch (GenabilityException e) {
+			// If the TOU group doesn't exist, it's already deleted - no further cleanup needed.
 			if (!e.getMessage().contains("404")) {
 				throw e;
 			}
