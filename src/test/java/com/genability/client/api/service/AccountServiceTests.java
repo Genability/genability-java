@@ -132,6 +132,13 @@ public class AccountServiceTests  extends BaseServiceTests {
 		}
 		
 		try {
+			// Add a delay to allow for indexing
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
+			
 			GetAccountsRequest request = new GetAccountsRequest();
 			request.setPageCount(pageCount);
 			request.setSearch("JAVA CLIENT TEST ACCOUNT");
