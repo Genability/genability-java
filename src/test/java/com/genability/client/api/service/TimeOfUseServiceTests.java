@@ -213,7 +213,17 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	}
 
 	private void cleanUpPrivateTou(TimeOfUseGroup grp) {
-		touService.deletePrivateTimeOfUseGroup(grp.getLseId(), grp.getTouGroupId());
+		try {
+			// Check if the TOU group has been deleted
+			Response<TimeOfUseGroup> verifyResponse = touService.getTimeOfUseGroup(grp.getLseId(), grp.getTouGroupId());
+			if (verifyResponse.getStatus() == Response.STATUS_SUCCESS) {
+				touService.deletePrivateTimeOfUseGroup(grp.getLseId(), grp.getTouGroupId());
+			}
+		} catch (GenabilityException e) {
+			if (!e.getMessage().contains("404")) {
+				throw e;
+			}
+		}
 	}
 	
 	/**		
