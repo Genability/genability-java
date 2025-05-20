@@ -160,7 +160,6 @@ public class AccountServiceTests  extends BaseServiceTests {
 						throw e; // Re-throw if we've exhausted retries
 					}
 					
-					System.out.println("Search request failed, retrying (" + retryCount + "/" + maxRetries + ")");
 					try {
 						Thread.sleep(500 * retryCount); // Exponential backoff
 					} catch (InterruptedException ie) {
