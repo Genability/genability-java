@@ -154,7 +154,11 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 		Response<TimeOfUseGroup> response = touService.addPrivateTimeOfUseGroup(grp);
 		assertEquals("Didn't successfully add the private TOU", Response.STATUS_SUCCESS, response.getStatus());
 		
-		cleanUpPrivateTou(response.getResults().get(0));
+		TimeOfUseGroup addedGroup = response.getResults().get(0);
+		
+		// Make sure the returned group has a proper ID that we can use for deletion
+		assertNotNull("The returned TOU group should have a touGroupId", addedGroup.getTouGroupId());
+		cleanUpPrivateTou(addedGroup);
 	}
 	
 	
@@ -223,12 +227,17 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 	private TimeOfUseGroup getValidTouGroup() {		
 		TimeOfUseGroup group = new TimeOfUseGroup();		
 		group.setTimeOfUses(new ArrayList<TimeOfUse>());		
-		group.setLseId(734L);		
+		group.setLseId(734L);
+		// Explicitly set the touGroupId to null so the server assigns a new one
+		group.setTouGroupId(null);
 
 		TimeOfUse tou = new TimeOfUse();
 		tou.setTouName("JAVA CLIENT LIB TOU");
 		tou.setTouPeriods(new ArrayList<TimeOfUsePeriod>());		
-		tou.setTouType(String.valueOf(TimeOfUseType.OFF_PEAK));		
+		tou.setTouType(String.valueOf(TimeOfUseType.OFF_PEAK));
+		// Make sure we don't have a conflicting ID
+		tou.setTouId(null);
+		tou.setTouGroupId(null);
 		group.getTimeOfUses().add(tou);		
 
 		TimeOfUsePeriod period = new TimeOfUsePeriod();		
@@ -237,7 +246,10 @@ public class TimeOfUseServiceTests extends BaseServiceTests {
 		period.setFromHour(0);		
 		period.setToHour(0);		
 		period.setFromMinute(0);		
-		period.setToMinute(0);		
+		period.setToMinute(0);
+		// Make sure we don't have a conflicting ID
+		period.setTouPeriodId(null);
+		period.setTouId(null);
 		tou.getTouPeriods().add(period);		
 
 		return group;		
