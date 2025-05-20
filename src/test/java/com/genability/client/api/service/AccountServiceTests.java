@@ -122,21 +122,53 @@ public class AccountServiceTests  extends BaseServiceTests {
 		int numberOfAccountsToCreate = 10;
 		int pageCount = 5;
 		String[] createdAccountIds = new String[numberOfAccountsToCreate];
+		String uniqueIdentifier = UUID.randomUUID().toString().substring(0, 8);
 		
 		for(int i = 0; i < numberOfAccountsToCreate; i++) {
 			Account newAccount = new Account();
-			newAccount.setAccountName(String.format("JAVA CLIENT TEST ACCOUNT #%d - CAN DELETE", i));
+			newAccount.setAccountName(String.format("JAVA CLIENT TEST ACCOUNT %s #%d - CAN DELETE", uniqueIdentifier, i));
 			
 			Account addedAccount = addAccount(newAccount);
 			createdAccountIds[i] = addedAccount.getAccountId();
 		}
 		
 		try {
+			// Add a short delay to allow for server indexing
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// Ignore interruption
+			}
+			
 			GetAccountsRequest request = new GetAccountsRequest();
 			request.setPageCount(pageCount);
-			request.setSearch("JAVA CLIENT TEST ACCOUNT");
+			request.setSearch("JAVA CLIENT TEST ACCOUNT " + uniqueIdentifier);
 			request.setSearchOn("accountName");
-			Response<Account> restResponse = accountService.getAccounts(request);
+			
+			// Retry logic for intermittent server errors
+			Response<Account> restResponse = null;
+			int retryCount = 0;
+			int maxRetries = 3;
+			
+			while (retryCount < maxRetries) {
+				try {
+					restResponse = accountService.getAccounts(request);
+					break; // Success, exit the retry loop
+				} catch (GenabilityException e) {
+					retryCount++;
+					if (retryCount >= maxRetries) {
+						throw e; // Re-throw if we've exhausted retries
+					}
+					
+					System.out.println("Search request failed, retrying (" + retryCount + "/" + maxRetries + ")");
+					try {
+						Thread.sleep(500 * retryCount); // Exponential backoff
+					} catch (InterruptedException ie) {
+						// Ignore interruption
+					}
+				}
+			}
+
 			
 			int totalAccounts = restResponse.getCount();
 			int accountsVisited = 0;
@@ -146,6 +178,11 @@ public class AccountServiceTests  extends BaseServiceTests {
 				assertEquals("Didn't page through the account list correctly.", accountsVisited, restResponse.getPageStart().intValue());
 	
 				accountsVisited += restResponse.getResults().size();
+				
+				// Don't make another request if we've seen all accounts
+				if (accountsVisited >= totalAccounts) {
+					break;
+				}
 				
 				request.setPageStart(restResponse.getPageStart() + restResponse.getPageCount());
 				restResponse = accountService.getAccounts(request);
