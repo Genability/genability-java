@@ -27,6 +27,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class AccountServiceTests  extends BaseServiceTests {
 
+	private static final int MAX_RETRIES = 3;
+	private static final int SLEEP_TIME = 500;
+
 	@Test
 	public void testAddAccount() {
 		//test
@@ -135,7 +138,7 @@ public class AccountServiceTests  extends BaseServiceTests {
 		try {
 			// Add a short delay to allow for server indexing
 			try {
-				Thread.sleep(500);
+				Thread.sleep(SLEEP_TIME);
 			} catch (InterruptedException e) {
 				// Ignore interruption
 			}
@@ -148,20 +151,19 @@ public class AccountServiceTests  extends BaseServiceTests {
 			// Retry logic for intermittent server errors
 			Response<Account> restResponse = null;
 			int retryCount = 0;
-			int maxRetries = 3;
 			
-			while (retryCount < maxRetries) {
+			while (retryCount < MAX_RETRIES) {
 				try {
 					restResponse = accountService.getAccounts(request);
 					break; // Success, exit the retry loop
 				} catch (GenabilityException e) {
 					retryCount++;
-					if (retryCount >= maxRetries) {
+					if (retryCount >= MAX_RETRIES) {
 						throw e; // Re-throw if we've exhausted retries
 					}
 					
 					try {
-						Thread.sleep(500 * retryCount); // Exponential backoff
+						Thread.sleep(SLEEP_TIME * retryCount); // Exponential backoff
 					} catch (InterruptedException ie) {
 						// Ignore interruption
 					}
