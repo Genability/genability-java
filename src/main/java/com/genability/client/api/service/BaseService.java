@@ -25,6 +25,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.AbstractHttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -246,44 +247,61 @@ public class BaseService {
 	} // end of callGet
 
 	protected <T extends Response<R>, R> T execute(final HttpRequestBase request, final TypeReference<T> resultTypeReference) {
-		try {
-			request.addHeader("accept", "application/json");
+		// Simple retry for connection failures
+		for (int attempt = 0; attempt < 3; attempt++) {
+			try {
+				request.addHeader("accept", "application/json");
 
-			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
-			request.addHeader("Authorization", "Basic " + basic_auth);
-			request.addHeader("Accept-Encoding", "gzip");
-			request.addHeader("Connection", "close"); //close connections after we receive a response
+				String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
+				request.addHeader("Authorization", "Basic " + basic_auth);
+				request.addHeader("Accept-Encoding", "gzip");
+				request.addHeader("Connection", "close"); //close connections after we receive a response
 
-			return httpClient.execute(request, new ResponseHandler<T>() {
-				@Override
-				public T handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
-					if (httpResponse.getStatusLine().getStatusCode() != 200) {
-						String responseBody = null;
-						try {
-							responseBody = EntityUtils.toString(httpResponse.getEntity());
+				return httpClient.execute(request, new ResponseHandler<T>() {
+					@Override
+					public T handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
+						if (httpResponse.getStatusLine().getStatusCode() != 200) {
+							String responseBody = null;
+							try {
+								responseBody = EntityUtils.toString(httpResponse.getEntity());
+							}
+							catch (IOException ex) {}
+
+							throw new GenabilityException("Failed " + request.getMethod() + " " + request.getURI() +
+									": HTTP error code : " + httpResponse.getStatusLine().getStatusCode(), responseBody);
 						}
-						catch (IOException ex) {}
 
-						throw new GenabilityException("Failed " + request.getMethod() + " " + request.getURI() +
-								": HTTP error code : " + httpResponse.getStatusLine().getStatusCode(), responseBody);
+						//
+						// Convert the JSON pay-load to the standard Response object.
+						//
+						return mapper.readValue(httpResponse.getEntity().getContent(), resultTypeReference);
 					}
+				});
 
-					//
-					// Convert the JSON pay-load to the standard Response object.
-					//
-					return mapper.readValue(httpResponse.getEntity().getContent(), resultTypeReference);
+			}
+			catch (ClientProtocolException e) {
+				log.error("ClientProtocolException", e);
+				throw new GenabilityException(e);
+			}
+			catch (IOException e) {
+				// Only retry on connection failures
+				if (e instanceof HttpHostConnectException && attempt < 2) {
+					log.warn("Connection failed, retrying... (attempt " + (attempt + 1) + "/3)", e);
+					try {
+						Thread.sleep(1000); // Simple 1 second delay
+					} catch (InterruptedException ie) {
+						Thread.currentThread().interrupt();
+						throw new GenabilityException("Retry interrupted", ie);
+					}
+					continue;
 				}
-			});
-
+				log.error("IOException", e);
+				throw new GenabilityException(e);
+			}
 		}
-		catch (ClientProtocolException e) {
-			log.error("ClientProtocolException", e);
-			throw new GenabilityException(e);
-		}
-		catch (IOException e) {
-			log.error("IOException", e);
-			throw new GenabilityException(e);
-		}
+		
+		// Should never reach here
+		throw new GenabilityException("Max retries exceeded");
 	}
 
 	private HttpEntity getEntity(Object obj) {
