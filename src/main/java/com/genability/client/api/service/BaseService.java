@@ -253,7 +253,7 @@ public class BaseService {
 		request.addHeader("Accept-Encoding", "gzip");
 		request.addHeader("Connection", "close"); //close connections after we receive a response
 
-		// Simple retry for connection failures
+		// Retry logic for connection failures
 		for (int attempt = 0; attempt < 3; attempt++) {
 			try {
 				return httpClient.execute(request, new ResponseHandler<T>() {
@@ -283,11 +283,10 @@ public class BaseService {
 				throw new GenabilityException(e);
 			}
 			catch (IOException e) {
-				// Only retry on connection failures
 				if (e instanceof HttpHostConnectException && attempt < 2) {
 					log.warn("Connection failed, retrying... (attempt " + (attempt + 1) + "/3)", e);
 					try {
-						Thread.sleep(1000); // Simple 1 second delay
+						Thread.sleep(1000);
 					} catch (InterruptedException ie) {
 						Thread.currentThread().interrupt();
 						throw new GenabilityException("Retry interrupted", ie);
