@@ -247,16 +247,15 @@ public class BaseService {
 	} // end of callGet
 
 	protected <T extends Response<R>, R> T execute(final HttpRequestBase request, final TypeReference<T> resultTypeReference) {
+		request.addHeader("accept", "application/json");
+		String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
+		request.addHeader("Authorization", "Basic " + basic_auth);
+		request.addHeader("Accept-Encoding", "gzip");
+		request.addHeader("Connection", "close"); //close connections after we receive a response
+
 		// Simple retry for connection failures
 		for (int attempt = 0; attempt < 3; attempt++) {
 			try {
-				request.addHeader("accept", "application/json");
-
-				String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
-				request.addHeader("Authorization", "Basic " + basic_auth);
-				request.addHeader("Accept-Encoding", "gzip");
-				request.addHeader("Connection", "close"); //close connections after we receive a response
-
 				return httpClient.execute(request, new ResponseHandler<T>() {
 					@Override
 					public T handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
