@@ -25,6 +25,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.AbstractHttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -46,6 +47,9 @@ import com.genability.client.api.request.BulkUploadRequest;
 import com.genability.client.types.Response;
 
 public class BaseService {
+	
+	private static final int MAX_RETRY_ATTEMPTS = 3;
+	private static final long RETRY_DELAY_MS = 1000;
 	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	protected String restApiServer = "https://api.genability.com/rest/";
@@ -246,44 +250,59 @@ public class BaseService {
 	} // end of callGet
 
 	protected <T extends Response<R>, R> T execute(final HttpRequestBase request, final TypeReference<T> resultTypeReference) {
-		try {
-			request.addHeader("accept", "application/json");
+		request.addHeader("accept", "application/json");
+		String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
+		request.addHeader("Authorization", "Basic " + basic_auth);
+		request.addHeader("Accept-Encoding", "gzip");
+		request.addHeader("Connection", "close"); //close connections after we receive a response
 
-			String basic_auth = new String(Base64.encodeBase64((appId + ":" + appKey).getBytes()));
-			request.addHeader("Authorization", "Basic " + basic_auth);
-			request.addHeader("Accept-Encoding", "gzip");
-			request.addHeader("Connection", "close"); //close connections after we receive a response
+		// Retry logic for connection failures
+		for (int attempt = 0; attempt < MAX_RETRY_ATTEMPTS; attempt++) {
+			try {
+				return httpClient.execute(request, new ResponseHandler<T>() {
+					@Override
+					public T handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
+						if (httpResponse.getStatusLine().getStatusCode() != 200) {
+							String responseBody = null;
+							try {
+								responseBody = EntityUtils.toString(httpResponse.getEntity());
+							}
+							catch (IOException ex) {}
 
-			return httpClient.execute(request, new ResponseHandler<T>() {
-				@Override
-				public T handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
-					if (httpResponse.getStatusLine().getStatusCode() != 200) {
-						String responseBody = null;
-						try {
-							responseBody = EntityUtils.toString(httpResponse.getEntity());
+							throw new GenabilityException("Failed " + request.getMethod() + " " + request.getURI() +
+									": HTTP error code : " + httpResponse.getStatusLine().getStatusCode(), responseBody);
 						}
-						catch (IOException ex) {}
 
-						throw new GenabilityException("Failed " + request.getMethod() + " " + request.getURI() +
-								": HTTP error code : " + httpResponse.getStatusLine().getStatusCode(), responseBody);
+						//
+						// Convert the JSON pay-load to the standard Response object.
+						//
+						return mapper.readValue(httpResponse.getEntity().getContent(), resultTypeReference);
 					}
+				});
 
-					//
-					// Convert the JSON pay-load to the standard Response object.
-					//
-					return mapper.readValue(httpResponse.getEntity().getContent(), resultTypeReference);
+			}
+			catch (ClientProtocolException e) {
+				log.error("ClientProtocolException", e);
+				throw new GenabilityException(e);
+			}
+			catch (IOException e) {
+				if (e instanceof HttpHostConnectException && attempt < MAX_RETRY_ATTEMPTS - 1) {
+					log.warn("Connection failed, retrying... (attempt " + (attempt + 1) + "/" + MAX_RETRY_ATTEMPTS + ")", e);
+					try {
+						Thread.sleep(RETRY_DELAY_MS);
+					} catch (InterruptedException ie) {
+						Thread.currentThread().interrupt();
+						throw new GenabilityException("Retry interrupted", ie);
+					}
+					continue;
 				}
-			});
-
+				log.error("IOException", e);
+				throw new GenabilityException(e);
+			}
 		}
-		catch (ClientProtocolException e) {
-			log.error("ClientProtocolException", e);
-			throw new GenabilityException(e);
-		}
-		catch (IOException e) {
-			log.error("IOException", e);
-			throw new GenabilityException(e);
-		}
+		
+		// Should never reach here
+		throw new GenabilityException("Max retries exceeded");
 	}
 
 	private HttpEntity getEntity(Object obj) {
