@@ -48,6 +48,9 @@ import com.genability.client.types.Response;
 
 public class BaseService {
 	
+	private static final int MAX_RETRY_ATTEMPTS = 3;
+	private static final long RETRY_DELAY_MS = 1000;
+	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	protected String restApiServer = "https://api.genability.com/rest/";
 
@@ -254,7 +257,7 @@ public class BaseService {
 		request.addHeader("Connection", "close"); //close connections after we receive a response
 
 		// Retry logic for connection failures
-		for (int attempt = 0; attempt < 3; attempt++) {
+		for (int attempt = 0; attempt < MAX_RETRY_ATTEMPTS; attempt++) {
 			try {
 				return httpClient.execute(request, new ResponseHandler<T>() {
 					@Override
@@ -283,10 +286,10 @@ public class BaseService {
 				throw new GenabilityException(e);
 			}
 			catch (IOException e) {
-				if (e instanceof HttpHostConnectException && attempt < 2) {
-					log.warn("Connection failed, retrying... (attempt " + (attempt + 1) + "/3)", e);
+				if (e instanceof HttpHostConnectException && attempt < MAX_RETRY_ATTEMPTS - 1) {
+					log.warn("Connection failed, retrying... (attempt " + (attempt + 1) + "/" + MAX_RETRY_ATTEMPTS + ")", e);
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(RETRY_DELAY_MS);
 					} catch (InterruptedException ie) {
 						Thread.currentThread().interrupt();
 						throw new GenabilityException("Retry interrupted", ie);
