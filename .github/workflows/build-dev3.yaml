@@ -1,0 +1,21 @@
+name: Build dev3
+
+on:
+  workflow_dispatch:
+  push:
+
+
+jobs:
+  build:
+    runs-on: runner-main-dev3
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Docker build
+        run: bin/build
+      
