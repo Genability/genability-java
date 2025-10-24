@@ -11,7 +11,6 @@ target
 \#*#
 
 
-/bin/*
 workspace.xml
 .idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_3_0.xml
 .idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_3_0.xml
