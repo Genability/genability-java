@@ -152,6 +152,13 @@ public class GetAccountTariffsRequest extends AbstractGetNRequest implements Ser
 		List<NameValuePair> qparams = super.getQueryParams();
 		
 		addParam(qparams, "providerAccountId", providerAccountId);
+		addParam(qparams, "effectiveOn", effectiveOn);
+    	addParam(qparams, "fromDateTime", fromDateTime);
+    	addParam(qparams, "toDateTime", toDateTime);
+    	addParam(qparams, "isActive", isActive);
+    	addParam(qparams, "includeNotApplicable", includeNotApplicable);
+    	addParam(qparams, "populateProperties", populateProperties);
+    	addParam(qparams, "populateRates", populateRates);
 
 
 		return qparams;
