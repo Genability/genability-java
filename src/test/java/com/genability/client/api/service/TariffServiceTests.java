@@ -155,8 +155,8 @@ public class TariffServiceTests extends BaseServiceTests {
 		request.setMasterTariffId(3292088L);
 		Tariff tariff1 = callGetTariff("tariff 1", request);
 
-		// Shasta Lake - Residential: has BUY, SELL, NET
-		request.setMasterTariffId(3327795L);
+		// Duke Energy - R-NMT-PROPOSAL Residential: has BUY, SELL, NET
+		request.setMasterTariffId(3516355L);
 		Tariff tariff2 = callGetTariff("tariff2", request);
 
 		Set<TransactionType> tariffTransactionTypes = new HashSet<TransactionType>();
@@ -169,7 +169,7 @@ public class TariffServiceTests extends BaseServiceTests {
 			tariffTransactionTypes.add(rate.getTransactionType());
 		}
 
-		assertEquals("Tariffs missing some expected transaction types", tariffTransactionTypes, allTransactionTypes);
+		assertEquals("Tariffs missing some expected transaction types", allTransactionTypes, tariffTransactionTypes);
 	}
 
 
